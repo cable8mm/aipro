@@ -1,66 +1,133 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# AI Pro - Smart WMS Solution
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+[![build & tests](https://github.com/cable8mm/aipro/actions/workflows/tests.yml/badge.svg)](https://github.com/cable8mm/aipro/actions/workflows/tests.yml)
+[![coding style](https://github.com/cable8mm/aipro/actions/workflows/coding-style-php.yml/badge.svg)](https://github.com/cable8mm/aipro/actions/workflows/coding-style-php.yml)
+[![release date](https://img.shields.io/github/release-date/cable8mm/aipro)](https://github.com/cable8mm/aipro/releases)
+[![minimum PHP version](https://img.shields.io/badge/php-%3E%3D_8.2.0-8892BF.svg)](https://github.com/cable8mm/aipro)
 
-## About Laravel
+에이아이프로는 물류센터를 보유한 회사가 WMS(창고관리시스템)와 상품 정보를 최신 상태로 유지하며, 이를 벤더와 소비자에게 효과적으로 제공할 수 있도록 설계된 솔루션입니다. AI 기술과 모바일 도구를 활용하여 운영의 편의성을 높이고, 비용 효율적인 서비스를 제공합니다.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Installation
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+[Install valet](https://laravel.com/docs/10.x/valet#installation):
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+```sh
+composer global require laravel/valet
 
-## Learning Laravel
+echo "export PATH=~/.composer/vendor/bin:$PATH" >> ~/.bashrc
+source ~/.bashrc
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+valet install
+```
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Cloning:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+```sh
+cd ~/Sites
 
-## Laravel Sponsors
+git clone https://github.com/cable8mm/aipro.git
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+cd aipro
+```
 
-### Premium Partners
+Setting:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+```sh
+composer install # install Project
 
-## Contributing
+php artisan storage:link # for uploading images and files
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+valet secure # set https
 
-## Code of Conduct
+valet use; # setup php@8.2
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+composer global update; # update global composer
 
-## Security Vulnerabilities
+npm install # install npm libraries
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+valet open # visit https://aipro.test
+```
 
-## License
+Database:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- Database : aipro
+
+```sh
+php artisan migrate
+
+php artisan nova:user
+
+# make Name, Email Address, Password and create user
+```
+
+You'd better use not mysql but sqlite while you has developed.
+
+Mail:
+
+```sh
+brew install mailpit
+
+brew services start mailpit
+```
+
+Visit to <http://localhost:8025>
+
+## Maintenance
+
+### Add languages
+
+```sh
+php artisan lang:add af
+```
+
+Refer to [this link](https://laravel-lang.com/available-locales-list.html#lists-available-locales-am) about it.
+
+## Test
+
+```sh
+composer test
+```
+
+## Build
+
+Development:
+
+```sh
+npm run dev
+```
+
+Production:
+
+**Push must be done in Production state.**
+
+```sh
+npm run prod
+```
+
+## CI/CD
+
+For testing third party integration, you should make github repository secrets as belows.
+
+*Laravel Nova* is required,
+
+- NOVA_PASSWORD
+- NOVA_USERNAME
+
+*Google Login* is optional for social logins,
+
+- GOOGLE_CLIENT_ID
+- GOOGLE_CLIENT_SECRET
+
+*Facebook Login* is optional for social logins,
+
+- FACEBOOK_CLIENT_ID
+- FACEBOOK_CLIENT_SECRET
+
+*Kakao Login* is optional for social logins,
+
+- KAKAO_CLIENT_ID
+- KAKAO_CLIENT_SECRET
+
+Additionally, *Github*, *Instagram* and *Naver* are supported to login.
+
+The stage server is automatically deployed in Merge, and the live server is deployed manually at [Envoy](https://envoyer.io/). However, you must first create a GitHub Release before live deployment.
