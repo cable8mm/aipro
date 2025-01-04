@@ -27,8 +27,8 @@ class MismatchedOrderShipmentFactory extends Factory
             'json' => fake()->paragraph(),
             'cms_maestro_id' => fake()->randomNumber(),
             'status' => fake()->text(),
-            'created' => fake()->dateTime(),
-            'modified' => fake()->dateTime(),
+            'created_at' => fake()->unixTime(),
+            'updated_at' => fake()->unixTime(),
         ];
     }
 }

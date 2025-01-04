@@ -20,8 +20,8 @@ class ChannelFeeFactory extends Factory
             'id' => fake()->numerify(),
             'channel' => fake()->text(),
             'fee_rate' => fake()->randomFloat(2, 0, 10000),
-            'created' => fake()->dateTime(),
-            'updated' => fake()->dateTime(),
+            'created_at' => fake()->unixTime(),
+            'updated_at' => fake()->unixTime(),
         ];
     }
 }

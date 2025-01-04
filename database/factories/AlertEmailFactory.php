@@ -21,7 +21,8 @@ class AlertEmailFactory extends Factory
             'name' => fake()->text(),
             'action_name' => fake()->text(),
             'email_list' => fake()->text(),
-            'modified' => fake()->dateTime(),
+            'created_at' => fake()->unixTime(),
+            'updated_at' => fake()->unixTime(),
         ];
     }
 }

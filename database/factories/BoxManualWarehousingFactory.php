@@ -23,7 +23,8 @@ class BoxManualWarehousingFactory extends Factory
             'type' => fake()->text(),
             'manual_add_inventory_count' => fake()->randomNumber(),
             'memo' => fake()->paragraph(),
-            'created' => fake()->dateTime(),
+            'created_at' => fake()->unixTime(),
+            'updated_at' => fake()->unixTime(),
         ];
     }
 }

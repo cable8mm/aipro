@@ -28,8 +28,8 @@ class SupplierGoodsBakFactory extends Factory
             'suggest_good_price' => fake()->randomNumber(),
             'customer_good_price' => fake()->randomNumber(),
             'additional_information' => fake()->text(),
-            'created' => fake()->dateTime(),
-            'modified' => fake()->dateTime(),
+            'created_at' => fake()->unixTime(),
+            'updated_at' => fake()->unixTime(),
         ];
     }
 }

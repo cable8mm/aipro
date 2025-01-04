@@ -23,8 +23,8 @@ class PromotionCodeFactory extends Factory
             'memo' => fake()->text(),
             'started' => fake()->dateTime(),
             'finished' => fake()->dateTime(),
-            'created' => fake()->dateTime(),
-            'modified' => fake()->dateTime(),
+            'created_at' => fake()->unixTime(),
+            'updated_at' => fake()->unixTime(),
             'cms_maestro_id' => fake()->randomNumber(),
         ];
     }

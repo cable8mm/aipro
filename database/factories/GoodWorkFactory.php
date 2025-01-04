@@ -22,7 +22,8 @@ class GoodWorkFactory extends Factory
             'ct_good_id' => fake()->randomNumber(),
             'description_json' => fake()->paragraph(),
             'is_created' => fake()->boolean(),
-            'created' => fake()->dateTime(),
+            'created_at' => fake()->unixTime(),
+            'updated_at' => fake()->unixTime(),
         ];
     }
 }

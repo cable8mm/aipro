@@ -28,8 +28,8 @@ class InventoryHistoryFactory extends Factory
             'attribute' => fake()->randomNumber(),
             'cancel_id' => fake()->randomNumber(),
             'is_success' => fake()->boolean(),
-            'created' => fake()->dateTime(),
-            'updated' => fake()->dateTime(),
+            'created_at' => fake()->unixTime(),
+            'updated_at' => fake()->unixTime(),
         ];
     }
 }

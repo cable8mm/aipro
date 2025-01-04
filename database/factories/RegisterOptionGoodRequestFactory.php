@@ -25,8 +25,8 @@ class RegisterOptionGoodRequestFactory extends Factory
             'status' => fake()->text(),
             'respond_file_url' => fake()->text(),
             'memo' => fake()->paragraph(),
-            'created' => fake()->dateTime(),
-            'modified' => fake()->dateTime(),
+            'created_at' => fake()->unixTime(),
+            'updated_at' => fake()->unixTime(),
         ];
     }
 }

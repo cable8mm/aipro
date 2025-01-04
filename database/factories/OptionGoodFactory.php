@@ -26,8 +26,8 @@ class OptionGoodFactory extends Factory
             'my_shop_sale_option_count' => fake()->randomNumber(),
             'other_shop_sale_option_count' => fake()->randomNumber(),
             'is_active' => fake()->boolean(),
-            'created' => fake()->dateTime(),
-            'modified' => fake()->dateTime(),
+            'created_at' => fake()->unixTime(),
+            'updated_at' => fake()->unixTime(),
         ];
     }
 }

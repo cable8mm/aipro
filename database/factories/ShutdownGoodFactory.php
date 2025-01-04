@@ -22,6 +22,8 @@ class ShutdownGoodFactory extends Factory
             'center_code' => fake()->text(),
             'name' => fake()->text(),
             'reason' => fake()->text(),
+            'created_at' => fake()->unixTime(),
+            'updated_at' => fake()->unixTime(),
         ];
     }
 }

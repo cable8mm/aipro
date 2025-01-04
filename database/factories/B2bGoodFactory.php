@@ -21,8 +21,8 @@ class B2bGoodFactory extends Factory
             'cms_maestro_id' => fake()->randomNumber(),
             'goods_no' => fake()->text(),
             'playauto_master_code' => fake()->text(),
-            'created' => fake()->dateTime(),
-            'modified' => fake()->dateTime(),
+            'created_at' => fake()->unixTime(),
+            'updated_at' => fake()->unixTime(),
         ];
     }
 }

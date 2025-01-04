@@ -50,8 +50,8 @@ class SupplierGoodFactory extends Factory
             'is_shutdowned' => fake()->boolean(),
             'supplier_created' => fake()->date(),
             'supplier_modified' => fake()->date(),
-            'created' => fake()->dateTime(),
-            'modified' => fake()->dateTime(),
+            'created_at' => fake()->unixTime(),
+            'updated_at' => fake()->unixTime(),
         ];
     }
 }

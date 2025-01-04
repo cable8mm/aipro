@@ -20,8 +20,8 @@ class HelpTipFactory extends Factory
             'id' => fake()->numerify(),
             'word' => fake()->text(),
             'help_tip' => fake()->text(),
-            'created' => fake()->dateTime(),
-            'modified' => fake()->dateTime(),
+            'created_at' => fake()->unixTime(),
+            'updated_at' => fake()->unixTime(),
         ];
     }
 }

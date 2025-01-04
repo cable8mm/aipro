@@ -32,8 +32,8 @@ class SetGoodFactory extends Factory
             'goods_bar' => fake()->text(),
             'is_my_shop_sale' => fake()->boolean(),
             'is_other_shop_sale' => fake()->boolean(),
-            'created' => fake()->dateTime(),
-            'modified' => fake()->dateTime(),
+            'created_at' => fake()->unixTime(),
+            'updated_at' => fake()->unixTime(),
         ];
     }
 }

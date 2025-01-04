@@ -28,8 +28,8 @@ class BoxSupplierFactory extends Factory
             'min_order_price' => fake()->randomNumber(),
             'is_parceled' => fake()->boolean(),
             'additional_information' => fake()->paragraph(),
-            'created' => fake()->dateTime(),
-            'modified' => fake()->dateTime(),
+            'created_at' => fake()->unixTime(),
+            'updated_at' => fake()->unixTime(),
         ];
     }
 }

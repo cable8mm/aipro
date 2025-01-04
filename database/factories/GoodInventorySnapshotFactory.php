@@ -24,7 +24,8 @@ class GoodInventorySnapshotFactory extends Factory
             'inventory' => fake()->randomNumber(),
             'safe_class' => fake()->randomLetter(),
             'type' => fake()->text(),
-            'created' => fake()->dateTime(),
+            'created_at' => fake()->unixTime(),
+            'updated_at' => fake()->unixTime(),
         ];
     }
 }

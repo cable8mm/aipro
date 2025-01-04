@@ -33,8 +33,8 @@ class PlacingOrderFactory extends Factory
             'warehoused' => fake()->dateTime(),
             'status' => fake()->text(),
             'memo' => fake()->paragraph(),
-            'created' => fake()->dateTime(),
-            'modified' => fake()->dateTime(),
+            'created_at' => fake()->unixTime(),
+            'updated_at' => fake()->unixTime(),
         ];
     }
 }

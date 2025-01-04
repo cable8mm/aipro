@@ -28,8 +28,8 @@ class OrderSheetInvoiceFactory extends Factory
             'invoice_filepath' => fake()->text(),
             'excel_json' => fake()->paragraph(),
             'status' => fake()->text(),
-            'created' => fake()->dateTime(),
-            'modified' => fake()->dateTime(),
+            'created_at' => fake()->unixTime(),
+            'updated_at' => fake()->unixTime(),
         ];
     }
 }

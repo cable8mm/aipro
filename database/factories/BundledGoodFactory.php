@@ -22,8 +22,8 @@ class BundledGoodFactory extends Factory
             'name' => fake()->text(),
             'set_code' => fake()->text(),
             'goods_price' => fake()->randomNumber(),
-            'created' => fake()->dateTime(),
-            'modified' => fake()->dateTime(),
+            'created_at' => fake()->unixTime(),
+            'updated_at' => fake()->unixTime(),
         ];
     }
 }

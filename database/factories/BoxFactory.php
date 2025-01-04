@@ -25,8 +25,8 @@ class BoxFactory extends Factory
             'box_price' => fake()->randomNumber(),
             'inventory' => fake()->randomNumber(),
             'memo' => fake()->text(),
-            'created' => fake()->dateTime(),
-            'modified' => fake()->dateTime(),
+            'created_at' => fake()->unixTime(),
+            'updated_at' => fake()->unixTime(),
         ];
     }
 }

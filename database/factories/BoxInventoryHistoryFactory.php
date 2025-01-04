@@ -24,8 +24,8 @@ class BoxInventoryHistoryFactory extends Factory
             'model' => fake()->text(),
             'attribute' => fake()->text(),
             'is_success' => fake()->boolean(),
-            'created' => fake()->dateTime(),
-            'updated' => fake()->dateTime(),
+            'created_at' => fake()->unixTime(),
+            'updated_at' => fake()->unixTime(),
         ];
     }
 }

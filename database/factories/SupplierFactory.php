@@ -30,8 +30,8 @@ class SupplierFactory extends Factory
             'additional_information' => fake()->paragraph(),
             'is_information_manual_sync' => fake()->boolean(),
             'is_active' => fake()->boolean(),
-            'created' => fake()->dateTime(),
-            'modified' => fake()->dateTime(),
+            'created_at' => fake()->unixTime(),
+            'updated_at' => fake()->unixTime(),
         ];
     }
 }

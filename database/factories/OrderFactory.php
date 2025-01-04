@@ -24,7 +24,8 @@ class OrderFactory extends Factory
             'has_center_class_j' => fake()->boolean(),
             'order_good_count' => fake()->randomNumber(),
             'printed_count' => fake()->randomNumber(),
-            'created' => fake()->dateTime(),
+            'created_at' => fake()->unixTime(),
+            'updated_at' => fake()->unixTime(),
         ];
     }
 }

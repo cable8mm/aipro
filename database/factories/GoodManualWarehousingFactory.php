@@ -23,7 +23,8 @@ class GoodManualWarehousingFactory extends Factory
             'manual_add_inventory_count' => fake()->randomNumber(),
             'type' => fake()->text(),
             'memo' => fake()->paragraph(),
-            'created' => fake()->dateTime(),
+            'created_at' => fake()->unixTime(),
+            'updated_at' => fake()->unixTime(),
         ];
     }
 }

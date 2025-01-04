@@ -88,8 +88,8 @@ class GoodFactory extends Factory
             'last_warehoused' => fake()->dateTime(),
             'supplier_out_of_stock_on_datetime' => fake()->dateTime(),
             'supplier_out_of_stock_off_datetime' => fake()->dateTime(),
-            'created' => fake()->dateTime(),
-            'modified' => fake()->dateTime(),
+            'created_at' => fake()->unixTime(),
+            'updated_at' => fake()->unixTime(),
         ];
     }
 }
