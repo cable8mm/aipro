@@ -23,8 +23,7 @@ return new class extends Migration
             $table->unsignedInteger('attribute')->nullable();
             $table->integer('cancel_id')->nullable();
             $table->boolean('is_success')->nullable();
-            $table->dateTime('created')->nullable();
-            $table->dateTime('updated')->nullable();
+            $table->timestamps();
         });
     }
 

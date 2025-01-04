@@ -27,8 +27,7 @@ return new class extends Migration
             $table->text('memo')->nullable();
             $table->boolean('is_active')->nullable()->default('1');
             $table->string('status', 100)->nullable()->default('판매중');
-            $table->dateTime('created')->nullable();
-            $table->dateTime('modified')->nullable();
+            $table->timestamps();
         });
     }
 

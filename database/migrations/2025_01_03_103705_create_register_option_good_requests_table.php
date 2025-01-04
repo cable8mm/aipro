@@ -20,8 +20,7 @@ return new class extends Migration
             $table->string('status', 10)->nullable()->default('등록대기');
             $table->string('respond_file_url', 190)->nullable();
             $table->text('memo')->nullable();
-            $table->dateTime('created')->nullable();
-            $table->dateTime('modified')->nullable();
+            $table->timestamps();
         });
     }
 

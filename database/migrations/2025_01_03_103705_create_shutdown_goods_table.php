@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('center_code', 150)->nullable();
             $table->string('name', 255)->nullable();
             $table->string('reason', 255)->nullable();
+            $table->timestamps();
         });
     }
 

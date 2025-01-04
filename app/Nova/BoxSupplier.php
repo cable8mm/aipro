@@ -53,8 +53,8 @@ class BoxSupplier extends Resource
             Number::make('Min Order Price'),
             Boolean::make('Is Parceled'),
             Text::make('Additional Information'),
-            DateTime::make('Created'),
-            DateTime::make('Modified'),
+            DateTime::make('Created At'),
+            DateTime::make('Updated At'),
         ];
     }
 

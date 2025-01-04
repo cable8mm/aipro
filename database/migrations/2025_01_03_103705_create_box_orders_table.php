@@ -26,8 +26,7 @@ return new class extends Migration
             $table->dateTime('warehoused')->nullable();
             $table->string('status', 25)->nullable()->default('발주작성중');
             $table->text('memo')->nullable();
-            $table->dateTime('created')->nullable();
-            $table->dateTime('modified')->nullable();
+            $table->timestamps();
         });
     }
 

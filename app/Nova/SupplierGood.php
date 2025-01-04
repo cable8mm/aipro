@@ -76,8 +76,8 @@ class SupplierGood extends Resource
             Boolean::make('Is Shutdowned'),
             Date::make('Supplier Created'),
             Date::make('Supplier Modified'),
-            DateTime::make('Created'),
-            DateTime::make('Modified'),
+            DateTime::make('Created At'),
+            DateTime::make('Updated At'),
         ];
     }
 

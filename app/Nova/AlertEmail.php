@@ -44,7 +44,8 @@ class AlertEmail extends Resource
             Text::make('Name')->maxlength(65535),
             Text::make('Action Name')->maxlength(65535),
             Text::make('Email List')->maxlength(65535),
-            DateTime::make('Modified'),
+            DateTime::make('Created At'),
+            DateTime::make('Updated At'),
         ];
     }
 

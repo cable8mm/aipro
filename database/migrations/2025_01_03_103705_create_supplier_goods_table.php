@@ -45,8 +45,7 @@ return new class extends Migration
             $table->boolean('is_shutdowned')->nullable()->default('0');
             $table->date('supplier_created')->nullable();
             $table->date('supplier_modified')->nullable();
-            $table->dateTime('created')->nullable();
-            $table->dateTime('modified')->nullable();
+            $table->timestamps();
         });
     }
 

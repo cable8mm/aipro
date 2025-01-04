@@ -46,8 +46,8 @@ class GoodsBar extends Resource
             Text::make('Goods Bar')->maxlength(65535),
             Boolean::make('Is My Shop Sale'),
             Boolean::make('Is Other Shop Sale'),
-            DateTime::make('Created'),
-            DateTime::make('Modified'),
+            DateTime::make('Created At'),
+            DateTime::make('Updated At'),
         ];
     }
 

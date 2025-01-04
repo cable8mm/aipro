@@ -44,8 +44,8 @@ class ChannelFee extends Resource
             ID::make()->sortable(),
             Text::make('Channel')->maxlength(65535),
             Number::make('Fee Rate')->step('any'),
-            DateTime::make('Created'),
-            DateTime::make('Updated'),
+            DateTime::make('Created At'),
+            DateTime::make('Updated At'),
         ];
     }
 

@@ -45,8 +45,8 @@ class IssueComment extends Resource
             Number::make('Ct Issue Id'),
             Number::make('Cms Maestro Id'),
             Text::make('Comment'),
-            DateTime::make('Created'),
-            DateTime::make('Modified'),
+            DateTime::make('Created At'),
+            DateTime::make('Updated At'),
         ];
     }
 

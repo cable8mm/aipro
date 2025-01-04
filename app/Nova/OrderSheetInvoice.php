@@ -53,8 +53,8 @@ class OrderSheetInvoice extends Resource
             Text::make('Invoice Filepath')->maxlength(65535),
             Textarea::make('Excel Json'),
             Text::make('Status')->maxlength(65535),
-            DateTime::make('Created'),
-            DateTime::make('Modified'),
+            DateTime::make('Created At'),
+            DateTime::make('Updated At'),
         ];
     }
 

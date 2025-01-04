@@ -59,8 +59,8 @@ class PlacingOrderGood extends Resource
             Text::make('Status')->maxlength(65535),
             Text::make('Memo'),
             DateTime::make('Ordered'),
-            DateTime::make('Created'),
-            DateTime::make('Modified'),
+            DateTime::make('Created At'),
+            DateTime::make('Updated At'),
         ];
     }
 

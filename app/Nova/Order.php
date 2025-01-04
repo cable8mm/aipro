@@ -49,7 +49,8 @@ class Order extends Resource
             Boolean::make('Has Center Class J'),
             Number::make('Order Good Count'),
             Number::make('Printed Count'),
-            DateTime::make('Created'),
+            DateTime::make('Created At'),
+            DateTime::make('Updated At'),
         ];
     }
 

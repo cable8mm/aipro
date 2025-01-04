@@ -16,8 +16,7 @@ return new class extends Migration
             $table->integer('ct_issue_id');
             $table->integer('cms_maestro_id');
             $table->text('comment');
-            $table->dateTime('created')->nullable();
-            $table->dateTime('modified')->nullable();
+            $table->timestamps();
         });
     }
 

@@ -22,8 +22,7 @@ return new class extends Migration
             $table->text('json')->nullable();
             $table->unsignedInteger('cms_maestro_id')->nullable();
             $table->string('status', 100)->nullable()->default('미처리');
-            $table->dateTime('created')->nullable();
-            $table->dateTime('modified')->nullable();
+            $table->timestamps();
         });
     }
 

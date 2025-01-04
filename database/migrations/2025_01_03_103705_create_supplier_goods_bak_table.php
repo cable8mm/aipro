@@ -23,8 +23,7 @@ return new class extends Migration
             $table->integer('suggest_good_price')->nullable();
             $table->integer('customer_good_price')->nullable();
             $table->string('additional_information', 255)->nullable();
-            $table->dateTime('created')->nullable();
-            $table->dateTime('modified')->nullable();
+            $table->timestamps();
         });
     }
 

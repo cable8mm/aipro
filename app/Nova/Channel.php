@@ -57,8 +57,8 @@ class Channel extends Resource
             Text::make('Memo'),
             Boolean::make('Is Active'),
             Text::make('Status')->maxlength(65535),
-            DateTime::make('Created'),
-            DateTime::make('Modified'),
+            DateTime::make('Created At'),
+            DateTime::make('Updated At'),
         ];
     }
 

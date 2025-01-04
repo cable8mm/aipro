@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('inventory')->nullable();
             $table->char('safe_class', 1)->nullable();
             $table->string('type', 50)->nullable();
-            $table->dateTime('created')->nullable();
+            $table->timestamps();
         });
     }
 

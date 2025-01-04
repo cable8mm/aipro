@@ -20,8 +20,7 @@ return new class extends Migration
             $table->string('status', 255)->nullable();
             $table->integer('worker_id')->nullable();
             $table->text('memo')->nullable();
-            $table->dateTime('created')->nullable();
-            $table->dateTime('modified')->nullable();
+            $table->timestamps();
         });
     }
 

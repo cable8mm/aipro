@@ -18,8 +18,7 @@ return new class extends Migration
             $table->string('memo', 190)->nullable();
             $table->dateTime('started')->nullable();
             $table->dateTime('finished')->nullable();
-            $table->dateTime('created')->nullable();
-            $table->dateTime('modified')->nullable();
+            $table->timestamps();
             $table->integer('cms_maestro_id');
         });
     }

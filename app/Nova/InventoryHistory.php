@@ -53,8 +53,8 @@ class InventoryHistory extends Resource
             Number::make('Attribute'),
             Number::make('Cancel Id'),
             Boolean::make('Is Success'),
-            DateTime::make('Created'),
-            DateTime::make('Updated'),
+            DateTime::make('Created At'),
+            DateTime::make('Updated At'),
         ];
     }
 

@@ -29,8 +29,7 @@ return new class extends Migration
             $table->string('status', 100)->nullable()->default('확인중');
             $table->text('memo')->nullable();
             $table->dateTime('ordered')->nullable();
-            $table->dateTime('created')->nullable();
-            $table->dateTime('modified')->nullable();
+            $table->timestamps();
         });
     }
 

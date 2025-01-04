@@ -49,8 +49,8 @@ class BoxInventoryHistory extends Resource
             Text::make('Model')->maxlength(65535),
             Text::make('Attribute')->maxlength(65535),
             Boolean::make('Is Success'),
-            DateTime::make('Created'),
-            DateTime::make('Updated'),
+            DateTime::make('Created At'),
+            DateTime::make('Updated At'),
         ];
     }
 

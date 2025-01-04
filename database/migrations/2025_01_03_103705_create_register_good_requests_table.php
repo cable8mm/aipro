@@ -21,8 +21,7 @@ return new class extends Migration
             $table->tinyInteger('has_supplier_monitoring_price')->default('0');
             $table->text('memo')->nullable();
             $table->string('status', 50)->default('등록대기');
-            $table->dateTime('created')->nullable();
-            $table->dateTime('modified')->nullable();
+            $table->timestamps();
         });
     }
 

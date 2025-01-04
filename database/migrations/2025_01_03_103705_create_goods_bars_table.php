@@ -17,8 +17,7 @@ return new class extends Migration
             $table->string('goods_bar', 190);
             $table->boolean('is_my_shop_sale')->nullable();
             $table->boolean('is_other_shop_sale')->nullable();
-            $table->dateTime('created')->nullable();
-            $table->dateTime('modified')->nullable();
+            $table->timestamps();
         });
     }
 

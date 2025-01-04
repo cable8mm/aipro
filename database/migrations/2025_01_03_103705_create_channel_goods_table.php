@@ -43,6 +43,7 @@ return new class extends Migration
             $table->integer('gift_price')->nullable();
             $table->string('gift_sale_status', 100)->nullable();
             $table->integer('gift_inventory')->nullable();
+            $table->timestamps();
         });
     }
 

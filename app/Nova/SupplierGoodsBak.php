@@ -52,8 +52,8 @@ class SupplierGoodsBak extends Resource
             Number::make('Suggest Good Price'),
             Number::make('Customer Good Price'),
             Text::make('Additional Information')->maxlength(65535),
-            DateTime::make('Created'),
-            DateTime::make('Modified'),
+            DateTime::make('Created At'),
+            DateTime::make('Updated At'),
         ];
     }
 

@@ -47,8 +47,8 @@ class PromotionCode extends Resource
             Text::make('Memo')->maxlength(65535),
             DateTime::make('Started'),
             DateTime::make('Finished'),
-            DateTime::make('Created'),
-            DateTime::make('Modified'),
+            DateTime::make('Created At'),
+            DateTime::make('Updated At'),
             Number::make('Cms Maestro Id'),
         ];
     }

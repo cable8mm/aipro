@@ -51,8 +51,8 @@ class OptionGood extends Resource
             Number::make('My Shop Sale Option Count'),
             Number::make('Other Shop Sale Option Count'),
             Boolean::make('Is Active'),
-            DateTime::make('Created'),
-            DateTime::make('Modified'),
+            DateTime::make('Created At'),
+            DateTime::make('Updated At'),
         ];
     }
 

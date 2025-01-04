@@ -47,7 +47,8 @@ class GoodManualWarehousing extends Resource
             Number::make('Manual Add Inventory Count'),
             Text::make('Type')->maxlength(65535),
             Text::make('Memo'),
-            DateTime::make('Created'),
+            DateTime::make('Created At'),
+            DateTime::make('Updated At'),
         ];
     }
 

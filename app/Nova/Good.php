@@ -113,8 +113,8 @@ class Good extends Resource
             DateTime::make('Last Warehoused'),
             DateTime::make('Supplier Out Of Stock On Datetime'),
             DateTime::make('Supplier Out Of Stock Off Datetime'),
-            DateTime::make('Created'),
-            DateTime::make('Modified'),
+            DateTime::make('Created At'),
+            DateTime::make('Updated At'),
         ];
     }
 

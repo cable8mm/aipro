@@ -17,8 +17,7 @@ return new class extends Migration
             $table->string('name', 130)->nullable();
             $table->string('set_code', 255)->nullable();
             $table->unsignedInteger('goods_price')->nullable();
-            $table->dateTime('created')->nullable();
-            $table->dateTime('modified')->nullable();
+            $table->timestamps();
         });
     }
 

@@ -23,8 +23,7 @@ return new class extends Migration
             $table->string('invoice_filepath', 255);
             $table->longText('excel_json')->nullable();
             $table->string('status', 50)->nullable()->default('파일업로드');
-            $table->dateTime('created')->nullable();
-            $table->dateTime('modified')->nullable();
+            $table->timestamps();
         });
     }
 

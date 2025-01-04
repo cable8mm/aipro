@@ -51,8 +51,8 @@ class MismatchedOrderShipment extends Resource
             Text::make('Json'),
             Number::make('Cms Maestro Id'),
             Text::make('Status')->maxlength(65535),
-            DateTime::make('Created'),
-            DateTime::make('Modified'),
+            DateTime::make('Created At'),
+            DateTime::make('Updated At'),
         ];
     }
 

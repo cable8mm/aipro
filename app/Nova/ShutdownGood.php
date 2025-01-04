@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
@@ -45,6 +46,8 @@ class ShutdownGood extends Resource
             Text::make('Center Code')->maxlength(65535),
             Text::make('Name')->maxlength(65535),
             Text::make('Reason')->maxlength(65535),
+            DateTime::make('Created At'),
+            DateTime::make('Updated At'),
         ];
     }
 

@@ -17,8 +17,7 @@ return new class extends Migration
             $table->unsignedInteger('start_price');
             $table->unsignedInteger('end_price');
             $table->decimal('coefficient', 4, 3);
-            $table->dateTime('created')->nullable();
-            $table->dateTime('modified')->nullable();
+            $table->timestamps();
         });
     }
 

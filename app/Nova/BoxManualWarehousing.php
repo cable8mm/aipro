@@ -47,7 +47,8 @@ class BoxManualWarehousing extends Resource
             Text::make('Type')->maxlength(65535),
             Number::make('Manual Add Inventory Count'),
             Text::make('Memo'),
-            DateTime::make('Created'),
+            DateTime::make('Created At'),
+            DateTime::make('Updated At'),
         ];
     }
 

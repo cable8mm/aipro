@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integer('cms_maestro_id')->nullable();
             $table->integer('manual_add_inventory_count')->nullable();
             $table->text('memo')->nullable();
-            $table->dateTime('created')->nullable();
+            $table->timestamps();
         });
     }
 

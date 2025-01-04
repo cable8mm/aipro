@@ -45,8 +45,8 @@ class B2bGood extends Resource
             Number::make('Cms Maestro Id'),
             Text::make('Goods No')->maxlength(65535),
             Text::make('Playauto Master Code')->maxlength(65535),
-            DateTime::make('Created'),
-            DateTime::make('Modified'),
+            DateTime::make('Created At'),
+            DateTime::make('Updated At'),
         ];
     }
 

@@ -16,8 +16,7 @@ return new class extends Migration
             $table->integer('cms_maestro_id')->nullable();
             $table->string('goods_no', 150)->nullable();
             $table->string('playauto_master_code', 255)->nullable();
-            $table->dateTime('created')->nullable();
-            $table->dateTime('modified')->nullable();
+            $table->timestamps();
         });
     }
 

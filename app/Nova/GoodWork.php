@@ -47,7 +47,8 @@ class GoodWork extends Resource
             Number::make('Ct Good Id'),
             Text::make('Description Json'),
             Boolean::make('Is Created'),
-            DateTime::make('Created'),
+            DateTime::make('Created At'),
+            DateTime::make('Updated At'),
         ];
     }
 

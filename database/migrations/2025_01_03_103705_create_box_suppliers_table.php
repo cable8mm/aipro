@@ -23,8 +23,7 @@ return new class extends Migration
             $table->integer('min_order_price')->nullable();
             $table->boolean('is_parceled')->nullable()->default('0');
             $table->text('additional_information')->nullable();
-            $table->dateTime('created')->nullable();
-            $table->dateTime('modified')->nullable();
+            $table->timestamps();
         });
     }
 

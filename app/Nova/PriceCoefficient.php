@@ -46,8 +46,8 @@ class PriceCoefficient extends Resource
             Number::make('Start Price'),
             Number::make('End Price'),
             Number::make('Coefficient')->step('any'),
-            DateTime::make('Created'),
-            DateTime::make('Modified'),
+            DateTime::make('Created At'),
+            DateTime::make('Updated At'),
         ];
     }
 

@@ -50,8 +50,8 @@ class RegisterGoodRequest extends Resource
             Number::make('Has Supplier Monitoring Price')->min(-128)->max(127),
             Text::make('Memo'),
             Text::make('Status')->maxlength(65535),
-            DateTime::make('Created'),
-            DateTime::make('Modified'),
+            DateTime::make('Created At'),
+            DateTime::make('Updated At'),
         ];
     }
 

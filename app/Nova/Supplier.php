@@ -55,8 +55,8 @@ class Supplier extends Resource
             Text::make('Additional Information'),
             Boolean::make('Is Information Manual Sync'),
             Boolean::make('Is Active'),
-            DateTime::make('Created'),
-            DateTime::make('Modified'),
+            DateTime::make('Created At'),
+            DateTime::make('Updated At'),
         ];
     }
 

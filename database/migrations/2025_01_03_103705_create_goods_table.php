@@ -83,8 +83,7 @@ return new class extends Migration
             $table->dateTime('last_warehoused')->nullable();
             $table->dateTime('supplier_out_of_stock_on_datetime')->nullable();
             $table->dateTime('supplier_out_of_stock_off_datetime')->nullable();
-            $table->dateTime('created')->nullable();
-            $table->dateTime('modified')->nullable();
+            $table->timestamps();
         });
     }
 

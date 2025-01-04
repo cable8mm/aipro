@@ -19,8 +19,7 @@ return new class extends Migration
             $table->string('model', 100)->nullable();
             $table->string('attribute', 100)->nullable();
             $table->boolean('is_success')->nullable();
-            $table->dateTime('created')->nullable();
-            $table->dateTime('updated')->nullable();
+            $table->timestamps();
         });
     }
 

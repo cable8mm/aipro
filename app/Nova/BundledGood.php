@@ -46,8 +46,8 @@ class BundledGood extends Resource
             Text::make('Name')->maxlength(65535),
             Text::make('Set Code')->maxlength(65535),
             Number::make('Goods Price'),
-            DateTime::make('Created'),
-            DateTime::make('Modified'),
+            DateTime::make('Created At'),
+            DateTime::make('Updated At'),
         ];
     }
 

@@ -25,8 +25,7 @@ return new class extends Migration
             $table->text('additional_information')->nullable();
             $table->boolean('is_information_manual_sync')->nullable()->default('0');
             $table->boolean('is_active')->nullable()->default('1');
-            $table->dateTime('created')->nullable();
-            $table->dateTime('modified')->nullable();
+            $table->timestamps();
         });
     }
 

@@ -48,7 +48,8 @@ class GoodInventorySnapshot extends Resource
             Number::make('Inventory'),
             Text::make('Safe Class'),
             Text::make('Type')->maxlength(65535),
-            DateTime::make('Created'),
+            DateTime::make('Created At'),
+            DateTime::make('Updated At'),
         ];
     }
 

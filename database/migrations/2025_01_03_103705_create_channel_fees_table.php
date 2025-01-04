@@ -15,8 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('channel', 255)->default('');
             $table->decimal('fee_rate', 5, 2)->nullable();
-            $table->dateTime('created')->nullable();
-            $table->dateTime('updated')->nullable();
+            $table->timestamps();
         });
     }
 

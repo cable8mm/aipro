@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
@@ -71,6 +72,8 @@ class ChannelGood extends Resource
             Number::make('Gift Price'),
             Text::make('Gift Sale Status')->maxlength(65535),
             Number::make('Gift Inventory'),
+            DateTime::make('Created At'),
+            DateTime::make('Updated At'),
         ];
     }
 

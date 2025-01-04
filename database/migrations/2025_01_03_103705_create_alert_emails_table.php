@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name', 255)->nullable();
             $table->string('action_name', 255)->nullable();
             $table->string('email_list', 255)->nullable();
-            $table->dateTime('modified')->nullable();
+            $table->timestamps();
         });
     }
 

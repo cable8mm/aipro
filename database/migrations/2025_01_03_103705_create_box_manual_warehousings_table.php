@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('type', 100)->default('미입력');
             $table->integer('manual_add_inventory_count');
             $table->text('memo')->nullable();
-            $table->dateTime('created')->nullable();
+            $table->timestamps();
         });
     }
 

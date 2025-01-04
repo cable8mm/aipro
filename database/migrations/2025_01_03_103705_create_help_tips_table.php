@@ -15,8 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('word', 100)->nullable();
             $table->string('help_tip', 190)->nullable();
-            $table->dateTime('created')->nullable();
-            $table->dateTime('modified')->nullable();
+            $table->timestamps();
         });
     }
 

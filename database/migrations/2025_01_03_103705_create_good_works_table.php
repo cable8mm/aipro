@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedInteger('ct_good_id')->nullable();
             $table->text('description_json')->nullable();
             $table->boolean('is_created')->nullable();
-            $table->dateTime('created')->nullable();
+            $table->timestamps();
         });
     }
 

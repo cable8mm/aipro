@@ -21,8 +21,7 @@ return new class extends Migration
             $table->integer('my_shop_sale_option_count')->nullable()->default('0');
             $table->integer('other_shop_sale_option_count')->nullable()->default('0');
             $table->boolean('is_active')->nullable()->default('1');
-            $table->dateTime('created')->nullable();
-            $table->dateTime('modified')->nullable();
+            $table->timestamps();
         });
     }
 

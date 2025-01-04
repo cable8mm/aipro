@@ -43,8 +43,8 @@ class HelpTip extends Resource
             ID::make()->sortable(),
             Text::make('Word')->maxlength(65535),
             Text::make('Help Tip')->maxlength(65535),
-            DateTime::make('Created'),
-            DateTime::make('Modified'),
+            DateTime::make('Created At'),
+            DateTime::make('Updated At'),
         ];
     }
 

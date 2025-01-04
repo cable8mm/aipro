@@ -46,7 +46,8 @@ class SupplierGoodManualWarehousing extends Resource
             Number::make('Cms Maestro Id'),
             Number::make('Manual Add Inventory Count'),
             Text::make('Memo'),
-            DateTime::make('Created'),
+            DateTime::make('Created At'),
+            DateTime::make('Updated At'),
         ];
     }
 

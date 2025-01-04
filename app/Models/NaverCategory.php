@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class NaverCategory extends Model
 {
     use HasFactory;
+
+    public $timestamps = false;
 }

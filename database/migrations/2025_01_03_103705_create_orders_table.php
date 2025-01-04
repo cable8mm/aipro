@@ -19,7 +19,7 @@ return new class extends Migration
             $table->boolean('has_center_class_j');
             $table->integer('order_good_count')->nullable();
             $table->integer('printed_count')->nullable()->default('0');
-            $table->dateTime('created')->nullable();
+            $table->timestamps();
         });
     }
 

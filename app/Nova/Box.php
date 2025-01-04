@@ -49,8 +49,8 @@ class Box extends Resource
             Number::make('Box Price'),
             Number::make('Inventory'),
             Text::make('Memo')->maxlength(65535),
-            DateTime::make('Created'),
-            DateTime::make('Modified'),
+            DateTime::make('Created At'),
+            DateTime::make('Updated At'),
         ];
     }
 
