@@ -1,7 +1,9 @@
 <?php
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+
 return new class extends Migration
 {
     /**
@@ -20,17 +22,18 @@ return new class extends Migration
             $table->unsignedInteger('supplier_confirmed_count')->nullable();
             $table->integer('supplier_confirmed_price')->nullable();
             $table->unsignedInteger('cost_count')->nullable();
-            $table->integer('cost_promotion_count')->nullable()->default("0");
+            $table->integer('cost_promotion_count')->nullable()->default('0');
             $table->integer('cost_price')->nullable();
-            $table->boolean('is_promotion')->nullable()->default("0");
+            $table->boolean('is_promotion')->nullable()->default('0');
             $table->dateTime('warehoused')->nullable();
-            $table->string('status', 100)->nullable()->default("확인중");
+            $table->string('status', 100)->nullable()->default('확인중');
             $table->text('memo')->nullable();
             $table->dateTime('ordered')->nullable();
             $table->dateTime('created')->nullable();
             $table->dateTime('modified')->nullable();
         });
     }
+
     /**
      * Reverse the migrations.
      */

@@ -1,7 +1,9 @@
 <?php
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+
 return new class extends Migration
 {
     /**
@@ -13,6 +15,7 @@ return new class extends Migration
             $table->string('playauto_master_code', 100);
         });
     }
+
     /**
      * Reverse the migrations.
      */

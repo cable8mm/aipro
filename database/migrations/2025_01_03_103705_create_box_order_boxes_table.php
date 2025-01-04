@@ -1,7 +1,9 @@
 <?php
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+
 return new class extends Migration
 {
     /**
@@ -21,12 +23,13 @@ return new class extends Migration
             $table->integer('cost_count')->nullable();
             $table->integer('cost_price')->nullable();
             $table->dateTime('warehoused')->nullable();
-            $table->string('status', 100)->nullable()->default("미입고");
+            $table->string('status', 100)->nullable()->default('미입고');
             $table->text('memo')->nullable();
             $table->dateTime('created')->nullable();
             $table->dateTime('modified')->nullable();
         });
     }
+
     /**
      * Reverse the migrations.
      */

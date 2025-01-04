@@ -1,7 +1,9 @@
 <?php
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+
 return new class extends Migration
 {
     /**
@@ -19,11 +21,12 @@ return new class extends Migration
             $table->string('option', 255)->nullable();
             $table->text('json')->nullable();
             $table->unsignedInteger('cms_maestro_id')->nullable();
-            $table->string('status', 100)->nullable()->default("미처리");
+            $table->string('status', 100)->nullable()->default('미처리');
             $table->dateTime('created')->nullable();
             $table->dateTime('modified')->nullable();
         });
     }
+
     /**
      * Reverse the migrations.
      */

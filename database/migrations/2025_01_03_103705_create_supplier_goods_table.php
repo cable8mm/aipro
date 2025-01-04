@@ -1,7 +1,9 @@
 <?php
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+
 return new class extends Migration
 {
     /**
@@ -29,7 +31,7 @@ return new class extends Migration
             $table->string('barcode', 100)->nullable();
             $table->string('box_barcode', 50)->nullable();
             $table->string('spec', 191)->nullable();
-            $table->unsignedInteger('inventory')->nullable()->default("0");
+            $table->unsignedInteger('inventory')->nullable()->default('0');
             $table->text('description')->nullable();
             $table->unsignedInteger('price')->nullable();
             $table->unsignedInteger('suggested_selling_price')->nullable();
@@ -37,16 +39,17 @@ return new class extends Migration
             $table->integer('supplier_monitoring_price')->nullable();
             $table->date('ead')->nullable();
             $table->text('additional_information')->nullable();
-            $table->boolean('is_information_manual_sync')->nullable()->default("0");
-            $table->boolean('is_runout')->nullable()->default("0");
-            $table->boolean('is_warehoused')->nullable()->default("1");
-            $table->boolean('is_shutdowned')->nullable()->default("0");
+            $table->boolean('is_information_manual_sync')->nullable()->default('0');
+            $table->boolean('is_runout')->nullable()->default('0');
+            $table->boolean('is_warehoused')->nullable()->default('1');
+            $table->boolean('is_shutdowned')->nullable()->default('0');
             $table->date('supplier_created')->nullable();
             $table->date('supplier_modified')->nullable();
             $table->dateTime('created')->nullable();
             $table->dateTime('modified')->nullable();
         });
     }
+
     /**
      * Reverse the migrations.
      */

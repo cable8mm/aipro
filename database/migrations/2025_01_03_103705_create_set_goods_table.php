@@ -1,7 +1,9 @@
 <?php
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+
 return new class extends Migration
 {
     /**
@@ -20,8 +22,8 @@ return new class extends Migration
             $table->integer('last_cost_price')->nullable();
             $table->integer('zero_margin_price')->nullable();
             $table->integer('suggested_selling_price_of_gms')->nullable();
-            $table->boolean('is_gift')->nullable()->default("0");
-            $table->boolean('is_shutdowned')->nullable()->default("0");
+            $table->boolean('is_gift')->nullable()->default('0');
+            $table->boolean('is_shutdowned')->nullable()->default('0');
             $table->string('goods_bar', 190)->nullable();
             $table->boolean('is_my_shop_sale')->nullable();
             $table->boolean('is_other_shop_sale')->nullable();
@@ -29,6 +31,7 @@ return new class extends Migration
             $table->dateTime('modified')->nullable();
         });
     }
+
     /**
      * Reverse the migrations.
      */
