@@ -2,7 +2,6 @@
 
 namespace App\Nova;
 
-use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -41,10 +40,8 @@ class HelpTip extends Resource
     {
         return [
             ID::make()->sortable(),
-            Text::make('Word')->maxlength(65535),
-            Text::make('Help Tip')->maxlength(65535),
-            DateTime::make('Created At'),
-            DateTime::make('Updated At'),
+            Text::make('Word')->maxlength(100),
+            Text::make('Help Tip')->maxlength(190),
         ];
     }
 

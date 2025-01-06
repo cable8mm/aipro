@@ -2,7 +2,6 @@
 
 namespace App\Nova;
 
-use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -41,11 +40,9 @@ class AlertEmail extends Resource
     {
         return [
             ID::make()->sortable(),
-            Text::make('Name')->maxlength(65535),
-            Text::make('Action Name')->maxlength(65535),
-            Text::make('Email List')->maxlength(65535),
-            DateTime::make('Created At'),
-            DateTime::make('Updated At'),
+            Text::make('Name')->maxlength(255),
+            Text::make('Action Name')->maxlength(255),
+            Text::make('Email List')->maxlength(255),
         ];
     }
 

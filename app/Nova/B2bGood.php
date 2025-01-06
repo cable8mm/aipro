@@ -2,7 +2,6 @@
 
 namespace App\Nova;
 
-use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
@@ -43,10 +42,8 @@ class B2bGood extends Resource
         return [
             ID::make()->sortable(),
             Number::make('Cms Maestro Id'),
-            Text::make('Goods No')->maxlength(65535),
-            Text::make('Playauto Master Code')->maxlength(65535),
-            DateTime::make('Created At'),
-            DateTime::make('Updated At'),
+            Text::make('Goods No')->maxlength(150),
+            Text::make('Playauto Master Code')->maxlength(255),
         ];
     }
 

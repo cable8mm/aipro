@@ -2,7 +2,6 @@
 
 namespace App\Nova;
 
-use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
@@ -42,12 +41,10 @@ class BundledGood extends Resource
     {
         return [
             ID::make()->sortable(),
-            Text::make('Playauto Master Code')->maxlength(65535),
-            Text::make('Name')->maxlength(65535),
-            Text::make('Set Code')->maxlength(65535),
+            Text::make('Playauto Master Code')->maxlength(130),
+            Text::make('Name')->maxlength(130),
+            Text::make('Set Code')->maxlength(255),
             Number::make('Goods Price'),
-            DateTime::make('Created At'),
-            DateTime::make('Updated At'),
         ];
     }
 

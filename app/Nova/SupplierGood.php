@@ -4,7 +4,6 @@ namespace App\Nova;
 
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Date;
-use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
@@ -45,23 +44,23 @@ class SupplierGood extends Resource
         return [
             ID::make()->sortable(),
             Number::make('Ct Supplier Id'),
-            Text::make('Good Code')->maxlength(65535),
-            Text::make('Center Code')->maxlength(65535),
-            Text::make('Supplier Attribute')->maxlength(65535),
-            Text::make('Supplier Category')->maxlength(65535),
-            Text::make('Godo Name')->maxlength(65535),
-            Text::make('Gn')->maxlength(65535),
-            Text::make('Name')->maxlength(65535),
-            Text::make('Origin')->maxlength(65535),
-            Text::make('Maker')->maxlength(65535),
-            Text::make('Brand')->maxlength(65535),
+            Text::make('Good Code')->maxlength(100),
+            Text::make('Center Code')->maxlength(100),
+            Text::make('Supplier Attribute')->maxlength(50),
+            Text::make('Supplier Category')->maxlength(100),
+            Text::make('Godo Name')->maxlength(191),
+            Text::make('Gn')->maxlength(191),
+            Text::make('Name')->maxlength(191),
+            Text::make('Origin')->maxlength(100),
+            Text::make('Maker')->maxlength(100),
+            Text::make('Brand')->maxlength(100),
             Number::make('Box Count'),
             Number::make('Quantity In Box'),
-            Text::make('Min Order Count')->maxlength(65535),
-            Text::make('Current Barcode')->maxlength(65535),
-            Text::make('Barcode')->maxlength(65535),
-            Text::make('Box Barcode')->maxlength(65535),
-            Text::make('Spec')->maxlength(65535),
+            Text::make('Min Order Count')->maxlength(191),
+            Text::make('Current Barcode')->maxlength(191),
+            Text::make('Barcode')->maxlength(100),
+            Text::make('Box Barcode')->maxlength(50),
+            Text::make('Spec')->maxlength(191),
             Number::make('Inventory'),
             Text::make('Description'),
             Number::make('Price'),
@@ -76,8 +75,6 @@ class SupplierGood extends Resource
             Boolean::make('Is Shutdowned'),
             Date::make('Supplier Created'),
             Date::make('Supplier Modified'),
-            DateTime::make('Created At'),
-            DateTime::make('Updated At'),
         ];
     }
 

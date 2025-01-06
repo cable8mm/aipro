@@ -3,7 +3,6 @@
 namespace App\Nova;
 
 use Laravel\Nova\Fields\Boolean;
-use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -42,12 +41,10 @@ class GoodsBar extends Resource
     {
         return [
             ID::make()->sortable(),
-            Text::make('Playauto Master Code')->maxlength(65535),
-            Text::make('Goods Bar')->maxlength(65535),
+            Text::make('Playauto Master Code')->maxlength(190),
+            Text::make('Goods Bar')->maxlength(190),
             Boolean::make('Is My Shop Sale'),
             Boolean::make('Is Other Shop Sale'),
-            DateTime::make('Created At'),
-            DateTime::make('Updated At'),
         ];
     }
 

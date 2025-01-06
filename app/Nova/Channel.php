@@ -44,21 +44,19 @@ class Channel extends Resource
         return [
             ID::make()->sortable(),
             Number::make('Last Process Maestro Id'),
-            Text::make('Name')->maxlength(65535),
-            Text::make('Playauto Site')->maxlength(65535),
-            Text::make('Siteid')->maxlength(65535),
+            Text::make('Name')->maxlength(255),
+            Text::make('Playauto Site')->maxlength(190),
+            Text::make('Siteid')->maxlength(100),
             Number::make('Fee Rate')->step('any'),
             Number::make('Total Good Count'),
             Number::make('Total Sale Good Count'),
             Number::make('Total Sold Out Good Count'),
             Number::make('Total No Sale Good Count'),
-            Text::make('Filepath')->maxlength(65535),
+            Text::make('Filepath')->maxlength(190),
             DateTime::make('Last Processed'),
             Text::make('Memo'),
             Boolean::make('Is Active'),
-            Text::make('Status')->maxlength(65535),
-            DateTime::make('Created At'),
-            DateTime::make('Updated At'),
+            Text::make('Status')->maxlength(100),
         ];
     }
 

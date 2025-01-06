@@ -52,10 +52,8 @@ class BoxOrderBox extends Resource
             Number::make('Cost Count'),
             Number::make('Cost Price'),
             DateTime::make('Warehoused'),
-            Text::make('Status')->maxlength(65535),
+            Text::make('Status')->maxlength(100),
             Text::make('Memo'),
-            DateTime::make('Created At'),
-            DateTime::make('Updated At'),
         ];
     }
 

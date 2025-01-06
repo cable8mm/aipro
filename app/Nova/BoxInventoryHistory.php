@@ -3,7 +3,6 @@
 namespace App\Nova;
 
 use Laravel\Nova\Fields\Boolean;
-use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
@@ -44,13 +43,11 @@ class BoxInventoryHistory extends Resource
         return [
             ID::make()->sortable(),
             Number::make('Ct Box Id'),
-            Text::make('Type')->maxlength(65535),
+            Text::make('Type')->maxlength(10),
             Number::make('Quantity'),
-            Text::make('Model')->maxlength(65535),
-            Text::make('Attribute')->maxlength(65535),
+            Text::make('Model')->maxlength(100),
+            Text::make('Attribute')->maxlength(100),
             Boolean::make('Is Success'),
-            DateTime::make('Created At'),
-            DateTime::make('Updated At'),
         ];
     }
 

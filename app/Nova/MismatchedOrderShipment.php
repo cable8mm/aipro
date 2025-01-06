@@ -2,7 +2,6 @@
 
 namespace App\Nova;
 
-use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
@@ -43,16 +42,14 @@ class MismatchedOrderShipment extends Resource
         return [
             ID::make()->sortable(),
             Number::make('Ct Order Sheet Invoice Id'),
-            Text::make('Order_no')->maxlength(65535),
-            Text::make('Site')->maxlength(65535),
-            Text::make('Master_goods_cd')->maxlength(65535),
-            Text::make('Goods_nm')->maxlength(65535),
-            Text::make('Option')->maxlength(65535),
+            Text::make('Order_no')->maxlength(100),
+            Text::make('Site')->maxlength(100),
+            Text::make('Master_goods_cd')->maxlength(100),
+            Text::make('Goods_nm')->maxlength(255),
+            Text::make('Option')->maxlength(255),
             Text::make('Json'),
             Number::make('Cms Maestro Id'),
-            Text::make('Status')->maxlength(65535),
-            DateTime::make('Created At'),
-            DateTime::make('Updated At'),
+            Text::make('Status')->maxlength(100),
         ];
     }
 

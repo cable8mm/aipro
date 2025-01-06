@@ -2,7 +2,6 @@
 
 namespace App\Nova;
 
-use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
@@ -42,38 +41,36 @@ class ChannelGood extends Resource
     {
         return [
             ID::make()->sortable(),
-            Text::make('Playauto Master Code')->maxlength(65535),
-            Text::make('Goods Bar')->maxlength(65535),
+            Text::make('Playauto Master Code')->maxlength(190),
+            Text::make('Goods Bar')->maxlength(190),
             Number::make('Coupang Price'),
-            Text::make('Coupang Sale Status')->maxlength(65535),
-            Text::make('Coupang Approved')->maxlength(65535),
+            Text::make('Coupang Sale Status')->maxlength(100),
+            Text::make('Coupang Approved')->maxlength(100),
             Number::make('Coupang Inventory'),
             Number::make('Kakaotalk Price'),
-            Text::make('Kakaotalk Sale Status')->maxlength(65535),
+            Text::make('Kakaotalk Sale Status')->maxlength(100),
             Number::make('Kakaotalk Inventory'),
             Number::make('Ssg Price'),
-            Text::make('Ssg Sale Status')->maxlength(65535),
+            Text::make('Ssg Sale Status')->maxlength(100),
             Number::make('Ssg Inventory'),
             Number::make('11st Price'),
-            Text::make('11st Sale Status')->maxlength(65535),
+            Text::make('11st Sale Status')->maxlength(100),
             Number::make('11st Inventory'),
             Number::make('Gmarket Price'),
-            Text::make('Gmarket Sale Status')->maxlength(65535),
+            Text::make('Gmarket Sale Status')->maxlength(100),
             Number::make('Gmarket Inventory'),
-            Text::make('Storefarm Channel')->maxlength(65535),
+            Text::make('Storefarm Channel')->maxlength(100),
             Number::make('Storefarm Price'),
-            Text::make('Storefarm Sale Status')->maxlength(65535),
+            Text::make('Storefarm Sale Status')->maxlength(100),
             Number::make('Storefarm Inventory'),
             Number::make('Auction Price'),
-            Text::make('Auction Sale Status')->maxlength(65535),
+            Text::make('Auction Sale Status')->maxlength(100),
             Number::make('Auction Inventory'),
             Number::make('Wemake Price'),
-            Text::make('Wemake Sale Status')->maxlength(65535),
+            Text::make('Wemake Sale Status')->maxlength(100),
             Number::make('Gift Price'),
-            Text::make('Gift Sale Status')->maxlength(65535),
+            Text::make('Gift Sale Status')->maxlength(100),
             Number::make('Gift Inventory'),
-            DateTime::make('Created At'),
-            DateTime::make('Updated At'),
         ];
     }
 

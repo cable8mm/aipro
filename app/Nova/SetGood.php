@@ -3,7 +3,6 @@
 namespace App\Nova;
 
 use Laravel\Nova\Fields\Boolean;
-use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
@@ -44,21 +43,19 @@ class SetGood extends Resource
         return [
             ID::make()->sortable(),
             Number::make('Cms Maestro Id'),
-            Text::make('Playauto Master Code')->maxlength(65535),
-            Text::make('Godo Code')->maxlength(65535),
-            Text::make('Featured Good List')->maxlength(65535),
-            Text::make('Name')->maxlength(65535),
+            Text::make('Playauto Master Code')->maxlength(255),
+            Text::make('Godo Code')->maxlength(255),
+            Text::make('Featured Good List')->maxlength(255),
+            Text::make('Name')->maxlength(255),
             Number::make('Goods Price'),
             Number::make('Last Cost Price'),
             Number::make('Zero Margin Price'),
             Number::make('Suggested Selling Price Of Gms'),
             Boolean::make('Is Gift'),
             Boolean::make('Is Shutdowned'),
-            Text::make('Goods Bar')->maxlength(65535),
+            Text::make('Goods Bar')->maxlength(190),
             Boolean::make('Is My Shop Sale'),
             Boolean::make('Is Other Shop Sale'),
-            DateTime::make('Created At'),
-            DateTime::make('Updated At'),
         ];
     }
 

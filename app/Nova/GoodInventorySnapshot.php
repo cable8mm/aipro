@@ -2,7 +2,6 @@
 
 namespace App\Nova;
 
-use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
@@ -44,12 +43,10 @@ class GoodInventorySnapshot extends Resource
             ID::make()->sortable(),
             Number::make('Cms Maestro Id'),
             Number::make('Ct Good Id'),
-            Text::make('Playauto Master Code')->maxlength(65535),
+            Text::make('Playauto Master Code')->maxlength(255),
             Number::make('Inventory'),
             Text::make('Safe Class'),
-            Text::make('Type')->maxlength(65535),
-            DateTime::make('Created At'),
-            DateTime::make('Updated At'),
+            Text::make('Type')->maxlength(50),
         ];
     }
 

@@ -3,7 +3,6 @@
 namespace App\Nova;
 
 use Laravel\Nova\Fields\Boolean;
-use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
@@ -45,16 +44,14 @@ class InventoryHistory extends Resource
             ID::make()->sortable(),
             Number::make('Cms Maestro Id'),
             Number::make('Ct Good Id'),
-            Text::make('Type')->maxlength(65535),
+            Text::make('Type')->maxlength(10),
             Number::make('Quantity'),
             Number::make('Price'),
             Number::make('After Quantity'),
-            Text::make('Model')->maxlength(65535),
+            Text::make('Model')->maxlength(100),
             Number::make('Attribute'),
             Number::make('Cancel Id'),
             Boolean::make('Is Success'),
-            DateTime::make('Created At'),
-            DateTime::make('Updated At'),
         ];
     }
 

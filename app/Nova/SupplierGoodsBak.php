@@ -2,7 +2,6 @@
 
 namespace App\Nova;
 
-use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
@@ -43,17 +42,15 @@ class SupplierGoodsBak extends Resource
         return [
             ID::make()->sortable(),
             Number::make('Ct Supplier Id'),
-            Text::make('Code')->maxlength(65535),
-            Text::make('Name')->maxlength(65535),
-            Text::make('Previous Name')->maxlength(65535),
+            Text::make('Code')->maxlength(255),
+            Text::make('Name')->maxlength(255),
+            Text::make('Previous Name')->maxlength(255),
             Number::make('Box Count'),
             Number::make('Cost Price Without Vat'),
             Number::make('Cost Price With Vat'),
             Number::make('Suggest Good Price'),
             Number::make('Customer Good Price'),
-            Text::make('Additional Information')->maxlength(65535),
-            DateTime::make('Created At'),
-            DateTime::make('Updated At'),
+            Text::make('Additional Information')->maxlength(255),
         ];
     }
 

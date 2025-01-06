@@ -2,7 +2,6 @@
 
 namespace App\Nova;
 
-use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
@@ -42,15 +41,13 @@ class Box extends Resource
     {
         return [
             ID::make()->sortable(),
-            Text::make('Name')->maxlength(65535),
-            Text::make('Code')->maxlength(65535),
+            Text::make('Name')->maxlength(100),
+            Text::make('Code')->maxlength(50),
             Number::make('Size'),
             Number::make('Delivery Price'),
             Number::make('Box Price'),
             Number::make('Inventory'),
-            Text::make('Memo')->maxlength(65535),
-            DateTime::make('Created At'),
-            DateTime::make('Updated At'),
+            Text::make('Memo')->maxlength(255),
         ];
     }
 

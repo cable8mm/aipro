@@ -2,7 +2,6 @@
 
 namespace App\Nova;
 
-use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
@@ -43,14 +42,12 @@ class Issue extends Resource
         return [
             ID::make()->sortable(),
             Number::make('Issuer Id'),
-            Text::make('Classification')->maxlength(65535),
-            Text::make('Title')->maxlength(65535),
+            Text::make('Classification')->maxlength(255),
+            Text::make('Title')->maxlength(255),
             Text::make('Description'),
-            Text::make('Status')->maxlength(65535),
+            Text::make('Status')->maxlength(255),
             Number::make('Worker Id'),
             Text::make('Memo'),
-            DateTime::make('Created At'),
-            DateTime::make('Updated At'),
         ];
     }
 

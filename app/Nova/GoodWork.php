@@ -3,7 +3,6 @@
 namespace App\Nova;
 
 use Laravel\Nova\Fields\Boolean;
-use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
@@ -47,8 +46,6 @@ class GoodWork extends Resource
             Number::make('Ct Good Id'),
             Text::make('Description Json'),
             Boolean::make('Is Created'),
-            DateTime::make('Created At'),
-            DateTime::make('Updated At'),
         ];
     }
 

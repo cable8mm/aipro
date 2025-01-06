@@ -3,7 +3,6 @@
 namespace App\Nova;
 
 use Laravel\Nova\Fields\Boolean;
-use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
@@ -44,13 +43,11 @@ class Order extends Resource
         return [
             ID::make()->sortable(),
             Number::make('Order Sheet Invoice Id'),
-            Text::make('Type')->maxlength(65535),
+            Text::make('Type')->maxlength(50),
             Boolean::make('Is All Good Matched'),
             Boolean::make('Has Center Class J'),
             Number::make('Order Good Count'),
             Number::make('Printed Count'),
-            DateTime::make('Created At'),
-            DateTime::make('Updated At'),
         ];
     }
 

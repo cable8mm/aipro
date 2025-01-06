@@ -56,11 +56,9 @@ class PlacingOrderGood extends Resource
             Number::make('Cost Price'),
             Boolean::make('Is Promotion'),
             DateTime::make('Warehoused'),
-            Text::make('Status')->maxlength(65535),
+            Text::make('Status')->maxlength(100),
             Text::make('Memo'),
             DateTime::make('Ordered'),
-            DateTime::make('Created At'),
-            DateTime::make('Updated At'),
         ];
     }
 

@@ -2,7 +2,6 @@
 
 namespace App\Nova;
 
-use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
@@ -43,15 +42,13 @@ class RegisterGoodRequest extends Resource
         return [
             ID::make()->sortable(),
             Number::make('Requester Id'),
-            Text::make('Title')->maxlength(65535),
-            Text::make('Request File Url')->maxlength(65535),
+            Text::make('Title')->maxlength(255),
+            Text::make('Request File Url')->maxlength(255),
             Number::make('Worker Id'),
-            Text::make('Respond File Url')->maxlength(65535),
+            Text::make('Respond File Url')->maxlength(255),
             Number::make('Has Supplier Monitoring Price')->min(-128)->max(127),
             Text::make('Memo'),
-            Text::make('Status')->maxlength(65535),
-            DateTime::make('Created At'),
-            DateTime::make('Updated At'),
+            Text::make('Status')->maxlength(50),
         ];
     }
 

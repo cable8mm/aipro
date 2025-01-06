@@ -2,7 +2,6 @@
 
 namespace App\Nova;
 
-use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
@@ -42,10 +41,8 @@ class ChannelFee extends Resource
     {
         return [
             ID::make()->sortable(),
-            Text::make('Channel')->maxlength(65535),
+            Text::make('Channel')->maxlength(255),
             Number::make('Fee Rate')->step('any'),
-            DateTime::make('Created At'),
-            DateTime::make('Updated At'),
         ];
     }
 

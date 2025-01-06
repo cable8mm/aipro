@@ -40,9 +40,9 @@ class Setting extends Resource
     {
         return [
             ID::make()->sortable(),
-            Text::make('Key')->maxlength(65535),
-            Text::make('Value')->maxlength(65535),
-            Text::make('Memo')->maxlength(65535),
+            Text::make('Key')->maxlength(150),
+            Text::make('Value')->maxlength(255),
+            Text::make('Memo')->maxlength(255),
         ];
     }
 

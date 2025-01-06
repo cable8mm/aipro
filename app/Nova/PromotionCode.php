@@ -42,13 +42,11 @@ class PromotionCode extends Resource
     {
         return [
             ID::make()->sortable(),
-            Text::make('Playauto Master Code')->maxlength(65535),
-            Text::make('Godo Code')->maxlength(65535),
-            Text::make('Memo')->maxlength(65535),
+            Text::make('Playauto Master Code')->maxlength(100),
+            Text::make('Godo Code')->maxlength(255),
+            Text::make('Memo')->maxlength(190),
             DateTime::make('Started'),
             DateTime::make('Finished'),
-            DateTime::make('Created At'),
-            DateTime::make('Updated At'),
             Number::make('Cms Maestro Id'),
         ];
     }

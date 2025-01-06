@@ -2,7 +2,6 @@
 
 namespace App\Nova;
 
-use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
@@ -44,17 +43,15 @@ class OrderSheetInvoice extends Resource
         return [
             ID::make()->sortable(),
             Number::make('Cms Maestro Id'),
-            Text::make('Name')->maxlength(65535),
-            Text::make('Excel Filepath')->maxlength(65535),
+            Text::make('Name')->maxlength(255),
+            Text::make('Excel Filepath')->maxlength(255),
             Number::make('Order Row Count'),
             Number::make('Order Number Count'),
             Number::make('Order Good Count'),
             Number::make('Mismatched Order Good Count'),
-            Text::make('Invoice Filepath')->maxlength(65535),
+            Text::make('Invoice Filepath')->maxlength(255),
             Textarea::make('Excel Json'),
-            Text::make('Status')->maxlength(65535),
-            DateTime::make('Created At'),
-            DateTime::make('Updated At'),
+            Text::make('Status')->maxlength(50),
         ];
     }
 

@@ -2,7 +2,6 @@
 
 namespace App\Nova;
 
-use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
@@ -46,8 +45,6 @@ class PriceCoefficient extends Resource
             Number::make('Start Price'),
             Number::make('End Price'),
             Number::make('Coefficient')->step('any'),
-            DateTime::make('Created At'),
-            DateTime::make('Updated At'),
         ];
     }
 

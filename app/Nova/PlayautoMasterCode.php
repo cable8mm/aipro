@@ -38,7 +38,7 @@ class PlayautoMasterCode extends Resource
     public function fields(NovaRequest $request)
     {
         return [
-            Text::make('Playauto Master Code')->maxlength(65535),
+            Text::make('Playauto Master Code')->maxlength(100),
         ];
     }
 

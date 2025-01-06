@@ -3,7 +3,6 @@
 namespace App\Nova;
 
 use Laravel\Nova\Fields\Boolean;
-use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
@@ -43,18 +42,16 @@ class BoxSupplier extends Resource
     {
         return [
             ID::make()->sortable(),
-            Text::make('Name')->maxlength(65535),
-            Text::make('Ordered Email')->maxlength(65535),
-            Text::make('Contact Name')->maxlength(65535),
-            Text::make('Contact Tel')->maxlength(65535),
-            Text::make('Contact Cel')->maxlength(65535),
+            Text::make('Name')->maxlength(255),
+            Text::make('Ordered Email')->maxlength(255),
+            Text::make('Contact Name')->maxlength(255),
+            Text::make('Contact Tel')->maxlength(255),
+            Text::make('Contact Cel')->maxlength(255),
             Number::make('Order Method')->min(-128)->max(127),
-            Text::make('Balance Criteria')->maxlength(65535),
+            Text::make('Balance Criteria')->maxlength(255),
             Number::make('Min Order Price'),
             Boolean::make('Is Parceled'),
             Text::make('Additional Information'),
-            DateTime::make('Created At'),
-            DateTime::make('Updated At'),
         ];
     }
 

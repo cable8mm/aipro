@@ -3,7 +3,6 @@
 namespace App\Nova;
 
 use Laravel\Nova\Fields\Boolean;
-use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
@@ -44,15 +43,13 @@ class OptionGood extends Resource
         return [
             ID::make()->sortable(),
             Number::make('Cms Maestro Id'),
-            Text::make('Playauto Master Code')->maxlength(65535),
-            Text::make('Godo Code')->maxlength(65535),
-            Text::make('Name')->maxlength(65535),
+            Text::make('Playauto Master Code')->maxlength(130),
+            Text::make('Godo Code')->maxlength(255),
+            Text::make('Name')->maxlength(130),
             Number::make('Option Count'),
             Number::make('My Shop Sale Option Count'),
             Number::make('Other Shop Sale Option Count'),
             Boolean::make('Is Active'),
-            DateTime::make('Created At'),
-            DateTime::make('Updated At'),
         ];
     }
 

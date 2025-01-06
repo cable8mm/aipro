@@ -2,7 +2,6 @@
 
 namespace App\Nova;
 
-use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
@@ -43,11 +42,9 @@ class ShutdownGood extends Resource
         return [
             ID::make()->sortable(),
             Number::make('Cms Maestro Id'),
-            Text::make('Center Code')->maxlength(65535),
-            Text::make('Name')->maxlength(65535),
-            Text::make('Reason')->maxlength(65535),
-            DateTime::make('Created At'),
-            DateTime::make('Updated At'),
+            Text::make('Center Code')->maxlength(150),
+            Text::make('Name')->maxlength(255),
+            Text::make('Reason')->maxlength(255),
         ];
     }
 

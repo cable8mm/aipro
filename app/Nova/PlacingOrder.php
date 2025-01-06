@@ -47,7 +47,7 @@ class PlacingOrder extends Resource
             Number::make('Cms Maestro Id'),
             Number::make('Warehouse Manager Id'),
             Number::make('Ct Supplier Id'),
-            Text::make('Title')->maxlength(65535),
+            Text::make('Title')->maxlength(190),
             Date::make('Order Date'),
             Number::make('Total Good Count'),
             Number::make('Total Order Price'),
@@ -57,10 +57,8 @@ class PlacingOrder extends Resource
             DateTime::make('Confirmed'),
             Date::make('Predict Warehoused'),
             DateTime::make('Warehoused'),
-            Text::make('Status')->maxlength(65535),
+            Text::make('Status')->maxlength(25),
             Text::make('Memo'),
-            DateTime::make('Created At'),
-            DateTime::make('Updated At'),
         ];
     }
 

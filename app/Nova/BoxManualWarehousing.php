@@ -2,7 +2,6 @@
 
 namespace App\Nova;
 
-use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
@@ -44,11 +43,9 @@ class BoxManualWarehousing extends Resource
             ID::make()->sortable(),
             Number::make('Ct Box Id'),
             Number::make('Cms Maestro Id'),
-            Text::make('Type')->maxlength(65535),
+            Text::make('Type')->maxlength(100),
             Number::make('Manual Add Inventory Count'),
             Text::make('Memo'),
-            DateTime::make('Created At'),
-            DateTime::make('Updated At'),
         ];
     }
 

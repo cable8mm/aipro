@@ -46,7 +46,7 @@ class BoxOrder extends Resource
             Number::make('Cms Maestro Id'),
             Number::make('Warehouse Manager Id'),
             Number::make('Ct Box Supplier Id'),
-            Text::make('Title')->maxlength(65535),
+            Text::make('Title')->maxlength(190),
             Date::make('Order Date'),
             Number::make('Total Box Count'),
             Number::make('Total Order Price'),
@@ -54,10 +54,8 @@ class BoxOrder extends Resource
             DateTime::make('Confirmed'),
             DateTime::make('Predict Warehoused'),
             DateTime::make('Warehoused'),
-            Text::make('Status')->maxlength(65535),
+            Text::make('Status')->maxlength(25),
             Text::make('Memo'),
-            DateTime::make('Created At'),
-            DateTime::make('Updated At'),
         ];
     }
 
