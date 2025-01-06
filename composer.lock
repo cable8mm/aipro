@@ -7091,16 +7091,16 @@
         },
         {
             "name": "cable8mm/xeed",
-            "version": "v1.6.5",
+            "version": "v1.6.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cable8mm/xeed.git",
-                "reference": "79b69cd7b54a7ad3f9b9d6d981fee54ac7915388"
+                "reference": "7a2a5ea0440260cbbd2529fdca397b87e85659e2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cable8mm/xeed/zipball/79b69cd7b54a7ad3f9b9d6d981fee54ac7915388",
-                "reference": "79b69cd7b54a7ad3f9b9d6d981fee54ac7915388",
+                "url": "https://api.github.com/repos/cable8mm/xeed/zipball/7a2a5ea0440260cbbd2529fdca397b87e85659e2",
+                "reference": "7a2a5ea0440260cbbd2529fdca397b87e85659e2",
                 "shasum": ""
             },
             "require": {
@@ -7166,9 +7166,9 @@
             ],
             "support": {
                 "issues": "https://github.com/cable8mm/xeed/issues",
-                "source": "https://github.com/cable8mm/xeed/tree/v1.6.5"
+                "source": "https://github.com/cable8mm/xeed/tree/v1.6.9"
             },
-            "time": "2025-01-04T11:15:38+00:00"
+            "time": "2025-01-06T09:10:52+00:00"
         },
         {
             "name": "composer/class-map-generator",
