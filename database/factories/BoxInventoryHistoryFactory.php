@@ -17,12 +17,11 @@ class BoxInventoryHistoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'id' => fake()->numerify(),
             'ct_box_id' => fake()->randomNumber(),
-            'type' => fake()->text(),
+            'type' => fake()->text(10),
             'quantity' => fake()->randomNumber(),
-            'model' => fake()->text(),
-            'attribute' => fake()->text(),
+            'model' => fake()->text(100),
+            'attribute' => fake()->text(100),
             'is_success' => fake()->boolean(),
             'created_at' => fake()->unixTime(),
             'updated_at' => fake()->unixTime(),

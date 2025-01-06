@@ -17,10 +17,9 @@ class BundledGoodFactory extends Factory
     public function definition(): array
     {
         return [
-            'id' => fake()->numerify(),
-            'playauto_master_code' => fake()->text(),
-            'name' => fake()->text(),
-            'set_code' => fake()->text(),
+            'playauto_master_code' => fake()->text(130),
+            'name' => fake()->text(130),
+            'set_code' => fake()->text(255),
             'goods_price' => fake()->randomNumber(),
             'created_at' => fake()->unixTime(),
             'updated_at' => fake()->unixTime(),

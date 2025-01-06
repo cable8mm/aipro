@@ -17,7 +17,6 @@ class SupplierGoodManualWarehousingFactory extends Factory
     public function definition(): array
     {
         return [
-            'id' => fake()->numerify(),
             'ct_supplier_good_id' => fake()->randomNumber(),
             'cms_maestro_id' => fake()->randomNumber(),
             'manual_add_inventory_count' => fake()->randomNumber(),

@@ -17,10 +17,9 @@ class SettingFactory extends Factory
     public function definition(): array
     {
         return [
-            'id' => fake()->numerify(),
-            'key' => fake()->text(),
-            'value' => fake()->text(),
-            'memo' => fake()->text(),
+            'key' => fake()->text(150),
+            'value' => fake()->text(255),
+            'memo' => fake()->text(255),
         ];
     }
 }

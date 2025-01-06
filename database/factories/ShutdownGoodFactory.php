@@ -17,11 +17,10 @@ class ShutdownGoodFactory extends Factory
     public function definition(): array
     {
         return [
-            'id' => fake()->numerify(),
             'cms_maestro_id' => fake()->randomNumber(),
-            'center_code' => fake()->text(),
-            'name' => fake()->text(),
-            'reason' => fake()->text(),
+            'center_code' => fake()->text(150),
+            'name' => fake()->text(255),
+            'reason' => fake()->text(255),
             'created_at' => fake()->unixTime(),
             'updated_at' => fake()->unixTime(),
         ];

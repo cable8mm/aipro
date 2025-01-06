@@ -17,15 +17,14 @@ class RegisterGoodRequestFactory extends Factory
     public function definition(): array
     {
         return [
-            'id' => fake()->numerify(),
             'requester_id' => fake()->randomNumber(),
-            'title' => fake()->text(),
-            'request_file_url' => fake()->text(),
+            'title' => fake()->text(255),
+            'request_file_url' => fake()->text(255),
             'worker_id' => fake()->randomNumber(),
-            'respond_file_url' => fake()->text(),
+            'respond_file_url' => fake()->text(255),
             'has_supplier_monitoring_price' => fake()->numberBetween(0, 127),
             'memo' => fake()->paragraph(),
-            'status' => fake()->text(),
+            'status' => fake()->text(50),
             'created_at' => fake()->unixTime(),
             'updated_at' => fake()->unixTime(),
         ];

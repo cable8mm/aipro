@@ -17,7 +17,6 @@ class BoxOrderBoxFactory extends Factory
     public function definition(): array
     {
         return [
-            'id' => fake()->numerify(),
             'ct_box_order_id' => fake()->randomNumber(),
             'cms_maestro_id' => fake()->randomNumber(),
             'ct_box_supplier_id' => fake()->randomNumber(),
@@ -28,7 +27,7 @@ class BoxOrderBoxFactory extends Factory
             'cost_count' => fake()->randomNumber(),
             'cost_price' => fake()->randomNumber(),
             'warehoused' => fake()->dateTime(),
-            'status' => fake()->text(),
+            'status' => fake()->text(100),
             'memo' => fake()->paragraph(),
             'created_at' => fake()->unixTime(),
             'updated_at' => fake()->unixTime(),

@@ -17,7 +17,6 @@ class GoodWorkFactory extends Factory
     public function definition(): array
     {
         return [
-            'id' => fake()->numerify(),
             'cms_maestro_id' => fake()->randomNumber(),
             'ct_good_id' => fake()->randomNumber(),
             'description_json' => fake()->paragraph(),

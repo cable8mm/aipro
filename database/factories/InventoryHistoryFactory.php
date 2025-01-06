@@ -17,14 +17,13 @@ class InventoryHistoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'id' => fake()->numerify(),
             'cms_maestro_id' => fake()->randomNumber(),
             'ct_good_id' => fake()->randomNumber(),
-            'type' => fake()->text(),
+            'type' => fake()->text(10),
             'quantity' => fake()->randomNumber(),
             'price' => fake()->randomNumber(),
             'after_quantity' => fake()->randomNumber(),
-            'model' => fake()->text(),
+            'model' => fake()->text(100),
             'attribute' => fake()->randomNumber(),
             'cancel_id' => fake()->randomNumber(),
             'is_success' => fake()->boolean(),

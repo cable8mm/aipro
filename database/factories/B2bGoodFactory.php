@@ -17,10 +17,9 @@ class B2bGoodFactory extends Factory
     public function definition(): array
     {
         return [
-            'id' => fake()->numerify(),
             'cms_maestro_id' => fake()->randomNumber(),
-            'goods_no' => fake()->text(),
-            'playauto_master_code' => fake()->text(),
+            'goods_no' => fake()->text(150),
+            'playauto_master_code' => fake()->text(255),
             'created_at' => fake()->unixTime(),
             'updated_at' => fake()->unixTime(),
         ];

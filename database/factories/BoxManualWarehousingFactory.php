@@ -17,10 +17,9 @@ class BoxManualWarehousingFactory extends Factory
     public function definition(): array
     {
         return [
-            'id' => fake()->numerify(),
             'ct_box_id' => fake()->randomNumber(),
             'cms_maestro_id' => fake()->randomNumber(),
-            'type' => fake()->text(),
+            'type' => fake()->text(100),
             'manual_add_inventory_count' => fake()->randomNumber(),
             'memo' => fake()->paragraph(),
             'created_at' => fake()->unixTime(),

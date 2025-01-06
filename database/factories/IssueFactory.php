@@ -17,12 +17,11 @@ class IssueFactory extends Factory
     public function definition(): array
     {
         return [
-            'id' => fake()->numerify(),
             'issuer_id' => fake()->randomNumber(),
-            'classification' => fake()->text(),
-            'title' => fake()->text(),
+            'classification' => fake()->text(255),
+            'title' => fake()->text(255),
             'description' => fake()->paragraph(),
-            'status' => fake()->text(),
+            'status' => fake()->text(255),
             'worker_id' => fake()->randomNumber(),
             'memo' => fake()->paragraph(),
             'created_at' => fake()->unixTime(),

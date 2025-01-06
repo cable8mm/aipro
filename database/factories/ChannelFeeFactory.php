@@ -17,9 +17,8 @@ class ChannelFeeFactory extends Factory
     public function definition(): array
     {
         return [
-            'id' => fake()->numerify(),
-            'channel' => fake()->text(),
-            'fee_rate' => fake()->randomFloat(2, 0, 10000),
+            'channel' => fake()->text(255),
+            'fee_rate' => fake()->randomFloat(2, 0, 999),
             'created_at' => fake()->unixTime(),
             'updated_at' => fake()->unixTime(),
         ];

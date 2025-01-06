@@ -17,16 +17,15 @@ class MismatchedOrderShipmentFactory extends Factory
     public function definition(): array
     {
         return [
-            'id' => fake()->numerify(),
             'ct_order_sheet_invoice_id' => fake()->randomNumber(),
-            'orderNo' => fake()->text(),
-            'site' => fake()->text(),
-            'masterGoodsCd' => fake()->text(),
-            'goodsNm' => fake()->text(),
-            'option' => fake()->text(),
+            'orderNo' => fake()->text(100),
+            'site' => fake()->text(100),
+            'masterGoodsCd' => fake()->text(100),
+            'goodsNm' => fake()->text(255),
+            'option' => fake()->text(255),
             'json' => fake()->paragraph(),
             'cms_maestro_id' => fake()->randomNumber(),
-            'status' => fake()->text(),
+            'status' => fake()->text(100),
             'created_at' => fake()->unixTime(),
             'updated_at' => fake()->unixTime(),
         ];

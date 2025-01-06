@@ -17,10 +17,9 @@ class PromotionCodeFactory extends Factory
     public function definition(): array
     {
         return [
-            'id' => fake()->numerify(),
-            'playauto_master_code' => fake()->text(),
-            'godo_code' => fake()->text(),
-            'memo' => fake()->text(),
+            'playauto_master_code' => fake()->text(100),
+            'godo_code' => fake()->text(255),
+            'memo' => fake()->text(190),
             'started' => fake()->dateTime(),
             'finished' => fake()->dateTime(),
             'created_at' => fake()->unixTime(),

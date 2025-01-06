@@ -17,9 +17,8 @@ class OrderFactory extends Factory
     public function definition(): array
     {
         return [
-            'id' => fake()->numerify(),
             'order_sheet_invoice_id' => fake()->randomNumber(),
-            'type' => fake()->text(),
+            'type' => fake()->text(50),
             'is_all_good_matched' => fake()->boolean(),
             'has_center_class_j' => fake()->boolean(),
             'order_good_count' => fake()->randomNumber(),

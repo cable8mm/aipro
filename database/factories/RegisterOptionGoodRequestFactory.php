@@ -17,13 +17,12 @@ class RegisterOptionGoodRequestFactory extends Factory
     public function definition(): array
     {
         return [
-            'id' => fake()->numerify(),
             'requester_id' => fake()->randomNumber(),
             'worker_id' => fake()->randomNumber(),
-            'title' => fake()->text(),
-            'request_file_url' => fake()->text(),
-            'status' => fake()->text(),
-            'respond_file_url' => fake()->text(),
+            'title' => fake()->text(190),
+            'request_file_url' => fake()->text(190),
+            'status' => fake()->text(10),
+            'respond_file_url' => fake()->text(190),
             'memo' => fake()->paragraph(),
             'created_at' => fake()->unixTime(),
             'updated_at' => fake()->unixTime(),

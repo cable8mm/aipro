@@ -17,21 +17,20 @@ class ChannelFactory extends Factory
     public function definition(): array
     {
         return [
-            'id' => fake()->numerify(),
             'last_process_maestro_id' => fake()->randomNumber(),
-            'name' => fake()->text(),
-            'playauto_site' => fake()->text(),
-            'siteid' => fake()->text(),
-            'fee_rate' => fake()->randomFloat(2, 0, 10000),
+            'name' => fake()->text(255),
+            'playauto_site' => fake()->text(190),
+            'siteid' => fake()->text(100),
+            'fee_rate' => fake()->randomFloat(2, 0, 999),
             'total_good_count' => fake()->randomNumber(),
             'total_sale_good_count' => fake()->randomNumber(),
             'total_sold_out_good_count' => fake()->randomNumber(),
             'total_no_sale_good_count' => fake()->randomNumber(),
-            'filepath' => fake()->text(),
+            'filepath' => fake()->text(190),
             'last_processed' => fake()->dateTime(),
             'memo' => fake()->paragraph(),
             'is_active' => fake()->boolean(),
-            'status' => fake()->text(),
+            'status' => fake()->text(100),
             'created_at' => fake()->unixTime(),
             'updated_at' => fake()->unixTime(),
         ];

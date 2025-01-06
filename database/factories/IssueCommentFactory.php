@@ -17,7 +17,6 @@ class IssueCommentFactory extends Factory
     public function definition(): array
     {
         return [
-            'id' => fake()->numerify(),
             'ct_issue_id' => fake()->randomNumber(),
             'cms_maestro_id' => fake()->randomNumber(),
             'comment' => fake()->paragraph(),

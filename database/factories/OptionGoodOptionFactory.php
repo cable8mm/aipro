@@ -17,17 +17,16 @@ class OptionGoodOptionFactory extends Factory
     public function definition(): array
     {
         return [
-            'id' => fake()->numerify(),
             'cms_maestro_id' => fake()->randomNumber(),
             'ct_option_good_id' => fake()->randomNumber(),
-            'playauto_master_code' => fake()->text(),
-            'name' => fake()->text(),
+            'playauto_master_code' => fake()->text(130),
+            'name' => fake()->text(130),
             'goods_price' => fake()->randomNumber(),
             'last_cost_price' => fake()->randomNumber(),
             'zero_margin_price' => fake()->randomNumber(),
             'suggested_selling_price_of_gms' => fake()->randomNumber(),
             'order' => fake()->randomNumber(),
-            'goods_bar' => fake()->text(),
+            'goods_bar' => fake()->text(190),
             'is_my_shop_sale' => fake()->boolean(),
             'is_other_shop_sale' => fake()->boolean(),
             'created_at' => fake()->unixTime(),

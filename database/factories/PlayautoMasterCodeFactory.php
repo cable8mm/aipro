@@ -17,7 +17,7 @@ class PlayautoMasterCodeFactory extends Factory
     public function definition(): array
     {
         return [
-            'playauto_master_code' => fake()->text(),
+            'playauto_master_code' => fake()->text(100),
         ];
     }
 }

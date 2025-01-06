@@ -17,13 +17,12 @@ class GoodInventorySnapshotFactory extends Factory
     public function definition(): array
     {
         return [
-            'id' => fake()->numerify(),
             'cms_maestro_id' => fake()->randomNumber(),
             'ct_good_id' => fake()->randomNumber(),
-            'playauto_master_code' => fake()->text(),
+            'playauto_master_code' => fake()->text(255),
             'inventory' => fake()->randomNumber(),
             'safe_class' => fake()->randomLetter(),
-            'type' => fake()->text(),
+            'type' => fake()->text(50),
             'created_at' => fake()->unixTime(),
             'updated_at' => fake()->unixTime(),
         ];

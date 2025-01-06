@@ -17,9 +17,8 @@ class HelpTipFactory extends Factory
     public function definition(): array
     {
         return [
-            'id' => fake()->numerify(),
-            'word' => fake()->text(),
-            'help_tip' => fake()->text(),
+            'word' => fake()->text(100),
+            'help_tip' => fake()->text(190),
             'created_at' => fake()->unixTime(),
             'updated_at' => fake()->unixTime(),
         ];

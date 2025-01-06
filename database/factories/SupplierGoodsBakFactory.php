@@ -17,17 +17,16 @@ class SupplierGoodsBakFactory extends Factory
     public function definition(): array
     {
         return [
-            'id' => fake()->numerify(),
             'ct_supplier_id' => fake()->randomNumber(),
-            'code' => fake()->text(),
-            'name' => fake()->text(),
-            'previous_name' => fake()->text(),
+            'code' => fake()->text(255),
+            'name' => fake()->text(255),
+            'previous_name' => fake()->text(255),
             'box_count' => fake()->randomNumber(),
             'cost_price_without_vat' => fake()->randomNumber(),
             'cost_price_with_vat' => fake()->randomNumber(),
             'suggest_good_price' => fake()->randomNumber(),
             'customer_good_price' => fake()->randomNumber(),
-            'additional_information' => fake()->text(),
+            'additional_information' => fake()->text(255),
             'created_at' => fake()->unixTime(),
             'updated_at' => fake()->unixTime(),
         ];

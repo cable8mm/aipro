@@ -17,7 +17,6 @@ class PlacingOrderGoodFactory extends Factory
     public function definition(): array
     {
         return [
-            'id' => fake()->numerify(),
             'ct_order_id' => fake()->randomNumber(),
             'cms_maestro_id' => fake()->randomNumber(),
             'ct_good_id' => fake()->randomNumber(),
@@ -31,7 +30,7 @@ class PlacingOrderGoodFactory extends Factory
             'cost_price' => fake()->randomNumber(),
             'is_promotion' => fake()->boolean(),
             'warehoused' => fake()->dateTime(),
-            'status' => fake()->text(),
+            'status' => fake()->text(100),
             'memo' => fake()->paragraph(),
             'ordered' => fake()->dateTime(),
             'created_at' => fake()->unixTime(),

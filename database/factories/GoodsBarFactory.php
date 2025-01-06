@@ -17,9 +17,8 @@ class GoodsBarFactory extends Factory
     public function definition(): array
     {
         return [
-            'id' => fake()->numerify(),
-            'playauto_master_code' => fake()->text(),
-            'goods_bar' => fake()->text(),
+            'playauto_master_code' => fake()->text(190),
+            'goods_bar' => fake()->text(190),
             'is_my_shop_sale' => fake()->boolean(),
             'is_other_shop_sale' => fake()->boolean(),
             'created_at' => fake()->unixTime(),
