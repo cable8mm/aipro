@@ -54,7 +54,6 @@ class DatabaseSeeder extends Seeder
             ShutdownGoodSeeder::class,
             SupplierGoodManualWarehousingSeeder::class,
             SupplierGoodSeeder::class,
-            SupplierGoodsBakSeeder::class,
             SupplierSeeder::class,
             WaybillSeeder::class,
         ]);
