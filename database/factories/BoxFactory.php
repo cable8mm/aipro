@@ -1,0 +1,31 @@
+<?php
+
+namespace Database\Factories;
+
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
+ */
+class BoxFactory extends Factory
+{
+    /**
+     * Define the model's default state.
+     *
+     * @return array<string, mixed>
+     */
+    public function definition(): array
+    {
+        return [
+            'name' => fake()->text(100),
+            'code' => fake()->text(50),
+            'size' => fake()->randomNumber(),
+            'delivery_price' => fake()->randomNumber(),
+            'box_price' => fake()->randomNumber(),
+            'inventory' => fake()->randomNumber(),
+            'memo' => fake()->text(255),
+            'created_at' => fake()->unixTime(),
+            'updated_at' => fake()->unixTime(),
+        ];
+    }
+}
