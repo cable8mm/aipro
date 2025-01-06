@@ -55,7 +55,6 @@ class DatabaseSeeder extends Seeder
             SupplierGoodManualWarehousingSeeder::class,
             SupplierGoodSeeder::class,
             SupplierSeeder::class,
-            WaybillSeeder::class,
         ]);
     }
 }
