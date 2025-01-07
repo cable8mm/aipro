@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('playauto_master_codes', function (Blueprint $table) {
-            $table->string('playauto_master_code', 100);
+            $table->string('playauto_master_code', 100)->primary();
         });
     }
 
