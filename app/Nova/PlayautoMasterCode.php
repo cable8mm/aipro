@@ -27,7 +27,6 @@ class PlayautoMasterCode extends Resource
      * @var array
      */
     public static $search = [
-        'id',
     ];
 
     /**

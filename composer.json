@@ -76,7 +76,7 @@
         ],
         "log": "tail -f ./storage/logs/laravel.log",
         "migrate": [
-            "@php artisan migrate:fresh"
+            "@php artisan migrate:fresh --seed --force"
         ],
         "nova-user": "@php artisan aipro:create-nova-account"
     },

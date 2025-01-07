@@ -9,5 +9,16 @@ class PlayautoMasterCode extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'playauto_master_code';
+
+    public $incrementing = false;
+
     public $timestamps = false;
+
+    protected function casts(): array
+    {
+        return [
+            'playauto_master_code' => 'string',
+        ];
+    }
 }
