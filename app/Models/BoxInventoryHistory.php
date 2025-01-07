@@ -17,7 +17,7 @@ class BoxInventoryHistory extends Model
             'quantity' => 'integer',
             'model' => 'string',
             'attribute' => 'string',
-            'is_success' => 'boolean'
+            'is_success' => 'boolean',
         ];
     }
 }

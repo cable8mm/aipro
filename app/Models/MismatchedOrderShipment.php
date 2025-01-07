@@ -19,7 +19,7 @@ class MismatchedOrderShipment extends Model
             'goodsNm' => 'string',
             'option' => 'string',
             'cms_maestro_id' => 'integer',
-            'status' => 'string'
+            'status' => 'string',
         ];
     }
 }

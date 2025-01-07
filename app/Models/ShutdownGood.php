@@ -15,7 +15,7 @@ class ShutdownGood extends Model
             'cms_maestro_id' => 'integer',
             'center_code' => 'string',
             'name' => 'string',
-            'reason' => 'string'
+            'reason' => 'string',
         ];
     }
 }

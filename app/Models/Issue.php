@@ -16,7 +16,7 @@ class Issue extends Model
             'classification' => 'string',
             'title' => 'string',
             'status' => 'string',
-            'worker_id' => 'integer'
+            'worker_id' => 'integer',
         ];
     }
 }

@@ -15,7 +15,7 @@ class BoxManualWarehousing extends Model
             'ct_box_id' => 'integer',
             'cms_maestro_id' => 'integer',
             'type' => 'string',
-            'manual_add_inventory_count' => 'integer'
+            'manual_add_inventory_count' => 'integer',
         ];
     }
 }

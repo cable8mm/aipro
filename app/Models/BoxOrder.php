@@ -23,7 +23,7 @@ class BoxOrder extends Model
             'confirmed' => 'datetime',
             'predict_warehoused' => 'datetime',
             'warehoused' => 'datetime',
-            'status' => 'string'
+            'status' => 'string',
         ];
     }
 }

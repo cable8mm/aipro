@@ -18,7 +18,7 @@ class RegisterGoodRequest extends Model
             'worker_id' => 'integer',
             'respond_file_url' => 'string',
             'has_supplier_monitoring_price' => 'integer',
-            'status' => 'string'
+            'status' => 'string',
         ];
     }
 }

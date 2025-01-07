@@ -14,7 +14,7 @@ class PriceCoefficient extends Model
         return [
             'start_price' => 'integer',
             'end_price' => 'integer',
-            'coefficient' => 'decimal:3'
+            'coefficient' => 'decimal:3',
         ];
     }
 }

@@ -15,7 +15,7 @@ class GoodsBar extends Model
             'playauto_master_code' => 'string',
             'goods_bar' => 'string',
             'is_my_shop_sale' => 'boolean',
-            'is_other_shop_sale' => 'boolean'
+            'is_other_shop_sale' => 'boolean',
         ];
     }
 }

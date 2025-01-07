@@ -22,7 +22,7 @@ class Supplier extends Model
             'min_order_price' => 'integer',
             'is_parceled' => 'boolean',
             'is_information_manual_sync' => 'boolean',
-            'is_active' => 'boolean'
+            'is_active' => 'boolean',
         ];
     }
 }

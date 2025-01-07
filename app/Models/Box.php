@@ -18,7 +18,7 @@ class Box extends Model
             'delivery_price' => 'integer',
             'box_price' => 'integer',
             'inventory' => 'integer',
-            'memo' => 'string'
+            'memo' => 'string',
         ];
     }
 }

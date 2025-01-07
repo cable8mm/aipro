@@ -13,7 +13,7 @@ class IssueComment extends Model
     {
         return [
             'ct_issue_id' => 'integer',
-            'cms_maestro_id' => 'integer'
+            'cms_maestro_id' => 'integer',
         ];
     }
 }

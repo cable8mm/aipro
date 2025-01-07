@@ -24,7 +24,7 @@ class Channel extends Model
             'filepath' => 'string',
             'last_processed' => 'datetime',
             'is_active' => 'boolean',
-            'status' => 'string'
+            'status' => 'string',
         ];
     }
 }

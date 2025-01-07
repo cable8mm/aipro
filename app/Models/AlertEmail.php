@@ -14,7 +14,7 @@ class AlertEmail extends Model
         return [
             'name' => 'string',
             'action_name' => 'string',
-            'email_list' => 'string'
+            'email_list' => 'string',
         ];
     }
 }

@@ -21,7 +21,7 @@ class InventoryHistory extends Model
             'model' => 'string',
             'attribute' => 'integer',
             'cancel_id' => 'integer',
-            'is_success' => 'boolean'
+            'is_success' => 'boolean',
         ];
     }
 }

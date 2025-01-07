@@ -17,7 +17,7 @@ class PromotionCode extends Model
             'memo' => 'string',
             'started' => 'datetime',
             'finished' => 'datetime',
-            'cms_maestro_id' => 'integer'
+            'cms_maestro_id' => 'integer',
         ];
     }
 }

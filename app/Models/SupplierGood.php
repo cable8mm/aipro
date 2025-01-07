@@ -41,7 +41,7 @@ class SupplierGood extends Model
             'is_warehoused' => 'boolean',
             'is_shutdowned' => 'boolean',
             'supplier_created' => 'date',
-            'supplier_modified' => 'date'
+            'supplier_modified' => 'date',
         ];
     }
 }

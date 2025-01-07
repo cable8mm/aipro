@@ -15,7 +15,7 @@ class BundledGood extends Model
             'playauto_master_code' => 'string',
             'name' => 'string',
             'set_code' => 'string',
-            'goods_price' => 'integer'
+            'goods_price' => 'integer',
         ];
     }
 }

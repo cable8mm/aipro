@@ -20,7 +20,7 @@ class BoxSupplier extends Model
             'order_method' => 'integer',
             'balance_criteria' => 'string',
             'min_order_price' => 'integer',
-            'is_parceled' => 'boolean'
+            'is_parceled' => 'boolean',
         ];
     }
 }

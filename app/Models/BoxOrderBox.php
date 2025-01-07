@@ -22,7 +22,7 @@ class BoxOrderBox extends Model
             'cost_count' => 'integer',
             'cost_price' => 'integer',
             'warehoused' => 'datetime',
-            'status' => 'string'
+            'status' => 'string',
         ];
     }
 }

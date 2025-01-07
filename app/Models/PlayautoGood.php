@@ -56,7 +56,7 @@ class PlayautoGood extends Model
             '사은품내용' => 'string',
             '인증구분' => 'string',
             '인증정보' => 'string',
-            '거래처' => 'string'
+            '거래처' => 'string',
         ];
     }
 }

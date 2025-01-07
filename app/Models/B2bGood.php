@@ -14,7 +14,7 @@ class B2bGood extends Model
         return [
             'cms_maestro_id' => 'integer',
             'goods_no' => 'string',
-            'playauto_master_code' => 'string'
+            'playauto_master_code' => 'string',
         ];
     }
 }

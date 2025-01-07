@@ -25,7 +25,7 @@ class PlacingOrder extends Model
             'confirmed' => 'datetime',
             'predict_warehoused' => 'date',
             'warehoused' => 'datetime',
-            'status' => 'string'
+            'status' => 'string',
         ];
     }
 }

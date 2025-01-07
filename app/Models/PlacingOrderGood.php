@@ -26,7 +26,7 @@ class PlacingOrderGood extends Model
             'is_promotion' => 'boolean',
             'warehoused' => 'datetime',
             'status' => 'string',
-            'ordered' => 'datetime'
+            'ordered' => 'datetime',
         ];
     }
 }

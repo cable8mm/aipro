@@ -14,7 +14,7 @@ class SupplierGoodManualWarehousing extends Model
         return [
             'ct_supplier_good_id' => 'integer',
             'cms_maestro_id' => 'integer',
-            'manual_add_inventory_count' => 'integer'
+            'manual_add_inventory_count' => 'integer',
         ];
     }
 }

@@ -14,7 +14,7 @@ class GoodWork extends Model
         return [
             'cms_maestro_id' => 'integer',
             'ct_good_id' => 'integer',
-            'is_created' => 'boolean'
+            'is_created' => 'boolean',
         ];
     }
 }

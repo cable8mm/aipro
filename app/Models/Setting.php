@@ -16,7 +16,7 @@ class Setting extends Model
         return [
             'key' => 'string',
             'value' => 'string',
-            'memo' => 'string'
+            'memo' => 'string',
         ];
     }
 }

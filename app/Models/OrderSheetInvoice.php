@@ -20,7 +20,7 @@ class OrderSheetInvoice extends Model
             'order_good_count' => 'integer',
             'mismatched_order_good_count' => 'integer',
             'invoice_filepath' => 'string',
-            'status' => 'string'
+            'status' => 'string',
         ];
     }
 }

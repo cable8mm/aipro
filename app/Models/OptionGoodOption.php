@@ -23,7 +23,7 @@ class OptionGoodOption extends Model
             'order' => 'integer',
             'goods_bar' => 'string',
             'is_my_shop_sale' => 'boolean',
-            'is_other_shop_sale' => 'boolean'
+            'is_other_shop_sale' => 'boolean',
         ];
     }
 }

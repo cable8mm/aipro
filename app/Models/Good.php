@@ -76,7 +76,7 @@ class Good extends Model
             'is_scm_manager_confirmed' => 'boolean',
             'last_warehoused' => 'datetime',
             'supplier_out_of_stock_on_datetime' => 'datetime',
-            'supplier_out_of_stock_off_datetime' => 'datetime'
+            'supplier_out_of_stock_off_datetime' => 'datetime',
         ];
     }
 }

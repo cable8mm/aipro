@@ -13,7 +13,7 @@ class ChannelFee extends Model
     {
         return [
             'channel' => 'string',
-            'fee_rate' => 'decimal:2'
+            'fee_rate' => 'decimal:2',
         ];
     }
 }

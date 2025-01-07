@@ -41,7 +41,7 @@ class ChannelGood extends Model
             'wemake_sale_status' => 'string',
             'gift_price' => 'integer',
             'gift_sale_status' => 'string',
-            'gift_inventory' => 'integer'
+            'gift_inventory' => 'integer',
         ];
     }
 }

@@ -16,7 +16,7 @@ class GoodInventorySnapshot extends Model
             'ct_good_id' => 'integer',
             'playauto_master_code' => 'string',
             'inventory' => 'integer',
-            'type' => 'string'
+            'type' => 'string',
         ];
     }
 }

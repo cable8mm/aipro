@@ -18,7 +18,7 @@ class PlayautoMasterCode extends Model
     protected function casts(): array
     {
         return [
-            'playauto_master_code' => 'string'
+            'playauto_master_code' => 'string',
         ];
     }
 }

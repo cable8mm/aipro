@@ -13,7 +13,7 @@ class HelpTip extends Model
     {
         return [
             'word' => 'string',
-            'help_tip' => 'string'
+            'help_tip' => 'string',
         ];
     }
 }

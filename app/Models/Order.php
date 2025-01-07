@@ -17,7 +17,7 @@ class Order extends Model
             'is_all_good_matched' => 'boolean',
             'has_center_class_j' => 'boolean',
             'order_good_count' => 'integer',
-            'printed_count' => 'integer'
+            'printed_count' => 'integer',
         ];
     }
 }

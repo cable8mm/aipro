@@ -15,7 +15,7 @@ class GoodManualWarehousing extends Model
             'ct_good_id' => 'integer',
             'cms_maestro_id' => 'integer',
             'manual_add_inventory_count' => 'integer',
-            'type' => 'string'
+            'type' => 'string',
         ];
     }
 }
