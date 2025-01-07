@@ -10,4 +10,13 @@ class Setting extends Model
     use HasFactory;
 
     public $timestamps = false;
+
+    protected function casts(): array
+    {
+        return [
+            'key' => 'string',
+            'value' => 'string',
+            'memo' => 'string'
+        ];
+    }
 }
