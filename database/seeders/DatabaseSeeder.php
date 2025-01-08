@@ -43,6 +43,7 @@ class DatabaseSeeder extends Seeder
             OrderSeeder::class,
             PlacingOrderGoodSeeder::class,
             PlacingOrderSeeder::class,
+            PlayautoCategorySeeder::class,
             PlayautoGoodSeeder::class,
             PlayautoMasterCodeSeeder::class,
             PriceCoefficientSeeder::class,
