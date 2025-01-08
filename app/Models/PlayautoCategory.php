@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class PlayautoCategory extends Model
 {
     use HasFactory;
+
+    public $timestamps = false;
+
+    public $incrementing = false;
 }
