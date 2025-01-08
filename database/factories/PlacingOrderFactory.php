@@ -26,7 +26,6 @@ class PlacingOrderFactory extends Factory
             'total_good_count' => fake()->randomNumber() % 100,
             'total_order_price' => fake()->randomNumber(5),
             'order_discount_percent' => fake()->randomNumber(2),
-            'is_applied_order_discount_percent' => fake()->boolean(),
             'sent_at' => fake()->dateTime(),
             'confirmed_at' => fake()->dateTime(),
             'predict_warehoused_at' => fake()->date(),

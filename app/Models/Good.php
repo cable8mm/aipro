@@ -59,8 +59,6 @@ class Good extends Model
             'naver_lowest_price' => 'integer',
             'internet_lowest_price' => 'integer',
             'zero_margin_price' => 'integer',
-            'suggested_sales_percent_margin' => 'integer',
-            'suggested_selling_price_of_gms' => 'integer',
             'is_hi300' => 'boolean',
             'is_supplier_out_of_stock' => 'boolean',
             'is_my_shop_sale' => 'boolean',

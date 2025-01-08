@@ -63,8 +63,6 @@ class GoodFactory extends Factory
             'naver_lowest_price' => fake()->randomNumber(),
             'internet_lowest_price' => fake()->randomNumber(),
             'zero_margin_price' => fake()->randomNumber(),
-            'suggested_sales_percent_margin' => fake()->randomNumber(),
-            'suggested_selling_price_of_gms' => fake()->randomNumber(),
             'is_supplier_out_of_stock' => fake()->boolean(),
             'is_shutdowned' => fake()->boolean(),
         ];
