@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class RegisterGoodRequest extends Model
 {
@@ -20,5 +21,10 @@ class RegisterGoodRequest extends Model
             'has_supplier_monitoring_price' => 'integer',
             'status' => 'string',
         ];
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'worker_id');
     }
 }

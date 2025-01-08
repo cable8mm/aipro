@@ -3,9 +3,13 @@
 namespace App\Nova;
 
 use Laravel\Nova\Fields\Boolean;
+use Laravel\Nova\Fields\Currency;
+use Laravel\Nova\Fields\Email;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Number;
+use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Supplier extends Resource
@@ -22,7 +26,7 @@ class Supplier extends Resource
      *
      * @var string
      */
-    public static $title = 'Suppliers';
+    public static $title = 'name';
 
     /**
      * The columns that should be searched.
@@ -43,17 +47,22 @@ class Supplier extends Resource
         return [
             ID::make()->sortable(),
             Text::make('Name')->maxlength(255),
-            Text::make('Ordered Email')->maxlength(255),
+            Email::make('Ordered Email', 'ordered_email')->maxlength(255),
             Text::make('Contact Name')->maxlength(255),
             Text::make('Contact Tel')->maxlength(255),
             Text::make('Contact Cel')->maxlength(255),
-            Number::make('Order Method')->min(-128)->max(127),
-            Text::make('Balance Criteria')->maxlength(255),
-            Number::make('Min Order Price'),
-            Boolean::make('Is Parceled'),
-            Text::make('Additional Information'),
-            Boolean::make('Is Information Manual Sync'),
-            Boolean::make('Is Active'),
+            Select::make('Order Method', 'order_method')->options([
+                'sms' => '문자 메시지',
+                'email' => '이메일',
+                'phone' => '전화',
+                'kakaotalk' => '카카오톡',
+                'order_system' => '발주 시스템',
+            ])->displayUsingLabels(),
+            Currency::make('Min Order Price'),
+            Textarea::make('Additional Information')->alwaysShow(),
+            Boolean::make('Is Active')->default(true),
+
+            HasMany::make('Supplier Goods'),
         ];
     }
 

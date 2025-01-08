@@ -17,9 +17,9 @@ class SettingFactory extends Factory
     public function definition(): array
     {
         return [
-            'key' => fake()->text(150),
-            'value' => fake()->text(255),
-            'memo' => fake()->text(255),
+            'key' => 'OPEN_MARKET_MINIMUM_INVENTORY',
+            'value' => 2,
+            'memo' => '이 수치 미만(포함 안됨)일 경우 품절처리 됨',
         ];
     }
 }

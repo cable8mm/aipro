@@ -2,9 +2,12 @@
 
 namespace App\Nova;
 
+use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Number;
+use Laravel\Nova\Fields\Status;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Textarea;
+use Laravel\Nova\Fields\URL;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class RegisterOptionGoodRequest extends Resource
@@ -21,7 +24,7 @@ class RegisterOptionGoodRequest extends Resource
      *
      * @var string
      */
-    public static $title = 'Register Option Good Requests';
+    public static $title = 'id';
 
     /**
      * The columns that should be searched.
@@ -41,13 +44,15 @@ class RegisterOptionGoodRequest extends Resource
     {
         return [
             ID::make()->sortable(),
-            Number::make('Requester Id'),
-            Number::make('Worker Id'),
+            BelongsTo::make('Requester', 'requester', User::class),
+            BelongsTo::make('Worker', 'worker', User::class),
             Text::make('Title')->maxlength(190),
-            Text::make('Request File Url')->maxlength(190),
-            Text::make('Status')->maxlength(10),
-            Text::make('Respond File Url')->maxlength(190),
-            Text::make('Memo'),
+            URL::make('Request File Url')->maxlength(190),
+            URL::make('Respond File Url')->maxlength(190),
+            Status::make('Status')
+                ->loadingWhen(['waiting', 'running'])
+                ->failedWhen(['failed']),
+            Textarea::make('Memo')->alwaysShow(),
         ];
     }
 

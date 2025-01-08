@@ -2,12 +2,17 @@
 
 namespace App\Nova;
 
-use Laravel\Nova\Fields\Boolean;
-use Laravel\Nova\Fields\Date;
+use App\Enums\Status as EnumsStatus;
+use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\DateTime;
+use Laravel\Nova\Fields\HasMany;
+use Laravel\Nova\Fields\Hidden;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
+use Laravel\Nova\Fields\Status;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class PlacingOrder extends Resource
@@ -24,7 +29,7 @@ class PlacingOrder extends Resource
      *
      * @var string
      */
-    public static $title = 'Placing Orders';
+    public static $title = 'id';
 
     /**
      * The columns that should be searched.
@@ -44,21 +49,31 @@ class PlacingOrder extends Resource
     {
         return [
             ID::make()->sortable(),
-            Number::make('Cms Maestro Id'),
-            Number::make('Warehouse Manager Id'),
-            Number::make('Ct Supplier Id'),
-            Text::make('Title')->maxlength(190),
-            Date::make('Order Date'),
-            Number::make('Total Good Count'),
-            Number::make('Total Order Price'),
-            Number::make('Order Discount Percent'),
-            Boolean::make('Is Applied Order Discount Percent'),
-            DateTime::make('Sent'),
-            DateTime::make('Confirmed'),
-            Date::make('Predict Warehoused'),
-            DateTime::make('Warehoused'),
-            Text::make('Status')->maxlength(25),
-            Text::make('Memo'),
+            Hidden::make('User', 'user_id')->default(function ($request) {
+                return $request->user()->id;
+            }),
+            BelongsTo::make('Warehouse Manager', 'warehouseManager', User::class),
+            BelongsTo::make('Supplier'),
+            Text::make('Title')->required()->rules('required')->maxlength(190),
+            Number::make('Total Good Count')->exceptOnForms()->displayUsing(function ($value) {
+                return number_format($value);
+            }),
+            Currency::make('Total Order Price')->exceptOnForms(),
+            Number::make('Order Discount Percent')->min(1)->max(100)->step(1)
+                ->displayUsing(fn () => "{$this->order_discount_percent}%")
+                ->exceptOnForms(),
+            DateTime::make('Ordered At')->nullable()
+                ->displayUsing(fn ($value) => $value ? $value->format('Y-m-d H, g:ia') : ''),
+            DateTime::make('Predict Warehoused At')->nullable(),
+            DateTime::make('Sent At')->exceptOnForms(),
+            DateTime::make('Confirmed At')->exceptOnForms(),
+            DateTime::make('Warehoused At')->exceptOnForms(),
+            Status::make('Status')
+                ->loadingWhen(EnumsStatus::loadingWhen())
+                ->failedWhen(EnumsStatus::failedWhen()),
+            Textarea::make('Memo')->alwaysShow(),
+
+            HasMany::make('Placing Order Goods', 'placingOrderGoods', PlacingOrderGood::class),
         ];
     }
 

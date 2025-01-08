@@ -20,7 +20,7 @@ class HelpTip extends Resource
      *
      * @var string
      */
-    public static $title = 'Help Tips';
+    public static $title = 'word';
 
     /**
      * The columns that should be searched.
@@ -29,6 +29,7 @@ class HelpTip extends Resource
      */
     public static $search = [
         'id',
+        'word',
     ];
 
     /**
@@ -40,7 +41,7 @@ class HelpTip extends Resource
     {
         return [
             ID::make()->sortable(),
-            Text::make('Word')->maxlength(100),
+            Text::make('Word')->rules('unique')->maxlength(100),
             Text::make('Help Tip')->maxlength(190),
         ];
     }

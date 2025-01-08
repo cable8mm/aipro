@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class BoxInventoryHistory extends Model
 {
@@ -12,12 +13,16 @@ class BoxInventoryHistory extends Model
     protected function casts(): array
     {
         return [
-            'ct_box_id' => 'integer',
             'type' => 'string',
             'quantity' => 'integer',
             'model' => 'string',
             'attribute' => 'string',
             'is_success' => 'boolean',
         ];
+    }
+
+    public function box(): BelongsTo
+    {
+        return $this->belongsTo(Box::class);
     }
 }

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('contact_name', 255)->nullable();
             $table->string('contact_tel', 255)->nullable();
             $table->string('contact_cel', 255)->nullable();
-            $table->tinyInteger('order_method')->nullable()->default('0');
+            $table->string('order_method', 50)->nullable();
             $table->string('balance_criteria', 255)->nullable();
             $table->integer('min_order_price')->nullable();
             $table->boolean('is_parceled')->nullable()->default('0');

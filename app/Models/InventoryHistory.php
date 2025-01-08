@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class InventoryHistory extends Model
 {
@@ -12,8 +13,6 @@ class InventoryHistory extends Model
     protected function casts(): array
     {
         return [
-            'cms_maestro_id' => 'integer',
-            'ct_good_id' => 'integer',
             'type' => 'string',
             'quantity' => 'integer',
             'price' => 'integer',
@@ -23,5 +22,15 @@ class InventoryHistory extends Model
             'cancel_id' => 'integer',
             'is_success' => 'boolean',
         ];
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function good(): BelongsTo
+    {
+        return $this->belongsTo(Good::class);
     }
 }

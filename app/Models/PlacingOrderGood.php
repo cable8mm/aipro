@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class PlacingOrderGood extends Model
 {
@@ -12,10 +13,6 @@ class PlacingOrderGood extends Model
     protected function casts(): array
     {
         return [
-            'ct_order_id' => 'integer',
-            'cms_maestro_id' => 'integer',
-            'ct_good_id' => 'integer',
-            'warehouse_manager_id' => 'integer',
             'order_count' => 'integer',
             'order_price' => 'integer',
             'supplier_confirmed_count' => 'integer',
@@ -24,9 +21,29 @@ class PlacingOrderGood extends Model
             'cost_promotion_count' => 'integer',
             'cost_price' => 'integer',
             'is_promotion' => 'boolean',
-            'warehoused' => 'datetime',
+            'warehoused_at' => 'datetime',
             'status' => 'string',
-            'ordered' => 'datetime',
+            'ordered_at' => 'datetime',
         ];
+    }
+
+    public function placingOrder(): BelongsTo
+    {
+        return $this->belongsTo(PlacingOrder::class);
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function warehouseManager(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'warehouse_manager_id');
+    }
+
+    public function good(): BelongsTo
+    {
+        return $this->belongsTo(Good::class);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\OrderMethod;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,20 +18,15 @@ class SupplierFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->text(255),
-            'ordered_email' => fake()->text(255),
-            'contact_name' => fake()->text(255),
-            'contact_tel' => fake()->text(255),
-            'contact_cel' => fake()->text(255),
-            'order_method' => fake()->numberBetween(0, 127),
-            'balance_criteria' => fake()->text(255),
-            'min_order_price' => fake()->randomNumber(),
-            'is_parceled' => fake()->boolean(),
+            'name' => fake('ko_KR')->company(),
+            'ordered_email' => fake()->email(),
+            'contact_name' => fake('ko_KR')->name(),
+            'contact_tel' => fake('ko_KR')->localAreaPhoneNumber(),
+            'contact_cel' => fake('ko_KR')->cellPhoneNumber(),
+            'order_method' => fake()->randomElement(OrderMethod::toKeys()),
+            'min_order_price' => fake()->randomElement([0, 100000, 200000, 500000, 1000000, 2000000]),
             'additional_information' => fake()->paragraph(),
-            'is_information_manual_sync' => fake()->boolean(),
             'is_active' => fake()->boolean(),
-            'created_at' => fake()->unixTime(),
-            'updated_at' => fake()->unixTime(),
         ];
     }
 }

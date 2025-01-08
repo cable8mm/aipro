@@ -17,13 +17,11 @@ class BoxManualWarehousingFactory extends Factory
     public function definition(): array
     {
         return [
-            'ct_box_id' => fake()->randomNumber(),
-            'cms_maestro_id' => fake()->randomNumber(),
-            'type' => fake()->text(100),
-            'manual_add_inventory_count' => fake()->randomNumber(),
+            'box_id' => fake()->randomNumber(1) + 1,
+            'user_id' => fake()->randomNumber(1) + 1,
+            'type' => fake()->randomElement(['미입력', '입고', '출고']),
+            'manual_add_inventory_count' => fake()->randomNumber(3),
             'memo' => fake()->paragraph(),
-            'created_at' => fake()->unixTime(),
-            'updated_at' => fake()->unixTime(),
         ];
     }
 }

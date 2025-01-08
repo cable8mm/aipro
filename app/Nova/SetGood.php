@@ -2,9 +2,10 @@
 
 namespace App\Nova;
 
+use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
+use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
@@ -22,7 +23,7 @@ class SetGood extends Resource
      *
      * @var string
      */
-    public static $title = 'Set Goods';
+    public static $title = 'name';
 
     /**
      * The columns that should be searched.
@@ -42,20 +43,14 @@ class SetGood extends Resource
     {
         return [
             ID::make()->sortable(),
-            Number::make('Cms Maestro Id'),
-            Text::make('Playauto Master Code')->maxlength(255),
-            Text::make('Godo Code')->maxlength(255),
+            BelongsTo::make('User'),
+            Text::make('Master Code')->maxlength(255),
             Text::make('Featured Good List')->maxlength(255),
             Text::make('Name')->maxlength(255),
-            Number::make('Goods Price'),
-            Number::make('Last Cost Price'),
-            Number::make('Zero Margin Price'),
-            Number::make('Suggested Selling Price Of Gms'),
-            Boolean::make('Is Gift'),
+            Currency::make('Goods Price'),
+            Currency::make('Last Cost Price'),
+            Currency::make('Zero Margin Price'),
             Boolean::make('Is Shutdowned'),
-            Text::make('Goods Bar')->maxlength(190),
-            Boolean::make('Is My Shop Sale'),
-            Boolean::make('Is Other Shop Sale'),
         ];
     }
 

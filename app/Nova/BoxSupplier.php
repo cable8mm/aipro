@@ -2,10 +2,13 @@
 
 namespace App\Nova;
 
+use App\Enums\OrderMethod;
 use Laravel\Nova\Fields\Boolean;
+use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Number;
+use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class BoxSupplier extends Resource
@@ -22,7 +25,7 @@ class BoxSupplier extends Resource
      *
      * @var string
      */
-    public static $title = 'Box Suppliers';
+    public static $title = 'name';
 
     /**
      * The columns that should be searched.
@@ -47,11 +50,10 @@ class BoxSupplier extends Resource
             Text::make('Contact Name')->maxlength(255),
             Text::make('Contact Tel')->maxlength(255),
             Text::make('Contact Cel')->maxlength(255),
-            Number::make('Order Method')->min(-128)->max(127),
-            Text::make('Balance Criteria')->maxlength(255),
-            Number::make('Min Order Price'),
+            Select::make('Order Method', 'order_method')->options(OrderMethod::toArray())->displayUsingLabels(),
+            Currency::make('Min Order Price'),
             Boolean::make('Is Parceled'),
-            Text::make('Additional Information'),
+            Textarea::make('Additional Information')->alwaysShow(),
         ];
     }
 

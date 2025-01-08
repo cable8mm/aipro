@@ -17,11 +17,7 @@ class AlertEmailFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->text(255),
-            'action_name' => fake()->text(255),
-            'email_list' => fake()->text(255),
-            'created_at' => fake()->unixTime(),
-            'updated_at' => fake()->unixTime(),
+            'email_list' => fake()->email(),
         ];
     }
 }

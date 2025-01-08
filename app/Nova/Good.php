@@ -2,11 +2,13 @@
 
 namespace App\Nova;
 
+use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
-use Laravel\Nova\Fields\DateTime;
+use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Good extends Resource
@@ -23,7 +25,7 @@ class Good extends Resource
      *
      * @var string
      */
-    public static $title = 'Goods';
+    public static $title = 'name';
 
     /**
      * The columns that should be searched.
@@ -43,76 +45,55 @@ class Good extends Resource
     {
         return [
             ID::make()->sortable(),
-            Number::make('Cms Maestro Id'),
-            Number::make('Ct Supplier Id'),
-            Number::make('Ct Supplier Good Id'),
-            Number::make('Ct Box Id'),
+            BelongsTo::make('User'),
+            BelongsTo::make('Supplier'),
+            BelongsTo::make('Supplier Good'),
+            BelongsTo::make('Box'),
             Text::make('List Image')->maxlength(190),
-            Number::make('Godo Code'),
-            Text::make('Retail Code')->maxlength(255),
-            Text::make('Playauto Master Code')->maxlength(255),
-            Text::make('Center Code')->maxlength(150),
-            Number::make('Playauto Category Id'),
+            Text::make('Master Code')->maxlength(255),
+            BelongsTo::make('Playauto Category'),
             Text::make('Name')->maxlength(255),
             Text::make('Godo Name')->maxlength(255),
             Text::make('Option')->maxlength(100),
-            Number::make('Inventory'),
-            Number::make('Supplier Out Of Stock Count'),
-            Text::make('Manual Add Inventory Memo'),
-            Number::make('Safe Inventory'),
+            Number::make('Inventory')->displayUsing(function ($value) {
+                return number_format($value);
+            }),
+            Number::make('Supplier Out Of Stock Count')->displayUsing(function ($value) {
+                return number_format($value);
+            }),
+            Textarea::make('Manual Add Inventory Memo')->alwaysShow(),
+            Number::make('Safe Inventory')->displayUsing(function ($value) {
+                return number_format($value);
+            }),
             Text::make('Safe Class'),
             Text::make('Center Class'),
             Text::make('Category')->maxlength(255),
             Text::make('Maker')->maxlength(255),
             Text::make('Brand')->maxlength(191),
-            Number::make('Cost Price'),
-            Number::make('Last Cost Price'),
-            Number::make('Suggested Selling Price'),
-            Number::make('Suggestioned Retail Price'),
-            Number::make('Supplier Monitoring Price'),
+            Currency::make('Cost Price'),
+            Currency::make('Last Cost Price'),
+            Currency::make('Suggested Selling Price'),
+            Currency::make('Suggestioned Retail Price'),
+            Currency::make('Supplier Monitoring Price'),
             Text::make('Supplier Monitoring Status')->maxlength(10),
             Boolean::make('Supplier Monitoring Interruption'),
-            Number::make('Goods Price'),
-            Number::make('Goods Price Wemake2'),
-            Number::make('Goods Price Holapetshop'),
-            Text::make('Supplier Name')->maxlength(255),
-            Number::make('Supplier Request Price'),
-            Text::make('Supplier Good Code')->maxlength(100),
+            Currency::make('Goods Price'),
             Text::make('Spec')->maxlength(255),
             Text::make('Order Rule')->maxlength(255),
-            Text::make('Barcode Type')->maxlength(50),
             Text::make('Barcode')->maxlength(255),
-            Text::make('Generated Barcode')->maxlength(255),
             Text::make('Picking Box Number')->maxlength(255),
-            Text::make('Storage Box Zone')->maxlength(255),
             Text::make('Goods Division Color')->maxlength(255),
             Number::make('Ship Quantity'),
-            Text::make('Memo'),
-            Text::make('Memo For Center')->maxlength(255),
-            Text::make('Good Classification')->maxlength(30),
-            Text::make('Print Classification')->maxlength(190),
+            Textarea::make('Memo')->alwaysShow(),
+            Textarea::make('Memo For Center')->alwaysShow(),
             Text::make('Naver Category'),
             Text::make('Naver Productid')->maxlength(128),
-            Boolean::make('Not Exist Naver Productid'),
             Boolean::make('Naver Lowest Price Wrong'),
-            Number::make('Naver Lowest Price'),
-            Number::make('Internet Lowest Price'),
-            Number::make('Zero Margin Price'),
-            Number::make('Suggested Sales Percent Margin'),
-            Number::make('Suggested Selling Price Of Gms'),
-            Boolean::make('Is Hi300'),
+            Currency::make('Naver Lowest Price'),
+            Currency::make('Internet Lowest Price'),
+            Currency::make('Zero Margin Price'),
             Boolean::make('Is Supplier Out Of Stock'),
-            Boolean::make('Is My Shop Sale'),
-            Boolean::make('Is Other Shop Sale'),
-            Boolean::make('Is Not Playauto Used'),
-            Boolean::make('Is Playauto Done'),
-            Boolean::make('Is Requested Shutdown'),
-            Boolean::make('Is Requested Reborn'),
             Boolean::make('Is Shutdowned'),
-            Boolean::make('Is Scm Manager Confirmed'),
-            DateTime::make('Last Warehoused'),
-            DateTime::make('Supplier Out Of Stock On Datetime'),
-            DateTime::make('Supplier Out Of Stock Off Datetime'),
         ];
     }
 

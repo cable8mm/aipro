@@ -16,17 +16,15 @@ class OptionGoodFactory extends Factory
      */
     public function definition(): array
     {
+        fake()->addProvider(new \Bezhanov\Faker\Provider\Commerce(fake()));
+        fake()->addProvider(new \Bezhanov\Faker\Provider\Device(fake()));
+
         return [
-            'cms_maestro_id' => fake()->randomNumber(),
-            'playauto_master_code' => fake()->text(130),
-            'godo_code' => fake()->text(255),
-            'name' => fake()->text(130),
-            'option_count' => fake()->randomNumber(),
-            'my_shop_sale_option_count' => fake()->randomNumber(),
-            'other_shop_sale_option_count' => fake()->randomNumber(),
+            'user_id' => fake()->randomNumber(1) + 1,
+            'master_code' => 'OG'.fake()->randomNumber(3, true),
+            'name' => fake()->productName(),
+            'option_count' => fake()->randomNumber(2),
             'is_active' => fake()->boolean(),
-            'created_at' => fake()->unixTime(),
-            'updated_at' => fake()->unixTime(),
         ];
     }
 }

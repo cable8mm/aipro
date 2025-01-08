@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class SetGood extends Model
 {
@@ -12,8 +13,7 @@ class SetGood extends Model
     protected function casts(): array
     {
         return [
-            'cms_maestro_id' => 'integer',
-            'playauto_master_code' => 'string',
+            'master_code' => 'string',
             'godo_code' => 'string',
             'featured_good_list' => 'string',
             'name' => 'string',
@@ -27,5 +27,10 @@ class SetGood extends Model
             'is_my_shop_sale' => 'boolean',
             'is_other_shop_sale' => 'boolean',
         ];
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }

@@ -19,8 +19,6 @@ class HelpTipFactory extends Factory
         return [
             'word' => fake()->text(100),
             'help_tip' => fake()->text(190),
-            'created_at' => fake()->unixTime(),
-            'updated_at' => fake()->unixTime(),
         ];
     }
 }

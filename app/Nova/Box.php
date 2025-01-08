@@ -2,9 +2,11 @@
 
 namespace App\Nova;
 
+use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Box extends Resource
@@ -21,7 +23,7 @@ class Box extends Resource
      *
      * @var string
      */
-    public static $title = 'Boxes';
+    public static $title = 'name';
 
     /**
      * The columns that should be searched.
@@ -30,6 +32,8 @@ class Box extends Resource
      */
     public static $search = [
         'id',
+        'name',
+        'code',
     ];
 
     /**
@@ -41,13 +45,14 @@ class Box extends Resource
     {
         return [
             ID::make()->sortable(),
-            Text::make('Name')->maxlength(100),
             Text::make('Code')->maxlength(50),
-            Number::make('Size'),
-            Number::make('Delivery Price'),
-            Number::make('Box Price'),
-            Number::make('Inventory'),
-            Text::make('Memo')->maxlength(255),
+            Text::make('Name')->maxlength(100)->sortable(),
+            Currency::make('Delivery Price'),
+            Currency::make('Box Price'),
+            Number::make('Inventory')->displayUsing(function ($value) {
+                return number_format($value);
+            }),
+            Textarea::make('Memo')->maxlength(255)->hideFromIndex(),
         ];
     }
 

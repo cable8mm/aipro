@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('mismatched_order_shipments', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('ct_order_sheet_invoice_id')->nullable();
-            $table->string('orderNo', 100)->nullable();
+            $table->foreignId('order_sheet_invoice_id')->nullable();
+            $table->string('order_no', 100)->nullable();
             $table->string('site', 100)->nullable();
-            $table->string('masterGoodsCd', 100)->nullable();
-            $table->string('goodsNm', 255)->nullable();
+            $table->string('master_goods_cd', 100)->nullable();
+            $table->string('goods_nm', 255)->nullable();
             $table->string('option', 255)->nullable();
             $table->text('json')->nullable();
-            $table->unsignedInteger('cms_maestro_id')->nullable();
+            $table->foreignId('user_id')->nullable();
             $table->string('status', 100)->nullable()->default('미처리');
             $table->timestamps();
         });

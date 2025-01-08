@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\Status;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,20 +14,19 @@ return new class extends Migration
     {
         Schema::create('placing_orders', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('cms_maestro_id');
-            $table->unsignedInteger('warehouse_manager_id')->nullable();
-            $table->unsignedInteger('ct_supplier_id');
+            $table->foreignId('user_id');
+            $table->foreignId('warehouse_manager_id')->nullable();
+            $table->foreignId('supplier_id');
             $table->string('title', 190);
-            $table->date('order_date');
+            $table->dateTime('ordered_at')->nullable();
+            $table->dateTime('sent_at')->nullable();
+            $table->dateTime('confirmed_at')->nullable();
+            $table->dateTime('predict_warehoused_at')->nullable();
+            $table->dateTime('warehoused_at')->nullable();
             $table->unsignedInteger('total_good_count')->nullable()->default('0');
             $table->unsignedInteger('total_order_price')->nullable();
             $table->integer('order_discount_percent')->nullable()->default('0');
-            $table->boolean('is_applied_order_discount_percent')->nullable();
-            $table->dateTime('sent')->nullable();
-            $table->dateTime('confirmed')->nullable();
-            $table->date('predict_warehoused')->nullable();
-            $table->dateTime('warehoused')->nullable();
-            $table->string('status', 25)->nullable()->default('발주작성중');
+            $table->string('status', 25)->nullable()->default(Status::WAITING);
             $table->text('memo')->nullable();
             $table->timestamps();
         });

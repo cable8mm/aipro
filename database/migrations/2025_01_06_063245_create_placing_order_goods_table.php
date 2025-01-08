@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('placing_order_goods', function (Blueprint $table) {
             $table->id();
-            $table->integer('ct_order_id')->nullable();
-            $table->integer('cms_maestro_id')->nullable();
-            $table->unsignedInteger('ct_good_id')->nullable();
+            $table->foreignId('placing_order_id')->nullable();
+            $table->foreignId('user_id')->nullable();
+            $table->foreignId('good_id')->nullable();
             $table->integer('warehouse_manager_id')->nullable();
             $table->unsignedInteger('order_count')->nullable();
             $table->unsignedInteger('order_price')->nullable();
@@ -25,10 +25,10 @@ return new class extends Migration
             $table->integer('cost_promotion_count')->nullable()->default('0');
             $table->integer('cost_price')->nullable();
             $table->boolean('is_promotion')->nullable()->default('0');
-            $table->dateTime('warehoused')->nullable();
+            $table->dateTime('warehoused_at')->nullable();
+            $table->dateTime('ordered_at')->nullable();
             $table->string('status', 100)->nullable()->default('확인중');
             $table->text('memo')->nullable();
-            $table->dateTime('ordered')->nullable();
             $table->timestamps();
         });
     }

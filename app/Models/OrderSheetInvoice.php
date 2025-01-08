@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class OrderSheetInvoice extends Model
 {
@@ -12,7 +13,6 @@ class OrderSheetInvoice extends Model
     protected function casts(): array
     {
         return [
-            'cms_maestro_id' => 'integer',
             'name' => 'string',
             'excel_filepath' => 'string',
             'order_row_count' => 'integer',
@@ -20,7 +20,12 @@ class OrderSheetInvoice extends Model
             'order_good_count' => 'integer',
             'mismatched_order_good_count' => 'integer',
             'invoice_filepath' => 'string',
-            'status' => 'string',
+            'excel_json' => 'array',
         ];
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }

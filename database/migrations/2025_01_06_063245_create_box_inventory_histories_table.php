@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('box_inventory_histories', function (Blueprint $table) {
             $table->id();
-            $table->integer('ct_box_id')->nullable();
+            $table->foreignId('box_id')->nullable();
             $table->string('type', 10)->nullable();
             $table->integer('quantity')->nullable();
             $table->string('model', 100)->nullable();

@@ -2,10 +2,11 @@
 
 namespace App\Nova;
 
+use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class PromotionCode extends Resource
@@ -22,7 +23,7 @@ class PromotionCode extends Resource
      *
      * @var string
      */
-    public static $title = 'Promotion Codes';
+    public static $title = 'id';
 
     /**
      * The columns that should be searched.
@@ -42,12 +43,11 @@ class PromotionCode extends Resource
     {
         return [
             ID::make()->sortable(),
-            Text::make('Playauto Master Code')->maxlength(100),
-            Text::make('Godo Code')->maxlength(255),
-            Text::make('Memo')->maxlength(190),
-            DateTime::make('Started'),
-            DateTime::make('Finished'),
-            Number::make('Cms Maestro Id'),
+            BelongsTo::make('User'),
+            Text::make('Master Code')->maxlength(100),
+            Textarea::make('Memo')->maxlength(190)->alwaysShow(),
+            DateTime::make('Started At'),
+            DateTime::make('Finished At'),
         ];
     }
 

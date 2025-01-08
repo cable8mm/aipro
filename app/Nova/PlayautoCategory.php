@@ -2,26 +2,26 @@
 
 namespace App\Nova;
 
+use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
-class B2bGood extends Resource
+class PlayautoCategory extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
-     * @var class-string<\App\Models\B2bGood>
+     * @var class-string<\App\Models\PlayautoCategory>
      */
-    public static $model = \App\Models\B2bGood::class;
+    public static $model = \App\Models\PlayautoCategory::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
      *
      * @var string
      */
-    public static $title = 'B2b Goods';
+    public static $title = 'id';
 
     /**
      * The columns that should be searched.
@@ -41,9 +41,11 @@ class B2bGood extends Resource
     {
         return [
             ID::make()->sortable(),
-            Number::make('Cms Maestro Id'),
-            Text::make('Goods No')->maxlength(150),
-            Text::make('Playauto Master Code')->maxlength(255),
+            Text::make('Depth1'),
+            Text::make('Depth2'),
+            Text::make('Depth3'),
+            Text::make('Depth4'),
+            Boolean::make('Is Active'),
         ];
     }
 
