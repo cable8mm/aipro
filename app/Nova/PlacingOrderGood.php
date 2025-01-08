@@ -2,11 +2,14 @@
 
 namespace App\Nova;
 
-use Laravel\Nova\Fields\Boolean;
+use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\DateTime;
+use Laravel\Nova\Fields\Hidden;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
-use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Status;
+use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class PlacingOrderGood extends Resource
@@ -23,7 +26,7 @@ class PlacingOrderGood extends Resource
      *
      * @var string
      */
-    public static $title = 'Placing Order Goods';
+    public static $title = 'good_id';
 
     /**
      * The columns that should be searched.
@@ -43,22 +46,25 @@ class PlacingOrderGood extends Resource
     {
         return [
             ID::make()->sortable(),
-            Number::make('Ct Order Id'),
-            Number::make('Cms Maestro Id'),
-            Number::make('Ct Good Id'),
-            Number::make('Warehouse Manager Id'),
-            Number::make('Order Count'),
-            Number::make('Order Price'),
-            Number::make('Supplier Confirmed Count'),
-            Number::make('Supplier Confirmed Price'),
-            Number::make('Cost Count'),
-            Number::make('Cost Promotion Count'),
-            Number::make('Cost Price'),
-            Boolean::make('Is Promotion'),
-            DateTime::make('Warehoused'),
-            Text::make('Status')->maxlength(100),
-            Text::make('Memo'),
-            DateTime::make('Ordered'),
+            BelongsTo::make('Placing Order'),
+            Hidden::make('User')->default(function ($request) {
+                return $request->user()->id;
+            }),
+            BelongsTo::make('Good'),
+            BelongsTo::make('Warehouse Manager', 'warehouseManager', User::class),
+            Number::make('Order Count')->displayUsing(function ($value) {
+                return number_format($value);
+            }),
+            Currency::make('Order Price'),
+            Number::make('Supplier Confirmed Count')->displayUsing(function ($value) {
+                return number_format($value);
+            })->exceptOnForms(),
+            Currency::make('Supplier Confirmed Price')->exceptOnForms(),
+            DateTime::make('Warehoused At'),
+            Status::make('Status')
+                ->loadingWhen(['waiting', 'running'])
+                ->failedWhen(['failed']),
+            Textarea::make('Memo'),
         ];
     }
 

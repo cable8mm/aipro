@@ -2,9 +2,11 @@
 
 namespace App\Nova;
 
+use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
-use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Status;
+use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class BoxManualWarehousing extends Resource
@@ -21,7 +23,7 @@ class BoxManualWarehousing extends Resource
      *
      * @var string
      */
-    public static $title = 'Box Manual Warehousings';
+    public static $title = 'id';
 
     /**
      * The columns that should be searched.
@@ -41,11 +43,13 @@ class BoxManualWarehousing extends Resource
     {
         return [
             ID::make()->sortable(),
-            Number::make('Ct Box Id'),
-            Number::make('Cms Maestro Id'),
-            Text::make('Type')->maxlength(100),
-            Number::make('Manual Add Inventory Count'),
-            Text::make('Memo'),
+            BelongsTo::make('Box'),
+            BelongsTo::make('User'),
+            Status::make('Type')->loadingWhen(['미입력'])->failedWhen([]),
+            Number::make('Manual Add Inventory Count')->displayUsing(function ($value) {
+                return number_format($value);
+            }),
+            Textarea::make('Memo')->alwaysShow(),
         ];
     }
 

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Good extends Model
 {
@@ -12,10 +13,6 @@ class Good extends Model
     protected function casts(): array
     {
         return [
-            'cms_maestro_id' => 'integer',
-            'ct_supplier_id' => 'integer',
-            'ct_supplier_good_id' => 'integer',
-            'ct_box_id' => 'integer',
             'list_image' => 'string',
             'godo_code' => 'integer',
             'retail_code' => 'string',
@@ -62,8 +59,6 @@ class Good extends Model
             'naver_lowest_price' => 'integer',
             'internet_lowest_price' => 'integer',
             'zero_margin_price' => 'integer',
-            'suggested_sales_percent_margin' => 'integer',
-            'suggested_selling_price_of_gms' => 'integer',
             'is_hi300' => 'boolean',
             'is_supplier_out_of_stock' => 'boolean',
             'is_my_shop_sale' => 'boolean',
@@ -78,5 +73,30 @@ class Good extends Model
             'supplier_out_of_stock_on_datetime' => 'datetime',
             'supplier_out_of_stock_off_datetime' => 'datetime',
         ];
+    }
+
+    public function box(): BelongsTo
+    {
+        return $this->belongsTo(Box::class);
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function supplier(): BelongsTo
+    {
+        return $this->belongsTo(Supplier::class);
+    }
+
+    public function supplierGood(): BelongsTo
+    {
+        return $this->belongsTo(SupplierGood::class);
+    }
+
+    public function playautoCategory(): BelongsTo
+    {
+        return $this->belongsTo(PlayautoCategory::class);
     }
 }

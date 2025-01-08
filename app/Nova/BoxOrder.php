@@ -2,11 +2,14 @@
 
 namespace App\Nova;
 
-use Laravel\Nova\Fields\Date;
+use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
+use Laravel\Nova\Fields\Status;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class BoxOrder extends Resource
@@ -23,7 +26,7 @@ class BoxOrder extends Resource
      *
      * @var string
      */
-    public static $title = 'Box Orders';
+    public static $title = 'title';
 
     /**
      * The columns that should be searched.
@@ -43,19 +46,23 @@ class BoxOrder extends Resource
     {
         return [
             ID::make()->sortable(),
-            Number::make('Cms Maestro Id'),
-            Number::make('Warehouse Manager Id'),
-            Number::make('Ct Box Supplier Id'),
+            BelongsTo::make('User'),
+            BelongsTo::make('Warehouse Manager', 'warehouseManager', User::class),
+            BelongsTo::make('Box Supplier'),
             Text::make('Title')->maxlength(190),
-            Date::make('Order Date'),
-            Number::make('Total Box Count'),
-            Number::make('Total Order Price'),
-            DateTime::make('Sent'),
-            DateTime::make('Confirmed'),
-            DateTime::make('Predict Warehoused'),
-            DateTime::make('Warehoused'),
-            Text::make('Status')->maxlength(25),
-            Text::make('Memo'),
+            Number::make('Total Box Count')->displayUsing(function ($value) {
+                return number_format($value);
+            }),
+            Currency::make('Total Order Price'),
+            DateTime::make('Ordered At'),
+            DateTime::make('Sent At'),
+            DateTime::make('Confirmed At'),
+            DateTime::make('Predict Warehoused At'),
+            DateTime::make('Warehoused At'),
+            Status::make('Status')
+                ->loadingWhen(['미처리'])
+                ->failedWhen([]),
+            Textarea::make('Memo')->alwaysShow(),
         ];
     }
 

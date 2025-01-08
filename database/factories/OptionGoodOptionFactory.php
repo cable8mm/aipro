@@ -16,21 +16,18 @@ class OptionGoodOptionFactory extends Factory
      */
     public function definition(): array
     {
+        fake()->addProvider(new \Bezhanov\Faker\Provider\Commerce(fake()));
+        fake()->addProvider(new \Bezhanov\Faker\Provider\Device(fake()));
+
         return [
-            'cms_maestro_id' => fake()->randomNumber(),
-            'ct_option_good_id' => fake()->randomNumber(),
-            'playauto_master_code' => fake()->text(130),
-            'name' => fake()->text(130),
-            'goods_price' => fake()->randomNumber(),
-            'last_cost_price' => fake()->randomNumber(),
-            'zero_margin_price' => fake()->randomNumber(),
-            'suggested_selling_price_of_gms' => fake()->randomNumber(),
-            'order' => fake()->randomNumber(),
-            'goods_bar' => fake()->text(190),
-            'is_my_shop_sale' => fake()->boolean(),
-            'is_other_shop_sale' => fake()->boolean(),
-            'created_at' => fake()->unixTime(),
-            'updated_at' => fake()->unixTime(),
+            'user_id' => fake()->randomNumber(1) + 1,
+            'option_good_id' => fake()->randomNumber(1) + 1,
+            'master_code' => 'OGO'.fake()->randomNumber(3, true),
+            'name' => fake()->productName(),
+            'goods_price' => fake()->randomNumber(5),
+            'last_cost_price' => fake()->randomNumber(5),
+            'zero_margin_price' => fake()->randomNumber(5),
+            'order' => fake()->randomNumber(2),
         ];
     }
 }

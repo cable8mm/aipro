@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\Status;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,15 +18,13 @@ class RegisterOptionGoodRequestFactory extends Factory
     public function definition(): array
     {
         return [
-            'requester_id' => fake()->randomNumber(),
-            'worker_id' => fake()->randomNumber(),
-            'title' => fake()->text(190),
-            'request_file_url' => fake()->text(190),
-            'status' => fake()->text(10),
-            'respond_file_url' => fake()->text(190),
+            'requester_id' => fake()->randomNumber(1) + 1,
+            'worker_id' => fake()->randomNumber(1) + 1,
+            'title' => fake()->sentence(),
+            'request_file_url' => fake()->url(),
+            'status' => fake()->randomElement(Status::toKeys()),
+            'respond_file_url' => fake()->url(190),
             'memo' => fake()->paragraph(),
-            'created_at' => fake()->unixTime(),
-            'updated_at' => fake()->unixTime(),
         ];
     }
 }

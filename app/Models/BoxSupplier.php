@@ -17,10 +17,7 @@ class BoxSupplier extends Model
             'contact_name' => 'string',
             'contact_tel' => 'string',
             'contact_cel' => 'string',
-            'order_method' => 'integer',
-            'balance_criteria' => 'string',
             'min_order_price' => 'integer',
-            'is_parceled' => 'boolean',
         ];
     }
 }

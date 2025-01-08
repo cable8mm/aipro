@@ -20,7 +20,7 @@ class Setting extends Resource
      *
      * @var string
      */
-    public static $title = 'Settings';
+    public static $title = 'key';
 
     /**
      * The columns that should be searched.

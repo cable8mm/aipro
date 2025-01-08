@@ -2,10 +2,13 @@
 
 namespace App\Nova;
 
+use App\Enums\Status as EnumsStatus;
+use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\KeyValue;
 use Laravel\Nova\Fields\Number;
+use Laravel\Nova\Fields\Status;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class OrderSheetInvoice extends Resource
@@ -22,7 +25,7 @@ class OrderSheetInvoice extends Resource
      *
      * @var string
      */
-    public static $title = 'Order Sheet Invoices';
+    public static $title = 'name';
 
     /**
      * The columns that should be searched.
@@ -42,16 +45,23 @@ class OrderSheetInvoice extends Resource
     {
         return [
             ID::make()->sortable(),
-            Number::make('Cms Maestro Id'),
+            BelongsTo::make('User'),
             Text::make('Name')->maxlength(255),
             Text::make('Excel Filepath')->maxlength(255),
-            Number::make('Order Row Count'),
-            Number::make('Order Number Count'),
-            Number::make('Order Good Count'),
-            Number::make('Mismatched Order Good Count'),
+            Number::make('Order Row Count')->displayUsing(function ($value) {
+                return number_format($value);
+            }),
+            Number::make('Order Number Count')->displayUsing(function ($value) {
+                return number_format($value);
+            }),
+            Number::make('Order Good Count')->displayUsing(function ($value) {
+                return number_format($value);
+            }),
             Text::make('Invoice Filepath')->maxlength(255),
-            Textarea::make('Excel Json'),
-            Text::make('Status')->maxlength(50),
+            KeyValue::make('Excel Json'),
+            Status::make('Status')
+                ->loadingWhen(EnumsStatus::loadingWhen())
+                ->failedWhen(EnumsStatus::failedWhen()),
         ];
     }
 

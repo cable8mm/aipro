@@ -2,11 +2,13 @@
 
 namespace App\Nova;
 
+use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
-use Laravel\Nova\Fields\Date;
+use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class SupplierGood extends Resource
@@ -23,7 +25,7 @@ class SupplierGood extends Resource
      *
      * @var string
      */
-    public static $title = 'Supplier Goods';
+    public static $title = 'name';
 
     /**
      * The columns that should be searched.
@@ -43,38 +45,36 @@ class SupplierGood extends Resource
     {
         return [
             ID::make()->sortable(),
-            Number::make('Ct Supplier Id'),
+            BelongsTo::make('Supplier'),
             Text::make('Good Code')->maxlength(100),
-            Text::make('Center Code')->maxlength(100),
-            Text::make('Supplier Attribute')->maxlength(50),
             Text::make('Supplier Category')->maxlength(100),
-            Text::make('Godo Name')->maxlength(191),
-            Text::make('Gn')->maxlength(191),
             Text::make('Name')->maxlength(191),
             Text::make('Origin')->maxlength(100),
             Text::make('Maker')->maxlength(100),
             Text::make('Brand')->maxlength(100),
-            Number::make('Box Count'),
-            Number::make('Quantity In Box'),
-            Text::make('Min Order Count')->maxlength(191),
-            Text::make('Current Barcode')->maxlength(191),
+            Number::make('Box Count')->displayUsing(function ($value) {
+                return number_format($value);
+            }),
+            Number::make('Quantity In Box')->displayUsing(function ($value) {
+                return number_format($value);
+            }),
+            Number::make('Min Order Count')->displayUsing(function ($value) {
+                return number_format($value);
+            }),
             Text::make('Barcode')->maxlength(100),
-            Text::make('Box Barcode')->maxlength(50),
             Text::make('Spec')->maxlength(191),
-            Number::make('Inventory'),
-            Text::make('Description'),
-            Number::make('Price'),
-            Number::make('Suggested Selling Price'),
-            Number::make('Suggestioned Retail Price'),
-            Number::make('Supplier Monitoring Price'),
-            Date::make('Ead'),
-            Text::make('Additional Information'),
-            Boolean::make('Is Information Manual Sync'),
+            Number::make('Inventory')->displayUsing(function ($value) {
+                return number_format($value);
+            }),
+            Textarea::make('Description')->alwaysShow(),
+            Currency::make('Price'),
+            Currency::make('Suggested Selling Price'),
+            Currency::make('Suggestioned Retail Price'),
+            Currency::make('Supplier Monitoring Price'),
+            Textarea::make('Additional Information')->alwaysShow(),
             Boolean::make('Is Runout'),
             Boolean::make('Is Warehoused'),
             Boolean::make('Is Shutdowned'),
-            Date::make('Supplier Created'),
-            Date::make('Supplier Modified'),
         ];
     }
 

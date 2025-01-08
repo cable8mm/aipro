@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use App\Enums\OrderMethod;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Supplier extends Model
 {
@@ -17,12 +19,15 @@ class Supplier extends Model
             'contact_name' => 'string',
             'contact_tel' => 'string',
             'contact_cel' => 'string',
-            'order_method' => 'integer',
-            'balance_criteria' => 'string',
+            'order_method' => OrderMethod::class,
             'min_order_price' => 'integer',
-            'is_parceled' => 'boolean',
             'is_information_manual_sync' => 'boolean',
             'is_active' => 'boolean',
         ];
+    }
+
+    public function supplierGoods(): HasMany
+    {
+        return $this->hasMany(SupplierGood::class);
     }
 }

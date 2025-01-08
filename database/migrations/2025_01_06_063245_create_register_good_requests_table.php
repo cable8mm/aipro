@@ -13,14 +13,18 @@ return new class extends Migration
     {
         Schema::create('register_good_requests', function (Blueprint $table) {
             $table->id();
-            $table->integer('requester_id');
+            $table->foreignId('requester_id')->constrained(
+                table: 'users', indexName: 'register_good_requests_requester_user_id'
+            )->onUpdate('cascade')->restrictOnDelete();
             $table->string('title', 255);
             $table->string('request_file_url', 255);
-            $table->integer('worker_id')->nullable();
+            $table->foreignId('worker_id')->constrained(
+                table: 'users', indexName: 'register_good_requests_worker_user_id'
+            )->onUpdate('cascade')->restrictOnDelete()->nullable();
             $table->string('respond_file_url', 255)->nullable();
-            $table->tinyInteger('has_supplier_monitoring_price')->default('0');
+            $table->boolean('has_supplier_monitoring_price')->default(false);
             $table->text('memo')->nullable();
-            $table->string('status', 50)->default('등록대기');
+            $table->string('status', 50)->default('waiting');
             $table->timestamps();
         });
     }

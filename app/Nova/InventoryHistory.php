@@ -2,7 +2,9 @@
 
 namespace App\Nova;
 
+use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
+use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
@@ -22,7 +24,7 @@ class InventoryHistory extends Resource
      *
      * @var string
      */
-    public static $title = 'Inventory Histories';
+    public static $title = 'id';
 
     /**
      * The columns that should be searched.
@@ -42,12 +44,16 @@ class InventoryHistory extends Resource
     {
         return [
             ID::make()->sortable(),
-            Number::make('Cms Maestro Id'),
-            Number::make('Ct Good Id'),
+            BelongsTo::make('User'),
+            BelongsTo::make('Good'),
             Text::make('Type')->maxlength(10),
-            Number::make('Quantity'),
-            Number::make('Price'),
-            Number::make('After Quantity'),
+            Number::make('Quantity')->displayUsing(function ($value) {
+                return number_format($value);
+            }),
+            Currency::make('Price'),
+            Number::make('After Quantity')->displayUsing(function ($value) {
+                return number_format($value);
+            }),
             Text::make('Model')->maxlength(100),
             Number::make('Attribute'),
             Number::make('Cancel Id'),

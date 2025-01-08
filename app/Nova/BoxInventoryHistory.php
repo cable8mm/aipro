@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
@@ -22,7 +23,7 @@ class BoxInventoryHistory extends Resource
      *
      * @var string
      */
-    public static $title = 'Box Inventory Histories';
+    public static $title = 'id';
 
     /**
      * The columns that should be searched.
@@ -42,11 +43,13 @@ class BoxInventoryHistory extends Resource
     {
         return [
             ID::make()->sortable(),
-            Number::make('Ct Box Id'),
-            Text::make('Type')->maxlength(10),
-            Number::make('Quantity'),
+            BelongsTo::make('Box'),
             Text::make('Model')->maxlength(100),
             Text::make('Attribute')->maxlength(100),
+            Number::make('Quantity')->displayUsing(function ($value) {
+                return number_format($value);
+            }),
+            Text::make('Type')->maxlength(10),
             Boolean::make('Is Success'),
         ];
     }

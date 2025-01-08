@@ -17,14 +17,11 @@ class PromotionCodeFactory extends Factory
     public function definition(): array
     {
         return [
-            'playauto_master_code' => fake()->text(100),
-            'godo_code' => fake()->text(255),
+            'user_id' => fake()->randomNumber(1) + 1,
+            'master_code' => 'PM'.fake()->randomNumber(3, true),
             'memo' => fake()->text(190),
-            'started' => fake()->dateTime(),
-            'finished' => fake()->dateTime(),
-            'created_at' => fake()->unixTime(),
-            'updated_at' => fake()->unixTime(),
-            'cms_maestro_id' => fake()->randomNumber(),
+            'started_at' => fake()->dateTime(),
+            'finished_at' => fake()->dateTime(),
         ];
     }
 }

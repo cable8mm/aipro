@@ -3,7 +3,6 @@
 namespace App\Providers;
 
 use App\Nova\AlertEmail;
-use App\Nova\B2bGood;
 use App\Nova\Box;
 use App\Nova\BoxInventoryHistory;
 use App\Nova\BoxManualWarehousing;
@@ -63,7 +62,6 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
 
                 MenuSection::make('상품/박스 관리', [
                     MenuItem::resource(Good::class),
-                    MenuItem::resource(B2bGood::class),
                     MenuItem::resource(Box::class),
                     MenuItem::resource(RegisterGoodRequest::class),
                 ])->icon('cake')->collapsable(),

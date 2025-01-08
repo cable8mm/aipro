@@ -13,13 +13,12 @@ return new class extends Migration
     {
         Schema::create('promotion_codes', function (Blueprint $table) {
             $table->id();
-            $table->string('playauto_master_code', 100);
-            $table->string('godo_code', 255)->nullable();
+            $table->foreignId('user_id');
+            $table->string('master_code', 100);
             $table->string('memo', 190)->nullable();
-            $table->dateTime('started')->nullable();
-            $table->dateTime('finished')->nullable();
+            $table->dateTime('started_at')->nullable();
+            $table->dateTime('finished_at')->nullable();
             $table->timestamps();
-            $table->integer('cms_maestro_id');
         });
     }
 

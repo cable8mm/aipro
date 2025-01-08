@@ -2,8 +2,10 @@
 
 namespace App\Nova;
 
+use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Number;
+use Laravel\Nova\Fields\KeyValue;
+use Laravel\Nova\Fields\Status;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
@@ -21,7 +23,7 @@ class MismatchedOrderShipment extends Resource
      *
      * @var string
      */
-    public static $title = 'Mismatched Order Shipments';
+    public static $title = 'order_no';
 
     /**
      * The columns that should be searched.
@@ -41,15 +43,17 @@ class MismatchedOrderShipment extends Resource
     {
         return [
             ID::make()->sortable(),
-            Number::make('Ct Order Sheet Invoice Id'),
-            Text::make('Order_no')->maxlength(100),
+            BelongsTo::make('User'),
+            BelongsTo::make('Order Sheet Invoice'),
+            Text::make('Order No')->maxlength(100),
             Text::make('Site')->maxlength(100),
-            Text::make('Master_goods_cd')->maxlength(100),
-            Text::make('Goods_nm')->maxlength(255),
+            Text::make('Master Goods Cd')->maxlength(100),
+            Text::make('Goods Nm')->maxlength(255),
             Text::make('Option')->maxlength(255),
-            Text::make('Json'),
-            Number::make('Cms Maestro Id'),
-            Text::make('Status')->maxlength(100),
+            KeyValue::make('Json'),
+            Status::make('Status')
+                ->loadingWhen(['미처리'])
+                ->failedWhen([]),
         ];
     }
 

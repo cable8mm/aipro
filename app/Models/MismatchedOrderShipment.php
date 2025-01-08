@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class MismatchedOrderShipment extends Model
 {
@@ -12,14 +13,23 @@ class MismatchedOrderShipment extends Model
     protected function casts(): array
     {
         return [
-            'ct_order_sheet_invoice_id' => 'integer',
             'orderNo' => 'string',
             'site' => 'string',
             'masterGoodsCd' => 'string',
             'goodsNm' => 'string',
             'option' => 'string',
-            'cms_maestro_id' => 'integer',
             'status' => 'string',
+            'json' => 'array',
         ];
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function orderSheetInvoice(): BelongsTo
+    {
+        return $this->belongsTo(OrderSheetInvoice::class);
     }
 }

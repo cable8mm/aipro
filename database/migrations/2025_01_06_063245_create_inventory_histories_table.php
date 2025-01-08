@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('inventory_histories', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('cms_maestro_id')->nullable();
-            $table->integer('ct_good_id')->nullable();
+            $table->foreignId('user_id')->nullable();
+            $table->foreignId('good_id')->nullable();
             $table->string('type', 10)->nullable();
             $table->integer('quantity')->nullable();
             $table->integer('price')->nullable();

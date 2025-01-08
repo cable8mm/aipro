@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\Status;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,10 +18,10 @@ class PlacingOrderGoodFactory extends Factory
     public function definition(): array
     {
         return [
-            'ct_order_id' => fake()->randomNumber(),
-            'cms_maestro_id' => fake()->randomNumber(),
-            'ct_good_id' => fake()->randomNumber(),
-            'warehouse_manager_id' => fake()->randomNumber(),
+            'placing_order_id' => fake()->randomNumber(1) + 1,
+            'user_id' => fake()->randomNumber(1) + 1,
+            'good_id' => fake()->randomNumber(1) + 1,
+            'warehouse_manager_id' => fake()->randomNumber(1) + 1,
             'order_count' => fake()->randomNumber(),
             'order_price' => fake()->randomNumber(),
             'supplier_confirmed_count' => fake()->randomNumber(),
@@ -29,12 +30,10 @@ class PlacingOrderGoodFactory extends Factory
             'cost_promotion_count' => fake()->randomNumber(),
             'cost_price' => fake()->randomNumber(),
             'is_promotion' => fake()->boolean(),
-            'warehoused' => fake()->dateTime(),
-            'status' => fake()->text(100),
+            'warehoused_at' => fake()->dateTime(),
+            'status' => fake()->randomElement(Status::toKeys()),
             'memo' => fake()->paragraph(),
-            'ordered' => fake()->dateTime(),
-            'created_at' => fake()->unixTime(),
-            'updated_at' => fake()->unixTime(),
+            'ordered_at' => fake()->dateTime(),
         ];
     }
 }

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class OptionGoodOption extends Model
 {
@@ -12,9 +13,7 @@ class OptionGoodOption extends Model
     protected function casts(): array
     {
         return [
-            'cms_maestro_id' => 'integer',
-            'ct_option_good_id' => 'integer',
-            'playauto_master_code' => 'string',
+            'master_code' => 'string',
             'name' => 'string',
             'goods_price' => 'integer',
             'last_cost_price' => 'integer',
@@ -25,5 +24,15 @@ class OptionGoodOption extends Model
             'is_my_shop_sale' => 'boolean',
             'is_other_shop_sale' => 'boolean',
         ];
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function optionGood(): BelongsTo
+    {
+        return $this->belongsTo(OptionGood::class);
     }
 }

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class BoxManualWarehousing extends Model
 {
@@ -12,10 +13,18 @@ class BoxManualWarehousing extends Model
     protected function casts(): array
     {
         return [
-            'ct_box_id' => 'integer',
-            'cms_maestro_id' => 'integer',
             'type' => 'string',
             'manual_add_inventory_count' => 'integer',
         ];
+    }
+
+    public function box(): BelongsTo
+    {
+        return $this->belongsTo(Box::class);
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }

@@ -17,15 +17,13 @@ class BoxFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->text(100),
-            'code' => fake()->text(50),
+            'name' => fake()->word(),
+            'code' => fake()->numerify('BOX-###'),
             'size' => fake()->randomNumber(),
-            'delivery_price' => fake()->randomNumber(),
-            'box_price' => fake()->randomNumber(),
+            'delivery_price' => fake()->randomNumber(5),
+            'box_price' => fake()->randomNumber(4),
             'inventory' => fake()->randomNumber(),
-            'memo' => fake()->text(255),
-            'created_at' => fake()->unixTime(),
-            'updated_at' => fake()->unixTime(),
+            'memo' => fake()->text(10),
         ];
     }
 }

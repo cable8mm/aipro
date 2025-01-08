@@ -2,9 +2,11 @@
 
 namespace App\Nova;
 
+use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
-use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Status;
+use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class GoodManualWarehousing extends Resource
@@ -21,7 +23,7 @@ class GoodManualWarehousing extends Resource
      *
      * @var string
      */
-    public static $title = 'Good Manual Warehousings';
+    public static $title = 'id';
 
     /**
      * The columns that should be searched.
@@ -41,11 +43,13 @@ class GoodManualWarehousing extends Resource
     {
         return [
             ID::make()->sortable(),
-            Number::make('Ct Good Id'),
-            Number::make('Cms Maestro Id'),
-            Number::make('Manual Add Inventory Count'),
-            Text::make('Type')->maxlength(100),
-            Text::make('Memo'),
+            BelongsTo::make('Good'),
+            BelongsTo::make('User'),
+            Number::make('Manual Add Inventory Count')->displayUsing(function ($value) {
+                return number_format($value);
+            }),
+            Status::make('Type')->loadingWhen(['미입력'])->failedWhen([]),
+            Textarea::make('Memo')->alwaysShow(),
         ];
     }
 

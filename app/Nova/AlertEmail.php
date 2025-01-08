@@ -20,7 +20,7 @@ class AlertEmail extends Resource
      *
      * @var string
      */
-    public static $title = 'Alert Emails';
+    public static $title = 'name';
 
     /**
      * The columns that should be searched.

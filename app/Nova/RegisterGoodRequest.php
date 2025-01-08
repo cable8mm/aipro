@@ -2,9 +2,13 @@
 
 namespace App\Nova;
 
+use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\Boolean;
+use Laravel\Nova\Fields\File;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Number;
+use Laravel\Nova\Fields\Status;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class RegisterGoodRequest extends Resource
@@ -21,7 +25,7 @@ class RegisterGoodRequest extends Resource
      *
      * @var string
      */
-    public static $title = 'Register Good Requests';
+    public static $title = 'title';
 
     /**
      * The columns that should be searched.
@@ -41,14 +45,16 @@ class RegisterGoodRequest extends Resource
     {
         return [
             ID::make()->sortable(),
-            Number::make('Requester Id'),
-            Text::make('Title')->maxlength(255),
-            Text::make('Request File Url')->maxlength(255),
-            Number::make('Worker Id'),
-            Text::make('Respond File Url')->maxlength(255),
-            Number::make('Has Supplier Monitoring Price')->min(-128)->max(127),
-            Text::make('Memo'),
-            Text::make('Status')->maxlength(50),
+            BelongsTo::make('Requester', 'user', User::class),
+            BelongsTo::make('Worker', 'user', User::class),
+            Text::make('Title')->rules('required')->required()->maxlength(255),
+            File::make('Request File Url')->rules('required')->required(),
+            File::make('Respond File Url'),
+            Boolean::make('Has Supplier Monitoring Price')->default(false),
+            Textarea::make('Memo')->alwaysShow(),
+            Status::make('Status')
+                ->loadingWhen(['waiting', 'running'])
+                ->failedWhen(['failed']),
         ];
     }
 

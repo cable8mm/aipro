@@ -2,7 +2,8 @@
 
 namespace App\Nova;
 
-use Laravel\Nova\Fields\Boolean;
+use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
@@ -22,7 +23,7 @@ class OptionGoodOption extends Resource
      *
      * @var string
      */
-    public static $title = 'Option Good Options';
+    public static $title = 'id';
 
     /**
      * The columns that should be searched.
@@ -42,18 +43,14 @@ class OptionGoodOption extends Resource
     {
         return [
             ID::make()->sortable(),
-            Number::make('Cms Maestro Id'),
-            Number::make('Ct Option Good Id'),
-            Text::make('Playauto Master Code')->maxlength(130),
+            BelongsTo::make('User'),
+            BelongsTo::make('Option Good'),
+            Text::make('Master Code')->maxlength(130),
             Text::make('Name')->maxlength(130),
-            Number::make('Goods Price'),
-            Number::make('Last Cost Price'),
-            Number::make('Zero Margin Price'),
-            Number::make('Suggested Selling Price Of Gms'),
+            Currency::make('Goods Price'),
+            Currency::make('Last Cost Price'),
+            Currency::make('Zero Margin Price'),
             Number::make('Order'),
-            Text::make('Goods Bar')->maxlength(190),
-            Boolean::make('Is My Shop Sale'),
-            Boolean::make('Is Other Shop Sale'),
         ];
     }
 

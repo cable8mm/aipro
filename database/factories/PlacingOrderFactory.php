@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\Status;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,23 +18,20 @@ class PlacingOrderFactory extends Factory
     public function definition(): array
     {
         return [
-            'cms_maestro_id' => fake()->randomNumber(),
-            'warehouse_manager_id' => fake()->randomNumber(),
-            'ct_supplier_id' => fake()->randomNumber(),
-            'title' => fake()->text(190),
-            'order_date' => fake()->date(),
-            'total_good_count' => fake()->randomNumber(),
-            'total_order_price' => fake()->randomNumber(),
-            'order_discount_percent' => fake()->randomNumber(),
-            'is_applied_order_discount_percent' => fake()->boolean(),
-            'sent' => fake()->dateTime(),
-            'confirmed' => fake()->dateTime(),
-            'predict_warehoused' => fake()->date(),
-            'warehoused' => fake()->dateTime(),
-            'status' => fake()->text(25),
+            'user_id' => (fake()->randomNumber(1) + 1),
+            'warehouse_manager_id' => (fake()->randomNumber(1) + 1),
+            'supplier_id' => (fake()->randomNumber(1) + 1),
+            'title' => fake()->text(50),
+            'ordered_at' => fake()->dateTime(),
+            'total_good_count' => fake()->randomNumber() % 100,
+            'total_order_price' => fake()->randomNumber(5),
+            'order_discount_percent' => fake()->randomNumber(2),
+            'sent_at' => fake()->dateTime(),
+            'confirmed_at' => fake()->dateTime(),
+            'predict_warehoused_at' => fake()->date(),
+            'warehoused_at' => fake()->dateTime(),
+            'status' => fake()->randomElement(Status::toKeys()),
             'memo' => fake()->paragraph(),
-            'created_at' => fake()->unixTime(),
-            'updated_at' => fake()->unixTime(),
         ];
     }
 }

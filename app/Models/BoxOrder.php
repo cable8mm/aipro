@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class BoxOrder extends Model
 {
@@ -12,18 +13,30 @@ class BoxOrder extends Model
     protected function casts(): array
     {
         return [
-            'cms_maestro_id' => 'integer',
-            'warehouse_manager_id' => 'integer',
-            'ct_box_supplier_id' => 'integer',
             'title' => 'string',
-            'order_date' => 'date',
+            'ordered_at' => 'date',
             'total_box_count' => 'integer',
             'total_order_price' => 'integer',
-            'sent' => 'datetime',
-            'confirmed' => 'datetime',
-            'predict_warehoused' => 'datetime',
-            'warehoused' => 'datetime',
+            'sent_at' => 'datetime',
+            'confirmed_at' => 'datetime',
+            'predict_warehoused_at' => 'datetime',
+            'warehoused_at' => 'datetime',
             'status' => 'string',
         ];
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function warehouseManager(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'warehouse_manager_id');
+    }
+
+    public function boxSupplier(): BelongsTo
+    {
+        return $this->belongsTo(BoxSupplier::class);
     }
 }

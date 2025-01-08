@@ -11,6 +11,17 @@ class HelpTipSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\HelpTip::factory()->count(10)->create();
+        $row = 1;
+        if (($handle = fopen(base_path('docs/csv/help_tips.csv'), 'r')) !== false) {
+            while (($data = fgetcsv($handle, 1000, ',')) !== false) {
+                $num = count($data);
+                $row++;
+                \App\Models\HelpTip::factory(1, [
+                    'word' => $data[0],
+                    'help_tip' => $data[1],
+                ])->create();
+            }
+            fclose($handle);
+        }
     }
 }

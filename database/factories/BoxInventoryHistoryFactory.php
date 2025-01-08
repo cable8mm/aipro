@@ -17,11 +17,11 @@ class BoxInventoryHistoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'ct_box_id' => fake()->randomNumber(),
-            'type' => fake()->text(10),
-            'quantity' => fake()->randomNumber(),
-            'model' => fake()->text(100),
-            'attribute' => fake()->text(100),
+            'box_id' => fake()->randomNumber(1) + 1,
+            'type' => fake()->randomElement(['입고', '입고취소', '출고', '출고취소', '취소']),
+            'quantity' => (fake()->boolean() ? 1 : -1) * fake()->randomNumber(1),
+            'model' => fake()->randomElement(['GoodManualWarehousing', 'Order', 'OrderGood', 'PlacingOrderGood', 'OrderShipment']),
+            'attribute' => fake()->randomNumber(3),
             'is_success' => fake()->boolean(),
             'created_at' => fake()->unixTime(),
             'updated_at' => fake()->unixTime(),

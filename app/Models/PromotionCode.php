@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class PromotionCode extends Model
 {
@@ -12,12 +13,15 @@ class PromotionCode extends Model
     protected function casts(): array
     {
         return [
-            'playauto_master_code' => 'string',
-            'godo_code' => 'string',
+            'master_code' => 'string',
             'memo' => 'string',
-            'started' => 'datetime',
-            'finished' => 'datetime',
-            'cms_maestro_id' => 'integer',
+            'started_at' => 'datetime',
+            'finished_at' => 'datetime',
         ];
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }
