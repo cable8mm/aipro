@@ -11,6 +11,7 @@
     "require": {
         "php": "^8.2",
         "laracraft-tech/laravel-useful-additions": "^4.0",
+        "laravel-lang/common": "^6.4",
         "laravel/framework": "^11.31",
         "laravel/nova": "4.34.3",
         "laravel/tinker": "^2.9",
@@ -50,7 +51,8 @@
             "@php artisan package:discover --ansi"
         ],
         "post-update-cmd": [
-            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
+            "@php artisan vendor:publish --tag=laravel-assets --ansi --force",
+            "@php artisan lang:update"
         ],
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
