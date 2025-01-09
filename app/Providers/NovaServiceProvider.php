@@ -90,7 +90,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                     MenuItem::resource(BoxInventoryHistory::class),
                 ])->icon('eye')->collapsable(),
 
-                MenuSection::make('MD', [
+                MenuSection::make(__('MD'), [
                     MenuItem::resource(Good::class),
                     MenuItem::resource(SetGood::class),
                     MenuItem::resource(OptionGood::class),
@@ -99,7 +99,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                     MenuItem::resource(RegisterOptionGoodRequest::class),
                 ])->icon('shopping-cart')->collapsable(),
 
-                MenuSection::make('Setting', [
+                MenuSection::make(__('Setting'), [
                     MenuItem::resource(User::class),
                     MenuItem::resource(Setting::class),
                     MenuItem::resource(AlertEmail::class),

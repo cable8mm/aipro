@@ -45,21 +45,21 @@ class OrderSheetInvoice extends Resource
     {
         return [
             ID::make()->sortable(),
-            BelongsTo::make('User'),
-            Text::make('Name')->maxlength(255),
-            Text::make('Excel Filepath')->maxlength(255),
-            Number::make('Order Row Count')->displayUsing(function ($value) {
+            BelongsTo::make(__('User'), 'user', User::class),
+            Text::make(__('Name'), 'name')->maxlength(255),
+            Text::make(__('Excel Filepath'), 'excel_filepath')->maxlength(255),
+            Number::make(__('Order Row Count'), 'order_row_count')->displayUsing(function ($value) {
                 return number_format($value);
             }),
-            Number::make('Order Number Count')->displayUsing(function ($value) {
+            Number::make(__('Order Number Count'), 'order_number_count')->displayUsing(function ($value) {
                 return number_format($value);
             }),
-            Number::make('Order Good Count')->displayUsing(function ($value) {
+            Number::make(__('Order Good Count'), 'order_good_count')->displayUsing(function ($value) {
                 return number_format($value);
             }),
-            Text::make('Invoice Filepath')->maxlength(255),
-            KeyValue::make('Excel Json'),
-            Status::make('Status')
+            Text::make(__('Invoice Filepath'), 'invoice_filepath')->maxlength(255),
+            KeyValue::make(__('Excel Json'), 'excel_json'),
+            Status::make(__('Status'), 'status')
                 ->loadingWhen(EnumsStatus::loadingWhen())
                 ->failedWhen(EnumsStatus::failedWhen()),
         ];
@@ -103,5 +103,10 @@ class OrderSheetInvoice extends Resource
     public function actions(NovaRequest $request)
     {
         return [];
+    }
+
+    public static function label()
+    {
+        return __('Order Sheet Invoice');
     }
 }

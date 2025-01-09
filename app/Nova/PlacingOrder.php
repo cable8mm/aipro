@@ -52,28 +52,28 @@ class PlacingOrder extends Resource
             Hidden::make('User', 'user_id')->default(function ($request) {
                 return $request->user()->id;
             }),
-            BelongsTo::make('Warehouse Manager', 'warehouseManager', User::class),
-            BelongsTo::make('Supplier'),
-            Text::make('Title')->required()->rules('required')->maxlength(190),
-            Number::make('Total Good Count')->exceptOnForms()->displayUsing(function ($value) {
+            BelongsTo::make(__('Warehouse Manager'), 'warehouseManager', User::class),
+            BelongsTo::make(__('Supplier'), 'supplier', Supplier::class),
+            Text::make(__('Title'), 'title')->required()->rules('required')->maxlength(190),
+            Number::make(__('Total Good Count'), 'total_good_count')->exceptOnForms()->displayUsing(function ($value) {
                 return number_format($value);
             }),
-            Currency::make('Total Order Price')->exceptOnForms(),
-            Number::make('Order Discount Percent')->min(1)->max(100)->step(1)
+            Currency::make(__('Total Order Price'), 'total_order_price')->exceptOnForms(),
+            Number::make(__('Order Discount Percent'), 'order_discount_percent')->min(1)->max(100)->step(1)
                 ->displayUsing(fn () => "{$this->order_discount_percent}%")
                 ->exceptOnForms(),
-            DateTime::make('Ordered At')->nullable()
+            DateTime::make(__('Ordered At'), 'ordered_at')->nullable()
                 ->displayUsing(fn ($value) => $value ? $value->format('Y-m-d H, g:ia') : ''),
-            DateTime::make('Predict Warehoused At')->nullable(),
-            DateTime::make('Sent At')->exceptOnForms(),
-            DateTime::make('Confirmed At')->exceptOnForms(),
-            DateTime::make('Warehoused At')->exceptOnForms(),
-            Status::make('Status')
+            DateTime::make(__('Predict Warehoused At'), 'predict_warehoused_at')->nullable(),
+            DateTime::make(__('Sent At'), 'sent_at')->exceptOnForms(),
+            DateTime::make(__('Confirmed At'), 'confirmed_at')->exceptOnForms(),
+            DateTime::make(__('Warehoused At'), 'warehoused_at')->exceptOnForms(),
+            Status::make(__('Status'), 'status')
                 ->loadingWhen(EnumsStatus::loadingWhen())
                 ->failedWhen(EnumsStatus::failedWhen()),
-            Textarea::make('Memo')->alwaysShow(),
+            Textarea::make(__('Memo'), 'memo')->alwaysShow(),
 
-            HasMany::make('Placing Order Goods', 'placingOrderGoods', PlacingOrderGood::class),
+            HasMany::make(__('Placing Order Goods'), 'placingOrderGoods', PlacingOrderGood::class),
         ];
     }
 
@@ -115,5 +115,10 @@ class PlacingOrder extends Resource
     public function actions(NovaRequest $request)
     {
         return [];
+    }
+
+    public static function label()
+    {
+        return __('Placing Order');
     }
 }

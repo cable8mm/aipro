@@ -43,11 +43,11 @@ class PromotionCode extends Resource
     {
         return [
             ID::make()->sortable(),
-            BelongsTo::make('User'),
-            Text::make('Master Code')->maxlength(100),
-            Textarea::make('Memo')->maxlength(190)->alwaysShow(),
-            DateTime::make('Started At'),
-            DateTime::make('Finished At'),
+            BelongsTo::make(__('User'), 'user', User::class),
+            Text::make(__('Master Code'), 'master_code')->maxlength(100),
+            Textarea::make(__('Memo'), 'memo')->maxlength(190)->alwaysShow(),
+            DateTime::make(__('Started At'), 'started_at'),
+            DateTime::make(__('Finished At'), 'finished_at'),
         ];
     }
 
@@ -89,5 +89,10 @@ class PromotionCode extends Resource
     public function actions(NovaRequest $request)
     {
         return [];
+    }
+
+    public static function label()
+    {
+        return __('Promotion Codes');
     }
 }

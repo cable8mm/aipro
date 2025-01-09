@@ -43,13 +43,13 @@ class GoodManualWarehousing extends Resource
     {
         return [
             ID::make()->sortable(),
-            BelongsTo::make('Good'),
-            BelongsTo::make('User'),
-            Number::make('Manual Add Inventory Count')->displayUsing(function ($value) {
+            BelongsTo::make(__('Good'), 'good', Good::class),
+            BelongsTo::make(__('User'), 'user', User::class),
+            Number::make(__('Manual Add Inventory Count'), 'manual_add_inventory_count')->displayUsing(function ($value) {
                 return number_format($value);
             }),
-            Status::make('Type')->loadingWhen(['미입력'])->failedWhen([]),
-            Textarea::make('Memo')->alwaysShow(),
+            Status::make(__('Type'), 'type')->loadingWhen(['미입력'])->failedWhen([]),
+            Textarea::make(__('Memo'), 'memo')->alwaysShow(),
         ];
     }
 
@@ -91,5 +91,10 @@ class GoodManualWarehousing extends Resource
     public function actions(NovaRequest $request)
     {
         return [];
+    }
+
+    public static function label()
+    {
+        return __('Good Manual Warehousings');
     }
 }

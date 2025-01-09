@@ -43,14 +43,14 @@ class BoxInventoryHistory extends Resource
     {
         return [
             ID::make()->sortable(),
-            BelongsTo::make('Box'),
-            Text::make('Model')->maxlength(100),
-            Text::make('Attribute')->maxlength(100),
-            Number::make('Quantity')->displayUsing(function ($value) {
+            BelongsTo::make(__('Box'), 'box', Box::class),
+            Text::make(__('Model'), 'model')->maxlength(100),
+            Text::make(__('Attribute'), 'attribute')->maxlength(100),
+            Number::make(__('Quantity'), 'quantity')->displayUsing(function ($value) {
                 return number_format($value);
             }),
-            Text::make('Type')->maxlength(10),
-            Boolean::make('Is Success'),
+            Text::make(__('Type'), 'type')->maxlength(10),
+            Boolean::make(__('Is Success'), 'is_success'),
         ];
     }
 
@@ -92,5 +92,10 @@ class BoxInventoryHistory extends Resource
     public function actions(NovaRequest $request)
     {
         return [];
+    }
+
+    public static function label()
+    {
+        return __('Box Inventory History');
     }
 }

@@ -43,13 +43,13 @@ class BoxManualWarehousing extends Resource
     {
         return [
             ID::make()->sortable(),
-            BelongsTo::make('Box'),
-            BelongsTo::make('User'),
-            Status::make('Type')->loadingWhen(['미입력'])->failedWhen([]),
-            Number::make('Manual Add Inventory Count')->displayUsing(function ($value) {
+            BelongsTo::make(__('Box'), 'box', Box::class),
+            BelongsTo::make(__('User'), 'user', User::class),
+            Status::make(__('Type'), 'type')->loadingWhen(['미입력'])->failedWhen([]),
+            Number::make(__('Manual Add Inventory Count'), 'manual_add_inventory_count')->displayUsing(function ($value) {
                 return number_format($value);
             }),
-            Textarea::make('Memo')->alwaysShow(),
+            Textarea::make(__('Memo'), 'memo')->alwaysShow(),
         ];
     }
 
@@ -91,5 +91,10 @@ class BoxManualWarehousing extends Resource
     public function actions(NovaRequest $request)
     {
         return [];
+    }
+
+    public static function label()
+    {
+        return __('Box Manual Warehousings');
     }
 }

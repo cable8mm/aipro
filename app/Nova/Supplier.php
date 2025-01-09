@@ -46,23 +46,23 @@ class Supplier extends Resource
     {
         return [
             ID::make()->sortable(),
-            Text::make('Name')->maxlength(255),
-            Email::make('Ordered Email', 'ordered_email')->maxlength(255),
-            Text::make('Contact Name')->maxlength(255),
-            Text::make('Contact Tel')->maxlength(255),
-            Text::make('Contact Cel')->maxlength(255),
-            Select::make('Order Method', 'order_method')->options([
+            Text::make(__('Name'), 'name')->maxlength(255),
+            Email::make(__('Ordered Email'), 'ordered_email')->maxlength(255),
+            Text::make(__('Contact Name'), 'contact_name')->maxlength(255),
+            Text::make(__('Contact Tel'), 'contact_tel')->maxlength(255),
+            Text::make(__('Contact Cel'), 'contact_cel')->maxlength(255),
+            Select::make(__('Order Method'), 'order_method')->options([
                 'sms' => '문자 메시지',
                 'email' => '이메일',
                 'phone' => '전화',
                 'kakaotalk' => '카카오톡',
                 'order_system' => '발주 시스템',
             ])->displayUsingLabels(),
-            Currency::make('Min Order Price'),
-            Textarea::make('Additional Information')->alwaysShow(),
-            Boolean::make('Is Active')->default(true),
+            Currency::make(__('Min Order Price'), 'min_order_price'),
+            Textarea::make(__('Additional Information'), 'additional_information')->alwaysShow(),
+            Boolean::make(__('Is Active'), 'is_active')->default(true),
 
-            HasMany::make('Supplier Goods'),
+            HasMany::make(__('Supplier Goods'), 'supplierGoods', SupplierGood::class),
         ];
     }
 
@@ -104,5 +104,10 @@ class Supplier extends Resource
     public function actions(NovaRequest $request)
     {
         return [];
+    }
+
+    public static function label()
+    {
+        return __('Supplier');
     }
 }
