@@ -45,14 +45,14 @@ class RegisterGoodRequest extends Resource
     {
         return [
             ID::make()->sortable(),
-            BelongsTo::make('Requester', 'user', User::class),
-            BelongsTo::make('Worker', 'user', User::class),
-            Text::make('Title')->rules('required')->required()->maxlength(255),
-            File::make('Request File Url')->rules('required')->required(),
-            File::make('Respond File Url'),
-            Boolean::make('Has Supplier Monitoring Price')->default(false),
-            Textarea::make('Memo')->alwaysShow(),
-            Status::make('Status')
+            BelongsTo::make(__('Requester'), 'user', User::class),
+            BelongsTo::make(__('Worker'), 'user', User::class),
+            Text::make(__('Title'), 'title')->rules('required')->required()->maxlength(255),
+            File::make(__('Request File Url'), 'request_file_url')->rules('required')->required(),
+            File::make(__('Respond File Url'), 'respond_file_url'),
+            Boolean::make(__('Has Supplier Monitoring Price'), 'has_supplier_monitoring_price')->default(false),
+            Textarea::make(__('Memo'), 'memo')->alwaysShow(),
+            Status::make(__('Status'), 'status')
                 ->loadingWhen(['waiting', 'running'])
                 ->failedWhen(['failed']),
         ];
@@ -96,5 +96,10 @@ class RegisterGoodRequest extends Resource
     public function actions(NovaRequest $request)
     {
         return [];
+    }
+
+    public static function label()
+    {
+        return __('Register Good Requests');
     }
 }

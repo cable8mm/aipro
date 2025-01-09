@@ -41,8 +41,8 @@ class HelpTip extends Resource
     {
         return [
             ID::make()->sortable(),
-            Text::make('Word')->rules('unique')->maxlength(100),
-            Text::make('Help Tip')->maxlength(190),
+            Text::make(__('Word'), 'word')->rules('unique')->maxlength(100),
+            Text::make(__('Help Tip'), 'help_tip')->maxlength(190),
         ];
     }
 
@@ -84,5 +84,10 @@ class HelpTip extends Resource
     public function actions(NovaRequest $request)
     {
         return [];
+    }
+
+    public static function label()
+    {
+        return __('Help Tip');
     }
 }

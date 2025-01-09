@@ -46,23 +46,23 @@ class BoxOrder extends Resource
     {
         return [
             ID::make()->sortable(),
-            BelongsTo::make('User'),
-            BelongsTo::make('Warehouse Manager', 'warehouseManager', User::class),
-            BelongsTo::make('Box Supplier'),
-            Text::make('Title')->maxlength(190),
-            Number::make('Total Box Count')->displayUsing(function ($value) {
+            BelongsTo::make(__('User'), 'user', User::class),
+            BelongsTo::make(__('Warehouse Manager'), 'warehouseManager', User::class),
+            BelongsTo::make(__('Box Supplier'), 'boxSupplier', BoxSupplier::class),
+            Text::make(__('Title'), 'title')->maxlength(190),
+            Number::make(__('Total Box Count'), 'total_box_count')->displayUsing(function ($value) {
                 return number_format($value);
             }),
-            Currency::make('Total Order Price'),
-            DateTime::make('Ordered At'),
-            DateTime::make('Sent At'),
-            DateTime::make('Confirmed At'),
-            DateTime::make('Predict Warehoused At'),
-            DateTime::make('Warehoused At'),
-            Status::make('Status')
+            Currency::make(__('Total Order Price'), 'total_order_price'),
+            DateTime::make(__('Ordered At'), 'ordered_at'),
+            DateTime::make(__('Sent At'), 'sent_at'),
+            DateTime::make(__('Confirmed At'), 'confirmed_at'),
+            DateTime::make(__('Predict Warehoused At'), 'predict_warehoused_at'),
+            DateTime::make(__('Warehoused At'), 'warehoused_at'),
+            Status::make(__('Status'), 'status')
                 ->loadingWhen(['미처리'])
                 ->failedWhen([]),
-            Textarea::make('Memo')->alwaysShow(),
+            Textarea::make(__('Memo'), 'memo')->alwaysShow(),
         ];
     }
 
@@ -104,5 +104,10 @@ class BoxOrder extends Resource
     public function actions(NovaRequest $request)
     {
         return [];
+    }
+
+    public static function label()
+    {
+        return __('Box Order');
     }
 }

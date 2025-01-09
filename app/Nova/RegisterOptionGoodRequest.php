@@ -44,15 +44,15 @@ class RegisterOptionGoodRequest extends Resource
     {
         return [
             ID::make()->sortable(),
-            BelongsTo::make('Requester', 'requester', User::class),
-            BelongsTo::make('Worker', 'worker', User::class),
-            Text::make('Title')->maxlength(190),
-            URL::make('Request File Url')->maxlength(190),
-            URL::make('Respond File Url')->maxlength(190),
-            Status::make('Status')
+            BelongsTo::make(__('Requester'), 'requester', User::class),
+            BelongsTo::make(__('Worker'), 'worker', User::class),
+            Text::make(__('Title'), 'title')->maxlength(190),
+            URL::make(__('Request File Url'), 'request_file_url')->maxlength(190),
+            URL::make(__('Respond File Url'), 'respond_file_url')->maxlength(190),
+            Status::make(__('Status'), 'status')
                 ->loadingWhen(['waiting', 'running'])
                 ->failedWhen(['failed']),
-            Textarea::make('Memo')->alwaysShow(),
+            Textarea::make(__('Memo'), 'memo')->alwaysShow(),
         ];
     }
 
@@ -94,5 +94,10 @@ class RegisterOptionGoodRequest extends Resource
     public function actions(NovaRequest $request)
     {
         return [];
+    }
+
+    public static function label()
+    {
+        return __('Register Option Good Request');
     }
 }

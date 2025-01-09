@@ -44,20 +44,20 @@ class InventoryHistory extends Resource
     {
         return [
             ID::make()->sortable(),
-            BelongsTo::make('User'),
-            BelongsTo::make('Good'),
-            Text::make('Type')->maxlength(10),
-            Number::make('Quantity')->displayUsing(function ($value) {
+            BelongsTo::make(__('User'), 'user', User::class),
+            BelongsTo::make(__('Good'), 'good', Good::class),
+            Text::make(__('Type'), 'type')->maxlength(10),
+            Number::make(__('Quantity'), 'quantity')->displayUsing(function ($value) {
                 return number_format($value);
             }),
-            Currency::make('Price'),
-            Number::make('After Quantity')->displayUsing(function ($value) {
+            Currency::make(__('Price'), 'price'),
+            Number::make(__('After Quantity'), 'after_quantity')->displayUsing(function ($value) {
                 return number_format($value);
             }),
-            Text::make('Model')->maxlength(100),
-            Number::make('Attribute'),
-            Number::make('Cancel Id'),
-            Boolean::make('Is Success'),
+            Text::make(__('Model'), 'model')->maxlength(100),
+            Number::make(__('Attribute'), 'attribute'),
+            Number::make(__('Cancel Id'), 'cancel_id'),
+            Boolean::make(__('Is Success'), 'is_success'),
         ];
     }
 
@@ -99,5 +99,10 @@ class InventoryHistory extends Resource
     public function actions(NovaRequest $request)
     {
         return [];
+    }
+
+    public static function label()
+    {
+        return __('Inventory History');
     }
 }

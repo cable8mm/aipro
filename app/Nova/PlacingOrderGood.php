@@ -46,25 +46,25 @@ class PlacingOrderGood extends Resource
     {
         return [
             ID::make()->sortable(),
-            BelongsTo::make('Placing Order'),
-            Hidden::make('User')->default(function ($request) {
+            BelongsTo::make(__('Placing Order'), 'placingOrder', PlacingOrder::class),
+            Hidden::make(__('User'), 'user')->default(function ($request) {
                 return $request->user()->id;
             }),
-            BelongsTo::make('Good'),
-            BelongsTo::make('Warehouse Manager', 'warehouseManager', User::class),
-            Number::make('Order Count')->displayUsing(function ($value) {
+            BelongsTo::make(__('Good'), 'good', Good::class),
+            BelongsTo::make(__('Warehouse Manager'), 'warehouseManager', User::class),
+            Number::make(__('Order Count'), 'order_count')->displayUsing(function ($value) {
                 return number_format($value);
             }),
-            Currency::make('Order Price'),
-            Number::make('Supplier Confirmed Count')->displayUsing(function ($value) {
+            Currency::make(__('Order Price'), 'order_price'),
+            Number::make(__('Supplier Confirmed Count'), 'supplier_confirmed_count')->displayUsing(function ($value) {
                 return number_format($value);
             })->exceptOnForms(),
-            Currency::make('Supplier Confirmed Price')->exceptOnForms(),
-            DateTime::make('Warehoused At'),
-            Status::make('Status')
+            Currency::make(__('Supplier Confirmed Price'), 'supplier_confirmed_price')->exceptOnForms(),
+            DateTime::make(__('Warehoused At'), 'warehoused_at'),
+            Status::make(__('Status'), 'status')
                 ->loadingWhen(['waiting', 'running'])
                 ->failedWhen(['failed']),
-            Textarea::make('Memo'),
+            Textarea::make(__('Memo'), 'memo')->alwaysShow(),
         ];
     }
 
@@ -106,5 +106,10 @@ class PlacingOrderGood extends Resource
     public function actions(NovaRequest $request)
     {
         return [];
+    }
+
+    public static function label()
+    {
+        return __('Placing Order Good');
     }
 }

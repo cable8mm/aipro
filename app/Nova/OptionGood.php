@@ -44,13 +44,13 @@ class OptionGood extends Resource
     {
         return [
             ID::make()->sortable(),
-            BelongsTo::make('User'),
-            Text::make('Master Code')->maxlength(130),
-            Text::make('Name')->maxlength(130),
-            Number::make('Option Count'),
-            Boolean::make('Is Active'),
+            BelongsTo::make(__('User'), 'user', User::class),
+            Text::make(__('Master Code'), 'master_code')->maxlength(130),
+            Text::make(__('Name'), 'name')->maxlength(130),
+            Number::make(__('Option Count'), 'option_count'),
+            Boolean::make(__('Is Active'), 'is_active'),
 
-            HasMany::make('Option Good Options'),
+            HasMany::make(__('Option Good Options'), 'optionGoodOptions', OptionGoodOption::class),
         ];
     }
 
@@ -92,5 +92,10 @@ class OptionGood extends Resource
     public function actions(NovaRequest $request)
     {
         return [];
+    }
+
+    public static function label()
+    {
+        return __('Option Goods');
     }
 }

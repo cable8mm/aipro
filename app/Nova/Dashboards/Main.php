@@ -18,4 +18,9 @@ class Main extends Dashboard
             new Help,
         ];
     }
+
+    public function label()
+    {
+        return __('Main');
+    }
 }

@@ -45,15 +45,15 @@ class BoxSupplier extends Resource
     {
         return [
             ID::make()->sortable(),
-            Text::make('Name')->maxlength(255),
-            Text::make('Ordered Email')->maxlength(255),
-            Text::make('Contact Name')->maxlength(255),
-            Text::make('Contact Tel')->maxlength(255),
-            Text::make('Contact Cel')->maxlength(255),
-            Select::make('Order Method', 'order_method')->options(OrderMethod::toArray())->displayUsingLabels(),
-            Currency::make('Min Order Price'),
-            Boolean::make('Is Parceled'),
-            Textarea::make('Additional Information')->alwaysShow(),
+            Text::make(__('Name'), 'name')->maxlength(255),
+            Text::make(__('Ordered Email'), 'ordered_email')->maxlength(255),
+            Text::make(__('Contact Name'), 'contact_name')->maxlength(255),
+            Text::make(__('Contact Tel'), 'contact_tel')->maxlength(255),
+            Text::make(__('Contact Cel'), 'contact_cel')->maxlength(255),
+            Select::make(__('Order Method'), 'order_method')->options(OrderMethod::toArray())->displayUsingLabels(),
+            Currency::make(__('Min Order Price'), 'min_order_price'),
+            Boolean::make(__('Is Parceled'), 'is_parceled'),
+            Textarea::make(__('Additional Information'), 'additional_information')->alwaysShow(),
         ];
     }
 
@@ -95,5 +95,10 @@ class BoxSupplier extends Resource
     public function actions(NovaRequest $request)
     {
         return [];
+    }
+
+    public static function label()
+    {
+        return __('Box Supplier');
     }
 }

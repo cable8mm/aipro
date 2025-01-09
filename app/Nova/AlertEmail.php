@@ -40,9 +40,9 @@ class AlertEmail extends Resource
     {
         return [
             ID::make()->sortable(),
-            Text::make('Name')->maxlength(255),
-            Text::make('Action Name')->maxlength(255),
-            Text::make('Email List')->maxlength(255),
+            Text::make(__('Name'), 'name')->maxlength(255),
+            Text::make(__('Action Name'), 'action_name')->maxlength(255),
+            Text::make(__('Email List'), 'email_list')->maxlength(255),
         ];
     }
 
@@ -84,5 +84,10 @@ class AlertEmail extends Resource
     public function actions(NovaRequest $request)
     {
         return [];
+    }
+
+    public static function label()
+    {
+        return __('Alert Email');
     }
 }

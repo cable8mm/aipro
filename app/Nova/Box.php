@@ -45,14 +45,14 @@ class Box extends Resource
     {
         return [
             ID::make()->sortable(),
-            Text::make('Code')->maxlength(50),
-            Text::make('Name')->maxlength(100)->sortable(),
-            Currency::make('Delivery Price'),
-            Currency::make('Box Price'),
-            Number::make('Inventory')->displayUsing(function ($value) {
+            Text::make(__('Code'), 'code')->maxlength(50),
+            Text::make(__('Name'), 'name')->maxlength(100)->sortable(),
+            Currency::make(__('Delivery Price'), 'delivery_price'),
+            Currency::make(__('Box Price'), 'box_price'),
+            Number::make(__('Inventory'), 'inventory')->displayUsing(function ($value) {
                 return number_format($value);
             }),
-            Textarea::make('Memo')->maxlength(255)->hideFromIndex(),
+            Textarea::make(__('Memo'), 'memo')->maxlength(255)->hideFromIndex(),
         ];
     }
 
@@ -94,5 +94,10 @@ class Box extends Resource
     public function actions(NovaRequest $request)
     {
         return [];
+    }
+
+    public static function label()
+    {
+        return __('Box');
     }
 }

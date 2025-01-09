@@ -43,15 +43,15 @@ class MismatchedOrderShipment extends Resource
     {
         return [
             ID::make()->sortable(),
-            BelongsTo::make('User'),
-            BelongsTo::make('Order Sheet Invoice'),
-            Text::make('Order No')->maxlength(100),
-            Text::make('Site')->maxlength(100),
-            Text::make('Master Goods Cd')->maxlength(100),
-            Text::make('Goods Nm')->maxlength(255),
-            Text::make('Option')->maxlength(255),
-            KeyValue::make('Json'),
-            Status::make('Status')
+            BelongsTo::make(__('User'), 'user', User::class),
+            BelongsTo::make(__('Order Sheet Invoice'), 'orderSheetInvoice', OrderSheetInvoice::class),
+            Text::make(__('Order No'), 'order_no')->maxlength(100),
+            Text::make(__('Site'), 'site')->maxlength(100),
+            Text::make(__('Master Goods Cd'), 'master_goods_cd')->maxlength(100),
+            Text::make(__('Goods Nm'), 'goods_nm')->maxlength(255),
+            Text::make(__('Option'), 'option')->maxlength(255),
+            KeyValue::make(__('Json'), 'json'),
+            Status::make(__('Status'), 'status')
                 ->loadingWhen(['미처리'])
                 ->failedWhen([]),
         ];
@@ -95,5 +95,10 @@ class MismatchedOrderShipment extends Resource
     public function actions(NovaRequest $request)
     {
         return [];
+    }
+
+    public static function label()
+    {
+        return __('Mismatched Order Shipment');
     }
 }

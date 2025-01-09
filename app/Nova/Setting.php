@@ -40,9 +40,9 @@ class Setting extends Resource
     {
         return [
             ID::make()->sortable(),
-            Text::make('Key')->maxlength(150),
-            Text::make('Value')->maxlength(255),
-            Text::make('Memo')->maxlength(255),
+            Text::make(__('Key'), 'key')->maxlength(150),
+            Text::make(__('Value'), 'value')->maxlength(255),
+            Text::make(__('Memo'), 'memo')->maxlength(255),
         ];
     }
 
@@ -84,5 +84,10 @@ class Setting extends Resource
     public function actions(NovaRequest $request)
     {
         return [];
+    }
+
+    public static function label()
+    {
+        return __('Settings');
     }
 }
