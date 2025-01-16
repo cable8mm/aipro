@@ -11,6 +11,7 @@ use Laravel\Nova\Fields\Hidden;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
+use Laravel\Nova\Fields\Stack;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -71,6 +72,10 @@ class PlacingOrder extends Resource
             Textarea::make(__('Memo'), 'memo')->alwaysShow(),
             Select::make(__('Status'), 'status')
                 ->options(EnumsPlacingOrder::array())->displayUsingLabels()->filterable(),
+            Stack::make(__('Created At').' & '.__('Updated At'), [
+                DateTime::make(__('Created At'), 'created_at'),
+                DateTime::make(__('Updated At'), 'updated_at'),
+            ]),
 
             HasMany::make(__('Placing Order Goods'), 'placingOrderGoods', PlacingOrderGood::class),
         ];

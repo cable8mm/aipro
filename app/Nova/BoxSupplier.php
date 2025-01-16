@@ -5,8 +5,10 @@ namespace App\Nova;
 use App\Enums\OrderMethod;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Currency;
+use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Select;
+use Laravel\Nova\Fields\Stack;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -54,6 +56,10 @@ class BoxSupplier extends Resource
             Currency::make(__('Min Order Price'), 'min_order_price'),
             Boolean::make(__('Is Parceled'), 'is_parceled'),
             Textarea::make(__('Additional Information'), 'additional_information')->alwaysShow(),
+            Stack::make(__('Created At').' & '.__('Updated At'), [
+                DateTime::make(__('Created At'), 'created_at'),
+                DateTime::make(__('Updated At'), 'updated_at'),
+            ]),
         ];
     }
 

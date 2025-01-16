@@ -3,9 +3,11 @@
 namespace App\Nova;
 
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
+use Laravel\Nova\Fields\Stack;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Order extends Resource
@@ -46,6 +48,10 @@ class Order extends Resource
             Select::make('Type')->options(['피킹존 A', '피킹존 B', '피킹존 C']),
             Number::make('Order Good Count')->exceptOnForms(),
             Number::make('Printed Count')->exceptOnForms(),
+            Stack::make(__('Created At').' & '.__('Updated At'), [
+                DateTime::make(__('Created At'), 'created_at'),
+                DateTime::make(__('Updated At'), 'updated_at'),
+            ]),
         ];
     }
 

@@ -2,10 +2,15 @@
 
 namespace App\Nova;
 
+use App\Enums\PlacingOrder;
+use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
-use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Select;
+use Laravel\Nova\Fields\Stack;
+use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class BoxOrderBox extends Resource
@@ -42,18 +47,23 @@ class BoxOrderBox extends Resource
     {
         return [
             ID::make()->sortable(),
-            Number::make('Ct Box Order Id'),
-            Number::make('Cms Maestro Id'),
-            Number::make('Ct Box Supplier Id'),
-            Number::make('Ct Box Id'),
-            Number::make('Warehouse Manager Id'),
-            Number::make('Order Count'),
-            Number::make('Order Price'),
-            Number::make('Cost Count'),
-            Number::make('Cost Price'),
-            DateTime::make('Warehoused'),
-            Text::make('Status')->maxlength(100),
-            Text::make('Memo'),
+            BelongsTo::make(__('Box Order'), 'boxOrder', BoxOrder::class),
+            BelongsTo::make(__('User'), 'user', User::class),
+            BelongsTo::make(__('Box Supplier'), 'boxSupplier', BoxSupplier::class),
+            BelongsTo::make(__('Box'), 'box', Box::class),
+            BelongsTo::make(__('Warehouse Manager'), 'warehouseManager', User::class),
+            Number::make(__('Order Count'), 'order_count'),
+            Currency::make(__('Order Price'), 'order_price'),
+            Number::make(__('Cost Count'), 'cost_count'),
+            Currency::make(__('Cost Price'), 'cost_price'),
+            DateTime::make(__('Warehoused At'), 'warehoused_at'),
+            Select::make(__('Status'), 'status')
+                ->options(PlacingOrder::array())->displayUsingLabels()->filterable(),
+            Textarea::make(__('Memo')),
+            Stack::make(__('Created At').' & '.__('Updated At'), [
+                DateTime::make(__('Created At'), 'created_at'),
+                DateTime::make(__('Updated At'), 'updated_at'),
+            ]),
         ];
     }
 

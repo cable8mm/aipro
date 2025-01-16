@@ -5,7 +5,9 @@ namespace App\Nova;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Currency;
+use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Stack;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
@@ -51,6 +53,10 @@ class SetGood extends Resource
             Currency::make(__('Last Cost Price'), 'last_cost_price')->exceptOnForms(),
             Currency::make(__('Zero Margin Price'), 'zero_margin_price')->exceptOnForms(),
             Boolean::make(__('is Shutdown'), 'is_shutdown'),
+            Stack::make(__('Created At').' & '.__('Updated At'), [
+                DateTime::make(__('Created At'), 'created_at'),
+                DateTime::make(__('Updated At'), 'updated_at'),
+            ]),
         ];
     }
 
