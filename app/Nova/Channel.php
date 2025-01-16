@@ -2,11 +2,17 @@
 
 namespace App\Nova;
 
+use App\Enums\Channel as EnumsChannel;
+use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\DateTime;
+use Laravel\Nova\Fields\File;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
+use Laravel\Nova\Fields\Select;
+use Laravel\Nova\Fields\Stack;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Channel extends Resource
@@ -43,20 +49,24 @@ class Channel extends Resource
     {
         return [
             ID::make()->sortable(),
-            Number::make('Last Process Maestro Id'),
-            Text::make('Name')->maxlength(255),
-            Text::make('Playauto Site')->maxlength(190),
-            Text::make('Siteid')->maxlength(100),
-            Number::make('Fee Rate')->step('any'),
-            Number::make('Total Good Count'),
-            Number::make('Total Sale Good Count'),
-            Number::make('Total Sold Out Good Count'),
-            Number::make('Total No Sale Good Count'),
-            Text::make('Filepath')->maxlength(190),
-            DateTime::make('Last Processed'),
-            Text::make('Memo'),
-            Boolean::make('Is Active'),
-            Text::make('Status')->maxlength(100),
+            BelongsTo::make(__('User'), 'user', User::class),
+            Text::make(__('Name'), 'name')->maxlength(255),
+            Text::make(__('Playauto Site'), 'playauto_site')->maxlength(190),
+            Text::make(__('Siteid'), 'siteid')->maxlength(100),
+            Number::make(__('Fee Rate'), 'fee_rate')->step('any'),
+            Number::make(__('Total Good Count'), 'total_good_count'),
+            Number::make(__('Total Sale Good Count'), 'total_sale_good_count'),
+            Number::make(__('Total Sold Out Good Count'), 'total_sold_out_good_count'),
+            Number::make(__('Total No Sale Good Count'), 'total_no_sale_good_count'),
+            File::make(__('Filepath'), 'filepath'),
+            DateTime::make(__('Last Processed At'), 'last_processed_at'),
+            Textarea::make(__('Memo'), 'memo'),
+            Boolean::make(__('Is Active'), 'is_active'),
+            Select::make(__('Status'), 'status')->options(EnumsChannel::array())->displayUsingLabels(),
+            Stack::make(__('Created At').' & '.__('Updated At'), [
+                DateTime::make(__('Created At'), 'created_at'),
+                DateTime::make(__('Updated At'), 'updated_at'),
+            ]),
         ];
     }
 

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Channel extends Model
 {
@@ -12,7 +13,7 @@ class Channel extends Model
     protected function casts(): array
     {
         return [
-            'last_process_maestro_id' => 'integer',
+            'user_id' => 'integer',
             'name' => 'string',
             'playauto_site' => 'string',
             'siteid' => 'string',
@@ -22,9 +23,14 @@ class Channel extends Model
             'total_sold_out_good_count' => 'integer',
             'total_no_sale_good_count' => 'integer',
             'filepath' => 'string',
-            'last_processed' => 'datetime',
+            'last_processed_at' => 'datetime',
             'is_active' => 'boolean',
             'status' => 'string',
         ];
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }
