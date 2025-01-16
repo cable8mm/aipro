@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('contact_name', 50)->nullable();
             $table->string('contact_tel', 40)->nullable();
             $table->string('contact_cel', 40)->nullable();
-            $table->json('order_method')->default([])->comment('발주 방법');
+            $table->json('order_method')->comment('발주 방법');
             $table->string('balance_criteria', 100)->nullable()->comment('정산 기준');
             $table->unsignedBigInteger('min_order_price')->comment('최소 발주 금액');
             $table->text('additional_information')->nullable()->comment('판매자 정보 수동 싱크기능 제공 유무');

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('type', 20);
             $table->bigInteger('quantity');
             $table->string('model', 100);
-            $table->unsignedBigInteger('attribute', 100);
+            $table->unsignedBigInteger('attribute');
             $table->boolean('is_success');
             $table->timestamps();
         });
