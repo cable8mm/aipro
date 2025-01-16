@@ -13,15 +13,14 @@ return new class extends Migration
     {
         Schema::create('set_goods', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable();
-            $table->string('master_code', 255)->nullable();
+            $table->foreignId('user_id');
+            $table->string('master_code', 255);
             $table->string('featured_good_list', 255)->nullable();
-            $table->string('name', 255)->nullable();
-            $table->integer('goods_price')->nullable();
-            $table->integer('last_cost_price')->nullable();
-            $table->integer('zero_margin_price')->nullable();
-            $table->boolean('is_gift')->nullable()->default('0');
-            $table->boolean('is_shutdowned')->nullable()->default('0');
+            $table->string('name', 255);
+            $table->unsignedBigInteger('goods_price');
+            $table->unsignedBigInteger('last_cost_price')->nullable();
+            $table->unsignedBigInteger('zero_margin_price')->nullable();
+            $table->boolean('is_shutdown')->nullable()->default(0);
             $table->timestamps();
         });
     }

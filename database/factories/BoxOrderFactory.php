@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\PlacingOrder;
 use Database\Seeders\UserSeeder;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -29,7 +30,7 @@ class BoxOrderFactory extends Factory
             'confirmed_at' => fake()->dateTime(),
             'predict_warehoused_at' => fake()->dateTime(),
             'warehoused_at' => fake()->dateTime(),
-            'status' => fake()->randomElement(['처리완료', '미처리']),
+            'status' => fake()->randomElement(PlacingOrder::array()),
             'memo' => fake()->paragraph(),
         ];
     }

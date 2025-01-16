@@ -2,11 +2,13 @@
 
 namespace App\Nova;
 
+use App\Enums\ManualInventoryAdjustmentType;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
-use Laravel\Nova\Fields\Status;
-use Laravel\Nova\Fields\Textarea;
+use Laravel\Nova\Fields\Select;
+use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class GoodManualWarehousing extends Resource
@@ -32,6 +34,9 @@ class GoodManualWarehousing extends Resource
      */
     public static $search = [
         'id',
+        'Good.name',
+        'Good.master_code',
+        'memo',
     ];
 
     /**
@@ -43,13 +48,16 @@ class GoodManualWarehousing extends Resource
     {
         return [
             ID::make()->sortable(),
+            Text::make(__('마스터 코드'), 'Good.master_code')->onlyOnIndex(),
+            Text::make(__('공급사'), 'Good.supplier.name')->onlyOnIndex(),
             BelongsTo::make(__('Good'), 'good', Good::class),
             BelongsTo::make(__('User'), 'user', User::class),
+            Select::make(__('Type'), 'type')->options(ManualInventoryAdjustmentType::array())->displayUsingLabels()->filterable(),
             Number::make(__('Manual Add Inventory Count'), 'manual_add_inventory_count')->displayUsing(function ($value) {
                 return number_format($value);
             }),
-            Status::make(__('Type'), 'type')->loadingWhen(['미입력'])->failedWhen([]),
-            Textarea::make(__('Memo'), 'memo')->alwaysShow(),
+            Text::make(__('Memo'), 'memo')->nullable(),
+            DateTime::make(__('Created At'), 'created_at')->onlyOnIndex()->filterable(),
         ];
     }
 

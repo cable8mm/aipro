@@ -25,7 +25,7 @@ class RegisterGoodRequestFactory extends Factory
             'respond_file_url' => fake()->word().'.xlsx',
             'has_supplier_monitoring_price' => fake()->boolean(),
             'memo' => fake()->paragraph(),
-            'status' => fake()->randomElement(Status::toKeys()),
+            'status' => fake()->randomElement(Status::array()),
         ];
     }
 }

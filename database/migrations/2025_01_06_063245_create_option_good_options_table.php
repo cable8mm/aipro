@@ -13,15 +13,14 @@ return new class extends Migration
     {
         Schema::create('option_good_options', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable();
-            $table->foreignId('option_good_id')->nullable();
-            $table->string('master_code', 130)->nullable();
-            $table->string('name', 130)->nullable();
-            $table->integer('goods_price')->nullable();
-            $table->integer('last_cost_price')->nullable();
-            $table->integer('zero_margin_price')->nullable();
-            $table->integer('suggested_selling_price_of_gms')->nullable();
-            $table->unsignedInteger('order')->nullable()->default('100');
+            $table->foreignId('user_id');
+            $table->foreignId('option_good_id');
+            $table->string('master_code', 130);
+            $table->string('name', 130);
+            $table->unsignedBigInteger('goods_price')->nullable();
+            $table->unsignedBigInteger('last_cost_price')->nullable();
+            $table->unsignedBigInteger('zero_margin_price')->nullable();
+            $table->unsignedInteger('order')->default(0);
             $table->timestamps();
         });
     }

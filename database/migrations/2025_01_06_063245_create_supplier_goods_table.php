@@ -29,12 +29,12 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->unsignedInteger('price')->nullable();
             $table->unsignedInteger('suggested_selling_price')->nullable();
-            $table->integer('suggestioned_retail_price')->nullable();
+            $table->integer('suggested_retail_price')->nullable();
             $table->integer('supplier_monitoring_price')->nullable();
             $table->text('additional_information')->nullable();
             $table->boolean('is_runout')->nullable()->default('0');
             $table->boolean('is_warehoused')->nullable()->default('1');
-            $table->boolean('is_shutdowned')->nullable()->default('0');
+            $table->boolean('is_shutdown')->nullable()->default('0');
             $table->timestamps();
         });
     }

@@ -2,11 +2,12 @@
 
 namespace App\Nova;
 
+use App\Enums\Status as EnumsStatus;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\File;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Status;
+use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -45,16 +46,16 @@ class RegisterGoodRequest extends Resource
     {
         return [
             ID::make()->sortable(),
-            BelongsTo::make(__('Requester'), 'user', User::class),
-            BelongsTo::make(__('Worker'), 'user', User::class),
+            BelongsTo::make(__('Requester'), 'requester', User::class)->default(function ($request) {
+                return $request->user()->id;
+            })->exceptOnForms(),
+            BelongsTo::make(__('Worker'), 'worker', User::class),
             Text::make(__('Title'), 'title')->rules('required')->required()->maxlength(255),
-            File::make(__('Request File Url'), 'request_file_url')->rules('required')->required(),
+            File::make(__('Request File Url'), 'request_file_url'),
             File::make(__('Respond File Url'), 'respond_file_url'),
             Boolean::make(__('Has Supplier Monitoring Price'), 'has_supplier_monitoring_price')->default(false),
+            Select::make(__('Status'), 'status')->options(EnumsStatus::array())->displayUsingLabels(),
             Textarea::make(__('Memo'), 'memo')->alwaysShow(),
-            Status::make(__('Status'), 'status')
-                ->loadingWhen(['waiting', 'running'])
-                ->failedWhen(['failed']),
         ];
     }
 

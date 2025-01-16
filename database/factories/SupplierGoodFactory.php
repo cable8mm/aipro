@@ -24,7 +24,7 @@ class SupplierGoodFactory extends Factory
             'good_code' => fake()->numerify('GOOD-###'),
             'supplier_category' => fake()->randomElement(['꽃게|암컷', '꽃게|숫컷']),
             'name' => fake()->productName(),
-            'origin' => fake('ko_KR')->country(),
+            'origin' => fake('ko_KR')->countryCode(),
             'maker' => fake()->company(),
             'brand' => fake()->deviceManufacturer(),
             'box_count' => fake()->randomNumber(1),
@@ -36,12 +36,12 @@ class SupplierGoodFactory extends Factory
             'description' => fake()->paragraph(),
             'price' => fake()->randomNumber(4),
             'suggested_selling_price' => fake()->randomNumber(4),
-            'suggestioned_retail_price' => fake()->randomNumber(4),
+            'suggested_retail_price' => fake()->randomNumber(4),
             'supplier_monitoring_price' => fake()->randomNumber(4),
             'additional_information' => fake()->paragraph(),
             'is_runout' => fake()->boolean(),
             'is_warehoused' => fake()->boolean(),
-            'is_shutdowned' => fake()->boolean(),
+            'is_shutdown' => fake()->boolean(),
         ];
     }
 }

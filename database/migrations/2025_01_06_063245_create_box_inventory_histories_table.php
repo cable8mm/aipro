@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('box_inventory_histories', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('box_id')->nullable();
-            $table->string('type', 10)->nullable();
-            $table->integer('quantity')->nullable();
-            $table->string('model', 100)->nullable();
-            $table->string('attribute', 100)->nullable();
-            $table->boolean('is_success')->nullable();
+            $table->foreignId('box_id');
+            $table->string('type', 20);
+            $table->bigInteger('quantity');
+            $table->string('model', 100);
+            $table->unsignedBigInteger('attribute');
+            $table->boolean('is_success');
             $table->timestamps();
         });
     }

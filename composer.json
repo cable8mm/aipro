@@ -10,13 +10,15 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "cable8mm/enum-getter": "^1.0",
         "laracraft-tech/laravel-useful-additions": "^4.0",
         "laravel-lang/common": "^6.4",
         "laravel/framework": "^11.31",
         "laravel/nova": "4.34.3",
         "laravel/tinker": "^2.9",
         "livewire/livewire": "^3.4",
-        "livewire/volt": "^1.0"
+        "livewire/volt": "^1.0",
+        "outl1ne/nova-multiselect-filter": "^4.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.14",
@@ -88,6 +90,19 @@
         "laravel": {
             "dont-discover": []
         }
+    },
+    "suggest": {
+        "barryvdh/laravel-debugbar": "Enables XDebug integration in Laravel applications.",
+        "barryvdh/laravel-ide-helper": "Provides IDE helper classes for Laravel applications.",
+        "cable8mm/xeed": "Provides Laravel resources like models, migrations, seeds, factories and Nova resources.",
+        "fakerphp/faker": "Generates fake data for testing and seeding your application.",
+        "laravel/breeze": "Laravel Breeze provides a ready-to-use starting point for building robust Laravel applications.",
+        "laracraft-tech/laravel-useful-additions": "Provides Traits to do getters essentially for enum and db:truncate command",
+        "laravel/pail": "A Laravel package for running Laravel applications on Pail.",
+        "laravel/pint": "Pint is a PHP static analysis tool that finds common mistakes in your Laravel application.",
+        "laravel/sail": "Laravel Sail provides a pre-configured Docker environment for local development.",
+        "mbezhanov/faker-provider-collection": "Adds custom Faker providers for Laravel applications.",
+        "outl1ne/nova-multiselect-filter": "Provides Laravel Nova filter for Multiselect field."
     },
     "config": {
         "optimize-autoloader": true,

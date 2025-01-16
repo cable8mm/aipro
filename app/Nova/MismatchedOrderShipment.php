@@ -2,10 +2,11 @@
 
 namespace App\Nova;
 
+use App\Enums\Status as EnumsStatus;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\KeyValue;
-use Laravel\Nova\Fields\Status;
+use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
@@ -32,6 +33,7 @@ class MismatchedOrderShipment extends Resource
      */
     public static $search = [
         'id',
+        'OrderSheetInvoice.id',
     ];
 
     /**
@@ -51,9 +53,8 @@ class MismatchedOrderShipment extends Resource
             Text::make(__('Goods Nm'), 'goods_nm')->maxlength(255),
             Text::make(__('Option'), 'option')->maxlength(255),
             KeyValue::make(__('Json'), 'json'),
-            Status::make(__('Status'), 'status')
-                ->loadingWhen(['미처리'])
-                ->failedWhen([]),
+            Select::make(__('Status'), 'status')
+                ->options(EnumsStatus::array())->displayUsingLabels()->filterable(),
         ];
     }
 

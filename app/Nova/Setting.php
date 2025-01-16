@@ -4,6 +4,7 @@ namespace App\Nova;
 
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Setting extends Resource
@@ -40,9 +41,9 @@ class Setting extends Resource
     {
         return [
             ID::make()->sortable(),
-            Text::make(__('Key'), 'key')->maxlength(150),
-            Text::make(__('Value'), 'value')->maxlength(255),
-            Text::make(__('Memo'), 'memo')->maxlength(255),
+            Text::make(__('Key'), 'key')->rules('required')->required()->maxlength(255),
+            Text::make(__('Value'), 'value')->rules('required')->required()->maxlength(255),
+            Textarea::make(__('Memo'), 'memo')->maxlength(255),
         ];
     }
 

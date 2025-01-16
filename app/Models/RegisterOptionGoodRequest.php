@@ -15,7 +15,6 @@ class RegisterOptionGoodRequest extends Model
         return [
             'title' => 'string',
             'request_file_url' => 'string',
-            'status' => 'string',
             'respond_file_url' => 'string',
         ];
     }

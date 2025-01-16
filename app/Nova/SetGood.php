@@ -43,14 +43,14 @@ class SetGood extends Resource
     {
         return [
             ID::make()->sortable(),
-            BelongsTo::make(__('User'), 'user', User::class),
-            Text::make(__('Master Code'), 'master_code')->maxlength(255),
+            BelongsTo::make(__('User'), 'user', User::class)->rules('required')->required(),
+            Text::make(__('Master Code'), 'master_code')->rules('required')->required()->maxlength(255),
             Text::make(__('Featured Good List'), 'featured_good_list')->maxlength(255),
-            Text::make(__('Name'), 'name')->maxlength(255),
-            Currency::make(__('Goods Price'), 'goods_price'),
-            Currency::make(__('Last Cost Price'), 'last_cost_price'),
-            Currency::make(__('Zero Margin Price'), 'zero_margin_price'),
-            Boolean::make(__('Is Shutdowned'), 'is_shutdowned'),
+            Text::make(__('Name'), 'name')->rules('required')->required()->maxlength(255),
+            Currency::make(__('Goods Price'), 'goods_price')->rules('required')->required(),
+            Currency::make(__('Last Cost Price'), 'last_cost_price')->exceptOnForms(),
+            Currency::make(__('Zero Margin Price'), 'zero_margin_price')->exceptOnForms(),
+            Boolean::make(__('is Shutdown'), 'is_shutdown'),
         ];
     }
 

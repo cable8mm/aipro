@@ -2,12 +2,14 @@
 
 namespace App\Nova;
 
+use App\Enums\InventoryHistory as EnumsInventoryHistory;
+use App\Enums\InventoryHistoryModel;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
-use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class InventoryHistory extends Resource
@@ -46,18 +48,20 @@ class InventoryHistory extends Resource
             ID::make()->sortable(),
             BelongsTo::make(__('User'), 'user', User::class),
             BelongsTo::make(__('Good'), 'good', Good::class),
-            Text::make(__('Type'), 'type')->maxlength(10),
+            Select::make(__('Type'), 'type')->options(EnumsInventoryHistory::array())
+                ->rules('required')->required()->displayUsingLabels(),
             Number::make(__('Quantity'), 'quantity')->displayUsing(function ($value) {
                 return number_format($value);
-            }),
-            Currency::make(__('Price'), 'price'),
+            })->rules('required')->required(),
+            Currency::make(__('Price'), 'price')->rules('required')->required(),
             Number::make(__('After Quantity'), 'after_quantity')->displayUsing(function ($value) {
                 return number_format($value);
-            }),
-            Text::make(__('Model'), 'model')->maxlength(100),
-            Number::make(__('Attribute'), 'attribute'),
+            })->rules('required')->required(),
+            Select::make(__('Model'), 'model')->options(InventoryHistoryModel::array())
+                ->rules('required')->required()->displayUsingLabels(),
+            Number::make(__('Attribute'), 'attribute')->rules('required')->required(),
             Number::make(__('Cancel Id'), 'cancel_id'),
-            Boolean::make(__('Is Success'), 'is_success'),
+            Boolean::make(__('Is Success'), 'is_success')->rules('required')->required(),
         ];
     }
 

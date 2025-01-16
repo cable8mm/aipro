@@ -52,7 +52,7 @@ class Box extends Resource
             Number::make(__('Inventory'), 'inventory')->displayUsing(function ($value) {
                 return number_format($value);
             }),
-            Textarea::make(__('Memo'), 'memo')->maxlength(255)->hideFromIndex(),
+            Textarea::make(__('Memo'), 'memo')->maxlength(255)->alwaysShow(),
         ];
     }
 

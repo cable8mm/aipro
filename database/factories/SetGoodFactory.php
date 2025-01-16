@@ -21,13 +21,13 @@ class SetGoodFactory extends Factory
 
         return [
             'user_id' => fake()->randomNumber(1) + 1,
-            'master_code' => 'PM'.fake()->randomNumber(3, true),
-            'featured_good_list' => fake()->randomElement(['set1x1ZZ3x1', 'set3x3ZZ7x3', 'set6x4ZZ8x4']),
+            'master_code' => fake()->randomElement(['SET1x1ZZ3x1', 'SET3x3ZZ7x3', 'SET6x4ZZ8x4']),
+            'featured_good_list' => fake()->randomNumber(1) + 1,
             'name' => fake()->productName(),
             'goods_price' => fake()->randomNumber(5),
             'last_cost_price' => fake()->randomNumber(5),
             'zero_margin_price' => fake()->randomNumber(5),
-            'is_shutdowned' => fake()->boolean(),
+            'is_shutdown' => fake()->boolean(),
         ];
     }
 }

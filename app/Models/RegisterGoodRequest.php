@@ -23,7 +23,12 @@ class RegisterGoodRequest extends Model
         ];
     }
 
-    public function user(): BelongsTo
+    public function requester(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'requester_id');
+    }
+
+    public function worker(): BelongsTo
     {
         return $this->belongsTo(User::class, 'worker_id');
     }
