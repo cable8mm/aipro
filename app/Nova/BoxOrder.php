@@ -48,6 +48,8 @@ class BoxOrder extends Resource
     {
         return [
             ID::make()->sortable(),
+            Select::make(__('Status'), 'status')
+                ->options(PlacingOrder::array())->displayUsingLabels()->filterable(),
             Hidden::make('User', 'user_id')->default(function ($request) {
                 return $request->user()->id;
             }),
@@ -63,9 +65,6 @@ class BoxOrder extends Resource
             DateTime::make(__('Sent At'), 'sent_at')->nullable()->exceptOnForms(),
             DateTime::make(__('Confirmed At'), 'confirmed_at')->nullable()->exceptOnForms(),
             DateTime::make(__('Warehoused At'), 'warehoused_at')->nullable()->exceptOnForms(),
-            Select::make(__('Status'), 'status')
-                ->options(PlacingOrder::array())->displayUsingLabels()->filterable(),
-
             Textarea::make(__('Memo'), 'memo')->alwaysShow(),
         ];
     }
