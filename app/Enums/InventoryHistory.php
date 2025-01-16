@@ -14,7 +14,7 @@ enum InventoryHistory: string
     case SHIPPING_CANCELED = 'shipping_canceled';
     case CANCELED = 'canceled';
 
-    public function name(): string
+    public function value(): string
     {
         return match ($this) {
             self::WAREHOUSING => '입고',

@@ -172,16 +172,16 @@
         },
         {
             "name": "cable8mm/enum-getter",
-            "version": "1.0.0",
+            "version": "v1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cable8mm/enum-getter.git",
-                "reference": "2fe768aff448f39e2c1ba6d442ddae4675b2e372"
+                "reference": "ebb874b9746c026f1fa4469894924cfd84727e47"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cable8mm/enum-getter/zipball/2fe768aff448f39e2c1ba6d442ddae4675b2e372",
-                "reference": "2fe768aff448f39e2c1ba6d442ddae4675b2e372",
+                "url": "https://api.github.com/repos/cable8mm/enum-getter/zipball/ebb874b9746c026f1fa4469894924cfd84727e47",
+                "reference": "ebb874b9746c026f1fa4469894924cfd84727e47",
                 "shasum": ""
             },
             "require": {
@@ -218,9 +218,9 @@
             ],
             "support": {
                 "issues": "https://github.com/cable8mm/enum-getter/issues",
-                "source": "https://github.com/cable8mm/enum-getter/tree/v1.0.0"
+                "source": "https://github.com/cable8mm/enum-getter/tree/v1.3.0"
             },
-            "time": "2025-01-12T17:52:31+00:00"
+            "time": "2025-01-16T17:09:30+00:00"
         },
         {
             "name": "carbonphp/carbon-doctrine-types",

@@ -15,7 +15,7 @@ enum GoodColor: string
     case BLACK = 'black';
     case ORANGE = 'orange';
 
-    public function name(): string
+    public function value(): string
     {
         return match ($this) {
             self::BLUE => '파랑',

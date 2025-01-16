@@ -5,9 +5,11 @@ namespace App\Nova;
 use App\Enums\Status as EnumsStatus;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
+use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\File;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Select;
+use Laravel\Nova\Fields\Stack;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -56,6 +58,10 @@ class RegisterGoodRequest extends Resource
             Boolean::make(__('Has Supplier Monitoring Price'), 'has_supplier_monitoring_price')->default(false),
             Select::make(__('Status'), 'status')->options(EnumsStatus::array())->displayUsingLabels(),
             Textarea::make(__('Memo'), 'memo')->alwaysShow(),
+            Stack::make(__('Created At').' & '.__('Updated At'), [
+                DateTime::make(__('Created At'), 'created_at'),
+                DateTime::make(__('Updated At'), 'updated_at'),
+            ]),
         ];
     }
 

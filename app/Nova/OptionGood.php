@@ -4,9 +4,11 @@ namespace App\Nova;
 
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
+use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
+use Laravel\Nova\Fields\Stack;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
@@ -49,6 +51,10 @@ class OptionGood extends Resource
             Text::make(__('Name'), 'name')->rules('required')->required()->maxlength(130),
             Number::make(__('Option Count'), 'option_count')->exceptOnForms(),
             Boolean::make(__('Is Active'), 'is_active'),
+            Stack::make(__('Created At').' & '.__('Updated At'), [
+                DateTime::make(__('Created At'), 'created_at'),
+                DateTime::make(__('Updated At'), 'updated_at'),
+            ]),
 
             HasMany::make(__('Option Good Options'), 'optionGoodOptions', OptionGoodOption::class),
         ];

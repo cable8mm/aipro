@@ -47,8 +47,6 @@ class ChannelGoodFactory extends Factory
             'gift_price' => fake()->randomNumber(),
             'gift_sale_status' => fake()->text(100),
             'gift_inventory' => fake()->randomNumber(),
-            'created_at' => fake()->unixTime(),
-            'updated_at' => fake()->unixTime(),
         ];
     }
 }

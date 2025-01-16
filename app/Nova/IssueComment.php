@@ -2,8 +2,10 @@
 
 namespace App\Nova;
 
+use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
+use Laravel\Nova\Fields\Stack;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
@@ -44,6 +46,10 @@ class IssueComment extends Resource
             Number::make('Ct Issue Id'),
             Number::make('Cms Maestro Id'),
             Text::make('Comment'),
+            Stack::make(__('Created At').' & '.__('Updated At'), [
+                DateTime::make(__('Created At'), 'created_at'),
+                DateTime::make(__('Updated At'), 'updated_at'),
+            ]),
         ];
     }
 

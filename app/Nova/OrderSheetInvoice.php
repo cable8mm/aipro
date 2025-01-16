@@ -4,12 +4,14 @@ namespace App\Nova;
 
 use App\Enums\Status;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\File;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\Hidden;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
+use Laravel\Nova\Fields\Stack;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
@@ -66,6 +68,10 @@ class OrderSheetInvoice extends Resource
             File::make(__('Invoice Filepath'), 'invoice_filepath'),
             Select::make(__('Status'), 'status')
                 ->options(Status::array())->displayUsingLabels()->filterable(),
+            Stack::make(__('Created At').' & '.__('Updated At'), [
+                DateTime::make(__('Created At'), 'created_at'),
+                DateTime::make(__('Updated At'), 'updated_at'),
+            ]),
 
             HasMany::make(__('OrderShipments'), 'orderShipments', OrderShipment::class),
 

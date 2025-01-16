@@ -42,7 +42,7 @@ class SupplierFactory extends Factory
             'contact_name' => fake('ko_KR')->name(),
             'contact_tel' => fake('ko_KR')->localAreaPhoneNumber(),
             'contact_cel' => fake('ko_KR')->cellPhoneNumber(),
-            'order_method' => fake()->randomElements(OrderMethod::array(), fake()->numberBetween(0, count(OrderMethod::array()) - 1)),
+            'order_method' => fake()->randomElements(OrderMethod::names(), fake()->numberBetween(0, count(OrderMethod::names()) - 1)),
             'balance_criteria' => fake()->randomElement(self::$balanceCriteria),
             'min_order_price' => fake()->randomElement([0, 100000, 200000, 500000, 1000000, 2000000]),
             'additional_information' => fake()->paragraph(),

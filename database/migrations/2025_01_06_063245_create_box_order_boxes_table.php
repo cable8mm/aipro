@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\PlacingOrder;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,17 +14,17 @@ return new class extends Migration
     {
         Schema::create('box_order_boxes', function (Blueprint $table) {
             $table->id();
-            $table->integer('ct_box_order_id')->nullable();
-            $table->integer('cms_maestro_id')->nullable();
-            $table->integer('ct_box_supplier_id')->nullable();
-            $table->unsignedInteger('ct_box_id')->nullable();
-            $table->unsignedInteger('warehouse_manager_id')->nullable();
-            $table->unsignedInteger('order_count')->nullable();
-            $table->unsignedInteger('order_price')->nullable();
+            $table->foreignId('box_order_id');
+            $table->foreignId('user_id');
+            $table->foreignId('box_supplier_id');
+            $table->foreignId('box_id');
+            $table->foreignId('warehouse_manager_id');
+            $table->unsignedInteger('order_count');
+            $table->unsignedInteger('order_price');
             $table->integer('cost_count')->nullable();
             $table->integer('cost_price')->nullable();
-            $table->dateTime('warehoused')->nullable();
-            $table->string('status', 100)->nullable()->default('미입고');
+            $table->dateTime('warehoused_at')->nullable();
+            $table->string('status', 100)->nullable()->default(PlacingOrder::WAITING);
             $table->text('memo')->nullable();
             $table->timestamps();
         });

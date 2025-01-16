@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\PlacingOrder;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,20 +18,18 @@ class BoxOrderBoxFactory extends Factory
     public function definition(): array
     {
         return [
-            'ct_box_order_id' => fake()->randomNumber(),
-            'cms_maestro_id' => fake()->randomNumber(),
-            'ct_box_supplier_id' => fake()->randomNumber(),
-            'ct_box_id' => fake()->randomNumber(),
-            'warehouse_manager_id' => fake()->randomNumber(),
-            'order_count' => fake()->randomNumber(),
-            'order_price' => fake()->randomNumber(),
-            'cost_count' => fake()->randomNumber(),
-            'cost_price' => fake()->randomNumber(),
-            'warehoused' => fake()->dateTime(),
-            'status' => fake()->text(100),
+            'box_order_id' => fake()->randomNumber(1) + 1,
+            'user_id' => fake()->randomNumber(1) + 1,
+            'box_supplier_id' => fake()->randomNumber(1) + 1,
+            'box_id' => fake()->randomNumber(1) + 1,
+            'warehouse_manager_id' => fake()->randomNumber(1) + 1,
+            'order_count' => fake()->randomNumber(2),
+            'order_price' => fake()->randomNumber(5),
+            'cost_count' => fake()->randomNumber(1),
+            'cost_price' => fake()->randomNumber(5),
+            'warehoused_at' => fake()->dateTime(),
+            'status' => fake()->randomElement(PlacingOrder::names()),
             'memo' => fake()->paragraph(),
-            'created_at' => fake()->unixTime(),
-            'updated_at' => fake()->unixTime(),
         ];
     }
 }

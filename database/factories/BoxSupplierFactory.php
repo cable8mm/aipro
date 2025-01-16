@@ -23,7 +23,7 @@ class BoxSupplierFactory extends Factory
             'contact_name' => fake('ko_KR')->name(),
             'contact_tel' => fake('ko_KR')->localAreaPhoneNumber(),
             'contact_cel' => fake('ko_KR')->cellPhoneNumber(),
-            'order_method' => fake()->randomElement(OrderMethod::array()),
+            'order_method' => fake()->randomElement(OrderMethod::names()),
             'min_order_price' => fake()->randomElement([0, 100000, 200000, 500000, 1000000, 2000000]),
             'additional_information' => fake('ko_KR')->paragraph(),
         ];

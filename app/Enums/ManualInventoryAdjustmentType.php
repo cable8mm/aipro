@@ -16,7 +16,7 @@ enum ManualInventoryAdjustmentType: string
     case DISPOSAL = 'disposal';
     case MISTAKE = 'mistake';
 
-    public function name(): string
+    public function value(): string
     {
         return match ($this) {
             self::CLIENT_RETURN => '고객반품',

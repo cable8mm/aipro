@@ -21,8 +21,6 @@ class PriceCoefficientFactory extends Factory
             'start_price' => fake()->randomNumber(),
             'end_price' => fake()->randomNumber(),
             'coefficient' => fake()->randomFloat(3, 0, 9),
-            'created_at' => fake()->unixTime(),
-            'updated_at' => fake()->unixTime(),
         ];
     }
 }

@@ -14,7 +14,7 @@ enum OrderMethod: string
     case KAKAOTALK = 'kakaotalk';
     case ORDER_SYSTEM = 'order_system';
 
-    public function name(): string
+    public function value(): string
     {
         return match ($this) {
             self::SMS => '문자 메시지',

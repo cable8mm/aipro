@@ -21,11 +21,11 @@ class InventoryHistoryFactory extends Factory
         return [
             'user_id' => fake()->randomNumber(1) + 1,
             'good_id' => fake()->randomNumber(1) + 1,
-            'type' => fake()->randomElement(InventoryHistory::array()),
+            'type' => fake()->randomElement(InventoryHistory::names()),
             'quantity' => (fake()->boolean() ? 1 : -1) * (fake()->randomNumber(2) + 1),
             'price' => fake()->randomNumber(),
             'after_quantity' => fake()->randomNumber(),
-            'model' => fake()->randomElement(InventoryHistoryModel::array()),
+            'model' => fake()->randomElement(InventoryHistoryModel::names()),
             'attribute' => fake()->randomNumber(3),
             'cancel_id' => fake()->randomNumber(2),
             'is_success' => fake()->boolean(),

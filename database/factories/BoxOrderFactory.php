@@ -30,7 +30,7 @@ class BoxOrderFactory extends Factory
             'confirmed_at' => fake()->dateTime(),
             'predict_warehoused_at' => fake()->dateTime(),
             'warehoused_at' => fake()->dateTime(),
-            'status' => fake()->randomElement(PlacingOrder::array()),
+            'status' => fake()->randomElement(PlacingOrder::names()),
             'memo' => fake()->paragraph(),
         ];
     }

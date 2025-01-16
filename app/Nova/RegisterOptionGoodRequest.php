@@ -4,9 +4,11 @@ namespace App\Nova;
 
 use App\Enums\Status;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\File;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Select;
+use Laravel\Nova\Fields\Stack;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -52,6 +54,10 @@ class RegisterOptionGoodRequest extends Resource
             File::make(__('Respond File Url'), 'respond_file_url'),
             Select::make(__('Status'), 'status')->rules('required')->required()->options(Status::array())->displayUsingLabels(),
             Textarea::make(__('Memo'), 'memo')->alwaysShow(),
+            Stack::make(__('Created At').' & '.__('Updated At'), [
+                DateTime::make(__('Created At'), 'created_at'),
+                DateTime::make(__('Updated At'), 'updated_at'),
+            ]),
         ];
     }
 

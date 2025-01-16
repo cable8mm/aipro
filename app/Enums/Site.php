@@ -26,7 +26,7 @@ enum Site: string
     case INTERPARK = '인터파크-오픈마켓';
     case GSESHOP = 'GS이숍';
 
-    public function name(): string
+    public function value(): string
     {
         return match ($this) {
             self::STREET11 => '11번가',
