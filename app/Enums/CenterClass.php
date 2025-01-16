@@ -11,7 +11,7 @@ enum CenterClass: string
     case M = 'M';
     case O = 'O';
 
-    public function name(): string
+    public function value(): string
     {
         return match ($this) {
             self::M => '센터 M등급',

@@ -14,7 +14,7 @@ enum PlacingOrderGoodStatus: string
     case BEING_IN_STOCK = 'being_in_stock';
     case CONFIRMING = 'confirming';
 
-    public function name(): string
+    public function value(): string
     {
         return match ($this) {
             self::NOT_IN_STOCK => '미입고',

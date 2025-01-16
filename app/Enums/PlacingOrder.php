@@ -14,7 +14,7 @@ enum PlacingOrder: string
     case WAREHOUSED = 'warehoused';
     case DELETE = 'delete';
 
-    public function name(): string
+    public function value(): string
     {
         return match ($this) {
             self::WRITING => '발주서작성중',

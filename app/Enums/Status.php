@@ -13,7 +13,7 @@ enum Status: string
     case FAILED = 'failed';
     case SUCCESS = 'success';
 
-    public function name(): string
+    public function value(): string
     {
         return match ($this) {
             self::WAITING => '대기',
@@ -25,11 +25,11 @@ enum Status: string
 
     public static function loadingWhen(): array
     {
-        return [self::WAITING->name(), self::RUNNING->name()];
+        return [self::WAITING->value(), self::RUNNING->value()];
     }
 
     public static function failedWhen(): array
     {
-        return [self::FAILED->name()];
+        return [self::FAILED->value()];
     }
 }

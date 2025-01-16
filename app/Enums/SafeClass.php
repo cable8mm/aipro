@@ -13,7 +13,7 @@ enum SafeClass: string
     case S3 = '3';
     case SX = 'X';
 
-    public function name(): string
+    public function value(): string
     {
         return match ($this) {
             self::S1 => '1등급',

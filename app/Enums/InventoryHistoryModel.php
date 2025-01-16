@@ -14,7 +14,7 @@ enum InventoryHistoryModel: string
     case PLACING_ORDER_GOOD = 'PlacingOrderGood';
     case ORDER_SHIPMENT = 'OrderShipment';
 
-    public function name(): string
+    public function value(): string
     {
         return match ($this) {
             self::GOOD_MANUAL_WAREHOUSING => 'GoodManualWarehousing',
