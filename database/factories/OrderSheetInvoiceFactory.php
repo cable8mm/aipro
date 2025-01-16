@@ -27,7 +27,7 @@ class OrderSheetInvoiceFactory extends Factory
             'order_good_count' => fake()->randomNumber(),
             'invoice_filepath' => fake()->word().'.'.fake()->fileExtension(),
             'excel_json' => fake()->words(10),
-            'status' => fake()->randomElement(Status::array()),
+            'status' => fake()->randomElement(Status::names()),
         ];
     }
 }

@@ -21,8 +21,6 @@ class GoodsBarFactory extends Factory
             'goods_bar' => fake()->text(190),
             'is_my_shop_sale' => fake()->boolean(),
             'is_other_shop_sale' => fake()->boolean(),
-            'created_at' => fake()->unixTime(),
-            'updated_at' => fake()->unixTime(),
         ];
     }
 }

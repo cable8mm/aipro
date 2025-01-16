@@ -31,7 +31,7 @@ class PlacingOrderGoodFactory extends Factory
             'cost_price' => fake()->randomNumber(5),
             'is_promotion' => fake()->boolean(),
             'warehoused_at' => fake()->dateTime(),
-            'status' => fake()->randomElement(Status::array()),
+            'status' => fake()->randomElement(Status::names()),
             'memo' => fake()->paragraph(),
             'ordered_at' => fake()->dateTime(),
         ];

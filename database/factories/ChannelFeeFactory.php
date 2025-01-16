@@ -19,8 +19,6 @@ class ChannelFeeFactory extends Factory
         return [
             'channel' => fake()->text(255),
             'fee_rate' => fake()->randomFloat(2, 0, 999),
-            'created_at' => fake()->unixTime(),
-            'updated_at' => fake()->unixTime(),
         ];
     }
 }

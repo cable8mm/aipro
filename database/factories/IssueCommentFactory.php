@@ -20,8 +20,6 @@ class IssueCommentFactory extends Factory
             'ct_issue_id' => fake()->randomNumber(),
             'cms_maestro_id' => fake()->randomNumber(),
             'comment' => fake()->paragraph(),
-            'created_at' => fake()->unixTime(),
-            'updated_at' => fake()->unixTime(),
         ];
     }
 }

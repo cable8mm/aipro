@@ -24,8 +24,6 @@ class IssueFactory extends Factory
             'status' => fake()->text(255),
             'worker_id' => fake()->randomNumber(),
             'memo' => fake()->paragraph(),
-            'created_at' => fake()->unixTime(),
-            'updated_at' => fake()->unixTime(),
         ];
     }
 }

@@ -22,7 +22,7 @@ class RegisterOptionGoodRequestFactory extends Factory
             'worker_id' => fake()->randomNumber(1) + 1,
             'title' => fake()->sentence(),
             'request_file_url' => fake()->word().'.xlsx',
-            'status' => fake()->randomElement(Status::array()),
+            'status' => fake()->randomElement(Status::names()),
             'respond_file_url' => fake()->word().'.xlsx',
             'memo' => fake()->paragraph(),
         ];

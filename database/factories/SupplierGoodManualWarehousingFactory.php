@@ -21,8 +21,6 @@ class SupplierGoodManualWarehousingFactory extends Factory
             'cms_maestro_id' => fake()->randomNumber(),
             'manual_add_inventory_count' => fake()->randomNumber(),
             'memo' => fake()->paragraph(),
-            'created_at' => fake()->unixTime(),
-            'updated_at' => fake()->unixTime(),
         ];
     }
 }
