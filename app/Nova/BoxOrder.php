@@ -2,12 +2,14 @@
 
 namespace App\Nova;
 
+use App\Enums\PlacingOrder;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\DateTime;
+use Laravel\Nova\Fields\Hidden;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
-use Laravel\Nova\Fields\Status;
+use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -46,22 +48,24 @@ class BoxOrder extends Resource
     {
         return [
             ID::make()->sortable(),
-            BelongsTo::make(__('User'), 'user', User::class),
+            Hidden::make('User', 'user_id')->default(function ($request) {
+                return $request->user()->id;
+            }),
             BelongsTo::make(__('Warehouse Manager'), 'warehouseManager', User::class),
             BelongsTo::make(__('Box Supplier'), 'boxSupplier', BoxSupplier::class),
-            Text::make(__('Title'), 'title')->maxlength(190),
+            Text::make(__('Title'), 'title')->rules('required')->required()->maxlength(190),
             Number::make(__('Total Box Count'), 'total_box_count')->displayUsing(function ($value) {
                 return number_format($value);
             }),
             Currency::make(__('Total Order Price'), 'total_order_price'),
-            DateTime::make(__('Ordered At'), 'ordered_at'),
-            DateTime::make(__('Sent At'), 'sent_at'),
-            DateTime::make(__('Confirmed At'), 'confirmed_at'),
-            DateTime::make(__('Predict Warehoused At'), 'predict_warehoused_at'),
-            DateTime::make(__('Warehoused At'), 'warehoused_at'),
-            Status::make(__('Status'), 'status')
-                ->loadingWhen(['미처리'])
-                ->failedWhen([]),
+            DateTime::make(__('Ordered At'), 'ordered_at')->nullable()->filterable(),
+            DateTime::make(__('Predict Warehoused At'), 'predict_warehoused_at')->nullable()->filterable(),
+            DateTime::make(__('Sent At'), 'sent_at')->nullable()->exceptOnForms(),
+            DateTime::make(__('Confirmed At'), 'confirmed_at')->nullable()->exceptOnForms(),
+            DateTime::make(__('Warehoused At'), 'warehoused_at')->nullable()->exceptOnForms(),
+            Select::make(__('Status'), 'status')
+                ->options(PlacingOrder::array())->displayUsingLabels()->filterable(),
+
             Textarea::make(__('Memo'), 'memo')->alwaysShow(),
         ];
     }
@@ -83,7 +87,9 @@ class BoxOrder extends Resource
      */
     public function filters(NovaRequest $request)
     {
-        return [];
+        return [
+            new Filters\PlacingOrderFinished,
+        ];
     }
 
     /**

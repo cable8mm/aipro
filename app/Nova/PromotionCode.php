@@ -23,7 +23,7 @@ class PromotionCode extends Resource
      *
      * @var string
      */
-    public static $title = 'id';
+    public static $title = 'master_code';
 
     /**
      * The columns that should be searched.
@@ -44,10 +44,10 @@ class PromotionCode extends Resource
         return [
             ID::make()->sortable(),
             BelongsTo::make(__('User'), 'user', User::class),
-            Text::make(__('Master Code'), 'master_code')->maxlength(100),
+            Text::make(__('Master Code'), 'master_code')->rules('required')->required()->maxlength(100),
+            DateTime::make(__('Started At'), 'started_at')->nullable(),
+            DateTime::make(__('Finished At'), 'finished_at')->nullable(),
             Textarea::make(__('Memo'), 'memo')->maxlength(190)->alwaysShow(),
-            DateTime::make(__('Started At'), 'started_at'),
-            DateTime::make(__('Finished At'), 'finished_at'),
         ];
     }
 

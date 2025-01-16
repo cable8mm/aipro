@@ -24,7 +24,7 @@ class OptionGood extends Resource
      *
      * @var string
      */
-    public static $title = 'id';
+    public static $title = 'name';
 
     /**
      * The columns that should be searched.
@@ -45,9 +45,9 @@ class OptionGood extends Resource
         return [
             ID::make()->sortable(),
             BelongsTo::make(__('User'), 'user', User::class),
-            Text::make(__('Master Code'), 'master_code')->maxlength(130),
-            Text::make(__('Name'), 'name')->maxlength(130),
-            Number::make(__('Option Count'), 'option_count'),
+            Text::make(__('Master Code'), 'master_code')->rules('required')->required()->maxlength(130),
+            Text::make(__('Name'), 'name')->rules('required')->required()->maxlength(130),
+            Number::make(__('Option Count'), 'option_count')->exceptOnForms(),
             Boolean::make(__('Is Active'), 'is_active'),
 
             HasMany::make(__('Option Good Options'), 'optionGoodOptions', OptionGoodOption::class),

@@ -2,12 +2,13 @@
 
 namespace App\Nova;
 
+use App\Enums\Status;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\File;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Status;
+use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
-use Laravel\Nova\Fields\URL;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class RegisterOptionGoodRequest extends Resource
@@ -46,12 +47,10 @@ class RegisterOptionGoodRequest extends Resource
             ID::make()->sortable(),
             BelongsTo::make(__('Requester'), 'requester', User::class),
             BelongsTo::make(__('Worker'), 'worker', User::class),
-            Text::make(__('Title'), 'title')->maxlength(190),
-            URL::make(__('Request File Url'), 'request_file_url')->maxlength(190),
-            URL::make(__('Respond File Url'), 'respond_file_url')->maxlength(190),
-            Status::make(__('Status'), 'status')
-                ->loadingWhen(['waiting', 'running'])
-                ->failedWhen(['failed']),
+            Text::make(__('Title'), 'title')->rules('required')->required()->maxlength(190),
+            File::make(__('Request File Url'), 'request_file_url'),
+            File::make(__('Respond File Url'), 'respond_file_url'),
+            Select::make(__('Status'), 'status')->rules('required')->required()->options(Status::array())->displayUsingLabels(),
             Textarea::make(__('Memo'), 'memo')->alwaysShow(),
         ];
     }

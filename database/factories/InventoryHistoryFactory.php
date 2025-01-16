@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Enums\InventoryHistory;
+use App\Enums\InventoryHistoryModel;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,11 +21,11 @@ class InventoryHistoryFactory extends Factory
         return [
             'user_id' => fake()->randomNumber(1) + 1,
             'good_id' => fake()->randomNumber(1) + 1,
-            'type' => fake()->randomElement(['입고', '입고취소', '출고', '출고취소', '취소']),
+            'type' => fake()->randomElement(InventoryHistory::array()),
             'quantity' => (fake()->boolean() ? 1 : -1) * (fake()->randomNumber(2) + 1),
             'price' => fake()->randomNumber(),
             'after_quantity' => fake()->randomNumber(),
-            'model' => fake()->randomElement(['GoodManualWarehousing', 'Order', 'OrderGood', 'PlacingOrderGood', 'OrderShipment']),
+            'model' => fake()->randomElement(InventoryHistoryModel::array()),
             'attribute' => fake()->randomNumber(3),
             'cancel_id' => fake()->randomNumber(2),
             'is_success' => fake()->boolean(),

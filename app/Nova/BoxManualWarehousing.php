@@ -2,11 +2,14 @@
 
 namespace App\Nova;
 
+use App\Enums\ManualInventoryAdjustmentType;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\DateTime;
+use Laravel\Nova\Fields\Hidden;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
-use Laravel\Nova\Fields\Status;
-use Laravel\Nova\Fields\Textarea;
+use Laravel\Nova\Fields\Select;
+use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class BoxManualWarehousing extends Resource
@@ -32,6 +35,9 @@ class BoxManualWarehousing extends Resource
      */
     public static $search = [
         'id',
+        'Box.name',
+        'Box.code',
+        'memo',
     ];
 
     /**
@@ -43,13 +49,19 @@ class BoxManualWarehousing extends Resource
     {
         return [
             ID::make()->sortable(),
-            BelongsTo::make(__('Box'), 'box', Box::class),
-            BelongsTo::make(__('User'), 'user', User::class),
-            Status::make(__('Type'), 'type')->loadingWhen(['미입력'])->failedWhen([]),
-            Number::make(__('Manual Add Inventory Count'), 'manual_add_inventory_count')->displayUsing(function ($value) {
-                return number_format($value);
+            Hidden::make('User', 'user_id')->default(function ($request) {
+                return $request->user()->id;
             }),
-            Textarea::make(__('Memo'), 'memo')->alwaysShow(),
+            BelongsTo::make(__('User'), 'user', User::class)->exceptOnForms(),
+            Text::make(__('코드'), 'Box.code')->onlyOnIndex(),
+            BelongsTo::make(__('Box'), 'box', Box::class),
+            Select::make(__('Type'), 'type')->options(ManualInventoryAdjustmentType::array())->displayUsingLabels()->filterable(),
+            Number::make(__('Manual Add Inventory Count'), 'manual_add_inventory_count')
+                ->rules('required', 'notIn:0')->displayUsing(function ($value) {
+                    return number_format($value);
+                })->default(0),
+            Text::make(__('Memo'), 'memo'),
+            DateTime::make(__('Created At'), 'created_at')->onlyOnIndex()->filterable(),
         ];
     }
 

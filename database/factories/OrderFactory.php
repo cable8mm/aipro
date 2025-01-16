@@ -17,14 +17,10 @@ class OrderFactory extends Factory
     public function definition(): array
     {
         return [
-            'order_sheet_invoice_id' => fake()->randomNumber(),
-            'type' => fake()->text(50),
-            'is_all_good_matched' => fake()->boolean(),
-            'has_center_class_j' => fake()->boolean(),
+            'order_sheet_invoice_id' => fake()->randomNumber(1) + 1,
+            'type' => fake()->randomElement(['피킹존 A', '피킹존 B', '피킹존 C']),
             'order_good_count' => fake()->randomNumber(),
             'printed_count' => fake()->randomNumber(),
-            'created_at' => fake()->unixTime(),
-            'updated_at' => fake()->unixTime(),
         ];
     }
 }

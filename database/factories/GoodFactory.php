@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\GoodColor;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -24,7 +25,7 @@ class GoodFactory extends Factory
             'supplier_id' => fake()->randomNumber(1) + 1,
             'supplier_good_id' => fake()->randomNumber(1) + 1,
             'box_id' => fake()->randomNumber(1) + 1,
-            'list_image' => fake()->word().'.xlsx',
+            'list_image' => 'placeholder_list_image.png',
             'master_code' => 'PM'.fake()->randomNumber(3, true),
             'playauto_category_id' => fake()->randomElement([10020400, 10030200, 10060600, 10061000]),
             'name' => fake()->productName(),
@@ -32,8 +33,7 @@ class GoodFactory extends Factory
             'option' => fake()->randomElement([null, 'Large', 'Small', 'Medium']),
             'inventory' => fake()->randomNumber(3),
             'supplier_out_of_stock_count' => fake()->randomNumber(),
-            'manual_add_inventory_memo' => fake()->paragraph(),
-            'safe_inventory' => fake()->randomNumber(),
+            'safe_inventory' => fake()->randomNumber(1),
             'safe_class' => fake()->randomElement(['1', '2', '3', '4', 'X']),
             'center_class' => fake()->randomElement(['M', 'O']),
             'category' => fake()->randomElement(['꽃게|암컷', '꽃게|숫컷']),
@@ -42,7 +42,7 @@ class GoodFactory extends Factory
             'cost_price' => fake()->randomNumber(5),
             'last_cost_price' => fake()->randomNumber(5),
             'suggested_selling_price' => fake()->randomNumber(5),
-            'suggestioned_retail_price' => fake()->randomNumber(5),
+            'suggested_retail_price' => fake()->randomNumber(5),
             'supplier_monitoring_price' => fake()->randomNumber(5),
             'supplier_monitoring_status' => fake()->text(10),
             'supplier_monitoring_interruption' => fake()->boolean(),
@@ -50,12 +50,10 @@ class GoodFactory extends Factory
             'spec' => fake()->randomElement(['5g*10p', '15mm']),
             'order_rule' => fake()->randomElement(['12', '24']),
             'barcode' => fake()->ean13(),
-            'generated_barcode' => fake()->text(255),
             'picking_box_number' => fake()->bothify('??-##-###'),
-            'goods_division_color' => fake()->randomElement(['빨강', '파랑', '노랑']),
+            'goods_division_color' => fake()->randomElement(GoodColor::array()),
             'ship_quantity' => fake()->randomElement([1, 2, 4, 8, 16]),
             'memo' => fake()->paragraph(),
-            'memo_for_center' => fake()->randomElement([null, '공급사 단종_1220', '공급사 품절_1212확인']),
             'print_classification' => fake()->text(190),
             'naver_category' => '5'.fake()->randomNumber(7),
             'naver_productid' => fake()->randomNumber(9),
@@ -64,7 +62,8 @@ class GoodFactory extends Factory
             'internet_lowest_price' => fake()->randomNumber(),
             'zero_margin_price' => fake()->randomNumber(),
             'is_supplier_out_of_stock' => fake()->boolean(),
-            'is_shutdowned' => fake()->boolean(),
+            'can_be_shipped' => fake()->boolean(),
+            'is_shutdown' => fake()->boolean(),
         ];
     }
 }

@@ -2,13 +2,16 @@
 
 namespace App\Nova;
 
+use App\Enums\PlacingOrderGoodStatus;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\Hidden;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
-use Laravel\Nova\Fields\Status;
+use Laravel\Nova\Fields\Select;
+use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
@@ -35,6 +38,9 @@ class PlacingOrderGood extends Resource
      */
     public static $search = [
         'id',
+        'Good.master_code',
+        'Good.name',
+        'Good.supplier.name',
     ];
 
     /**
@@ -47,24 +53,35 @@ class PlacingOrderGood extends Resource
         return [
             ID::make()->sortable(),
             BelongsTo::make(__('Placing Order'), 'placingOrder', PlacingOrder::class),
-            Hidden::make(__('User'), 'user')->default(function ($request) {
+            Hidden::make(__('User'), 'user_id')->default(function ($request) {
                 return $request->user()->id;
             }),
+            Text::make(__('Master Code'), 'Good.master_code'),
+            Text::make(__('Safe Class'), 'Good.safe_class'),
+            Text::make(__('Center Class'), 'Good.center_class'),
+            Text::make(__('Supplier'), 'Good.supplier.name'),
             BelongsTo::make(__('Good'), 'good', Good::class),
-            BelongsTo::make(__('Warehouse Manager'), 'warehouseManager', User::class),
-            Number::make(__('Order Count'), 'order_count')->displayUsing(function ($value) {
+            Number::make(__('Order Count'), 'order_count')->rules('required')->required()->displayUsing(function ($value) {
                 return number_format($value);
             }),
-            Currency::make(__('Order Price'), 'order_price'),
+            Currency::make('단가', function () {
+                return (int) ($this->order_price / $this->order_count);
+            }),
+            Currency::make(__('Order Price'), 'order_price')->rules('required')->required(),
             Number::make(__('Supplier Confirmed Count'), 'supplier_confirmed_count')->displayUsing(function ($value) {
                 return number_format($value);
             })->exceptOnForms(),
             Currency::make(__('Supplier Confirmed Price'), 'supplier_confirmed_price')->exceptOnForms(),
-            DateTime::make(__('Warehoused At'), 'warehoused_at'),
-            Status::make(__('Status'), 'status')
-                ->loadingWhen(['waiting', 'running'])
-                ->failedWhen(['failed']),
+            Number::make(__('Cost Count'), 'cost_count')->rules('required')->required()->displayUsing(function ($value) {
+                return number_format($value);
+            }),
+            Currency::make(__('Cost Price'), 'cost_price'),
+            Boolean::make(__('Is Promotion')),
+            DateTime::make(__('Warehoused At'), 'warehoused_at')->filterable(),
+            Select::make(__('Status'), 'status')
+                ->options(PlacingOrderGoodStatus::array())->displayUsingLabels(),
             Textarea::make(__('Memo'), 'memo')->alwaysShow(),
+            BelongsTo::make(__('Warehouse Manager'), 'warehouseManager', User::class),
         ];
     }
 

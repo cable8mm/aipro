@@ -11,6 +11,11 @@ class BoxSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\Box::factory()->count(10)->create();
+        for ($i = 1; $i < 11; $i++) {
+            \App\Models\Box::factory(1, [
+                'name' => '센터'.$i.'호',
+                'code' => 'BOX-'.$i,
+            ])->create();
+        }
     }
 }

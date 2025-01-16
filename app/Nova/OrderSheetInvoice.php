@@ -2,12 +2,14 @@
 
 namespace App\Nova;
 
-use App\Enums\Status as EnumsStatus;
+use App\Enums\Status;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\File;
+use Laravel\Nova\Fields\HasMany;
+use Laravel\Nova\Fields\Hidden;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\KeyValue;
 use Laravel\Nova\Fields\Number;
-use Laravel\Nova\Fields\Status;
+use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
@@ -34,6 +36,7 @@ class OrderSheetInvoice extends Resource
      */
     public static $search = [
         'id',
+        'name',
     ];
 
     /**
@@ -45,23 +48,28 @@ class OrderSheetInvoice extends Resource
     {
         return [
             ID::make()->sortable(),
-            BelongsTo::make(__('User'), 'user', User::class),
+            Hidden::make('User', 'user_id')->default(function ($request) {
+                return $request->user()->id;
+            }),
+            BelongsTo::make(__('User'), 'user', User::class)->exceptOnForms(),
             Text::make(__('Name'), 'name')->maxlength(255),
-            Text::make(__('Excel Filepath'), 'excel_filepath')->maxlength(255),
+            File::make(__('Excel Filepath'), 'excel_filepath'),
             Number::make(__('Order Row Count'), 'order_row_count')->displayUsing(function ($value) {
                 return number_format($value);
-            }),
+            })->exceptOnForms(),
             Number::make(__('Order Number Count'), 'order_number_count')->displayUsing(function ($value) {
                 return number_format($value);
-            }),
+            })->exceptOnForms(),
             Number::make(__('Order Good Count'), 'order_good_count')->displayUsing(function ($value) {
                 return number_format($value);
-            }),
-            Text::make(__('Invoice Filepath'), 'invoice_filepath')->maxlength(255),
-            KeyValue::make(__('Excel Json'), 'excel_json'),
-            Status::make(__('Status'), 'status')
-                ->loadingWhen(EnumsStatus::loadingWhen())
-                ->failedWhen(EnumsStatus::failedWhen()),
+            })->exceptOnForms(),
+            File::make(__('Invoice Filepath'), 'invoice_filepath'),
+            Select::make(__('Status'), 'status')
+                ->options(Status::array())->displayUsingLabels()->filterable(),
+
+            HasMany::make(__('OrderShipments'), 'orderShipments', OrderShipment::class),
+
+            HasMany::make(__('Orders'), 'orders', Order::class),
         ];
     }
 

@@ -2,10 +2,10 @@
 
 namespace App\Nova;
 
-use Laravel\Nova\Fields\Boolean;
+use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
-use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Order extends Resource
@@ -22,7 +22,7 @@ class Order extends Resource
      *
      * @var string
      */
-    public static $title = 'Orders';
+    public static $title = 'id';
 
     /**
      * The columns that should be searched.
@@ -42,12 +42,10 @@ class Order extends Resource
     {
         return [
             ID::make()->sortable(),
-            Number::make('Order Sheet Invoice Id'),
-            Text::make('Type')->maxlength(50),
-            Boolean::make('Is All Good Matched'),
-            Boolean::make('Has Center Class J'),
-            Number::make('Order Good Count'),
-            Number::make('Printed Count'),
+            BelongsTo::make(__('Order Sheet Invoice'), 'orderSheetInvoice', OrderSheetInvoice::class),
+            Select::make('Type')->options(['피킹존 A', '피킹존 B', '피킹존 C']),
+            Number::make('Order Good Count')->exceptOnForms(),
+            Number::make('Printed Count')->exceptOnForms(),
         ];
     }
 

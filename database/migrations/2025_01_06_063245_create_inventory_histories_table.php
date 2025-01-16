@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->nullable();
             $table->foreignId('good_id')->nullable();
-            $table->string('type', 10)->nullable();
+            $table->string('type', 20)->nullable();
             $table->integer('quantity')->nullable();
             $table->integer('price')->nullable();
             $table->integer('after_quantity')->nullable();

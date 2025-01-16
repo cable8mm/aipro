@@ -13,10 +13,8 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->integer('order_sheet_invoice_id')->nullable();
+            $table->foreignId('order_sheet_invoice_id')->nullable();
             $table->string('type', 50)->nullable();
-            $table->boolean('is_all_good_matched');
-            $table->boolean('has_center_class_j');
             $table->integer('order_good_count')->nullable();
             $table->integer('printed_count')->nullable()->default('0');
             $table->timestamps();

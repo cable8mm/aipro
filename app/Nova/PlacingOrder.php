@@ -2,7 +2,7 @@
 
 namespace App\Nova;
 
-use App\Enums\Status as EnumsStatus;
+use App\Enums\PlacingOrder as EnumsPlacingOrder;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\DateTime;
@@ -10,7 +10,7 @@ use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\Hidden;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
-use Laravel\Nova\Fields\Status;
+use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -53,7 +53,7 @@ class PlacingOrder extends Resource
                 return $request->user()->id;
             }),
             BelongsTo::make(__('Warehouse Manager'), 'warehouseManager', User::class),
-            BelongsTo::make(__('Supplier'), 'supplier', Supplier::class),
+            BelongsTo::make(__('Supplier'), 'supplier', Supplier::class)->filterable(),
             Text::make(__('Title'), 'title')->required()->rules('required')->maxlength(190),
             Number::make(__('Total Good Count'), 'total_good_count')->exceptOnForms()->displayUsing(function ($value) {
                 return number_format($value);
@@ -63,15 +63,14 @@ class PlacingOrder extends Resource
                 ->displayUsing(fn () => "{$this->order_discount_percent}%")
                 ->exceptOnForms(),
             DateTime::make(__('Ordered At'), 'ordered_at')->nullable()
-                ->displayUsing(fn ($value) => $value ? $value->format('Y-m-d H, g:ia') : ''),
-            DateTime::make(__('Predict Warehoused At'), 'predict_warehoused_at')->nullable(),
+                ->displayUsing(fn ($value) => $value ? $value->format('Y-m-d H, g:ia') : '')->filterable(),
+            DateTime::make(__('Predict Warehoused At'), 'predict_warehoused_at')->nullable()->filterable(),
             DateTime::make(__('Sent At'), 'sent_at')->exceptOnForms(),
             DateTime::make(__('Confirmed At'), 'confirmed_at')->exceptOnForms(),
             DateTime::make(__('Warehoused At'), 'warehoused_at')->exceptOnForms(),
-            Status::make(__('Status'), 'status')
-                ->loadingWhen(EnumsStatus::loadingWhen())
-                ->failedWhen(EnumsStatus::failedWhen()),
             Textarea::make(__('Memo'), 'memo')->alwaysShow(),
+            Select::make(__('Status'), 'status')
+                ->options(EnumsPlacingOrder::array())->displayUsingLabels()->filterable(),
 
             HasMany::make(__('Placing Order Goods'), 'placingOrderGoods', PlacingOrderGood::class),
         ];
@@ -94,7 +93,9 @@ class PlacingOrder extends Resource
      */
     public function filters(NovaRequest $request)
     {
-        return [];
+        return [
+            new Filters\PlacingOrderFinished,
+        ];
     }
 
     /**
@@ -120,5 +121,10 @@ class PlacingOrder extends Resource
     public static function label()
     {
         return __('Placing Order');
+    }
+
+    public function title()
+    {
+        return '#'.$this->id.' 발주서';
     }
 }

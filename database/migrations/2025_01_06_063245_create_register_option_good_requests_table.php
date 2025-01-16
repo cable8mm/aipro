@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('register_option_good_requests', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('requester_id')->nullable();
-            $table->foreignId('worker_id')->nullable();
+            $table->foreignId('requester_id');
+            $table->foreignId('worker_id');
             $table->string('title', 190);
             $table->string('request_file_url', 190)->nullable();
-            $table->string('status', 10)->nullable()->default('등록대기');
             $table->string('respond_file_url', 190)->nullable();
+            $table->string('status', 10)->default('등록대기');
             $table->text('memo')->nullable();
             $table->timestamps();
         });

@@ -2,12 +2,13 @@
 
 namespace App\Nova;
 
+use App\Enums\OrderMethod;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\Email;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Select;
+use Laravel\Nova\Fields\MultiSelect;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -35,6 +36,10 @@ class Supplier extends Resource
      */
     public static $search = [
         'id',
+        'name',
+        'ordered_email',
+        'contact_tel',
+        'contact_cel',
     ];
 
     /**
@@ -46,21 +51,18 @@ class Supplier extends Resource
     {
         return [
             ID::make()->sortable(),
-            Text::make(__('Name'), 'name')->maxlength(255),
-            Email::make(__('Ordered Email'), 'ordered_email')->maxlength(255),
-            Text::make(__('Contact Name'), 'contact_name')->maxlength(255),
-            Text::make(__('Contact Tel'), 'contact_tel')->maxlength(255),
-            Text::make(__('Contact Cel'), 'contact_cel')->maxlength(255),
-            Select::make(__('Order Method'), 'order_method')->options([
-                'sms' => '문자 메시지',
-                'email' => '이메일',
-                'phone' => '전화',
-                'kakaotalk' => '카카오톡',
-                'order_system' => '발주 시스템',
-            ])->displayUsingLabels(),
-            Currency::make(__('Min Order Price'), 'min_order_price'),
-            Textarea::make(__('Additional Information'), 'additional_information')->alwaysShow(),
-            Boolean::make(__('Is Active'), 'is_active')->default(true),
+            Text::make(__('Name'), 'name')->maxlength(50)->rules('required')->required(),
+            Email::make(__('Ordered Email'), 'ordered_email')->maxlength(100),
+            Text::make(__('Contact Name'), 'contact_name')->maxlength(50)->rules('required')->required(),
+            Text::make(__('Contact Tel'), 'contact_tel')->maxlength(40),
+            Text::make(__('Contact Cel'), 'contact_cel')->maxlength(40)->rules('required')->required(),
+            MultiSelect::make(__('Order Method'), 'order_method')->options(OrderMethod::array())
+                ->rules('required')->required()->displayUsingLabels()->filterable(),
+            Text::make(__('Balance Criteria'), 'balance_criteria')->maxlength(100),
+            Currency::make(__('Min Order Price'), 'min_order_price')->default(0)->rules('required')->required(),
+            Textarea::make(__('Additional Information'), 'additional_information')->alwaysShow()->nullable(),
+            Boolean::make(__('Is Parceled'), 'is_parceled')->default(true)->filterable(),
+            Boolean::make(__('Is Active'), 'is_active')->default(true)->filterable(),
 
             HasMany::make(__('Supplier Goods'), 'supplierGoods', SupplierGood::class),
         ];

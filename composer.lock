@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "963bf1a5d2d5e7f8f3cc442669df4fbf",
+    "content-hash": "d7971754f7d44dd866e374ac36b5e4f6",
     "packages": [
         {
             "name": "archtechx/enums",
@@ -169,6 +169,58 @@
                 }
             ],
             "time": "2023-11-26T16:51:39+00:00"
+        },
+        {
+            "name": "cable8mm/enum-getter",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cable8mm/enum-getter.git",
+                "reference": "2fe768aff448f39e2c1ba6d442ddae4675b2e372"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cable8mm/enum-getter/zipball/2fe768aff448f39e2c1ba6d442ddae4675b2e372",
+                "reference": "2fe768aff448f39e2c1ba6d442ddae4675b2e372",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.19",
+                "phpunit/phpunit": "^10.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Cable8mm\\EnumGetter\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sam Lee",
+                    "email": "cable8mm@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "This package make Enums simple for making keys, values and combine array including translate function.",
+            "homepage": "https://github.com/cable8mm/enum-getter",
+            "keywords": [
+                "cable8mm",
+                "enum",
+                "enum-getter",
+                "getter"
+            ],
+            "support": {
+                "issues": "https://github.com/cable8mm/enum-getter/issues",
+                "source": "https://github.com/cable8mm/enum-getter/tree/v1.0.0"
+            },
+            "time": "2025-01-12T17:52:31+00:00"
         },
         {
             "name": "carbonphp/carbon-doctrine-types",
@@ -4888,6 +4940,122 @@
                 }
             ],
             "time": "2024-12-17T11:28:11+00:00"
+        },
+        {
+            "name": "outl1ne/nova-multiselect-filter",
+            "version": "4.0.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/outl1ne/nova-multiselect-filter.git",
+                "reference": "13da4158177dcdfc7c389e99195af2642cf68761"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/outl1ne/nova-multiselect-filter/zipball/13da4158177dcdfc7c389e99195af2642cf68761",
+                "reference": "13da4158177dcdfc7c389e99195af2642cf68761",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/nova": "^4.0",
+                "outl1ne/nova-translations-loader": "^5.0.0",
+                "php": ">=8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Outl1ne\\NovaMultiselectFilter\\FilterServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Outl1ne\\NovaMultiselectFilter\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kaspar Rosin",
+                    "email": "kaspar.rosin@gmail.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Tarvo Reinpalu",
+                    "email": "tarvoreinpalu@gmail.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Outl1ne",
+                    "email": "info@optimistdigital.com",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "Multiselect filter for Laravel Nova.",
+            "keywords": [
+                "filter",
+                "laravel",
+                "laravel-nova",
+                "multiselect",
+                "nova",
+                "select"
+            ],
+            "support": {
+                "issues": "https://github.com/outl1ne/nova-multiselect-filter/issues",
+                "source": "https://github.com/outl1ne/nova-multiselect-filter/tree/4.0.8"
+            },
+            "time": "2023-07-24T08:40:51+00:00"
+        },
+        {
+            "name": "outl1ne/nova-translations-loader",
+            "version": "5.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/outl1ne/nova-translations-loader.git",
+                "reference": "87be6da40633e0cd0b9276cf494f0ca8954eccc0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/outl1ne/nova-translations-loader/zipball/87be6da40633e0cd0b9276cf494f0ca8954eccc0",
+                "reference": "87be6da40633e0cd0b9276cf494f0ca8954eccc0",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/nova": "^4.0|^5.0",
+                "php": ">=8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": [],
+                    "providers": []
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Outl1ne\\NovaTranslationsLoader\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "This Laravel Nova package helps developers load translations into their packages.",
+            "keywords": [
+                "laravel",
+                "nova",
+                "optimistdigital",
+                "outl1ne",
+                "translations"
+            ],
+            "support": {
+                "issues": "https://github.com/outl1ne/nova-translations-loader/issues",
+                "source": "https://github.com/outl1ne/nova-translations-loader/tree/5.0.3"
+            },
+            "time": "2024-10-22T08:19:08+00:00"
         },
         {
             "name": "phpoption/phpoption",

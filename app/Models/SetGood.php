@@ -22,7 +22,7 @@ class SetGood extends Model
             'zero_margin_price' => 'integer',
             'suggested_selling_price_of_gms' => 'integer',
             'is_gift' => 'boolean',
-            'is_shutdowned' => 'boolean',
+            'is_shutdown' => 'boolean',
             'goods_bar' => 'string',
             'is_my_shop_sale' => 'boolean',
             'is_other_shop_sale' => 'boolean',

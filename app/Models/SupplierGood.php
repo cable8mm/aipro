@@ -28,11 +28,11 @@ class SupplierGood extends Model
             'inventory' => 'integer',
             'price' => 'integer',
             'suggested_selling_price' => 'integer',
-            'suggestioned_retail_price' => 'integer',
+            'suggested_retail_price' => 'integer',
             'supplier_monitoring_price' => 'integer',
             'is_runout' => 'boolean',
             'is_warehoused' => 'boolean',
-            'is_shutdowned' => 'boolean',
+            'is_shutdown' => 'boolean',
         ];
     }
 

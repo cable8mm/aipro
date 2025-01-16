@@ -2,8 +2,12 @@
 
 namespace App\Enums;
 
+use Cable8mm\EnumGetter\EnumGetter;
+
 enum OrderMethod: string
 {
+    use EnumGetter;
+
     case SMS = 'sms';
     case EMAIL = 'email';
     case PHONE = 'phone';
@@ -19,27 +23,5 @@ enum OrderMethod: string
             self::KAKAOTALK => '카카오톡',
             self::ORDER_SYSTEM => '발주 시스템',
         };
-    }
-
-    public static function toKeys(): array
-    {
-        $result = [];
-
-        foreach (self::cases() as $value) {
-            $result[$value->name()] = $value->value;
-        }
-
-        return $result;
-    }
-
-    public static function toArray(): array
-    {
-        $result = [];
-
-        foreach (self::cases() as $value) {
-            $result[$value->value] = $value->name();
-        }
-
-        return $result;
     }
 }

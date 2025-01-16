@@ -2,8 +2,12 @@
 
 namespace App\Enums;
 
+use Cable8mm\EnumGetter\EnumGetter;
+
 enum Status: string
 {
+    use EnumGetter;
+
     case WAITING = 'waiting';
     case RUNNING = 'running';
     case FAILED = 'failed';
@@ -12,10 +16,10 @@ enum Status: string
     public function name(): string
     {
         return match ($this) {
-            self::WAITING => __('waiting'),
-            self::RUNNING => __('running'),
-            self::FAILED => __('failed'),
-            self::SUCCESS => __('success'),
+            self::WAITING => '대기',
+            self::RUNNING => '작업중',
+            self::FAILED => '실패',
+            self::SUCCESS => '성공',
         };
     }
 
@@ -27,27 +31,5 @@ enum Status: string
     public static function failedWhen(): array
     {
         return [self::FAILED->name()];
-    }
-
-    public static function toKeys(): array
-    {
-        $result = [];
-
-        foreach (self::cases() as $value) {
-            $result[$value->name()] = $value->value;
-        }
-
-        return $result;
-    }
-
-    public static function toArray(): array
-    {
-        $result = [];
-
-        foreach (self::cases() as $value) {
-            $result[$value->value] = $value->name();
-        }
-
-        return $result;
     }
 }

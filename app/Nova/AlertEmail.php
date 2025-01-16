@@ -3,6 +3,7 @@
 namespace App\Nova;
 
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\KeyValue;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
@@ -40,9 +41,9 @@ class AlertEmail extends Resource
     {
         return [
             ID::make()->sortable(),
-            Text::make(__('Name'), 'name')->maxlength(255),
-            Text::make(__('Action Name'), 'action_name')->maxlength(255),
-            Text::make(__('Email List'), 'email_list')->maxlength(255),
+            Text::make(__('Name'), 'name')->rules('required')->required()->maxlength(255),
+            Text::make(__('Action Name'), 'action_name')->rules('required')->required()->maxlength(255),
+            KeyValue::make(__('Email List'), 'email_list'),
         ];
     }
 

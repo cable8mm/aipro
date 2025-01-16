@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Enums\Status;
+use App\Enums\PlacingOrder;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -30,7 +30,7 @@ class PlacingOrderFactory extends Factory
             'confirmed_at' => fake()->dateTime(),
             'predict_warehoused_at' => fake()->date(),
             'warehoused_at' => fake()->dateTime(),
-            'status' => fake()->randomElement(Status::toKeys()),
+            'status' => fake()->randomElement(PlacingOrder::array()),
             'memo' => fake()->paragraph(),
         ];
     }

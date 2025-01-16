@@ -2,10 +2,13 @@
 
 namespace App\Nova;
 
+use App\Enums\InventoryHistory;
+use App\Enums\InventoryHistoryModel;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
+use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
@@ -44,13 +47,14 @@ class BoxInventoryHistory extends Resource
         return [
             ID::make()->sortable(),
             BelongsTo::make(__('Box'), 'box', Box::class),
-            Text::make(__('Model'), 'model')->maxlength(100),
-            Text::make(__('Attribute'), 'attribute')->maxlength(100),
-            Number::make(__('Quantity'), 'quantity')->displayUsing(function ($value) {
+            Select::make(__('Type'), 'type')->options(InventoryHistory::array())->displayUsingLabels()
+                ->rules('required')->required(),
+            Select::make(__('Model'), 'model')->options(InventoryHistoryModel::array())->displayUsingLabels()->rules('required')->required(),
+            Text::make(__('Attribute'), 'attribute')->rules('required', 'gt:0')->required(),
+            Number::make(__('Quantity'), 'quantity')->rules('required')->required()->displayUsing(function ($value) {
                 return number_format($value);
             }),
-            Text::make(__('Type'), 'type')->maxlength(10),
-            Boolean::make(__('Is Success'), 'is_success'),
+            Boolean::make(__('Is Success'), 'is_success')->rules('required')->required(),
         ];
     }
 

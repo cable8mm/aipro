@@ -25,17 +25,16 @@ return new class extends Migration
             $table->string('option', 100)->nullable()->default('');
             $table->integer('inventory')->nullable()->default('0');
             $table->unsignedInteger('supplier_out_of_stock_count')->nullable()->default('0');
-            $table->text('manual_add_inventory_memo')->nullable();
             $table->integer('safe_inventory')->nullable()->default('0');
-            $table->char('safe_class', 1)->nullable()->default('3');
-            $table->char('center_class', 1)->nullable()->default('H');
+            $table->char('safe_class', 2)->nullable()->default('3');
+            $table->char('center_class', 1)->nullable()->default('M');
             $table->string('category', 255)->nullable();
             $table->string('maker', 255)->nullable();
             $table->string('brand', 191)->nullable();
             $table->integer('cost_price')->nullable();
             $table->integer('last_cost_price')->nullable();
             $table->integer('suggested_selling_price')->nullable();
-            $table->integer('suggestioned_retail_price')->nullable();
+            $table->integer('suggested_retail_price')->nullable();
             $table->integer('supplier_monitoring_price')->nullable();
             $table->string('supplier_monitoring_status', 10)->nullable();
             $table->boolean('supplier_monitoring_interruption')->nullable()->default('0');
@@ -43,12 +42,10 @@ return new class extends Migration
             $table->string('spec', 255)->nullable();
             $table->string('order_rule', 255)->nullable();
             $table->string('barcode', 255)->nullable()->default('');
-            $table->string('generated_barcode', 255)->nullable();
-            $table->string('picking_box_number', 255)->nullable();
-            $table->string('goods_division_color', 255)->nullable();
+            $table->string('picking_box_number', 30)->nullable();
+            $table->string('goods_division_color', 20)->nullable();
             $table->integer('ship_quantity')->default('1');
             $table->text('memo')->nullable();
-            $table->string('memo_for_center', 255)->nullable();
             $table->string('print_classification', 190)->nullable();
             $table->char('naver_category', 20)->nullable();
             $table->string('naver_productid', 128)->nullable();
@@ -57,7 +54,8 @@ return new class extends Migration
             $table->integer('internet_lowest_price')->nullable();
             $table->integer('zero_margin_price')->nullable();
             $table->boolean('is_supplier_out_of_stock')->nullable()->default('0');
-            $table->boolean('is_shutdowned')->nullable()->default('0');
+            $table->boolean('can_be_shipped')->default(true);
+            $table->boolean('is_shutdown')->nullable()->default('0');
             $table->timestamps();
         });
     }

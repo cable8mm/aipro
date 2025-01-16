@@ -41,8 +41,11 @@ class HelpTip extends Resource
     {
         return [
             ID::make()->sortable(),
-            Text::make(__('Word'), 'word')->rules('unique')->maxlength(100),
-            Text::make(__('Help Tip'), 'help_tip')->maxlength(190),
+            Text::make(__('Word'), 'word')
+                ->creationRules('required', 'unique:help_tips,word')
+                ->updateRules('required')
+                ->required()->maxlength(100),
+            Text::make(__('Help Tip'), 'help_tip')->rules('required')->required()->maxlength(190),
         ];
     }
 

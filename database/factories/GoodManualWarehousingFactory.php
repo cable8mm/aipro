@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\ManualInventoryAdjustmentType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,9 +20,9 @@ class GoodManualWarehousingFactory extends Factory
         return [
             'good_id' => fake()->randomNumber(1) + 1,
             'user_id' => fake()->randomNumber(1) + 1,
-            'manual_add_inventory_count' => fake()->randomNumber(),
-            'type' => fake()->randomElement(['미입력', '입고', '출고']),
-            'memo' => fake()->paragraph(),
+            'manual_add_inventory_count' => (fake()->boolean() === true ? 1 : -1) * fake()->randomNumber(2),
+            'type' => fake()->randomElement(ManualInventoryAdjustmentType::array()),
+            'memo' => fake()->sentence(),
         ];
     }
 }
