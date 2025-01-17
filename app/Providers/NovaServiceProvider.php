@@ -8,8 +8,11 @@ use App\Nova\BoxInventoryHistory;
 use App\Nova\BoxManualWarehousing;
 use App\Nova\BoxOrder;
 use App\Nova\BoxSupplier;
+use App\Nova\Channel;
+use App\Nova\ChannelFee;
 use App\Nova\Dashboards\Main;
 use App\Nova\Good;
+use App\Nova\GoodInventorySnapshot;
 use App\Nova\GoodManualWarehousing;
 use App\Nova\HelpTip;
 use App\Nova\InventoryHistory;
@@ -17,11 +20,13 @@ use App\Nova\MismatchedOrderShipment;
 use App\Nova\NaverCategory;
 use App\Nova\OptionGood;
 use App\Nova\OptionGoodOption;
+use App\Nova\Order;
 use App\Nova\OrderSheetInvoice;
 use App\Nova\OrderShipment;
 use App\Nova\PlacingOrder;
 use App\Nova\PlacingOrderGood;
 use App\Nova\PlayautoCategory;
+use App\Nova\PlayautoGood;
 use App\Nova\PriceCoefficient;
 use App\Nova\PromotionCode;
 use App\Nova\RegisterGoodRequest;
@@ -76,6 +81,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
 
                 MenuSection::make('주문 관리(주문서+출고)', [
                     MenuItem::resource(OrderSheetInvoice::class),
+                    MenuItem::resource(Order::class),
                     MenuItem::resource(OrderShipment::class),
                     MenuItem::resource(MismatchedOrderShipment::class),
                 ])->icon('shopping-cart')->collapsable(),
@@ -107,6 +113,13 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                     MenuItem::resource(OptionGoodOption::class),
                     MenuItem::resource(PromotionCode::class),
                     MenuItem::resource(RegisterOptionGoodRequest::class),
+                    MenuItem::resource(ChannelFee::class),
+                ])->icon('shopping-cart')->collapsable(),
+
+                MenuSection::make(__('Playauto'), [
+                    MenuItem::resource(Channel::class),
+                    MenuItem::resource(PlayautoGood::class),
+                    MenuItem::resource(GoodInventorySnapshot::class),
                 ])->icon('shopping-cart')->collapsable(),
 
                 MenuSection::make(__('Tools'), [

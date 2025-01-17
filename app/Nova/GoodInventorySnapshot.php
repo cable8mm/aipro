@@ -2,9 +2,13 @@
 
 namespace App\Nova;
 
+use App\Enums\SafeClass;
+use App\Enums\Status;
+use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
+use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Stack;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -23,7 +27,7 @@ class GoodInventorySnapshot extends Resource
      *
      * @var string
      */
-    public static $title = 'Good Inventory Snapshots';
+    public static $title = 'playauto_master_code';
 
     /**
      * The columns that should be searched.
@@ -32,6 +36,7 @@ class GoodInventorySnapshot extends Resource
      */
     public static $search = [
         'id',
+        'playauto_master_code',
     ];
 
     /**
@@ -43,12 +48,12 @@ class GoodInventorySnapshot extends Resource
     {
         return [
             ID::make()->sortable(),
-            Number::make('Cms Maestro Id'),
-            Number::make('Ct Good Id'),
-            Text::make('Playauto Master Code')->maxlength(255),
+            BelongsTo::make(__('Author'), 'author', User::class),
+            BelongsTo::make(__('Good'), 'good', Good::class),
+            Text::make('Playauto Master Code')->maxlength(50),
             Number::make('Inventory'),
-            Text::make('Safe Class'),
-            Text::make('Type')->maxlength(50),
+            Select::make(__('Safe Class'), 'safe_class')->options(SafeClass::array())->displayUsingLabels(),
+            Select::make(__('Type'), 'type')->options(Status::array())->displayUsingLabels(),
             Stack::make(__('Created At').' & '.__('Updated At'), [
                 DateTime::make(__('Created At'), 'created_at'),
                 DateTime::make(__('Updated At'), 'updated_at'),
@@ -94,5 +99,15 @@ class GoodInventorySnapshot extends Resource
     public function actions(NovaRequest $request)
     {
         return [];
+    }
+
+    public static function label()
+    {
+        return __('Good Inventory Snapshots');
+    }
+
+    public function title()
+    {
+        return __('Good Inventory Snapshots').' #'.$this->id;
     }
 }

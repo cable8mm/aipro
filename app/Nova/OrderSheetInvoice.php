@@ -46,7 +46,7 @@ class OrderSheetInvoice extends Resource
                 return $request->user()->id;
             }),
             BelongsTo::make(__('Author'), 'author', User::class)->exceptOnForms(),
-            Text::make('Title', function () {
+            Text::make(__('Title'), 'title', function () {
                 return $this->title();
             }),
             File::make(__('Excel Filepath'), 'excel_filepath'),
@@ -67,7 +67,7 @@ class OrderSheetInvoice extends Resource
                 DateTime::make(__('Updated At'), 'updated_at'),
             ]),
 
-            HasMany::make(__('OrderShipments'), 'orderShipments', OrderShipment::class),
+            HasMany::make(__('Order Shipments'), 'orderShipments', OrderShipment::class),
 
             HasMany::make(__('Orders'), 'orders', Order::class),
         ];
@@ -120,6 +120,6 @@ class OrderSheetInvoice extends Resource
 
     public function title()
     {
-        return __('Invoice').' '.'#'.$this->id;
+        return __('Order Sheet Invoice').' '.'#'.$this->id;
     }
 }

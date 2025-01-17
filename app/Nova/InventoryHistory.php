@@ -115,4 +115,9 @@ class InventoryHistory extends Resource
     {
         return __('Inventory History');
     }
+
+    public function title()
+    {
+        return __('Inventory History').' #'.$this->id;
+    }
 }

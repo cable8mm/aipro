@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\Site;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,8 +18,8 @@ class ChannelFeeFactory extends Factory
     public function definition(): array
     {
         return [
-            'channel' => fake()->text(255),
-            'fee_rate' => fake()->randomFloat(2, 0, 999),
+            'channel' => fake()->randomElement(Site::names()),
+            'fee_rate' => fake()->randomFloat(2, 0, 4),
         ];
     }
 }

@@ -2,11 +2,12 @@
 
 namespace App\Nova;
 
+use App\Enums\Site;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
+use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Stack;
-use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class ChannelFee extends Resource
@@ -23,7 +24,7 @@ class ChannelFee extends Resource
      *
      * @var string
      */
-    public static $title = 'Channel Fees';
+    public static $title = 'channel';
 
     /**
      * The columns that should be searched.
@@ -43,8 +44,8 @@ class ChannelFee extends Resource
     {
         return [
             ID::make()->sortable(),
-            Text::make('Channel')->maxlength(255),
-            Number::make('Fee Rate')->step('any'),
+            Select::make(__('Channel'), 'channel')->options(Site::array())->displayUsingLabels(),
+            Number::make(__('Fee Rate'), 'fee_rate')->step('any'),
             Stack::make(__('Created At').' & '.__('Updated At'), [
                 DateTime::make(__('Created At'), 'created_at'),
                 DateTime::make(__('Updated At'), 'updated_at'),
@@ -90,5 +91,10 @@ class ChannelFee extends Resource
     public function actions(NovaRequest $request)
     {
         return [];
+    }
+
+    public static function label()
+    {
+        return __('Channel Fees');
     }
 }

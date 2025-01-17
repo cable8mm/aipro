@@ -58,7 +58,6 @@ class GoodManualWarehousing extends Resource
                 return number_format($value);
             }),
             Text::make(__('Memo'), 'memo')->nullable(),
-            DateTime::make(__('Created At'), 'created_at')->onlyOnIndex()->filterable(),
             Stack::make(__('Created At').' & '.__('Updated At'), [
                 DateTime::make(__('Created At'), 'created_at'),
                 DateTime::make(__('Updated At'), 'updated_at'),
@@ -109,5 +108,10 @@ class GoodManualWarehousing extends Resource
     public static function label()
     {
         return __('Good Manual Warehousings');
+    }
+
+    public function title()
+    {
+        return __('Good Manual Warehousing').' '.'#'.$this->id;
     }
 }

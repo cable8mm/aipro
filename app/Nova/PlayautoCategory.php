@@ -49,7 +49,7 @@ class PlayautoCategory extends Resource
             Text::make('Depth2'),
             Text::make('Depth3'),
             Text::make('Depth4'),
-            Boolean::make('Is Active'),
+            Boolean::make(__('Is Active'), 'is_active'),
         ];
     }
 

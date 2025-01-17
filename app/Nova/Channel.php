@@ -29,7 +29,7 @@ class Channel extends Resource
      *
      * @var string
      */
-    public static $title = 'Channels';
+    public static $title = 'name';
 
     /**
      * The columns that should be searched.
@@ -108,5 +108,10 @@ class Channel extends Resource
     public function actions(NovaRequest $request)
     {
         return [];
+    }
+
+    public static function label()
+    {
+        return __('Channels');
     }
 }

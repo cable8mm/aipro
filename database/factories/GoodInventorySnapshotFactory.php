@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Enums\SafeClass;
+use App\Enums\Status;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,12 +19,12 @@ class GoodInventorySnapshotFactory extends Factory
     public function definition(): array
     {
         return [
-            'cms_maestro_id' => fake()->randomNumber(),
-            'ct_good_id' => fake()->randomNumber(),
-            'playauto_master_code' => fake()->text(255),
-            'inventory' => fake()->randomNumber(),
-            'safe_class' => fake()->randomLetter(),
-            'type' => fake()->text(50),
+            'author_id' => fake()->randomNumber(1) + 1,
+            'good_id' => fake()->randomNumber(1) + 1,
+            'playauto_master_code' => 'PM'.fake()->randomNumber(3, true),
+            'inventory' => fake()->randomNumber(2) + 1,
+            'safe_class' => fake()->randomElement(SafeClass::names()),
+            'type' => fake()->randomElement(Status::names()),
         ];
     }
 }

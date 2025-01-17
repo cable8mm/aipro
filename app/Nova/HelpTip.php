@@ -32,6 +32,7 @@ class HelpTip extends Resource
     public static $search = [
         'id',
         'word',
+        'help_tip',
     ];
 
     /**
