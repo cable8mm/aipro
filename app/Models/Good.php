@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Laravel\Nova\Actions\Actionable;
 
 class Good extends Model
 {
-    use HasFactory;
+    use Actionable, HasFactory;
 
     protected function casts(): array
     {
@@ -71,6 +72,7 @@ class Good extends Model
             'last_warehoused' => 'datetime',
             'supplier_out_of_stock_on_datetime' => 'datetime',
             'supplier_out_of_stock_off_datetime' => 'datetime',
+            'can_be_shipped' => 'boolean',
         ];
     }
 

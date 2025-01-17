@@ -6,6 +6,7 @@ use App\Enums\PlacingOrder;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\DateTime;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\Hidden;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
@@ -37,6 +38,7 @@ class BoxOrder extends Resource
      */
     public static $search = [
         'id',
+        'title',
     ];
 
     /**
@@ -66,6 +68,8 @@ class BoxOrder extends Resource
             DateTime::make(__('Confirmed At'), 'confirmed_at')->nullable()->exceptOnForms(),
             DateTime::make(__('Warehoused At'), 'warehoused_at')->nullable()->exceptOnForms(),
             Textarea::make(__('Memo'), 'memo')->alwaysShow(),
+
+            HasMany::make(__('BoxOrderBox'), 'boxOrderBoxes', BoxOrderBox::class),
         ];
     }
 

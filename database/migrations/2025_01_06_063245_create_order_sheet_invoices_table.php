@@ -14,8 +14,7 @@ return new class extends Migration
     {
         Schema::create('order_sheet_invoices', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
-            $table->string('name', 255);
+            $table->foreignId('author_id');
             $table->string('excel_filepath', 255)->nullable();
             $table->integer('order_row_count')->nullable();
             $table->integer('order_number_count')->nullable();

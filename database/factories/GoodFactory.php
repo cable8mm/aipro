@@ -2,7 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Enums\CenterClass;
 use App\Enums\GoodColor;
+use App\Enums\SafeClass;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -34,8 +36,8 @@ class GoodFactory extends Factory
             'inventory' => fake()->randomNumber(3),
             'supplier_out_of_stock_count' => fake()->randomNumber(),
             'safe_inventory' => fake()->randomNumber(1),
-            'safe_class' => fake()->randomElement(['1', '2', '3', '4', 'X']),
-            'center_class' => fake()->randomElement(['M', 'O']),
+            'safe_class' => fake()->randomElement(SafeClass::names()),
+            'center_class' => fake()->randomElement(CenterClass::names()),
             'category' => fake()->randomElement(['꽃게|암컷', '꽃게|숫컷']),
             'maker' => fake()->company(),
             'brand' => fake()->deviceManufacturer(),

@@ -12,7 +12,6 @@ class ChannelSeeder extends Seeder
      */
     public function run(): void
     {
-        $row = 1;
         if (($handle = fopen(base_path('docs/csv/channels.csv'), 'r')) !== false) {
             while (($data = fgetcsv($handle, 1000, ',')) !== false) {
                 \App\Models\Channel::factory(1, [

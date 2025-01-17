@@ -2,7 +2,9 @@
 
 namespace App\Nova;
 
+use App\Enums\CenterClass;
 use App\Enums\PlacingOrderGoodStatus;
+use App\Enums\SafeClass;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Currency;
@@ -57,10 +59,16 @@ class PlacingOrderGood extends Resource
             Hidden::make(__('User'), 'user_id')->default(function ($request) {
                 return $request->user()->id;
             }),
-            Text::make(__('Master Code'), 'Good.master_code'),
-            Text::make(__('Safe Class'), 'Good.safe_class'),
-            Text::make(__('Center Class'), 'Good.center_class'),
-            Text::make(__('Supplier'), 'Good.supplier.name'),
+            Text::make(__('Master Code'), 'Good.master_code')->exceptOnForms(),
+            Text::make(__('Safe Class'), 'Good.safe_class')->exceptOnForms()
+                ->displayUsing(function ($value) {
+                    return SafeClass::{$value}->value();
+                }),
+            Text::make(__('Center Class'), 'Good.center_class')->exceptOnForms()
+                ->displayUsing(function ($value) {
+                    return CenterClass::{$value}->value();
+                }),
+            Text::make(__('Supplier'), 'Good.supplier.name')->exceptOnForms(),
             BelongsTo::make(__('Good'), 'good', Good::class),
             Number::make(__('Order Count'), 'order_count')->rules('required')->required()->displayUsing(function ($value) {
                 return number_format($value);

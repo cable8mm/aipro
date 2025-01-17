@@ -2,11 +2,12 @@
 
 namespace App\Nova;
 
+use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Stack;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class ShutdownGood extends Resource
@@ -23,7 +24,7 @@ class ShutdownGood extends Resource
      *
      * @var string
      */
-    public static $title = 'Shutdown Goods';
+    public static $title = 'name';
 
     /**
      * The columns that should be searched.
@@ -32,6 +33,8 @@ class ShutdownGood extends Resource
      */
     public static $search = [
         'id',
+        'name',
+        'master_code',
     ];
 
     /**
@@ -43,10 +46,10 @@ class ShutdownGood extends Resource
     {
         return [
             ID::make()->sortable(),
-            Number::make('Cms Maestro Id'),
-            Text::make('Center Code')->maxlength(150),
-            Text::make('Name')->maxlength(255),
-            Text::make('Reason')->maxlength(255),
+            BelongsTo::make(__('Author'), 'author', User::class),
+            Text::make(__('Master Code'), 'master_code')->maxlength(150),
+            Text::make(__('Title'), 'title')->maxlength(255),
+            Textarea::make(__('Reason'), 'reason')->alwaysShow(),
             Stack::make(__('Created At').' & '.__('Updated At'), [
                 DateTime::make(__('Created At'), 'created_at'),
                 DateTime::make(__('Updated At'), 'updated_at'),
@@ -92,5 +95,10 @@ class ShutdownGood extends Resource
     public function actions(NovaRequest $request)
     {
         return [];
+    }
+
+    public static function label()
+    {
+        return __('Shutdown Goods');
     }
 }

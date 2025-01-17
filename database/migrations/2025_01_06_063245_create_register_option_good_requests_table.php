@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('register_option_good_requests', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('requester_id');
+            $table->foreignId('author_id');
             $table->foreignId('worker_id');
             $table->string('title', 190);
             $table->string('request_file_url', 190)->nullable();

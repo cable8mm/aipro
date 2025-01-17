@@ -2,11 +2,12 @@
 
 namespace App\Nova;
 
+use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Stack;
-use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class SupplierGoodManualWarehousing extends Resource
@@ -17,13 +18,6 @@ class SupplierGoodManualWarehousing extends Resource
      * @var class-string<\App\Models\SupplierGoodManualWarehousing>
      */
     public static $model = \App\Models\SupplierGoodManualWarehousing::class;
-
-    /**
-     * The single value that should be used to represent the resource when being displayed.
-     *
-     * @var string
-     */
-    public static $title = 'Supplier Good Manual Warehousings';
 
     /**
      * The columns that should be searched.
@@ -43,10 +37,10 @@ class SupplierGoodManualWarehousing extends Resource
     {
         return [
             ID::make()->sortable(),
-            Number::make('Ct Supplier Good Id'),
-            Number::make('Cms Maestro Id'),
-            Number::make('Manual Add Inventory Count'),
-            Text::make('Memo'),
+            BelongsTo::make(__('Author'), 'author', SupplierGood::class),
+            BelongsTo::make(__('Supplier Good'), 'supplierGood', SupplierGood::class),
+            Number::make(__('Manual Add Inventory Count'), 'manual_add_inventory_count'),
+            Textarea::make(__('Memo'), 'memo')->alwaysShow(),
             Stack::make(__('Created At').' & '.__('Updated At'), [
                 DateTime::make(__('Created At'), 'created_at'),
                 DateTime::make(__('Updated At'), 'updated_at'),
@@ -92,5 +86,15 @@ class SupplierGoodManualWarehousing extends Resource
     public function actions(NovaRequest $request)
     {
         return [];
+    }
+
+    public static function label()
+    {
+        return __('Supplier Good Manual Warehousings');
+    }
+
+    public function title()
+    {
+        return __('Supplier Good Manual Warehousing').' '.'#'.$this->id;
     }
 }

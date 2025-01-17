@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('naver_categories', function (Blueprint $table) {
             $table->id();
             $table->char('cateCd', 11);
-            $table->bigInteger('naver_category');
+            $table->unsignedBigInteger('naver_category');
         });
     }
 

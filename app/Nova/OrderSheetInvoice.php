@@ -25,20 +25,12 @@ class OrderSheetInvoice extends Resource
     public static $model = \App\Models\OrderSheetInvoice::class;
 
     /**
-     * The single value that should be used to represent the resource when being displayed.
-     *
-     * @var string
-     */
-    public static $title = 'name';
-
-    /**
      * The columns that should be searched.
      *
      * @var array
      */
     public static $search = [
         'id',
-        'name',
     ];
 
     /**
@@ -50,11 +42,13 @@ class OrderSheetInvoice extends Resource
     {
         return [
             ID::make()->sortable(),
-            Hidden::make('User', 'user_id')->default(function ($request) {
+            Hidden::make('Author', 'author')->default(function ($request) {
                 return $request->user()->id;
             }),
-            BelongsTo::make(__('User'), 'user', User::class)->exceptOnForms(),
-            Text::make(__('Name'), 'name')->maxlength(255),
+            BelongsTo::make(__('Author'), 'author', User::class)->exceptOnForms(),
+            Text::make('Title', function () {
+                return $this->title();
+            }),
             File::make(__('Excel Filepath'), 'excel_filepath'),
             Number::make(__('Order Row Count'), 'order_row_count')->displayUsing(function ($value) {
                 return number_format($value);
@@ -122,5 +116,10 @@ class OrderSheetInvoice extends Resource
     public static function label()
     {
         return __('Order Sheet Invoice');
+    }
+
+    public function title()
+    {
+        return __('Invoice').' '.'#'.$this->id;
     }
 }

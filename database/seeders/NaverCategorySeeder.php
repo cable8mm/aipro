@@ -11,6 +11,15 @@ class NaverCategorySeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\NaverCategory::factory()->count(10)->create();
+        if (($handle = fopen(base_path('docs/csv/naver_categories.csv'), 'r')) !== false) {
+            while (($data = fgetcsv($handle, 1000, ',')) !== false) {
+                \App\Models\NaverCategory::factory(1, [
+                    'id' => $data[0],
+                    'cateCd' => $data[1],
+                    'naver_category' => $data[2],
+                ])->create();
+            }
+            fclose($handle);
+        }
     }
 }

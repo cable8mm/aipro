@@ -9,7 +9,7 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^8.2",
+        "php": "^8.3",
         "cable8mm/enum-getter": "^1.0",
         "laracraft-tech/laravel-useful-additions": "^4.0",
         "laravel-lang/common": "^6.4",

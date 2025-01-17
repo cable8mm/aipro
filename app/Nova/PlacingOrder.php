@@ -130,6 +130,6 @@ class PlacingOrder extends Resource
 
     public function title()
     {
-        return '#'.$this->id.' 발주서';
+        return __('Placing Order').' '.'#'.$this->id;
     }
 }

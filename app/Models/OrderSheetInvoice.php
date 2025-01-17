@@ -14,7 +14,6 @@ class OrderSheetInvoice extends Model
     protected function casts(): array
     {
         return [
-            'name' => 'string',
             'excel_filepath' => 'string',
             'order_row_count' => 'integer',
             'order_number_count' => 'integer',
@@ -25,7 +24,7 @@ class OrderSheetInvoice extends Model
         ];
     }
 
-    public function user(): BelongsTo
+    public function author(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
