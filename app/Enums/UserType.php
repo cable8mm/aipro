@@ -9,6 +9,7 @@ enum UserType: string
     use EnumGetter;
 
     case ADMINISTRATOR = 'Administrator';
+    case DEVELOPER = 'Developer';
     case MANAGER = 'Manager';
     case MD = 'MD';
     case WAREHOUSER = 'Warehouser';
@@ -18,6 +19,7 @@ enum UserType: string
     {
         return match ($this) {
             self::ADMINISTRATOR => '최고관리자',
+            self::DEVELOPER => '개발자',
             self::MANAGER => '관리자',
             self::MD => '엠디',
             self::WAREHOUSER => '공무직',
