@@ -3,6 +3,7 @@
 namespace App\Nova;
 
 use App\Enums\UserType;
+use App\Traits\NovaAuthorizedByManager;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules;
 use Laravel\Nova\Fields\DateTime;
@@ -17,6 +18,8 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 
 class User extends Resource
 {
+    use NovaAuthorizedByManager;
+
     /**
      * The model the resource corresponds to.
      *
@@ -121,5 +124,21 @@ class User extends Resource
     public static function label()
     {
         return __('User');
+    }
+
+    public function authorizedToView(Request $request)
+    {
+        return $request->user()?->type == UserType::ADMINISTRATOR->name
+            || $request->user()?->type == UserType::DEVELOPER->name
+            || $request->user()?->type == UserType::MANAGER->name
+            || $request->user()?->id == $this->id;
+    }
+
+    public function authorizedToUpdate(Request $request)
+    {
+        return $request->user()?->type == UserType::ADMINISTRATOR->name
+            || $request->user()?->type == UserType::DEVELOPER->name
+            || $request->user()?->type == UserType::MANAGER->name
+            || $request->user()?->id == $this->id;
     }
 }

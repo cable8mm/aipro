@@ -3,6 +3,7 @@
 namespace App\Nova;
 
 use App\Enums\Status as EnumsStatus;
+use App\Traits\NovaAuthorizedByWarehouser;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
@@ -14,6 +15,8 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 
 class MismatchedOrderShipment extends Resource
 {
+    use NovaAuthorizedByWarehouser;
+
     /**
      * The model the resource corresponds to.
      *

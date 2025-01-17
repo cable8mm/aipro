@@ -3,6 +3,7 @@
 namespace App\Nova;
 
 use App\Enums\CenterClass;
+use App\Traits\NovaAuthorizedByManager;
 use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
@@ -13,6 +14,8 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 
 class PriceCoefficient extends Resource
 {
+    use NovaAuthorizedByManager;
+
     /**
      * The model the resource corresponds to.
      *

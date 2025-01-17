@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\Traits\NovaAuthorizedByWarehouser;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Country;
@@ -16,6 +17,8 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 
 class SupplierGood extends Resource
 {
+    use NovaAuthorizedByWarehouser;
+
     /**
      * The model the resource corresponds to.
      *

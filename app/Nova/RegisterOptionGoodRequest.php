@@ -3,6 +3,9 @@
 namespace App\Nova;
 
 use App\Enums\Status;
+use App\Enums\UserType;
+use App\Traits\NovaAuthorizedByNotReviewer;
+use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\File;
@@ -15,6 +18,8 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 
 class RegisterOptionGoodRequest extends Resource
 {
+    use NovaAuthorizedByNotReviewer;
+
     /**
      * The model the resource corresponds to.
      *
@@ -104,5 +109,12 @@ class RegisterOptionGoodRequest extends Resource
     public static function label()
     {
         return __('Register Option Good Request');
+    }
+
+    public function authorizedToUpdate(Request $request)
+    {
+        return $request->user()?->type == UserType::ADMINISTRATOR->name
+            || $request->user()?->type == UserType::DEVELOPER->name
+            || $request->user()?->id == $this->author_id;
     }
 }

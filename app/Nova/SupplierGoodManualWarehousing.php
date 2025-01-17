@@ -2,16 +2,20 @@
 
 namespace App\Nova;
 
+use App\Traits\NovaAuthorizedByWarehouser;
+use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Stack;
-use Laravel\Nova\Fields\Textarea;
+use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class SupplierGoodManualWarehousing extends Resource
 {
+    use NovaAuthorizedByWarehouser;
+
     /**
      * The model the resource corresponds to.
      *
@@ -40,7 +44,7 @@ class SupplierGoodManualWarehousing extends Resource
             BelongsTo::make(__('Author'), 'author', SupplierGood::class),
             BelongsTo::make(__('Supplier Good'), 'supplierGood', SupplierGood::class),
             Number::make(__('Manual Add Inventory Count'), 'manual_add_inventory_count'),
-            Textarea::make(__('Memo'), 'memo')->alwaysShow(),
+            Text::make(__('Memo'), 'memo')->maxlength(255),
             Stack::make(__('Created At').' & '.__('Updated At'), [
                 DateTime::make(__('Created At'), 'created_at'),
                 DateTime::make(__('Updated At'), 'updated_at'),
@@ -96,5 +100,10 @@ class SupplierGoodManualWarehousing extends Resource
     public function title()
     {
         return __('Supplier Good Manual Warehousing').' '.'#'.$this->id;
+    }
+
+    public function authorizedToView(Request $request)
+    {
+        return false;
     }
 }

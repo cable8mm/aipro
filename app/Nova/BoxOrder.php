@@ -3,6 +3,7 @@
 namespace App\Nova;
 
 use App\Enums\PlacingOrder;
+use App\Traits\NovaAuthorizedByWarehouser;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\DateTime;
@@ -17,6 +18,8 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 
 class BoxOrder extends Resource
 {
+    use NovaAuthorizedByWarehouser;
+
     /**
      * The model the resource corresponds to.
      *

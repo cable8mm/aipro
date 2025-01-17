@@ -3,6 +3,7 @@
 namespace App\Nova;
 
 use App\Enums\Status as EnumsStatus;
+use App\Traits\NovaAuthorizedByNotReviewer;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\DateTime;
@@ -16,6 +17,8 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 
 class RegisterGoodRequest extends Resource
 {
+    use NovaAuthorizedByNotReviewer;
+
     /**
      * The model the resource corresponds to.
      *

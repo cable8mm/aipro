@@ -3,6 +3,7 @@
 namespace App\Nova;
 
 use App\Enums\Channel as EnumsChannel;
+use App\Traits\NovaAuthorizedByManager;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\DateTime;
@@ -17,6 +18,8 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Channel extends Resource
 {
+    use NovaAuthorizedByManager;
+
     /**
      * The model the resource corresponds to.
      *

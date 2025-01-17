@@ -2,6 +2,9 @@
 
 namespace App\Nova;
 
+use App\Enums\UserType;
+use App\Traits\NovaAuthorizedByMd;
+use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
@@ -12,6 +15,8 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 
 class PromotionCode extends Resource
 {
+    use NovaAuthorizedByMd;
+
     /**
      * The model the resource corresponds to.
      *
@@ -99,5 +104,13 @@ class PromotionCode extends Resource
     public static function label()
     {
         return __('Promotion Codes');
+    }
+
+    public function authorizedToUpdate(Request $request)
+    {
+        return $request->user()?->type == UserType::ADMINISTRATOR->name
+            || $request->user()?->type == UserType::DEVELOPER->name
+            || $request->user()?->type == UserType::MANAGER->name
+            || $request->user()?->id == $this->user_id;
     }
 }
