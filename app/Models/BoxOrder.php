@@ -5,10 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Laravel\Nova\Actions\Actionable;
 
 class BoxOrder extends Model
 {
-    use HasFactory;
+    use Actionable, HasFactory;
 
     protected function casts(): array
     {
@@ -38,5 +40,10 @@ class BoxOrder extends Model
     public function boxSupplier(): BelongsTo
     {
         return $this->belongsTo(BoxSupplier::class);
+    }
+
+    public function boxOrderBoxes(): HasMany
+    {
+        return $this->hasMany(BoxOrderBox::class);
     }
 }

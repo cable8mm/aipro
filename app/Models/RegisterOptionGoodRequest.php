@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Laravel\Nova\Actions\Actionable;
 
 class RegisterOptionGoodRequest extends Model
 {
-    use HasFactory;
+    use Actionable, HasFactory;
 
     protected function casts(): array
     {
@@ -19,9 +20,9 @@ class RegisterOptionGoodRequest extends Model
         ];
     }
 
-    public function requester(): BelongsTo
+    public function author(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'requester_id');
+        return $this->belongsTo(User::class, 'author_id');
     }
 
     public function worker(): BelongsTo
