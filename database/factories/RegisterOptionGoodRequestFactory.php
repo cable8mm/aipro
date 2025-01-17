@@ -18,7 +18,7 @@ class RegisterOptionGoodRequestFactory extends Factory
     public function definition(): array
     {
         return [
-            'requester_id' => fake()->randomNumber(1) + 1,
+            'author_id' => fake()->randomNumber(1) + 1,
             'worker_id' => fake()->randomNumber(1) + 1,
             'title' => fake()->sentence(),
             'request_file_url' => fake()->word().'.xlsx',
