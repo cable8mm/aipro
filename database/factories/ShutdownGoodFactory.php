@@ -16,11 +16,14 @@ class ShutdownGoodFactory extends Factory
      */
     public function definition(): array
     {
+        fake()->addProvider(new \Bezhanov\Faker\Provider\Commerce(fake()));
+        fake()->addProvider(new \Bezhanov\Faker\Provider\Device(fake()));
+
         return [
-            'cms_maestro_id' => fake()->randomNumber(),
-            'center_code' => fake()->text(150),
-            'name' => fake()->text(255),
-            'reason' => fake()->text(255),
+            'author_id' => fake()->randomNumber(1) + 1,
+            'master_code' => fake()->randomElement(['SET1x1ZZ3x1', 'SET3x3ZZ7x3', 'SET6x4ZZ8x4']),
+            'title' => fake('ko_KR')->productName(),
+            'reason' => fake('ko_KR')->paragraph(),
         ];
     }
 }

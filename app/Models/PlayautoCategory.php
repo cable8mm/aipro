@@ -12,4 +12,11 @@ class PlayautoCategory extends Model
     public $timestamps = false;
 
     public $incrementing = false;
+
+    protected function casts(): array
+    {
+        return [
+            'is_active' => 'boolean',
+        ];
+    }
 }

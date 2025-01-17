@@ -17,8 +17,8 @@ class NaverCategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'cateCd' => fake()->randomLetter(),
-            'naver_category' => fake()->numerify(),
+            'cateCd' => '0'.fake()->randomNumber(8, true),
+            'naver_category' => fake()->randomNumber(8, true),
         ];
     }
 }

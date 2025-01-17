@@ -2,10 +2,8 @@
 
 namespace App\Nova;
 
-use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
-use Laravel\Nova\Fields\Stack;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
@@ -32,6 +30,8 @@ class NaverCategory extends Resource
      */
     public static $search = [
         'id',
+        'cateCd',
+        'naver_category',
     ];
 
     /**
@@ -43,12 +43,8 @@ class NaverCategory extends Resource
     {
         return [
             ID::make()->sortable(),
-            Text::make('Cate_cd'),
-            Number::make('Naver Category'),
-            Stack::make(__('Created At').' & '.__('Updated At'), [
-                DateTime::make(__('Created At'), 'created_at'),
-                DateTime::make(__('Updated At'), 'updated_at'),
-            ]),
+            Number::make(__('Naver Category'), 'naver_category'),
+            Text::make(__('Cate Cd'), 'cateCd'),
         ];
     }
 
@@ -90,5 +86,10 @@ class NaverCategory extends Resource
     public function actions(NovaRequest $request)
     {
         return [];
+    }
+
+    public static function label()
+    {
+        return __('Naver Categories');
     }
 }

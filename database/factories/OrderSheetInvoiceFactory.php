@@ -19,8 +19,7 @@ class OrderSheetInvoiceFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => fake()->numberBetween(0, UserSeeder::COUNT),
-            'name' => fake('ko_KR')->sentence(),
+            'author_id' => fake()->numberBetween(0, UserSeeder::COUNT),
             'excel_filepath' => fake()->word().'.xlsx',
             'order_row_count' => fake()->randomNumber(),
             'order_number_count' => fake()->randomNumber(),

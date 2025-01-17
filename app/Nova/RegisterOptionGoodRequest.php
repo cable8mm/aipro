@@ -27,7 +27,7 @@ class RegisterOptionGoodRequest extends Resource
      *
      * @var string
      */
-    public static $title = 'id';
+    public static $title = 'title';
 
     /**
      * The columns that should be searched.
@@ -47,7 +47,7 @@ class RegisterOptionGoodRequest extends Resource
     {
         return [
             ID::make()->sortable(),
-            BelongsTo::make(__('Requester'), 'requester', User::class),
+            BelongsTo::make(__('Author'), 'Author', User::class),
             BelongsTo::make(__('Worker'), 'worker', User::class),
             Text::make(__('Title'), 'title')->rules('required')->required()->maxlength(190),
             File::make(__('Request File Url'), 'request_file_url'),

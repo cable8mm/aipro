@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\CenterClass;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,9 +18,9 @@ class PriceCoefficientFactory extends Factory
     public function definition(): array
     {
         return [
-            'center_class' => fake()->randomLetter(),
-            'start_price' => fake()->randomNumber(),
-            'end_price' => fake()->randomNumber(),
+            'center_class' => fake()->randomElement(CenterClass::names()),
+            'start_price' => fake()->randomNumber(2),
+            'end_price' => fake()->randomNumber(5) + 1,
             'coefficient' => fake()->randomFloat(3, 0, 9),
         ];
     }

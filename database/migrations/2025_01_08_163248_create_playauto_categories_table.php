@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('playauto_categories', function (Blueprint $table) {
             $table->id();
-            $table->string('depth1', 255)->nullable();
-            $table->string('depth2', 255)->nullable();
-            $table->string('depth3', 255)->nullable();
-            $table->string('depth4', 255)->nullable();
-            $table->boolean('is_active')->nullable()->default('0');
+            $table->string('depth1', 100);
+            $table->string('depth2', 100)->nullable();
+            $table->string('depth3', 100)->nullable();
+            $table->string('depth4', 100)->nullable();
+            $table->boolean('is_active')->default(true);
         });
     }
 

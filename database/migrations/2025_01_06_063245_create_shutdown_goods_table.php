@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('shutdown_goods', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('cms_maestro_id')->nullable();
-            $table->string('center_code', 150)->nullable();
-            $table->string('name', 255)->nullable();
-            $table->string('reason', 255)->nullable();
+            $table->foreignId('author_id');
+            $table->string('master_code', 150);
+            $table->string('title', 255);
+            $table->string('reason', 255);
             $table->timestamps();
         });
     }

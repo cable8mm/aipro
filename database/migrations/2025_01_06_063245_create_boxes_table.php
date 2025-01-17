@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('boxes', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 100)->nullable();
-            $table->string('code', 50);
-            $table->unsignedInteger('size');
-            $table->integer('delivery_price')->nullable();
-            $table->integer('box_price')->nullable();
-            $table->unsignedInteger('inventory')->nullable()->default('0');
-            $table->string('memo', 255)->nullable();
+            $table->string('name', 100)->nullable()->comment('박스 이름');
+            $table->string('code', 50)->comment('박스 코드');
+            $table->unsignedInteger('size')->comment('박스 사이즈');
+            $table->integer('delivery_price')->nullable()->comment('배송 금액');
+            $table->integer('box_price')->nullable()->comment('박스 가격');
+            $table->unsignedInteger('inventory')->nullable()->default('0')->comment('재고 수량');
+            $table->string('memo', 255)->nullable()->comment('메모');
             $table->timestamps();
         });
     }

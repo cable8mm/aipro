@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('supplier_good_manual_warehousings', function (Blueprint $table) {
             $table->id();
-            $table->integer('ct_supplier_good_id')->nullable();
-            $table->integer('cms_maestro_id')->nullable();
-            $table->integer('manual_add_inventory_count')->nullable();
+            $table->foreignId('supplier_good_id');
+            $table->foreignId('author_id');
+            $table->integer('manual_add_inventory_count');
             $table->text('memo')->nullable();
             $table->timestamps();
         });

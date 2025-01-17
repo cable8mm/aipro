@@ -45,9 +45,13 @@ class Order extends Resource
         return [
             ID::make()->sortable(),
             BelongsTo::make(__('Order Sheet Invoice'), 'orderSheetInvoice', OrderSheetInvoice::class),
-            Select::make('Type')->options(['피킹존 A', '피킹존 B', '피킹존 C']),
-            Number::make('Order Good Count')->exceptOnForms(),
-            Number::make('Printed Count')->exceptOnForms(),
+            Select::make(__('Type'), 'type')->options(['피킹존 A', '피킹존 B', '피킹존 C']),
+            Number::make(__('Order Good Count'), 'order_good_count')->displayUsing(function ($value) {
+                return number_format($value);
+            })->exceptOnForms(),
+            Number::make(__('Printed Count'), 'printed_count')->displayUsing(function ($value) {
+                return number_format($value);
+            })->exceptOnForms(),
             Stack::make(__('Created At').' & '.__('Updated At'), [
                 DateTime::make(__('Created At'), 'created_at'),
                 DateTime::make(__('Updated At'), 'updated_at'),
