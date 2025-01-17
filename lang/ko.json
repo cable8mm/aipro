@@ -736,5 +736,6 @@
     "Downloaded At": "다운로드일시",
     "Shipped At": "배송일시",
     "Site Goods Cd": "사이트 상품코드",
-    "Playauto Goods": "플레이오토 상품"
+    "Playauto Goods": "플레이오토 상품",
+    "Timezone": "타임존"
 }

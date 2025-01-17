@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Enums\UserType;
 use Illuminate\Console\Command;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Hash;
@@ -40,6 +41,7 @@ class CreateNovaAccount extends Command
                     'name' => $name,
                     'email' => $email,
                     'password' => Hash::make($password),
+                    'type' => UserType::ADMINISTRATOR->name,
                 ]))->save();
             } catch (QueryException $e) {
 
