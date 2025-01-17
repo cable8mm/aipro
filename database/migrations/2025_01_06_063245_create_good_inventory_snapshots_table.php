@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\SafeClass;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,11 +14,11 @@ return new class extends Migration
     {
         Schema::create('good_inventory_snapshots', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('cms_maestro_id')->nullable();
-            $table->unsignedInteger('ct_good_id')->nullable();
-            $table->string('playauto_master_code', 255)->nullable();
-            $table->integer('inventory')->nullable();
-            $table->char('safe_class', 1)->nullable();
+            $table->foreignId('author_id');
+            $table->foreignId('good_id');
+            $table->string('playauto_master_code', 50);
+            $table->integer('inventory');
+            $table->string('safe_class', 20)->default(SafeClass::S1->name);
             $table->string('type', 50)->nullable();
             $table->timestamps();
         });

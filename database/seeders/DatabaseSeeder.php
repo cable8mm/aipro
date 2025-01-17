@@ -23,7 +23,6 @@ class DatabaseSeeder extends Seeder
             BoxSupplierSeeder::class,
             BoxSeeder::class,
             ChannelFeeSeeder::class,
-            ChannelGoodSeeder::class,
             ChannelSeeder::class,
             GoodInventorySnapshotSeeder::class,
             GoodManualWarehousingSeeder::class,
