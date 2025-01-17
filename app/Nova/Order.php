@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\Traits\NovaAuthorizedByWarehouser;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
@@ -12,6 +13,8 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Order extends Resource
 {
+    use NovaAuthorizedByWarehouser;
+
     /**
      * The model the resource corresponds to.
      *

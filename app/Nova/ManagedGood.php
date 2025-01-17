@@ -6,7 +6,6 @@ use App\Enums\CenterClass;
 use App\Enums\GoodColor;
 use App\Enums\SafeClass;
 use App\Nova\Filters\InventoryCountFilter;
-use App\Traits\NovaAuthorizedByManager;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Currency;
@@ -20,10 +19,8 @@ use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
-class Good extends Resource
+class ManagedGood extends Resource
 {
-    use NovaAuthorizedByManager;
-
     /**
      * The model the resource corresponds to.
      *
@@ -160,7 +157,7 @@ class Good extends Resource
 
     public static function label()
     {
-        return __('Good');
+        return __('Managed Good');
     }
 
     public function title()

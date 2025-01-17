@@ -4,6 +4,9 @@ namespace App\Nova;
 
 use App\Enums\SafeClass;
 use App\Enums\Status;
+use App\Enums\UserType;
+use App\Traits\NovaAuthorizedByDeveloper;
+use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
@@ -15,6 +18,8 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 
 class GoodInventorySnapshot extends Resource
 {
+    use NovaAuthorizedByDeveloper;
+
     /**
      * The model the resource corresponds to.
      *
@@ -109,5 +114,19 @@ class GoodInventorySnapshot extends Resource
     public function title()
     {
         return __('Good Inventory Snapshots').' #'.$this->id;
+    }
+
+    public function authorizedToView(Request $request)
+    {
+        return $request->user()?->type == UserType::ADMINISTRATOR->name
+            || $request->user()?->type == UserType::DEVELOPER->name
+            || $request->user()?->id == $this->author_id;
+    }
+
+    public function authorizedToUpdate(Request $request)
+    {
+        return $request->user()?->type == UserType::ADMINISTRATOR->name
+            || $request->user()?->type == UserType::DEVELOPER->name
+            || $request->user()?->id == $this->author_id;
     }
 }

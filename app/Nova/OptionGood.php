@@ -2,6 +2,9 @@
 
 namespace App\Nova;
 
+use App\Enums\UserType;
+use App\Traits\NovaAuthorizedByMd;
+use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\DateTime;
@@ -14,6 +17,8 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 
 class OptionGood extends Resource
 {
+    use NovaAuthorizedByMd;
+
     /**
      * The model the resource corresponds to.
      *
@@ -108,5 +113,13 @@ class OptionGood extends Resource
     public function title()
     {
         return '['.$this->master_code.'] '.$this->name;
+    }
+
+    public function authorizedToUpdate(Request $request)
+    {
+        return $request->user()?->type == UserType::ADMINISTRATOR->name
+            || $request->user()?->type == UserType::DEVELOPER->name
+            || $request->user()?->type == UserType::MANAGER->name
+            || $request->user()?->id == $this->user_id;
     }
 }

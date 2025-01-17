@@ -6,7 +6,7 @@ use App\Enums\CenterClass;
 use App\Enums\GoodColor;
 use App\Enums\SafeClass;
 use App\Nova\Filters\InventoryCountFilter;
-use App\Traits\NovaAuthorizedByManager;
+use App\Traits\NovaAuthorizedByMd;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Currency;
@@ -20,9 +20,9 @@ use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
-class Good extends Resource
+class BasicGood extends Resource
 {
-    use NovaAuthorizedByManager;
+    use NovaAuthorizedByMd;
 
     /**
      * The model the resource corresponds to.
@@ -60,9 +60,6 @@ class Good extends Resource
         return [
             ID::make()->sortable(),
             BelongsTo::make(__('User'), 'user', User::class),
-            BelongsTo::make(__('Supplier'), 'supplier', Supplier::class)->filterable(),
-            BelongsTo::make(__('Supplier Good'), 'supplierGood', SupplierGood::class),
-            BelongsTo::make(__('Box'), 'box', Box::class),
             Image::make(__('List Image'), 'list_image'),
             Text::make(__('Master Code'), 'master_code')->rules('required')->required()->maxlength(255)->sortable(),
             BelongsTo::make(__('Playauto Category'), 'playautoCategory', PlayautoCategory::class),
@@ -72,9 +69,6 @@ class Good extends Resource
             Number::make(__('Inventory'), 'inventory')->displayUsing(function ($value) {
                 return number_format($value);
             })->sortable(),
-            Number::make(__('Supplier Out Of Stock Count'), 'supplier_out_of_stock_count')->displayUsing(function ($value) {
-                return number_format($value);
-            })->sortable()->exceptOnForms(),
             Number::make(__('Safe Inventory'), 'safe_inventory')->displayUsing(function ($value) {
                 return number_format($value);
             })->rules('required')->required()->sortable(),
@@ -92,9 +86,6 @@ class Good extends Resource
             Boolean::make(__('Supplier Monitoring Interruption'), 'supplier_monitoring_interruption'),
             Currency::make(__('Goods Price'), 'goods_price'),
             Text::make(__('Spec'), 'spec')->maxlength(255),
-            Text::make(__('Order Rule'), 'order_rule')->maxlength(255),
-            Text::make(__('Barcode'), 'barcode')->maxlength(255),
-            Text::make(__('Picking Box Number'), 'picking_box_number')->maxlength(255),
             Select::make(__('Goods Division Color'), 'goods_division_color')->options(GoodColor::array())->displayUsingLabels(),
             Number::make(__('Ship Quantity'), 'ship_quantity')->displayUsing(function ($value) {
                 return number_format($value);
@@ -160,7 +151,7 @@ class Good extends Resource
 
     public static function label()
     {
-        return __('Good');
+        return __('Basic Good');
     }
 
     public function title()

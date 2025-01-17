@@ -193,8 +193,8 @@
     "Good Inventory Snapshots": "상품 재고 스냅샷",
     "Good Manual Warehousing Memo": "상품재고조정메모",
     "Good Manual Warehousing Type": "상품재고조정타입",
-    "Good Manual Warehousing": "상품 수동 입고",
-    "Good Manual Warehousings": "상품 수동 입고",
+    "Good Manual Warehousing": "상품 수동 재고 조정",
+    "Good Manual Warehousings": "상품 수동 재고 조정",
     "Good Playauto Master Code": "일반상품 플레이오토마스터코드",
     "Goods": "상품 리스트",
     "Goods Division Color": "상품 구분색",
@@ -737,5 +737,6 @@
     "Shipped At": "배송일시",
     "Site Goods Cd": "사이트 상품코드",
     "Playauto Goods": "플레이오토 상품",
-    "Timezone": "타임존"
+    "Timezone": "타임존",
+    "Basic Good": "기본 상품"
 }

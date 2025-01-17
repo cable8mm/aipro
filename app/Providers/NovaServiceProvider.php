@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Nova\AlertEmail;
+use App\Nova\BasicGood;
 use App\Nova\Box;
 use App\Nova\BoxInventoryHistory;
 use App\Nova\BoxManualWarehousing;
@@ -16,6 +17,7 @@ use App\Nova\GoodInventorySnapshot;
 use App\Nova\GoodManualWarehousing;
 use App\Nova\HelpTip;
 use App\Nova\InventoryHistory;
+use App\Nova\ManagedGood;
 use App\Nova\MismatchedOrderShipment;
 use App\Nova\NaverCategory;
 use App\Nova\OptionGood;
@@ -107,13 +109,17 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 ])->icon('eye')->collapsable(),
 
                 MenuSection::make(__('MD'), [
-                    MenuItem::resource(Good::class),
+                    MenuItem::resource(BasicGood::class),
                     MenuItem::resource(SetGood::class),
                     MenuItem::resource(OptionGood::class),
                     MenuItem::resource(OptionGoodOption::class),
                     MenuItem::resource(PromotionCode::class),
                     MenuItem::resource(RegisterOptionGoodRequest::class),
                     MenuItem::resource(ChannelFee::class),
+                ])->icon('shopping-cart')->collapsable(),
+
+                MenuSection::make(__('SCM'), [
+                    MenuItem::resource(ManagedGood::class),
                 ])->icon('shopping-cart')->collapsable(),
 
                 MenuSection::make(__('Playauto'), [

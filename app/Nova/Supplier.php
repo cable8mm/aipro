@@ -3,6 +3,7 @@
 namespace App\Nova;
 
 use App\Enums\OrderMethod;
+use App\Traits\NovaAuthorizedByWarehouser;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\DateTime;
@@ -17,6 +18,8 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Supplier extends Resource
 {
+    use NovaAuthorizedByWarehouser;
+
     /**
      * The model the resource corresponds to.
      *
@@ -54,8 +57,8 @@ class Supplier extends Resource
         return [
             ID::make()->sortable(),
             Text::make(__('Name'), 'name')->maxlength(50)->rules('required')->required(),
-            Email::make(__('Ordered Email'), 'ordered_email')->maxlength(100),
             Text::make(__('Contact Name'), 'contact_name')->maxlength(50)->rules('required')->required(),
+            Email::make(__('Ordered Email'), 'ordered_email')->maxlength(100),
             Text::make(__('Contact Tel'), 'contact_tel')->maxlength(40),
             Text::make(__('Contact Cel'), 'contact_cel')->maxlength(40)->rules('required')->required(),
             MultiSelect::make(__('Order Method'), 'order_method')->options(OrderMethod::array())

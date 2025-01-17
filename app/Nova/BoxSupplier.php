@@ -3,6 +3,7 @@
 namespace App\Nova;
 
 use App\Enums\OrderMethod;
+use App\Traits\NovaAuthorizedByWarehouser;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\DateTime;
@@ -15,6 +16,8 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 
 class BoxSupplier extends Resource
 {
+    use NovaAuthorizedByWarehouser;
+
     /**
      * The model the resource corresponds to.
      *

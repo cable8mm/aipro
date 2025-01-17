@@ -4,6 +4,7 @@ namespace App\Nova;
 
 use App\Enums\InventoryHistory as EnumsInventoryHistory;
 use App\Enums\InventoryHistoryModel;
+use App\Traits\NovaAuthorizedByNone;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Currency;
@@ -16,6 +17,8 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 
 class InventoryHistory extends Resource
 {
+    use NovaAuthorizedByNone;
+
     /**
      * The model the resource corresponds to.
      *

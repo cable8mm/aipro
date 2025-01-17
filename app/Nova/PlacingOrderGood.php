@@ -5,6 +5,7 @@ namespace App\Nova;
 use App\Enums\CenterClass;
 use App\Enums\PlacingOrderGoodStatus;
 use App\Enums\SafeClass;
+use App\Traits\NovaAuthorizedByWarehouser;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Currency;
@@ -20,6 +21,8 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 
 class PlacingOrderGood extends Resource
 {
+    use NovaAuthorizedByWarehouser;
+
     /**
      * The model the resource corresponds to.
      *

@@ -20,7 +20,7 @@ class SupplierGoodManualWarehousingFactory extends Factory
             'supplier_good_id' => fake()->randomNumber(1) + 1,
             'author_id' => fake()->randomNumber(1) + 1,
             'manual_add_inventory_count' => (fake()->boolean() ? 1 : -1) * fake()->randomNumber(2),
-            'memo' => fake()->paragraph(),
+            'memo' => fake('ko_KR')->sentence(),
         ];
     }
 }

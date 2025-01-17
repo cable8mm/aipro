@@ -3,6 +3,8 @@
 namespace App\Nova;
 
 use App\Enums\ManualInventoryAdjustmentType;
+use App\Traits\NovaAuthorizedByWarehouser;
+use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
@@ -14,6 +16,8 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 
 class GoodManualWarehousing extends Resource
 {
+    use NovaAuthorizedByWarehouser;
+
     /**
      * The model the resource corresponds to.
      *
@@ -113,5 +117,15 @@ class GoodManualWarehousing extends Resource
     public function title()
     {
         return __('Good Manual Warehousing').' '.'#'.$this->id;
+    }
+
+    public function authorizedToView(Request $request)
+    {
+        return false;
+    }
+
+    public function authorizedToUpdate(Request $request)
+    {
+        return false;
     }
 }

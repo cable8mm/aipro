@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\Traits\NovaAuthorizedByManager;
 use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
@@ -13,6 +14,8 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Box extends Resource
 {
+    use NovaAuthorizedByManager;
+
     /**
      * The model the resource corresponds to.
      *
