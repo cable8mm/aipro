@@ -104,4 +104,9 @@ class OptionGood extends Resource
     {
         return __('Option Goods');
     }
+
+    public function title()
+    {
+        return '['.$this->master_code.'] '.$this->name;
+    }
 }

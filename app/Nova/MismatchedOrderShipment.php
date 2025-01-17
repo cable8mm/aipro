@@ -108,4 +108,9 @@ class MismatchedOrderShipment extends Resource
     {
         return __('Mismatched Order Shipment');
     }
+
+    public function title()
+    {
+        return __('Mismatched Order Shipment').' '.'#'.$this->id;
+    }
 }

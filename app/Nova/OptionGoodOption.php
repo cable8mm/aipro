@@ -34,6 +34,8 @@ class OptionGoodOption extends Resource
      */
     public static $search = [
         'id',
+        'master_code',
+        'name',
     ];
 
     /**
@@ -103,5 +105,10 @@ class OptionGoodOption extends Resource
     public static function label()
     {
         return __('Option Good Option');
+    }
+
+    public function title()
+    {
+        return '['.$this->master_code.'] '.$this->name;
     }
 }

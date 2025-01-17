@@ -4,6 +4,7 @@ namespace App\Nova;
 
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class PlayautoGood extends Resource
@@ -20,7 +21,7 @@ class PlayautoGood extends Resource
      *
      * @var string
      */
-    public static $title = 'Playauto Goods';
+    public static $title = 'SKU코드';
 
     /**
      * The columns that should be searched.
@@ -40,7 +41,7 @@ class PlayautoGood extends Resource
     {
         return [
             ID::make()->sortable(),
-            Text::make('S_k_u코드')->maxlength(255),
+            Text::make('SKU코드', 'SKU코드')->maxlength(255),
             Text::make('모델명')->maxlength(255),
             Text::make('브랜드')->maxlength(255),
             Text::make('제조사')->maxlength(255),
@@ -61,23 +62,23 @@ class PlayautoGood extends Resource
             Text::make('판매수량')->maxlength(255),
             Text::make('실재고')->maxlength(255),
             Text::make('안전재고')->maxlength(255),
-            Text::make('이미지1_u_r_l')->maxlength(255),
-            Text::make('이미지2_u_r_l')->maxlength(255),
-            Text::make('이미지3_u_r_l')->maxlength(255),
-            Text::make('이미지4_u_r_l')->maxlength(255),
-            Text::make('G_i_f생성')->maxlength(255),
-            Text::make('이미지6_u_r_l')->maxlength(255),
-            Text::make('이미지7_u_r_l')->maxlength(255),
-            Text::make('이미지8_u_r_l')->maxlength(255),
-            Text::make('이미지9_u_r_l')->maxlength(255),
-            Text::make('이미지10_u_r_l')->maxlength(255),
+            Text::make('이미지1URL')->maxlength(255),
+            Text::make('이미지2URL')->maxlength(255),
+            Text::make('이미지3URL')->maxlength(255),
+            Text::make('이미지4URL')->maxlength(255),
+            Text::make('GIF생성')->maxlength(255),
+            Text::make('이미지6URL')->maxlength(255),
+            Text::make('이미지7URL')->maxlength(255),
+            Text::make('이미지8URL')->maxlength(255),
+            Text::make('이미지9URL')->maxlength(255),
+            Text::make('이미지10URL')->maxlength(255),
             Text::make('추가정보입력사항')->maxlength(255),
             Text::make('옵션타입')->maxlength(255),
             Text::make('옵션구분')->maxlength(255),
             Text::make('선택옵션'),
             Text::make('입력형옵션')->maxlength(255),
             Text::make('추가구매옵션')->maxlength(255),
-            Text::make('Description'),
+            Textarea::make('Description'),
             Text::make('추가상세설명'),
             Text::make('광고/홍보')->maxlength(255),
             Text::make('제조일자')->maxlength(255),
@@ -128,5 +129,10 @@ class PlayautoGood extends Resource
     public function actions(NovaRequest $request)
     {
         return [];
+    }
+
+    public static function label()
+    {
+        return __('Playauto Goods');
     }
 }

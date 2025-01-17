@@ -142,4 +142,9 @@ class PlacingOrderGood extends Resource
     {
         return __('Placing Order Good');
     }
+
+    public function title()
+    {
+        return '['.$this->good->master_code.'] '.$this->good->name;
+    }
 }
