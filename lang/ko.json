@@ -447,7 +447,7 @@
     "Picking Box Number": "피킹박스 번호",
     "Placing Order": "발주",
     "Placing Order Count": "발주횟수",
-    "Placing Order Good": "발주 주문 상품",
+    "Placing Order Good": "발주 상품",
     "Placing Order Good Id": "발주상품아이디",
     "Placing Order Id": "발주아이디",
     "Placing Orders": "발주서",
@@ -742,5 +742,17 @@
     "Action Name": "액션 이름",
     "Dashboards": "대시보드",
     "My Profile": "프로필",
-    "Helpful Links": "도움되는 사이트"
+    "Helpful Links": "도움되는 사이트",
+    "365 Days": "365 일",
+    "Total Order Shipment": "총 주문서",
+    "Order Shipment Per Day": "일별 주문서",
+    "Total Placing Order Good": "총 발주상품",
+    "Placing Order Good Per Day": "일별 발주상품",
+    "Total Good": "총 상품",
+    "Good Per Day": "일별 상품",
+    "Sale Price Per Day": "일별 판매금액",
+    "Total Sale Price": "총 판매금액",
+    "Total Sale Count": "총 판매갯수",
+    "Sale Count Per Day": "일별 판매갯수",
+    "Sale Price Per Site": "사이트별 판매금액"
 }
