@@ -11,7 +11,7 @@ abstract class Resource extends NovaResource
 
     public static $showColumnBorders = true;
 
-    public static $clickAction = 'preview';
+    public static $clickAction = 'detail';
 
     public static $showPollingToggle = true;
 
