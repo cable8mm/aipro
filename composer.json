@@ -15,10 +15,12 @@
         "laravel-lang/common": "^6.4",
         "laravel/framework": "^11.31",
         "laravel/nova": "4.34.3",
+        "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
         "livewire/livewire": "^3.4",
         "livewire/volt": "^1.0",
-        "outl1ne/nova-multiselect-filter": "^4.0"
+        "outl1ne/nova-multiselect-filter": "^4.0",
+        "picqer/php-barcode-generator": "^3.2"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.14",
@@ -102,7 +104,8 @@
         "laravel/pint": "Pint is a PHP static analysis tool that finds common mistakes in your Laravel application.",
         "laravel/sail": "Laravel Sail provides a pre-configured Docker environment for local development.",
         "mbezhanov/faker-provider-collection": "Adds custom Faker providers for Laravel applications.",
-        "outl1ne/nova-multiselect-filter": "Provides Laravel Nova filter for Multiselect field."
+        "outl1ne/nova-multiselect-filter": "Provides Laravel Nova filter for Multiselect field.",
+        "picqer/php-barcode-generator": "Required to generate a barcode"
     },
     "config": {
         "optimize-autoloader": true,
