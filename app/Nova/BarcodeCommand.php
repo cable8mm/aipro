@@ -2,13 +2,18 @@
 
 namespace App\Nova;
 
+use App\Traits\NovaAuthorizedByManager;
 use Illuminate\Validation\Rule;
+use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\Number;
+use Laravel\Nova\Fields\Stack;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class BarcodeCommand extends Resource
 {
+    use NovaAuthorizedByManager;
+
     /**
      * The model the resource corresponds to.
      *
@@ -50,6 +55,15 @@ class BarcodeCommand extends Resource
             Text::make(__('Barcode'), 'barcode')
                 ->rules(Rule::unique('barcode_commands')->ignore($this->id), 'required')
                 ->required()->maxlength(100),
+            Text::make(__('Barcode Image'), function () {
+                $barcode = $this->barcode;
+
+                return "<img src='/api/generate-barcode?number={$barcode}' />";
+            })->asHtml(),
+            Stack::make(__('Created At').' & '.__('Updated At'), [
+                DateTime::make(__('Created At'), 'created_at'),
+                DateTime::make(__('Updated At'), 'updated_at'),
+            ]),
         ];
     }
 

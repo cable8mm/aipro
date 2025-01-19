@@ -76,7 +76,7 @@ final class Barcode
     {
         $barcode = BarcodeType::barcodeGenerator($this->type)->getBarcode($this->number);
 
-        $renderer = new \Picqer\Barcode\Renderers\SvgRenderer;
+        $renderer = new \Picqer\Barcode\Renderers\PngRenderer;
 
         return $renderer->render($barcode, width: 155, height: 50);
     }
