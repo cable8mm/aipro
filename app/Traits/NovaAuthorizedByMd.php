@@ -36,8 +36,7 @@ trait NovaAuthorizedByMd
 
     public function authorizedToDelete(Request $request)
     {
-        return $request->user()?->type == UserType::ADMINISTRATOR->name
-            || $request->user()?->type == UserType::DEVELOPER->name;
+        return false;
     }
 
     public function authorizedToUpdate(Request $request)
