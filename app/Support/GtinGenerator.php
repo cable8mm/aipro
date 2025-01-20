@@ -24,6 +24,8 @@ class GtinGenerator
 
     /**
      * Get command barcode number
+     *
+     * @param  int  $id  `barcode_commands` table id
      */
     public function getCommand(int $id): string
     {
@@ -34,6 +36,11 @@ class GtinGenerator
         return $this->get($code);
     }
 
+    /**
+     * Get box barcode number
+     *
+     * @param  int  $id  `boxes` table id
+     */
     public function getBox(int $id): string
     {
         $idLength = static::LENGTH - strlen(static::BOX_PREFIX);
@@ -43,6 +50,12 @@ class GtinGenerator
         return $this->get($code);
     }
 
+    /**
+     * Get barcode with checksum
+     *
+     * @param  string  $code  Barcode number
+     * @return string The method returns the barcode number with checksum
+     */
     public function get(string $code): string
     {
         return $code.$this->getChecksum($code);
@@ -63,6 +76,12 @@ class GtinGenerator
         return substr(10 - (substr($iCalculation, -1)), -1);
     }
 
+    /**
+     * Factory method to create
+     *
+     * @param  string  $id  `boxes` table id
+     * @return string This method returns box barcode number
+     */
     public static function ofBox(string $id): string
     {
         return (new static)->getBox($id);

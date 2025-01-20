@@ -8,4 +8,4 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::get('/generate-barcode/{barcode_number}', GenerateBarcodeController::class);
+Route::get('/generate-barcode/{barcodeNumber}', GenerateBarcodeController::class);
