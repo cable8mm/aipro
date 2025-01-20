@@ -11,6 +11,8 @@ class MismatchedOrderShipment extends Model
 {
     use Actionable, HasFactory;
 
+    protected $with = ['user', 'orderSheetInvoice'];
+
     protected function casts(): array
     {
         return [

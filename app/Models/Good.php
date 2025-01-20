@@ -11,6 +11,8 @@ class Good extends Model
 {
     use Actionable, HasFactory;
 
+    protected $with = ['box', 'user', 'supplier', 'supplierGood', 'playautoCategory'];
+
     protected function casts(): array
     {
         return [

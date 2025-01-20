@@ -11,6 +11,8 @@ class Order extends Model
 {
     use Actionable, HasFactory;
 
+    protected $with = ['orderSheetInvoice'];
+
     protected function casts(): array
     {
         return [

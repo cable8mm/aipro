@@ -10,6 +10,8 @@ class GoodInventorySnapshot extends Model
 {
     use HasFactory;
 
+    protected $with = ['author', 'good'];
+
     protected function casts(): array
     {
         return [

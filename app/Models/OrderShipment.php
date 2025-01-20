@@ -10,6 +10,8 @@ class OrderShipment extends Model
 {
     use HasFactory;
 
+    protected $with = ['orderSheetInvoice'];
+
     protected function casts(): array
     {
         return [

@@ -11,6 +11,8 @@ class BoxManualWarehousing extends Model
 {
     use Actionable, HasFactory;
 
+    protected $with = ['box', 'user'];
+
     protected function casts(): array
     {
         return [

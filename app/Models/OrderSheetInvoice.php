@@ -11,6 +11,8 @@ class OrderSheetInvoice extends Model
 {
     use HasFactory;
 
+    protected $with = ['author'];
+
     protected function casts(): array
     {
         return [

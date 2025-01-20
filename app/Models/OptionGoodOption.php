@@ -11,6 +11,8 @@ class OptionGoodOption extends Model
 {
     use Actionable, HasFactory;
 
+    protected $with = ['user', 'optionGood'];
+
     protected function casts(): array
     {
         return [
