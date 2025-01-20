@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BarcodeCommandController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -12,5 +13,7 @@ Route::view('dashboard', 'dashboard')
 Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
+
+Route::get('barcode-command', BarcodeCommandController::class);
 
 require __DIR__.'/auth.php';

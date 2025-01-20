@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\AlertEmail as ModelsAlertEmail;
+use App\Models\BarcodeCommand as ModelsBarcodeCommand;
 use App\Models\Box as ModelsBox;
 use App\Models\BoxSupplier as ModelsBoxSupplier;
 use App\Models\Channel as ModelsChannel;
@@ -21,6 +22,7 @@ use App\Models\Supplier as ModelsSupplier;
 use App\Models\SupplierGood as ModelsSupplierGood;
 use App\Models\User as ModelsUser;
 use App\Nova\AlertEmail;
+use App\Nova\BarcodeCommand;
 use App\Nova\BasicGood;
 use App\Nova\Box;
 use App\Nova\BoxInventoryHistory;
@@ -150,6 +152,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 ])->icon('view-boards')->collapsable(),
 
                 MenuSection::make(__('Tools'), [
+                    MenuItem::resource(BarcodeCommand::class)->withBadge(fn () => ModelsBarcodeCommand::count(), 'info'),
                     MenuItem::resource(NaverCategory::class)->withBadge(fn () => ModelsNaverCategory::count(), 'info'),
                     MenuItem::resource(PriceCoefficient::class),
                     MenuItem::resource(ShutdownGood::class)->withBadge(fn () => ModelsShutdownGood::count(), 'info'),
