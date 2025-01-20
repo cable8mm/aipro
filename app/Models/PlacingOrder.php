@@ -12,6 +12,8 @@ class PlacingOrder extends Model
 {
     use Actionable, HasFactory;
 
+    protected $with = ['user', 'warehouseManager', 'supplier'];
+
     protected function casts(): array
     {
         return [

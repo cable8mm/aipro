@@ -12,6 +12,8 @@ class BoxOrder extends Model
 {
     use Actionable, HasFactory;
 
+    protected $with = ['user', 'warehouseManager', 'boxSupplier'];
+
     protected function casts(): array
     {
         return [

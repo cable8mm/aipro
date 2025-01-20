@@ -10,6 +10,8 @@ class BoxInventoryHistory extends Model
 {
     use HasFactory;
 
+    protected $with = ['box'];
+
     protected function casts(): array
     {
         return [

@@ -11,6 +11,8 @@ class GoodManualWarehousing extends Model
 {
     use Actionable, HasFactory;
 
+    protected $with = ['good', 'user'];
+
     protected function casts(): array
     {
         return [

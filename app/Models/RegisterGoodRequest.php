@@ -11,6 +11,8 @@ class RegisterGoodRequest extends Model
 {
     use Actionable, HasFactory;
 
+    protected $with = ['requester', 'worker'];
+
     protected function casts(): array
     {
         return [

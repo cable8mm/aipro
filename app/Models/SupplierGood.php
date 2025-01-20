@@ -11,6 +11,8 @@ class SupplierGood extends Model
 {
     use Actionable, HasFactory;
 
+    protected $with = ['supplier'];
+
     protected function casts(): array
     {
         return [

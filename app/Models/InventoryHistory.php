@@ -10,6 +10,8 @@ class InventoryHistory extends Model
 {
     use HasFactory;
 
+    protected $with = ['user', 'good'];
+
     protected function casts(): array
     {
         return [
