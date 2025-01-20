@@ -58,7 +58,7 @@ class BarcodeCommand extends Resource
             Text::make(__('Barcode Image'), function () {
                 $barcode = $this->barcode;
 
-                return "<img src='/api/generate-barcode?number={$barcode}' />";
+                return "<img class='py-2' src='/api/generate-barcode/{$barcode}' />";
             })->asHtml(),
             Stack::make(__('Created At').' & '.__('Updated At'), [
                 DateTime::make(__('Created At'), 'created_at'),

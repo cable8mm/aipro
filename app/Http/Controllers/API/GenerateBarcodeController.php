@@ -9,12 +9,10 @@ use Illuminate\Support\Facades\Response;
 
 class GenerateBarcodeController extends Controller
 {
-    public function __invoke(Request $request)
+    public function __invoke(Request $request, string $barcode_number)
     {
-        $number = $request->get('number');
-
         return Response::make(
-            Barcode::factory($number)->render(),
+            Barcode::factory($barcode_number)->render(),
             200,
             ['Content-Type' => 'image/png']
         );
