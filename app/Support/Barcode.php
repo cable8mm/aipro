@@ -43,6 +43,14 @@ final class Barcode
         [$this->commandType, $this->number, $this->type] = $this->getProperties($originalNumber);
     }
 
+    /**
+     * Get properties of a barcode number
+     *
+     * @param  string  $number  The barcode number
+     * @return array array{BarcodeCommandType, string, BarcodeType}
+     *
+     * @example {BarcodeCommandType::ORDER, '90000001010018', BarcodeType::ITF14}
+     */
     private function getProperties(string $number): array
     {
         $barcodeCommandTypeValue = $number[0];
