@@ -86,7 +86,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
 
         Nova::withBreadcrumbs();
 
-        Nova::showUnreadCountInNotificationCenter();
+        Nova::withoutNotificationCenter();
 
         Nova::footer(function ($request) {
             return Blade::render('
