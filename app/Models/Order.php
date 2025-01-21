@@ -28,4 +28,9 @@ class Order extends Model
     {
         return $this->belongsTo(OrderSheetInvoice::class);
     }
+
+    public function pickingZone(): BelongsTo
+    {
+        return $this->belongsTo(PickingZone::class);
+    }
 }

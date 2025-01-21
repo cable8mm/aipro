@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
  */
-class OrderFactory extends Factory
+class PickingZoneFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,10 +17,8 @@ class OrderFactory extends Factory
     public function definition(): array
     {
         return [
-            'order_sheet_invoice_id' => fake()->randomNumber(1) + 1,
-            'picking_zone_id' => fake()->numberBetween(1, 9),
-            'order_good_count' => fake()->numberBetween(1, 99),
-            'printed_count' => fake()->numberBetween(0, 9),
+            'name' => fake()->word(),
+            'code' => fake()->randomElement(['A', 'B', 'C', 'D', 'E', 'F']).fake()->numberBetween(1, 9),
         ];
     }
 }

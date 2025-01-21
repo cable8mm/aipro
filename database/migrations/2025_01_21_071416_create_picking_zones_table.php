@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('orders', function (Blueprint $table) {
+        Schema::create('picking_zones', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('order_sheet_invoice_id');
-            $table->foreignId('picking_zone_id')->nullable();
-            $table->integer('order_good_count')->default(0);
-            $table->integer('printed_count')->default(0);
+            $table->string('name', 50)->comment('피킹 존 이름');
+            $table->string('code', 10)->comment('피킹 존 코드');
             $table->timestamps();
         });
     }
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('orders');
+        Schema::dropIfExists('zones');
     }
 };

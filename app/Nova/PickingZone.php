@@ -2,24 +2,23 @@
 
 namespace App\Nova;
 
-use App\Traits\NovaAuthorizedByWarehouser;
-use Laravel\Nova\Fields\BelongsTo;
+use App\Traits\NovaAuthorizedByManager;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Stack;
+use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
-class Order extends Resource
+class PickingZone extends Resource
 {
-    use NovaAuthorizedByWarehouser;
+    use NovaAuthorizedByManager;
 
     /**
      * The model the resource corresponds to.
      *
-     * @var class-string<\App\Models\Order>
+     * @var class-string<\App\Models\PickingZone>
      */
-    public static $model = \App\Models\Order::class;
+    public static $model = \App\Models\PickingZone::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -35,6 +34,8 @@ class Order extends Resource
      */
     public static $search = [
         'id',
+        'name',
+        'code',
     ];
 
     /**
@@ -46,14 +47,8 @@ class Order extends Resource
     {
         return [
             ID::make()->sortable(),
-            BelongsTo::make(__('Order Sheet Invoice'), 'orderSheetInvoice', OrderSheetInvoice::class),
-            BelongsTo::make(__('Picking Zone'), 'pickingZone', PickingZone::class),
-            Number::make(__('Order Good Count'), 'order_good_count')->displayUsing(function ($value) {
-                return number_format($value);
-            })->exceptOnForms(),
-            Number::make(__('Printed Count'), 'printed_count')->displayUsing(function ($value) {
-                return number_format($value);
-            })->exceptOnForms(),
+            Text::make(__('Name'), 'name')->maxlength(50),
+            Text::make(__('Code'), 'code')->maxlength(10),
             Stack::make(__('Created At').' & '.__('Updated At'), [
                 DateTime::make(__('Created At'), 'created_at'),
                 DateTime::make(__('Updated At'), 'updated_at'),
@@ -103,6 +98,11 @@ class Order extends Resource
 
     public static function label()
     {
-        return __('Orders');
+        return __('Picking Zones');
+    }
+
+    public function title()
+    {
+        return __('Picking Zones').' '.$this->code;
     }
 }

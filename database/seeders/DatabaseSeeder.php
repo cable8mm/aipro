@@ -38,6 +38,7 @@ class DatabaseSeeder extends Seeder
             OrderSheetInvoiceSeeder::class,
             OrderSeeder::class,
             OrderShipmentSeeder::class,
+            PickingZoneSeeder::class,
             PlacingOrderGoodSeeder::class,
             PlacingOrderSeeder::class,
             PlayautoCategorySeeder::class,
