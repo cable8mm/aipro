@@ -34,13 +34,13 @@ class OrderSheetInvoice extends Model
     protected static function booted(): void
     {
         static::creating(function (OrderSheetInvoice $orderSheetInvoice) {
-            $orderSheetInvoice->author_id = Auth::user()->id;
+            $orderSheetInvoice->author_id = $orderSheetInvoice->author_id ?? Auth::user()->id;
         });
     }
 
     public function author(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'author_id');
     }
 
     public function orders(): HasMany

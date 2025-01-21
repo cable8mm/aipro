@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "35b7a22c72f75847ee58a1bb1cedca3b",
+    "content-hash": "1407f0cbf7c84866b70fff1e8540d95b",
     "packages": [
         {
             "name": "archtechx/enums",
@@ -221,6 +221,118 @@
                 "source": "https://github.com/cable8mm/enum-getter/tree/v1.3.0"
             },
             "time": "2025-01-16T17:09:30+00:00"
+        },
+        {
+            "name": "cable8mm/good-code",
+            "version": "v2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cable8mm/good-code.git",
+                "reference": "de833d7c9ac8fbc44f71490534132ee6c8eada80"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cable8mm/good-code/zipball/de833d7c9ac8fbc44f71490534132ee6c8eada80",
+                "reference": "de833d7c9ac8fbc44f71490534132ee6c8eada80",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.0",
+                "phpunit/phpunit": "^9.0|^10.0|^11.0"
+            },
+            "type": "project",
+            "autoload": {
+                "psr-4": {
+                    "Cable8mm\\GoodCodeParser\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sam Lee",
+                    "email": "cable8mm@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Create a general code specification for building a WMS (Warehouse Management System), and specify parsers and implementation guidelines.",
+            "keywords": [
+                "cable8mm",
+                "composer",
+                "packagist",
+                "php",
+                "psr-12"
+            ],
+            "support": {
+                "issues": "https://github.com/cable8mm/good-code/issues",
+                "source": "https://github.com/cable8mm/good-code/tree/v2.0.0"
+            },
+            "time": "2025-01-21T06:26:40+00:00"
+        },
+        {
+            "name": "cable8mm/laravel-validation-kisa-rules",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cable8mm/laravel-validation-kisa-rules.git",
+                "reference": "629ccb1c68ecc8a5b259add8f72b7ebc3c8fa2b6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cable8mm/laravel-validation-kisa-rules/zipball/629ccb1c68ecc8a5b259add8f72b7ebc3c8fa2b6",
+                "reference": "629ccb1c68ecc8a5b259add8f72b7ebc3c8fa2b6",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^8.0|^9.0|^10.0|^11.0",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.0",
+                "orchestra/testbench": "^6.23|^7.0|^8.0|^9.0",
+                "phpunit/phpunit": "^9.0|^10.0|^11.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Cable8mm\\ValidationKisaRules\\ValidationKisaRulesServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Cable8mm\\ValidationKisaRules\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Samgu Lee",
+                    "email": "cable8mm@gmail.com",
+                    "homepage": "https://www.palgle.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A set of useful Laravel validation password rules for KISA",
+            "homepage": "https://github.com/cable8mm/laravel-validation-kisa-rules",
+            "keywords": [
+                "cable8mm",
+                "laravel-validation-kisa-rules"
+            ],
+            "support": {
+                "issues": "https://github.com/cable8mm/laravel-validation-kisa-rules/issues",
+                "source": "https://github.com/cable8mm/laravel-validation-kisa-rules/tree/v1.0.1"
+            },
+            "time": "2024-04-26T12:23:41+00:00"
         },
         {
             "name": "carbonphp/carbon-doctrine-types",
@@ -6295,16 +6407,16 @@
         },
         {
             "name": "spatie/laravel-package-tools",
-            "version": "1.18.0",
+            "version": "1.18.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-package-tools.git",
-                "reference": "8332205b90d17164913244f4a8e13ab7e6761d29"
+                "reference": "d41c44a7eab604c3eb0cad93210612d4c1429c20"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-package-tools/zipball/8332205b90d17164913244f4a8e13ab7e6761d29",
-                "reference": "8332205b90d17164913244f4a8e13ab7e6761d29",
+                "url": "https://api.github.com/repos/spatie/laravel-package-tools/zipball/d41c44a7eab604c3eb0cad93210612d4c1429c20",
+                "reference": "d41c44a7eab604c3eb0cad93210612d4c1429c20",
                 "shasum": ""
             },
             "require": {
@@ -6343,7 +6455,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-package-tools/issues",
-                "source": "https://github.com/spatie/laravel-package-tools/tree/1.18.0"
+                "source": "https://github.com/spatie/laravel-package-tools/tree/1.18.2"
             },
             "funding": [
                 {
@@ -6351,7 +6463,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-12-30T13:13:39+00:00"
+            "time": "2025-01-20T14:14:17+00:00"
         },
         {
             "name": "symfony/clock",

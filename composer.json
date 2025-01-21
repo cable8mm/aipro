@@ -11,6 +11,8 @@
     "require": {
         "php": "^8.3",
         "cable8mm/enum-getter": "^1.0",
+        "cable8mm/good-code": "^2.0",
+        "cable8mm/laravel-validation-kisa-rules": "^1.0",
         "dedoc/scramble": "^0.11.33",
         "laracraft-tech/laravel-useful-additions": "^4.0",
         "laravel-lang/common": "^6.4",
@@ -97,6 +99,8 @@
     "suggest": {
         "barryvdh/laravel-debugbar": "Enables XDebug integration in Laravel applications.",
         "barryvdh/laravel-ide-helper": "Provides IDE helper classes for Laravel applications.",
+        "cable8mm/good-code": "Provides various apis for good code and performance.",
+        "cable8mm/laravel-validation-kisa-rules": "Provides Laravel validation rules for Korean.",
         "cable8mm/xeed": "Provides Laravel resources like models, migrations, seeds, factories and Nova resources.",
         "dedoc/scramble": "Provides API Documents",
         "fakerphp/faker": "Generates fake data for testing and seeding your application.",

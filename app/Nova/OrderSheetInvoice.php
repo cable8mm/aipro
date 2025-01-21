@@ -12,8 +12,8 @@ use Laravel\Nova\Fields\File;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
-use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Stack;
+use Laravel\Nova\Fields\Status as FieldsStatus;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
@@ -53,11 +53,11 @@ class OrderSheetInvoice extends Resource
 
             File::make(__('Order Sheet File'), 'order_sheet_file')->required()
                 ->creationRules([
-                    //                    'required',
+                    'required',
                     RulesFile::types(['xlsx', 'xls', 'csv'])->max(48 * 1024),
                 ])
                 ->updateRules([
-                    //                    'nullable',
+                    'nullable',
                     RulesFile::types(['xlsx', 'xls', 'csv'])->max(48 * 1024),
                 ])
                 ->help('엑셀 파일을 업로드합니다. (xlsx, xls, csv)')
@@ -66,13 +66,11 @@ class OrderSheetInvoice extends Resource
                 ->storeSize('order_sheet_file_size')
                 ->prunable(),
 
-            File::make(__('Invoice File'), 'invoice_file')->required()
+            File::make(__('Invoice File'), 'invoice_file')
                 ->creationRules([
-                    'required',
                     RulesFile::types(['pdf'])->max(48 * 1024),
                 ])
                 ->updateRules([
-                    'nullable',
                     RulesFile::types(['pdf'])->max(48 * 1024),
                 ])
                 ->help('운송장 파일을 업로드합니다. (pdf)')
@@ -113,9 +111,15 @@ class OrderSheetInvoice extends Resource
                 return number_format($value);
             })->exceptOnForms(),
 
-            Select::make(__('Status'), 'status')
-                ->options(Status::array())->displayUsingLabels()
-                ->filterable()->exceptOnForms(),
+            FieldsStatus::make(__('Status'), 'status')
+                ->default(Status::WAITING->name)
+                ->loadingWhen([Status::WAITING->name, Status::RUNNING->name])
+                ->failedWhen([Status::FAILED->name])
+                ->filterable(function ($request, $query, $value, $attribute) {
+                    $query->where($attribute, 'LIKE', "{$value}%");
+                })->displayUsing(function ($value) {
+                    return Status::{$value}->value() ?? '-';
+                }),
             Stack::make(__('Created At').' & '.__('Updated At'), [
                 DateTime::make(__('Created At'), 'created_at'),
                 DateTime::make(__('Updated At'), 'updated_at'),

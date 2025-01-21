@@ -4,8 +4,8 @@ namespace App\Nova;
 
 use App\Enums\UserType;
 use App\Traits\NovaAuthorizedByManager;
+use Cable8mm\ValidationKisaRules\Rules\KisaPassword;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rules;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\Gravatar;
 use Laravel\Nova\Fields\ID;
@@ -71,8 +71,8 @@ class User extends Resource
 
             Password::make(__('Password'), 'password')
                 ->onlyOnForms()
-                ->creationRules('required', Rules\Password::defaults())
-                ->updateRules('nullable', Rules\Password::defaults()),
+                ->creationRules('required', new KisaPassword)
+                ->updateRules('nullable', new KisaPassword),
 
             Stack::make(__('Created At').' & '.__('Updated At'), [
                 DateTime::make(__('Created At'), 'created_at'),
