@@ -2,10 +2,12 @@
 
 namespace App\Nova;
 
+use App\Enums\OrderType;
 use App\Traits\NovaAuthorizedByWarehouser;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\MultiSelect;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Stack;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -45,9 +47,10 @@ class Order extends Resource
     public function fields(NovaRequest $request)
     {
         return [
-            ID::make()->sortable(),
+            ID::make(__('Order Number'), 'id')->sortable(),
             BelongsTo::make(__('Order Sheet Invoice'), 'orderSheetInvoice', OrderSheetInvoice::class),
-            BelongsTo::make(__('Picking Zone'), 'pickingZone', PickingZone::class),
+            MultiSelect::make(__('Type'), 'type')->options(OrderType::array())
+                ->rules('required')->required()->displayUsingLabels()->filterable(),
             Number::make(__('Order Good Count'), 'order_good_count')->displayUsing(function ($value) {
                 return number_format($value);
             })->exceptOnForms(),

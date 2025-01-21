@@ -16,21 +16,15 @@ class Order extends Model
     protected function casts(): array
     {
         return [
-            'type' => 'string',
-            'is_all_good_matched' => 'boolean',
-            'has_center_class_j' => 'boolean',
+            'type' => 'array',
             'order_good_count' => 'integer',
             'printed_count' => 'integer',
+            'is_all_good_matched' => 'boolean',
         ];
     }
 
     public function orderSheetInvoice(): BelongsTo
     {
         return $this->belongsTo(OrderSheetInvoice::class);
-    }
-
-    public function pickingZone(): BelongsTo
-    {
-        return $this->belongsTo(PickingZone::class);
     }
 }

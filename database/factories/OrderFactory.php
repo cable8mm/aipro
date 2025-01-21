@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\OrderType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,8 +18,9 @@ class OrderFactory extends Factory
     public function definition(): array
     {
         return [
+            'id' => '100'.str_pad(fake()->randomNumber(9), 9, '0', STR_PAD_LEFT),
             'order_sheet_invoice_id' => fake()->randomNumber(1) + 1,
-            'picking_zone_id' => fake()->numberBetween(1, 9),
+            'type' => fake()->randomElements(OrderType::names(), fake()->randomNumber(2) % count(OrderType::cases())),
             'order_good_count' => fake()->numberBetween(1, 99),
             'printed_count' => fake()->numberBetween(0, 9),
         ];
