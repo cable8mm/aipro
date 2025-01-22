@@ -171,7 +171,9 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             ];
         });
 
-        // https://nova.laravel.com/docs/v4/customization/menus#appending-prepending-to-the-menu
+        /**
+         * @see https://nova.laravel.com/docs/v4/customization/menus#appending-prepending-to-the-menu
+         */
         Nova::userMenu(function (Request $request, Menu $menu) {
             return $menu
                 ->prepend(MenuItem::link(__('My Profile'), '/resources/users/'.$request->user()->getKey()));
