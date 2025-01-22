@@ -10,11 +10,13 @@ use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\Gravatar;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Password;
+use Laravel\Nova\Fields\PasswordConfirmation;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Stack;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Timezone;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use Laravel\Nova\Panel;
 
 class User extends Resource
 {
@@ -65,14 +67,19 @@ class User extends Resource
                 ->creationRules('unique:users,email')
                 ->updateRules('unique:users,email,{{resourceId}}'),
 
-            Select::make(__('Type'), 'type')->options(UserType::array())->displayUsingLabels(),
+            Select::make(__('Type'), 'type')->required()->options(UserType::array())->displayUsingLabels(),
 
-            Timezone::make(__('Timezone'), 'timezone'),
+            Timezone::make(__('Timezone'), 'timezone')->required()->searchable()
+                ->help(__('If you are in Korea, select "Asia/Seoul".')),
 
-            Password::make(__('Password'), 'password')
-                ->onlyOnForms()
-                ->creationRules('required', new KisaPassword)
-                ->updateRules('nullable', new KisaPassword),
+            Panel::make(__('Change Password'), [
+                Password::make(__('Password'), 'password')
+                    ->onlyOnForms()
+                    ->creationRules('required', new KisaPassword, 'confirmed')
+                    ->updateRules('nullable', new KisaPassword, 'confirmed'),
+
+                PasswordConfirmation::make(__('Password Confirmation'), 'password_confirmation'),
+            ])->limit(1),
 
             Stack::make(__('Created At').' & '.__('Updated At'), [
                 DateTime::make(__('Created At'), 'created_at'),
