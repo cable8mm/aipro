@@ -3,6 +3,7 @@
 namespace App\Nova;
 
 use App\Enums\Status;
+use App\Nova\Actions\OrderFromOrderSheetInvoice;
 use App\Traits\NovaAuthorizedByWarehouser;
 use Illuminate\Support\Number as SupportNumber;
 use Illuminate\Validation\Rules\File as RulesFile;
@@ -49,6 +50,18 @@ class OrderSheetInvoice extends Resource
             BelongsTo::make(__('Author'), 'author', User::class)->exceptOnForms(),
             Text::make(__('Title'), 'title', function () {
                 return $this->title();
+            })->exceptOnForms(),
+
+            Number::make(__('Row Count'), 'row_count')->nullable()->displayUsing(function ($value) {
+                return ! is_null($value) ? number_format($value) : null;
+            })->exceptOnForms(),
+            Number::make(__('Order Count'), 'order_count')->nullable()->exceptOnForms(),
+            Number::make(__('Order Good Count'), 'order_good_count')->nullable()->displayUsing(function ($value) {
+                return ! is_null($value) ? number_format($value) : null;
+            })->exceptOnForms(),
+
+            Number::make(__('Mismatched Order Good Count'), 'mismatched_order_good_count')->nullable()->displayUsing(function ($value) {
+                return ! is_null($value) ? number_format($value) : null;
             })->exceptOnForms(),
 
             File::make(__('Order Sheet File'), 'order_sheet_file')->required()
@@ -100,16 +113,6 @@ class OrderSheetInvoice extends Resource
                         return $value ? SupportNumber::fileSize($value, precision: 2) : '-';
                     }),
             ]),
-
-            Number::make(__('Order Row Count'), 'order_row_count')->displayUsing(function ($value) {
-                return number_format($value);
-            })->exceptOnForms(),
-            Number::make(__('Order Number Count'), 'order_number_count')->displayUsing(function ($value) {
-                return number_format($value);
-            })->exceptOnForms(),
-            Number::make(__('Order Good Count'), 'order_good_count')->displayUsing(function ($value) {
-                return number_format($value);
-            })->exceptOnForms(),
 
             FieldsStatus::make(__('Status'), 'status')
                 ->default(Status::WAITING->name)
@@ -168,7 +171,9 @@ class OrderSheetInvoice extends Resource
      */
     public function actions(NovaRequest $request)
     {
-        return [];
+        return [
+            (new OrderFromOrderSheetInvoice)->showInline(),
+        ];
     }
 
     public static function label()

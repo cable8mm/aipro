@@ -12,6 +12,7 @@ use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Stack;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use Outl1ne\NovaInputFilter\InputFilter;
 
 class OrderShipment extends Resource
 {
@@ -38,6 +39,7 @@ class OrderShipment extends Resource
      */
     public static $search = [
         'id',
+        'order_sheet_invoice_id',
     ];
 
     /**
@@ -127,7 +129,9 @@ class OrderShipment extends Resource
      */
     public function filters(NovaRequest $request)
     {
-        return [];
+        return [
+            InputFilter::make()->forColumns(['order_sheet_invoice_id'])->withName(__('Order Sheet Invoice').' ID'),
+        ];
     }
 
     /**
