@@ -16,12 +16,13 @@ return new class extends Migration
             $table->id();
             $table->foreignId('author_id');
             $table->string('excel_filepath', 255)->nullable();
-            $table->integer('order_row_count')->nullable();
-            $table->integer('order_number_count')->nullable();
-            $table->integer('order_good_count')->nullable();
+            $table->integer('order_row_count')->nullable()->comment('주문 행수');
+            $table->integer('order_number_count')->nullable()->comment('주문수');
+            $table->integer('order_good_count')->nullable()->comment('주문 상품수');
+            $table->integer('mismatched_order_good_count')->nullable()->comment('미매칭 상품수');
             $table->string('invoice_filepath', 255)->nullable();
             $table->json('excel_json')->nullable();
-            $table->string('status', 50)->nullable()->default(Status::WAITING);
+            $table->string('status', 50)->nullable()->default(Status::WAITING)->comment('에러,파일업로드,정상확인완료,주문서입력완료');
             $table->timestamps();
         });
     }
