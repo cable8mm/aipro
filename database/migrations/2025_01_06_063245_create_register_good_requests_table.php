@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('register_good_requests', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('requester_id')->constrained(
+            $table->foreignId('author_id')->constrained(
                 table: 'users', indexName: 'register_good_requests_requester_user_id'
-            )->onUpdate('cascade')->restrictOnDelete();
+            )->onUpdate('cascade')->restrictOnDelete()->comment('요청자');
             $table->string('title', 255);
             $table->string('request_file_url', 255);
             $table->foreignId('worker_id')->constrained(

@@ -10,7 +10,6 @@ use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\DateTime;
-use Laravel\Nova\Fields\Hidden;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
@@ -59,9 +58,8 @@ class PlacingOrderGood extends Resource
         return [
             ID::make()->sortable(),
             BelongsTo::make(__('Placing Order'), 'placingOrder', PlacingOrder::class),
-            Hidden::make(__('User'), 'user_id')->default(function ($request) {
-                return $request->user()->id;
-            }),
+            BelongsTo::make(__('Author'), 'author', User::class),
+            BelongsTo::make(__('Warehouse Manager'), 'warehouseManager', User::class),
             Text::make(__('Master Code'), 'Good.master_code')->exceptOnForms(),
             Text::make(__('Safe Class'), 'Good.safe_class')->exceptOnForms()
                 ->displayUsing(function ($value) {
@@ -93,7 +91,6 @@ class PlacingOrderGood extends Resource
             Select::make(__('Status'), 'status')
                 ->options(PlacingOrderGoodStatus::array())->displayUsingLabels(),
             Textarea::make(__('Memo'), 'memo')->alwaysShow(),
-            BelongsTo::make(__('Warehouse Manager'), 'warehouseManager', User::class),
             Stack::make(__('Created At').' & '.__('Updated At'), [
                 DateTime::make(__('Created At'), 'created_at'),
                 DateTime::make(__('Updated At'), 'updated_at'),

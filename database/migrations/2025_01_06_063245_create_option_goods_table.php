@@ -13,11 +13,13 @@ return new class extends Migration
     {
         Schema::create('option_goods', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable();
+            $table->foreignId('author_id');
             $table->string('master_code', 130);
             $table->string('name', 130);
-            $table->integer('option_count')->nullable()->default('0');
-            $table->boolean('is_active')->nullable()->default('1');
+            $table->integer('option_count')->default(0)->comment('등록 옵션수');
+            $table->integer('my_shop_sale_option_count')->default(0)->comment('자사몰 판매 가능 옵션수');
+            $table->integer('other_shop_sale_option_count')->default(0)->comment('타사몰 판매 가능 옵션수');
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }

@@ -51,7 +51,7 @@ class InventoryHistory extends Resource
     {
         return [
             ID::make()->sortable(),
-            BelongsTo::make(__('User'), 'user', User::class),
+            BelongsTo::make(__('Author'), 'author', User::class),
             BelongsTo::make(__('Good'), 'good', Good::class),
             Select::make(__('Type'), 'type')->options(EnumsInventoryHistory::array())
                 ->rules('required')->required()->displayUsingLabels(),

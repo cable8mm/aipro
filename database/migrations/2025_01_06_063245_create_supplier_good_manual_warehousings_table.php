@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('supplier_good_id');
             $table->foreignId('author_id');
             $table->integer('manual_add_inventory_count');
-            $table->text('memo')->nullable();
+            $table->text('memo')->nullable()->comment('수동 입고 이유');
             $table->timestamps();
         });
     }

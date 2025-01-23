@@ -19,7 +19,7 @@ class BoxOrderFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => fake()->numberBetween(0, UserSeeder::COUNT),
+            'author_id' => fake()->numberBetween(0, UserSeeder::COUNT),
             'warehouse_manager_id' => fake()->numberBetween(0, UserSeeder::COUNT),
             'box_supplier_id' => fake()->numberBetween(0, UserSeeder::COUNT),
             'title' => fake()->text(30),

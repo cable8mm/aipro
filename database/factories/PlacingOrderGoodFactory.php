@@ -19,7 +19,7 @@ class PlacingOrderGoodFactory extends Factory
     {
         return [
             'placing_order_id' => fake()->randomNumber(1) + 1,
-            'user_id' => fake()->randomNumber(1) + 1,
+            'author_id' => fake()->randomNumber(1) + 1,
             'good_id' => fake()->randomNumber(1) + 1,
             'warehouse_manager_id' => fake()->randomNumber(1) + 1,
             'order_count' => fake()->randomNumber(2),
@@ -31,9 +31,9 @@ class PlacingOrderGoodFactory extends Factory
             'cost_price' => fake()->randomNumber(5),
             'is_promotion' => fake()->boolean(),
             'warehoused_at' => fake()->dateTime(),
+            'placing_ordered_at' => fake()->dateTime(),
             'status' => fake()->randomElement(Status::names()),
             'memo' => fake()->paragraph(),
-            'ordered_at' => fake()->dateTime(),
         ];
     }
 }

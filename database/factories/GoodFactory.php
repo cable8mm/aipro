@@ -23,7 +23,7 @@ class GoodFactory extends Factory
         fake()->addProvider(new \Bezhanov\Faker\Provider\Device(fake()));
 
         return [
-            'user_id' => fake()->randomNumber(1) + 1,
+            'author_id' => fake()->randomNumber(1) + 1,
             'supplier_id' => fake()->randomNumber(1) + 1,
             'supplier_good_id' => fake()->randomNumber(1) + 1,
             'box_id' => fake()->randomNumber(1) + 1,

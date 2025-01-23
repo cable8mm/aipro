@@ -55,7 +55,7 @@ class BoxOrder extends Resource
             ID::make()->sortable(),
             Select::make(__('Status'), 'status')
                 ->options(PlacingOrder::array())->displayUsingLabels()->filterable(),
-            Hidden::make('User', 'user_id')->default(function ($request) {
+            Hidden::make('Author', 'author_id')->default(function ($request) {
                 return $request->user()->id;
             }),
             BelongsTo::make(__('Warehouse Manager'), 'warehouseManager', User::class),

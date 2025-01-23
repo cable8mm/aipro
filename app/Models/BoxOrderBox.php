@@ -11,7 +11,7 @@ class BoxOrderBox extends Model
 {
     use Actionable, HasFactory;
 
-    protected $with = ['boxOrder', 'user', 'boxSupplier', 'box', 'warehouseManager'];
+    protected $with = ['boxOrder', 'author', 'boxSupplier', 'box', 'warehouseManager'];
 
     protected function casts(): array
     {
@@ -30,9 +30,9 @@ class BoxOrderBox extends Model
         return $this->belongsTo(BoxOrder::class);
     }
 
-    public function user(): BelongsTo
+    public function author(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'author_id');
     }
 
     public function boxSupplier(): BelongsTo

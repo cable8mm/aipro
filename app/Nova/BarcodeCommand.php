@@ -26,7 +26,7 @@ class BarcodeCommand extends Resource
      *
      * @var string
      */
-    public static $title = 'Barcode Commands';
+    public static $title = 'name';
 
     /**
      * The columns that should be searched.
@@ -54,7 +54,7 @@ class BarcodeCommand extends Resource
                 ->required()->maxlength(100),
             Text::make(__('Barcode'), 'barcode')
                 ->rules(Rule::unique('barcode_commands')->ignore($this->id), 'required')
-                ->required()->maxlength(100),
+                ->required()->maxlength(20),
             Text::make(__('Barcode Image'), function () {
                 $barcode = $this->barcode;
 
@@ -105,5 +105,10 @@ class BarcodeCommand extends Resource
     public function actions(NovaRequest $request)
     {
         return [];
+    }
+
+    public static function label()
+    {
+        return __('Barcode Commands');
     }
 }

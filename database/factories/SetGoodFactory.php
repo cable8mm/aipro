@@ -20,7 +20,7 @@ class SetGoodFactory extends Factory
         fake()->addProvider(new \Bezhanov\Faker\Provider\Device(fake()));
 
         return [
-            'user_id' => fake()->randomNumber(1) + 1,
+            'author_id' => fake()->randomNumber(1) + 1,
             'master_code' => fake()->randomElement(['SET1x1ZZ3x1', 'SET3x3ZZ7x3', 'SET6x4ZZ8x4']),
             'featured_good_list' => fake()->randomNumber(1) + 1,
             'name' => fake()->productName(),

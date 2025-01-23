@@ -15,10 +15,10 @@ return new class extends Migration
         Schema::create('order_sheet_invoices', function (Blueprint $table) {
             $table->id();
             $table->foreignId('author_id');
-            $table->unsignedBigInteger('row_count')->nullable();
-            $table->unsignedBigInteger('order_count')->nullable();
-            $table->unsignedBigInteger('order_good_count')->nullable();
-            $table->unsignedBigInteger('mismatched_order_good_count')->nullable();
+            $table->unsignedBigInteger('row_count')->nullable()->comment('주문 행수');
+            $table->unsignedBigInteger('order_count')->nullable()->comment('주문수');
+            $table->unsignedBigInteger('order_good_count')->nullable()->comment('주문 상품수');
+            $table->unsignedBigInteger('mismatched_order_good_count')->nullable()->comment('미매칭 상품수');
             $table->string('order_sheet_file', 255)->comment('주문서파일');
             $table->string('order_sheet_file_name')->comment('주문서파일 이름');
             $table->unsignedBigInteger('order_sheet_file_size')->comment('주문서파일 사이즈');
@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('invoice_file_name')->comment('운송장파일 이름');
             $table->unsignedBigInteger('invoice_file_size')->comment('운송장파일 사이즈');
             $table->json('excel_json')->nullable();
-            $table->string('status', 50)->nullable()->default(Status::WAITING->name);
+            $table->string('status', 50)->nullable()->default(Status::WAITING)->comment('에러,파일업로드,정상확인완료,주문서입력완료');
             $table->timestamps();
         });
     }

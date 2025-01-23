@@ -19,7 +19,7 @@ class BoxManualWarehousingFactory extends Factory
     {
         return [
             'box_id' => fake()->randomNumber(1) + 1,
-            'user_id' => fake()->randomNumber(1) + 1,
+            'author_id' => fake()->randomNumber(1) + 1,
             'type' => fake()->randomElement(ManualInventoryAdjustmentType::names()),
             'manual_add_inventory_count' => (fake()->boolean() ? 1 : -1) * (fake()->randomNumber(1) + 1),
             'memo' => fake('ko_KR')->sentence(),

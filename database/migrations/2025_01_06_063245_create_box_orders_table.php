@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('box_orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
+            $table->foreignId('author_id');
             $table->foreignId('warehouse_manager_id')->nullable();
             $table->foreignId('box_supplier_id')->nullable();
             $table->string('title', 190);

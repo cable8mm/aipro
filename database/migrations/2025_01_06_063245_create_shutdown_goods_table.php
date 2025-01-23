@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('author_id');
             $table->string('master_code', 150);
             $table->string('title', 255);
-            $table->string('reason', 255);
+            $table->text('reason');
             $table->timestamps();
         });
     }

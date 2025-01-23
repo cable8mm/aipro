@@ -17,7 +17,7 @@ class PromotionCodeFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => fake()->randomNumber(1) + 1,
+            'author_id' => fake()->randomNumber(1) + 1,
             'master_code' => 'PM'.fake()->randomNumber(3, true),
             'memo' => fake()->text(190),
             'started_at' => fake()->dateTime(),

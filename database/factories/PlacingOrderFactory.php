@@ -18,10 +18,10 @@ class PlacingOrderFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => (fake()->randomNumber(1) + 1),
-            'warehouse_manager_id' => (fake()->randomNumber(1) + 1),
-            'supplier_id' => (fake()->randomNumber(1) + 1),
-            'title' => fake()->text(50),
+            'author_id' => fake()->numberBetween(1, 10),
+            'warehouse_manager_id' => fake()->numberBetween(1, 10),
+            'supplier_id' => fake()->numberBetween(1, 10),
+            'title' => fake('ko_KR')->text(50),
             'ordered_at' => fake()->dateTime(),
             'total_good_count' => fake()->randomNumber() % 100,
             'total_order_price' => fake()->randomNumber(5),

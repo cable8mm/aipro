@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->unsignedBigInteger('id')->primary()->comment('주문번호');
             $table->foreignId('order_sheet_invoice_id')->comment('주문서송장 아이디');
-            $table->string('type', 255)->nullable()->comment('센터 요청 12개 타입');
+            $table->string('type', 191)->nullable()->comment('센터 요청 12개 타입');
             $table->integer('order_good_count')->default(0)->comment('주문 상품 갯수');
             $table->integer('printed_count')->default(0)->comment('출력 횟수');
             $table->boolean('is_all_good_matched')->comment('모든 상품이 매칭되었는지');

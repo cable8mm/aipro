@@ -52,7 +52,7 @@ class Channel extends Resource
     {
         return [
             ID::make()->sortable(),
-            BelongsTo::make(__('User'), 'user', User::class),
+            BelongsTo::make(__('Author'), 'author', User::class),
             Text::make(__('Name'), 'name')->maxlength(255),
             Text::make(__('Playauto Site'), 'playauto_site')->maxlength(190),
             Text::make(__('Siteid'), 'siteid')->maxlength(100),

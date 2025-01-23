@@ -51,10 +51,12 @@ class OptionGood extends Resource
     {
         return [
             ID::make()->sortable(),
-            BelongsTo::make(__('User'), 'user', User::class),
+            BelongsTo::make(__('Author'), 'author', User::class),
             Text::make(__('Master Code'), 'master_code')->rules('required')->required()->maxlength(130),
             Text::make(__('Name'), 'name')->rules('required')->required()->maxlength(130),
             Number::make(__('Option Count'), 'option_count')->exceptOnForms(),
+            Number::make(__('My Shop Sale Option Count'), 'my_shop_sale_option_count')->exceptOnForms(),
+            Number::make(__('Other Shop Sale Option Count'), 'other_shop_sale_option_count')->exceptOnForms(),
             Boolean::make(__('Is Active'), 'is_active'),
             Stack::make(__('Created At').' & '.__('Updated At'), [
                 DateTime::make(__('Created At'), 'created_at'),

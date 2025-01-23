@@ -13,15 +13,15 @@ return new class extends Migration
     {
         Schema::create('mismatched_order_shipments', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('author_id')->comment('등록자');
             $table->foreignId('order_sheet_invoice_id')->nullable();
-            $table->string('order_no', 100)->nullable();
-            $table->string('site', 100)->nullable();
-            $table->string('master_goods_cd', 100)->nullable();
-            $table->string('goods_nm', 255)->nullable();
-            $table->string('option', 255)->nullable();
-            $table->text('json')->nullable();
-            $table->foreignId('user_id')->nullable();
-            $table->string('status', 100)->nullable()->default('미처리');
+            $table->string('order_no', 100)->nullable()->comment('주문고유번호');
+            $table->string('site', 100)->nullable()->comment('판매사이트');
+            $table->string('master_goods_cd', 100)->nullable()->comment('마스터상품코드');
+            $table->string('goods_nm', 255)->nullable()->comment('상품명');
+            $table->string('option', 255)->nullable()->comment('주문선택사항');
+            $table->text('json')->nullable()->comment('주문 전체 데이터');
+            $table->string('status', 100)->comment('Status::class');
             $table->timestamps();
         });
     }

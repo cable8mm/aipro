@@ -15,7 +15,7 @@ class ChannelSeeder extends Seeder
         if (($handle = fopen(base_path('docs/csv/channels.csv'), 'r')) !== false) {
             while (($data = fgetcsv($handle, 1000, ',')) !== false) {
                 \App\Models\Channel::factory(1, [
-                    'user_id' => fake()->randomNumber(1) + 1,
+                    'author_id' => fake()->randomNumber(1) + 1,
                     'name' => $data[2],
                     'playauto_site' => $data[3],
                     'siteid' => $data[4],

@@ -12,7 +12,7 @@ class PlacingOrder extends Model
 {
     use Actionable, HasFactory;
 
-    protected $with = ['user', 'warehouseManager', 'supplier'];
+    protected $with = ['author', 'warehouseManager', 'supplier'];
 
     protected function casts(): array
     {
@@ -30,9 +30,9 @@ class PlacingOrder extends Model
         ];
     }
 
-    public function user(): BelongsTo
+    public function author(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'author_id');
     }
 
     public function warehouseManager(): BelongsTo

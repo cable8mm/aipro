@@ -56,7 +56,7 @@ class ManagedGood extends Resource
     {
         return [
             ID::make()->sortable(),
-            BelongsTo::make(__('User'), 'user', User::class),
+            BelongsTo::make(__('Author'), 'author', User::class),
             BelongsTo::make(__('Supplier'), 'supplier', Supplier::class)->filterable(),
             BelongsTo::make(__('Supplier Good'), 'supplierGood', SupplierGood::class),
             BelongsTo::make(__('Box'), 'box', Box::class),
