@@ -11,7 +11,7 @@ class Good extends Model
 {
     use Actionable, HasFactory;
 
-    protected $with = ['box', 'user', 'supplier', 'supplierGood', 'playautoCategory'];
+    protected $with = ['box', 'author', 'supplier', 'supplierGood', 'playautoCategory'];
 
     protected function casts(): array
     {
@@ -83,9 +83,9 @@ class Good extends Model
         return $this->belongsTo(Box::class);
     }
 
-    public function user(): BelongsTo
+    public function author(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'author_id');
     }
 
     public function supplier(): BelongsTo

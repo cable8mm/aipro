@@ -18,8 +18,8 @@ class GoodManualWarehousingFactory extends Factory
     public function definition(): array
     {
         return [
-            'good_id' => fake()->randomNumber(1) + 1,
-            'user_id' => fake()->randomNumber(1) + 1,
+            'author_id' => fake()->numberBetween(1, 10),
+            'good_id' => fake()->numberBetween(1, 10),
             'manual_add_inventory_count' => (fake()->boolean() === true ? 1 : -1) * fake()->randomNumber(2),
             'type' => fake()->randomElement(ManualInventoryAdjustmentType::names()),
             'memo' => fake()->sentence(),

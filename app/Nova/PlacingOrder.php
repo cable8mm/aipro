@@ -8,7 +8,6 @@ use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\HasMany;
-use Laravel\Nova\Fields\Hidden;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
@@ -53,9 +52,7 @@ class PlacingOrder extends Resource
     {
         return [
             ID::make()->sortable(),
-            Hidden::make('User', 'user_id')->default(function ($request) {
-                return $request->user()->id;
-            }),
+            BelongsTo::make(__('Author'), 'author', User::class),
             BelongsTo::make(__('Warehouse Manager'), 'warehouseManager', User::class),
             BelongsTo::make(__('Supplier'), 'supplier', Supplier::class)->filterable(),
             Text::make(__('Title'), 'title')->required()->rules('required')->maxlength(190),

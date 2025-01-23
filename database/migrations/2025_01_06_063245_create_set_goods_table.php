@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('set_goods', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
+            $table->foreignId('author_id');
             $table->string('master_code', 255);
             $table->string('featured_good_list', 255)->nullable();
             $table->string('name', 255);
-            $table->unsignedBigInteger('goods_price');
-            $table->unsignedBigInteger('last_cost_price')->nullable();
-            $table->unsignedBigInteger('zero_margin_price')->nullable();
-            $table->boolean('is_shutdown')->nullable()->default(0);
+            $table->unsignedBigInteger('goods_price')->comment('판매가');
+            $table->unsignedBigInteger('last_cost_price')->nullable()->comment('마지막 매입가');
+            $table->unsignedBigInteger('zero_margin_price')->nullable()->comment('제로마진판매가');
+            $table->boolean('is_shutdown')->default(false)->comment('판매 중지 유무');
             $table->timestamps();
         });
     }

@@ -11,7 +11,7 @@ class OptionGoodOption extends Model
 {
     use Actionable, HasFactory;
 
-    protected $with = ['user', 'optionGood'];
+    protected $with = ['author', 'optionGood'];
 
     protected function casts(): array
     {
@@ -29,9 +29,9 @@ class OptionGoodOption extends Model
         ];
     }
 
-    public function user(): BelongsTo
+    public function author(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'author_id');
     }
 
     public function optionGood(): BelongsTo

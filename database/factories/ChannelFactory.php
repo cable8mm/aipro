@@ -18,7 +18,7 @@ class ChannelFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => fake()->randomNumber(1) + 1,
+            'author_id' => fake()->randomNumber(1) + 1,
             'name' => fake('ko_KR')->name(),
             'playauto_site' => fake()->text(190),
             'siteid' => fake()->text(100),

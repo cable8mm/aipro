@@ -50,7 +50,7 @@ class MismatchedOrderShipment extends Resource
     {
         return [
             ID::make()->sortable(),
-            BelongsTo::make(__('User'), 'user', User::class),
+            BelongsTo::make(__('Author'), 'author', User::class),
             BelongsTo::make(__('Order Sheet Invoice'), 'orderSheetInvoice', OrderSheetInvoice::class),
             Text::make(__('Order No'), 'order_no')->maxlength(100),
             Text::make(__('Site'), 'site')->maxlength(100),

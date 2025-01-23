@@ -21,10 +21,10 @@ class OrderSheetInvoiceFactory extends Factory
         return [
             'author_id' => fake()->numberBetween(0, UserSeeder::COUNT),
             'excel_filepath' => fake()->word().'.xlsx',
-            'order_row_count' => fake()->randomNumber(),
-            'order_number_count' => fake()->randomNumber(),
-            'order_good_count' => fake()->randomNumber(),
-            'invoice_filepath' => fake()->word().'.'.fake()->fileExtension(),
+            'order_row_count' => fake()->randomNumber(2) + 1,
+            'order_number_count' => fake()->randomNumber(2) + 1,
+            'order_good_count' => fake()->randomNumber(2) + 1,
+            'invoice_filepath' => fake()->word().'.xls',
             'excel_json' => fake()->words(10),
             'status' => fake()->randomElement(Status::names()),
         ];

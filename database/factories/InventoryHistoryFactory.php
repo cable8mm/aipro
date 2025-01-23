@@ -19,15 +19,15 @@ class InventoryHistoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => fake()->randomNumber(1) + 1,
+            'author_id' => fake()->randomNumber(1) + 1,
             'good_id' => fake()->randomNumber(1) + 1,
             'type' => fake()->randomElement(InventoryHistory::names()),
             'quantity' => (fake()->boolean() ? 1 : -1) * (fake()->randomNumber(2) + 1),
-            'price' => fake()->randomNumber(),
-            'after_quantity' => fake()->randomNumber(),
+            'price' => fake()->numberBetween(5000, 50000),
+            'after_quantity' => fake()->randomNumber(2) + 1,
             'model' => fake()->randomElement(InventoryHistoryModel::names()),
-            'attribute' => fake()->randomNumber(3),
-            'cancel_id' => fake()->randomNumber(2),
+            'attribute' => fake()->randomNumber(1) + 1,
+            'cancel_id' => fake()->randomNumber(1) + 1,
             'is_success' => fake()->boolean(),
         ];
     }

@@ -11,7 +11,7 @@ class GoodManualWarehousing extends Model
 {
     use Actionable, HasFactory;
 
-    protected $with = ['good', 'user'];
+    protected $with = ['good', 'author'];
 
     protected function casts(): array
     {
@@ -26,8 +26,8 @@ class GoodManualWarehousing extends Model
         return $this->belongsTo(Good::class);
     }
 
-    public function user(): BelongsTo
+    public function author(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'author_id');
     }
 }

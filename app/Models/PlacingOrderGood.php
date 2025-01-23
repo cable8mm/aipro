@@ -11,7 +11,7 @@ class PlacingOrderGood extends Model
 {
     use Actionable, HasFactory;
 
-    protected $with = ['placingOrder', 'user', 'warehouseManager', 'good'];
+    protected $with = ['placingOrder', 'author', 'warehouseManager', 'good'];
 
     protected function casts(): array
     {
@@ -26,7 +26,7 @@ class PlacingOrderGood extends Model
             'is_promotion' => 'boolean',
             'warehoused_at' => 'datetime',
             'status' => 'string',
-            'ordered_at' => 'datetime',
+            'placing_ordered_at' => 'datetime',
         ];
     }
 
@@ -35,9 +35,9 @@ class PlacingOrderGood extends Model
         return $this->belongsTo(PlacingOrder::class);
     }
 
-    public function user(): BelongsTo
+    public function author(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'author_id');
     }
 
     public function warehouseManager(): BelongsTo

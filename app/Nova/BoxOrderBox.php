@@ -48,7 +48,7 @@ class BoxOrderBox extends Resource
         return [
             ID::make()->sortable(),
             BelongsTo::make(__('Box Order'), 'boxOrder', BoxOrder::class),
-            BelongsTo::make(__('User'), 'user', User::class),
+            BelongsTo::make(__('Author'), 'author', User::class),
             BelongsTo::make(__('Box Supplier'), 'boxSupplier', BoxSupplier::class),
             BelongsTo::make(__('Box'), 'box', Box::class),
             BelongsTo::make(__('Warehouse Manager'), 'warehouseManager', User::class),

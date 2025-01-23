@@ -56,7 +56,7 @@ class GoodManualWarehousing extends Resource
             Text::make(__('마스터 코드'), 'Good.master_code')->onlyOnIndex(),
             Text::make(__('공급사'), 'Good.supplier.name')->onlyOnIndex(),
             BelongsTo::make(__('Good'), 'good', Good::class),
-            BelongsTo::make(__('User'), 'user', User::class),
+            BelongsTo::make(__('Author'), 'author', User::class),
             Select::make(__('Type'), 'type')->options(ManualInventoryAdjustmentType::array())->displayUsingLabels()->filterable(),
             Number::make(__('Manual Add Inventory Count'), 'manual_add_inventory_count')->displayUsing(function ($value) {
                 return number_format($value);

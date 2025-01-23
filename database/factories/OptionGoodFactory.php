@@ -20,10 +20,12 @@ class OptionGoodFactory extends Factory
         fake()->addProvider(new \Bezhanov\Faker\Provider\Device(fake()));
 
         return [
-            'user_id' => fake()->randomNumber(1) + 1,
+            'author_id' => fake()->randomNumber(1) + 1,
             'master_code' => 'OG'.fake()->randomNumber(3, true),
-            'name' => fake()->productName(),
+            'name' => fake('ko_KR')->productName(),
             'option_count' => fake()->randomNumber(2),
+            'my_shop_sale_option_count' => fake()->randomNumber(1),
+            'other_shop_sale_option_count' => fake()->randomNumber(1),
             'is_active' => fake()->boolean(),
         ];
     }

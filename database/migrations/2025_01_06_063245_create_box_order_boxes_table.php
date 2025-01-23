@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('box_order_boxes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('box_order_id');
-            $table->foreignId('user_id');
+            $table->foreignId('author_id');
             $table->foreignId('box_supplier_id');
             $table->foreignId('box_id');
             $table->foreignId('warehouse_manager_id');
