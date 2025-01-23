@@ -66,6 +66,7 @@ class InventoryHistory extends Resource
                 ->rules('required')->required()->displayUsingLabels(),
             Number::make(__('Attribute'), 'attribute')->rules('required')->required(),
             Number::make(__('Cancel Id'), 'cancel_id'),
+            BelongsTo::make(__('Cancel Id'), 'bySelf', InventoryHistory::class),
             Boolean::make(__('Is Success'), 'is_success')->rules('required')->required(),
             Stack::make(__('Created At').' & '.__('Updated At'), [
                 DateTime::make(__('Created At'), 'created_at'),

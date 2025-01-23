@@ -63,8 +63,7 @@ class PlacingOrder extends Resource
             Number::make(__('Order Discount Percent'), 'order_discount_percent')->min(1)->max(100)->step(1)
                 ->displayUsing(fn () => "{$this->order_discount_percent}%")
                 ->exceptOnForms(),
-            DateTime::make(__('Ordered At'), 'ordered_at')->nullable()
-                ->displayUsing(fn ($value) => $value ? $value->format('Y-m-d H, g:ia') : '')->filterable(),
+            DateTime::make(__('Ordered At'), 'ordered_at')->nullable()->filterable(),
             DateTime::make(__('Predict Warehoused At'), 'predict_warehoused_at')->nullable()->filterable(),
             DateTime::make(__('Sent At'), 'sent_at')->exceptOnForms(),
             DateTime::make(__('Confirmed At'), 'confirmed_at')->exceptOnForms(),

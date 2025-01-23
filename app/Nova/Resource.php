@@ -7,8 +7,6 @@ use Laravel\Nova\Resource as NovaResource;
 
 abstract class Resource extends NovaResource
 {
-    public static $tableStyle = 'tight';
-
     public static $showColumnBorders = true;
 
     public static $clickAction = 'detail';

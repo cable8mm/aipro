@@ -17,11 +17,11 @@ enum InventoryHistoryModel: string
     public function value(): string
     {
         return match ($this) {
-            self::GOOD_MANUAL_WAREHOUSING => 'GoodManualWarehousing',
-            self::ORDER => 'Order',
-            self::ORDER_GOOD => 'OrderGood',
-            self::PLACING_ORDER_GOOD => 'PlacingOrderGood',
-            self::ORDER_SHIPMENT => 'OrderShipment',
+            self::GOOD_MANUAL_WAREHOUSING => __('Good Manual Warehousing'),
+            self::ORDER => __('Order'),
+            self::ORDER_GOOD => __('Order Good'),
+            self::PLACING_ORDER_GOOD => __('Placing Order Good'),
+            self::ORDER_SHIPMENT => __('Order Shipment'),
         };
     }
 }

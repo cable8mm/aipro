@@ -35,4 +35,9 @@ class InventoryHistory extends Model
     {
         return $this->belongsTo(Good::class);
     }
+
+    public function bySelf(): BelongsTo
+    {
+        return $this->belongsTo(InventoryHistory::class, 'cancel_id');
+    }
 }

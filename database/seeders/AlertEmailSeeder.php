@@ -8,19 +8,19 @@ class AlertEmailSeeder extends Seeder
 {
     private array $actions = [
         [
-            'send_inventory',
+            'SEND_INVENTORY',
             '재고 상태 및 체크리스트(월~금 오전 8시 즈음)',
         ],
         [
-            'send_goods_checklist',
+            'SEND_GOODS_CHECKLIST',
             '상품 관리 및 체크리스트(월~금 오전 8시 즈음)',
         ],
         [
-            'send_system_order_checklist',
+            'SEND_SYSTEM_ORDER_CHECKLIST',
             '시스템 발주를 위한 체크 리스트(월~금 오전 8시 즈음)',
         ],
         [
-            'request_shutdown',
+            'REQUEST_SHUTDOWN',
             'D등급 x 재고0 x 판매중 상품 처리(월~금 17시 50분 즈음)',
         ],
     ];
