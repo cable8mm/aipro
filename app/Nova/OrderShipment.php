@@ -3,13 +3,15 @@
 namespace App\Nova;
 
 use App\Enums\Site;
+use App\Enums\Status;
 use App\Traits\NovaAuthorizedByWarehouser;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\Boolean;
+use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
-use Laravel\Nova\Fields\Stack;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Outl1ne\NovaInputFilter\InputFilter;
@@ -54,28 +56,30 @@ class OrderShipment extends Resource
             BelongsTo::make(__('Order Sheet Invoice'), 'orderSheetInvoice', OrderSheetInvoice::class),
             Text::make(__('Order No'), 'orderNo')->maxlength(255),
             Select::make(__('Site'), 'site')->options(Site::array())->displayUsingLabels(),
-            Text::make(__('Regist Date'), 'registDate')->maxlength(255),
-            Text::make(__('Order Date'), 'orderDate')->maxlength(255),
-            Text::make(__('Payment Date'), 'paymentDate')->maxlength(255),
-            Text::make(__('Status Date'), 'statusDate')->maxlength(255),
-            Text::make(__('Delivery Date'), 'deliveryDate')->maxlength(255),
-            Text::make(__('Status'), 'status')->maxlength(255),
+            DateTime::make(__('Regist Date'), 'registDate'),
+            DateTime::make(__('Order Date'), 'orderDate'),
+            DateTime::make(__('Payment Date'), 'paymentDate'),
+            DateTime::make(__('Status Date'), 'statusDate'),
+            DateTime::make(__('Delivery Date'), 'deliveryDate'),
+            Select::make(__('Status'), 'status')->options(Status::array())->displayUsingLabels(),
             Text::make(__('Site Order No'), 'siteOrderNo')->maxlength(255),
             Text::make(__('Site Goods Cd'), 'siteGoodsCd')->maxlength(255),
             Text::make(__('Goods Nm'), 'goodsNm')->maxlength(255),
             Text::make(__('Option'), 'option')->maxlength(255),
-            Number::make(__('Option Price'), 'optionPrice'),
+            Currency::make(__('Option Price'), 'optionPrice'),
             Text::make(__('Additional Option'), 'additionalOption')->maxlength(255),
-            Number::make(__('Additional Option Price'), 'additionalOptionPrice'),
-            Number::make(__('Cost Price'), 'costPrice'),
-            Number::make(__('Fixed Price'), 'fixedPrice'),
-            Number::make(__('Total Price'), 'totalPrice'),
+            Currency::make(__('Additional Option Price'), 'additionalOptionPrice'),
+            Currency::make(__('Cost Price'), 'costPrice'),
+            Currency::make(__('Fixed Price'), 'fixedPrice'),
+            Currency::make(__('Total Price'), 'totalPrice'),
             Number::make(__('Amount'), 'amount'),
-            Number::make(__('Total Amount'), 'totalAmount'),
-            Number::make(__('Confirm Amount'), 'confirmAmount'),
-            Text::make(__('Delivery Type'), 'deliveryType')->maxlength(255),
-            Number::make(__('Delivery Price'), 'deliveryPrice'),
-            Number::make(__('Total Delivery Price'), 'totalDeliveryPrice'),
+            Number::make(__('Total Amount'), 'totalAmount')
+                ->displayUsing(fn ($value) => number_format($value)),
+            Number::make(__('Confirm Amount'), 'confirmAmount')
+                ->displayUsing(fn ($value) => number_format($value)),
+            Select::make(__('Delivery Type'), 'deliveryType')->options(Status::array())->displayUsingLabels(),
+            Currency::make(__('Delivery Price'), 'deliveryPrice'),
+            Currency::make(__('Total Delivery Price'), 'totalDeliveryPrice'),
             Text::make(__('Order Name'), 'orderName')->maxlength(255),
             Text::make(__('Order Phone'), 'orderPhone')->maxlength(255),
             Text::make(__('Order Cell Phone'), 'orderCellPhone')->maxlength(255),
@@ -94,21 +98,18 @@ class OrderShipment extends Resource
             Text::make(__('Master Goods Cd'), 'masterGoodsCd')->maxlength(255),
             Text::make(__('Memo'), 'memo'),
             Number::make(__('Validator'), 'validator'),
-            Text::make(__('Is Set'), 'isSet')->maxlength(1),
-            Text::make(__('Printed'), 'printed')->maxlength(1),
-            Text::make(__('Downloaded'), 'downloaded')->maxlength(1),
-            Text::make(__('Shipped'), 'shipped')->maxlength(1),
+            Boolean::make(__('Is Set'), 'isSet'),
+            Boolean::make(__('Printed'), 'printed'),
+            Boolean::make(__('Downloaded'), 'downloaded'),
+            Boolean::make(__('Shipped'), 'shipped'),
             Text::make(__('Boxes'), 'boxes')->maxlength(255),
-            Text::make(__('Shippable'), 'shippable')->maxlength(1),
-            Number::make(__('Inventory'), 'inventory'),
+            Boolean::make(__('Shippable'), 'shippable'),
+            Number::make(__('Inventory'), 'inventory')
+                ->displayUsing(fn ($value) => number_format($value)),
             DateTime::make(__('Printed At'), 'printed_at')->exceptOnForms(),
             DateTime::make(__('Downloaded At'), 'downloaded_at')->exceptOnForms(),
             DateTime::make(__('Shipped At'), 'shipped_at')->exceptOnForms(),
             DateTime::make(__('Completed At'), 'completed_at')->exceptOnForms(),
-            Stack::make(__('Created At').' & '.__('Updated At'), [
-                DateTime::make(__('Created At'), 'created_at'),
-                DateTime::make(__('Updated At'), 'updated_at'),
-            ]),
         ];
     }
 

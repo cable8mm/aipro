@@ -16,10 +16,10 @@ enum SafeClass: string
     public function value(): string
     {
         return match ($this) {
-            self::S1 => '1등급',
-            self::S2 => '2등급',
-            self::S3 => '3등급',
-            self::SX => 'X등급',
+            self::S1 => __('Inventory Level 1'),
+            self::S2 => __('Inventory Level 2'),
+            self::S3 => __('Inventory Level 3'),
+            self::SX => __('Inventory Level X'),
         };
     }
 }

@@ -102,4 +102,14 @@ class Good extends Model
     {
         return $this->belongsTo(PlayautoCategory::class);
     }
+
+    public function scopeShutdown($query)
+    {
+        return $query->where('is_shutdown', true);
+    }
+
+    public function scopeNotShutdown($query)
+    {
+        return $query->where('is_shutdown', false);
+    }
 }

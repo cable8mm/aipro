@@ -20,4 +20,12 @@ class Setting extends Model
             'memo' => 'string',
         ];
     }
+
+    /**
+     * Retrieves the value of the setting by key.
+     */
+    public static function get(string $key): string
+    {
+        return static::where('key', $key)->first()->value;
+    }
 }

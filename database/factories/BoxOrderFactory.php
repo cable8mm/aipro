@@ -22,7 +22,7 @@ class BoxOrderFactory extends Factory
             'author_id' => fake()->numberBetween(0, UserSeeder::COUNT),
             'warehouse_manager_id' => fake()->numberBetween(0, UserSeeder::COUNT),
             'box_supplier_id' => fake()->numberBetween(0, UserSeeder::COUNT),
-            'title' => fake()->text(30),
+            'title' => date('Y년 m월 n일').' 박스 발주합니다.',
             'ordered_at' => fake()->dateTime(),
             'total_box_count' => fake()->randomNumber(2),
             'total_order_price' => fake()->randomNumber(5),

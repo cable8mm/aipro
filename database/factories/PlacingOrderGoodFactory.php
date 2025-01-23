@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Enums\Status;
+use App\Enums\PlacingOrderGoodStatus;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -32,7 +32,7 @@ class PlacingOrderGoodFactory extends Factory
             'is_promotion' => fake()->boolean(),
             'warehoused_at' => fake()->dateTime(),
             'placing_ordered_at' => fake()->dateTime(),
-            'status' => fake()->randomElement(Status::names()),
+            'status' => fake()->randomElement(PlacingOrderGoodStatus::names()),
             'memo' => fake()->paragraph(),
         ];
     }

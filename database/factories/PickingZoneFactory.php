@@ -16,9 +16,12 @@ class PickingZoneFactory extends Factory
      */
     public function definition(): array
     {
+        $block = fake()->randomElement(['A', 'B', 'C', 'D', 'E', 'F']);
+        $lack = fake()->numberBetween(1, 9);
+
         return [
-            'name' => fake()->word(),
-            'code' => fake()->randomElement(['A', 'B', 'C', 'D', 'E', 'F']).fake()->numberBetween(1, 9),
+            'name' => $block.'블록 '.$lack.'랙',
+            'code' => $block.$lack,
         ];
     }
 }
