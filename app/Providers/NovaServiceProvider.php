@@ -12,6 +12,7 @@ use App\Models\HelpTip as ModelsHelpTip;
 use App\Models\NaverCategory as ModelsNaverCategory;
 use App\Models\OptionGood as ModelsOptionGood;
 use App\Models\OptionGoodOption as ModelsOptionGoodOption;
+use App\Models\PickingZone as ModelsPickingZone;
 use App\Models\PlayautoCategory as ModelsPlayautoCategory;
 use App\Models\PlayautoGood as ModelsPlayautoGood;
 use App\Models\PromotionCode as ModelsPromotionCode;
@@ -45,6 +46,7 @@ use App\Nova\OptionGoodOption;
 use App\Nova\Order;
 use App\Nova\OrderSheetInvoice;
 use App\Nova\OrderShipment;
+use App\Nova\PickingZone;
 use App\Nova\PlacingOrder;
 use App\Nova\PlacingOrderGood;
 use App\Nova\PlayautoCategory;
@@ -86,7 +88,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
 
         Nova::withBreadcrumbs();
 
-        Nova::showUnreadCountInNotificationCenter();
+        Nova::withoutNotificationCenter();
 
         Nova::footer(function ($request) {
             return Blade::render('
@@ -153,6 +155,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
 
                 MenuSection::make(__('Tools'), [
                     MenuItem::resource(BarcodeCommand::class)->withBadge(fn () => ModelsBarcodeCommand::count(), 'info'),
+                    MenuItem::resource(PickingZone::class)->withBadge(fn () => ModelsPickingZone::count(), 'info'),
                     MenuItem::resource(NaverCategory::class)->withBadge(fn () => ModelsNaverCategory::count(), 'info'),
                     MenuItem::resource(PriceCoefficient::class),
                     MenuItem::resource(ShutdownGood::class)->withBadge(fn () => ModelsShutdownGood::count(), 'info'),

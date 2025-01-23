@@ -18,13 +18,17 @@ class OrderSheetInvoiceFactory extends Factory
      */
     public function definition(): array
     {
+        $order_sheet_file = fake()->word().'.xlsx';
+        $invoice_file = fake()->word().'.pdf';
+
         return [
-            'author_id' => fake()->numberBetween(0, UserSeeder::COUNT),
-            'excel_filepath' => fake()->word().'.xlsx',
-            'order_row_count' => fake()->randomNumber(2) + 1,
-            'order_number_count' => fake()->randomNumber(2) + 1,
-            'order_good_count' => fake()->randomNumber(2) + 1,
-            'invoice_filepath' => fake()->word().'.xls',
+            'author_id' => fake()->numberBetween(1, UserSeeder::COUNT),
+            'order_sheet_file' => 'upload/order_sheets/'.$order_sheet_file,
+            'order_sheet_file_name' => $order_sheet_file,
+            'order_sheet_file_size' => fake()->randomNumber(8, true),
+            'invoice_file' => 'upload/invoices/'.$invoice_file,
+            'invoice_file_name' => $invoice_file,
+            'invoice_file_size' => fake()->randomNumber(8, true),
             'excel_json' => fake()->words(10),
             'status' => fake()->randomElement(Status::names()),
         ];

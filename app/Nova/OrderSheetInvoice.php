@@ -3,16 +3,18 @@
 namespace App\Nova;
 
 use App\Enums\Status;
+use App\Nova\Actions\OrderFromOrderSheetInvoice;
 use App\Traits\NovaAuthorizedByWarehouser;
+use Illuminate\Support\Number as SupportNumber;
+use Illuminate\Validation\Rules\File as RulesFile;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\File;
 use Laravel\Nova\Fields\HasMany;
-use Laravel\Nova\Fields\Hidden;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
-use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Stack;
+use Laravel\Nova\Fields\Status as FieldsStatus;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
@@ -45,26 +47,82 @@ class OrderSheetInvoice extends Resource
     {
         return [
             ID::make()->sortable(),
-            Hidden::make('Author', 'author')->default(function ($request) {
-                return $request->user()->id;
-            }),
             BelongsTo::make(__('Author'), 'author', User::class)->exceptOnForms(),
             Text::make(__('Title'), 'title', function () {
                 return $this->title();
-            }),
-            File::make(__('Excel Filepath'), 'excel_filepath'),
-            Number::make(__('Order Row Count'), 'order_row_count')->displayUsing(function ($value) {
-                return number_format($value);
             })->exceptOnForms(),
-            Number::make(__('Order Number Count'), 'order_number_count')->displayUsing(function ($value) {
-                return number_format($value);
+
+            Number::make(__('Row Count'), 'row_count')->nullable()->displayUsing(function ($value) {
+                return ! is_null($value) ? number_format($value) : null;
             })->exceptOnForms(),
-            Number::make(__('Order Good Count'), 'order_good_count')->displayUsing(function ($value) {
-                return number_format($value);
+            Number::make(__('Order Count'), 'order_count')->nullable()->exceptOnForms(),
+            Number::make(__('Order Good Count'), 'order_good_count')->nullable()->displayUsing(function ($value) {
+                return ! is_null($value) ? number_format($value) : null;
             })->exceptOnForms(),
-            File::make(__('Invoice Filepath'), 'invoice_filepath'),
-            Select::make(__('Status'), 'status')
-                ->options(Status::array())->displayUsingLabels()->filterable(),
+
+            Number::make(__('Mismatched Order Good Count'), 'mismatched_order_good_count')->nullable()->displayUsing(function ($value) {
+                return ! is_null($value) ? number_format($value) : null;
+            })->exceptOnForms(),
+
+            File::make(__('Order Sheet File'), 'order_sheet_file')->required()
+                ->creationRules([
+                    'required',
+                    RulesFile::types(['xlsx', 'xls', 'csv'])->max(48 * 1024),
+                ])
+                ->updateRules([
+                    'nullable',
+                    RulesFile::types(['xlsx', 'xls', 'csv'])->max(48 * 1024),
+                ])
+                ->help('엑셀 파일을 업로드합니다. (xlsx, xls, csv)')
+                ->path('upload/order_sheets')
+                ->storeOriginalName('order_sheet_file_name')
+                ->storeSize('order_sheet_file_size')
+                ->prunable(),
+
+            File::make(__('Invoice File'), 'invoice_file')
+                ->creationRules([
+                    RulesFile::types(['pdf'])->max(48 * 1024),
+                ])
+                ->updateRules([
+                    RulesFile::types(['pdf'])->max(48 * 1024),
+                ])
+                ->help('운송장 파일을 업로드합니다. (pdf)')
+                ->path('upload/invoices')
+                ->storeOriginalName('invoice_file_name')
+                ->storeSize('invoice_file_size')
+                ->prunable(),
+
+            Stack::make(__('Order Sheet File').' & '.__('Invoice File Name'), [
+                Text::make(__('Order Sheet File Name'), 'order_sheet_file_name')
+                    ->exceptOnForms(),
+
+                Text::make(__('Invoice File Name'), 'invoice_file_name')
+                    ->exceptOnForms(),
+            ]),
+
+            Stack::make(__('File Sizes'), [
+                Number::make(__('Order Sheet File Size'), 'order_sheet_file_size')
+                    ->exceptOnForms()
+                    ->displayUsing(function ($value) {
+                        return $value ? SupportNumber::fileSize($value, precision: 2) : '-';
+                    }),
+
+                Number::make(__('Invoice File Size'), 'invoice_file_size')
+                    ->exceptOnForms()
+                    ->displayUsing(function ($value) {
+                        return $value ? SupportNumber::fileSize($value, precision: 2) : '-';
+                    }),
+            ]),
+
+            FieldsStatus::make(__('Status'), 'status')
+                ->default(Status::WAITING->name)
+                ->loadingWhen([Status::WAITING->name, Status::RUNNING->name])
+                ->failedWhen([Status::FAILED->name])
+                ->filterable(function ($request, $query, $value, $attribute) {
+                    $query->where($attribute, 'LIKE', "{$value}%");
+                })->displayUsing(function ($value) {
+                    return Status::{$value}->value() ?? '-';
+                }),
             Stack::make(__('Created At').' & '.__('Updated At'), [
                 DateTime::make(__('Created At'), 'created_at'),
                 DateTime::make(__('Updated At'), 'updated_at'),
@@ -113,7 +171,9 @@ class OrderSheetInvoice extends Resource
      */
     public function actions(NovaRequest $request)
     {
-        return [];
+        return [
+            (new OrderFromOrderSheetInvoice)->showInline(),
+        ];
     }
 
     public static function label()

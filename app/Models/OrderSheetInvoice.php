@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Auth;
 
 class OrderSheetInvoice extends Model
 {
@@ -16,19 +17,30 @@ class OrderSheetInvoice extends Model
     protected function casts(): array
     {
         return [
-            'excel_filepath' => 'string',
-            'order_row_count' => 'integer',
-            'order_number_count' => 'integer',
+            'row_count' => 'integer',
+            'order_count' => 'integer',
             'order_good_count' => 'integer',
             'mismatched_order_good_count' => 'integer',
-            'invoice_filepath' => 'string',
-            'excel_json' => 'array',
+            'order_sheet_file' => 'string',
+            'order_sheet_file_name' => 'string',
+            'order_sheet_file_size' => 'integer',
+            'invoice_file' => 'string',
+            'invoice_file_name' => 'string',
+            'invoice_file_size' => 'integer',
+            'excel_json' => 'json',
         ];
+    }
+
+    protected static function booted(): void
+    {
+        static::creating(function (OrderSheetInvoice $orderSheetInvoice) {
+            $orderSheetInvoice->author_id = $orderSheetInvoice->author_id ?? Auth::user()->id;
+        });
     }
 
     public function author(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'author_id');
     }
 
     public function orders(): HasMany

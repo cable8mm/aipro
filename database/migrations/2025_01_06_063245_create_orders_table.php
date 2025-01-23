@@ -12,11 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('order_sheet_invoice_id')->nullable()->comment('주문서송장 아이디');
-            $table->string('type', 50)->nullable()->comment('센터 요청 12개 타입');
-            $table->integer('order_good_count')->nullable()->comment('주문 상품 갯수');
-            $table->integer('printed_count')->nullable()->default('0')->comment('출력 횟수');
+            $table->unsignedBigInteger('id')->primary()->comment('주문번호');
+            $table->foreignId('order_sheet_invoice_id')->comment('주문서송장 아이디');
+            $table->string('type', 191)->nullable()->comment('센터 요청 12개 타입');
+            $table->integer('order_good_count')->default(0)->comment('주문 상품 갯수');
+            $table->integer('printed_count')->default(0)->comment('출력 횟수');
+            $table->boolean('is_all_good_matched')->comment('모든 상품이 매칭되었는지');
             $table->timestamps();
         });
     }
