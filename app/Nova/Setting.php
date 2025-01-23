@@ -45,7 +45,7 @@ class Setting extends Resource
     {
         return [
             ID::make()->sortable(),
-            Text::make(__('Key'), 'key')->rules('required')->required()->maxlength(255),
+            Text::make(__('Key'), 'key')->rules('required')->required()->maxlength(255)->copyable(),
             Text::make(__('Value'), 'value')->rules('required')->required()->maxlength(255),
             Textarea::make(__('Memo'), 'memo')->maxlength(255),
         ];
