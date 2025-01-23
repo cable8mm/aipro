@@ -11,7 +11,7 @@ class MismatchedOrderShipment extends Model
 {
     use Actionable, HasFactory;
 
-    protected $with = ['user', 'orderSheetInvoice'];
+    protected $with = ['author', 'orderSheetInvoice'];
 
     protected function casts(): array
     {
@@ -26,9 +26,9 @@ class MismatchedOrderShipment extends Model
         ];
     }
 
-    public function user(): BelongsTo
+    public function author(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'author_id');
     }
 
     public function orderSheetInvoice(): BelongsTo

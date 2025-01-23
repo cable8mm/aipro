@@ -11,7 +11,7 @@ class BoxManualWarehousing extends Model
 {
     use Actionable, HasFactory;
 
-    protected $with = ['box', 'user'];
+    protected $with = ['box', 'author'];
 
     protected function casts(): array
     {
@@ -26,8 +26,8 @@ class BoxManualWarehousing extends Model
         return $this->belongsTo(Box::class);
     }
 
-    public function user(): BelongsTo
+    public function author(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'author_id');
     }
 }

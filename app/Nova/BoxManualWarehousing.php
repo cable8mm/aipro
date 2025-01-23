@@ -7,7 +7,6 @@ use App\Traits\NovaAuthorizedByWarehouser;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\DateTime;
-use Laravel\Nova\Fields\Hidden;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
@@ -54,10 +53,7 @@ class BoxManualWarehousing extends Resource
     {
         return [
             ID::make()->sortable(),
-            Hidden::make('User', 'user_id')->default(function ($request) {
-                return $request->user()->id;
-            }),
-            BelongsTo::make(__('User'), 'user', User::class)->exceptOnForms(),
+            BelongsTo::make(__('Author'), 'author', User::class)->exceptOnForms(),
             Text::make(__('코드'), 'Box.code')->onlyOnIndex(),
             BelongsTo::make(__('Box'), 'box', Box::class),
             Select::make(__('Type'), 'type')->options(ManualInventoryAdjustmentType::array())->displayUsingLabels()->filterable(),

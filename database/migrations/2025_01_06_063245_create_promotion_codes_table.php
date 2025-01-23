@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('promotion_codes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
+            $table->foreignId('author_id');
             $table->string('master_code', 100);
             $table->string('memo', 190)->nullable();
             $table->dateTime('started_at')->nullable();

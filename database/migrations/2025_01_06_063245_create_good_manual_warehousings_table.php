@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('good_manual_warehousings', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('good_id');
-            $table->foreignId('user_id');
-            $table->integer('manual_add_inventory_count');
-            $table->string('type', 100)->default('미입력');
+            $table->foreignId('author_id')->comment('등록자');
+            $table->foreignId('good_id')->comment('상품');
+            $table->integer('manual_add_inventory_count')->comment('상품 차감 수량');
+            $table->string('type', 100);
             $table->text('memo')->nullable();
             $table->timestamps();
         });

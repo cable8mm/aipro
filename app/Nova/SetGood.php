@@ -50,7 +50,7 @@ class SetGood extends Resource
     {
         return [
             ID::make()->sortable(),
-            BelongsTo::make(__('User'), 'user', User::class)->rules('required')->required(),
+            BelongsTo::make(__('Author'), 'author', User::class)->rules('required')->required(),
             Text::make(__('Master Code'), 'master_code')->rules('required')->required()->maxlength(255),
             Text::make(__('Featured Good List'), 'featured_good_list')->maxlength(255),
             Text::make(__('Name'), 'name')->rules('required')->required()->maxlength(255),

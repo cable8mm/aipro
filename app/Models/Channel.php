@@ -11,12 +11,11 @@ class Channel extends Model
 {
     use Actionable, HasFactory;
 
-    protected $with = ['user'];
+    protected $with = ['author'];
 
     protected function casts(): array
     {
         return [
-            'user_id' => 'integer',
             'name' => 'string',
             'playauto_site' => 'string',
             'siteid' => 'string',
@@ -32,8 +31,8 @@ class Channel extends Model
         ];
     }
 
-    public function user(): BelongsTo
+    public function author(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'author_id');
     }
 }

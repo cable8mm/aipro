@@ -11,12 +11,12 @@ class RegisterGoodRequest extends Model
 {
     use Actionable, HasFactory;
 
-    protected $with = ['requester', 'worker'];
+    protected $with = ['author', 'worker'];
 
     protected function casts(): array
     {
         return [
-            'requester_id' => 'integer',
+            'author_id' => 'integer',
             'title' => 'string',
             'request_file_url' => 'string',
             'worker_id' => 'integer',
@@ -26,9 +26,9 @@ class RegisterGoodRequest extends Model
         ];
     }
 
-    public function requester(): BelongsTo
+    public function author(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'requester_id');
+        return $this->belongsTo(User::class, 'author_id');
     }
 
     public function worker(): BelongsTo

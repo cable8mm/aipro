@@ -51,7 +51,7 @@ class RegisterGoodRequest extends Resource
     {
         return [
             ID::make()->sortable(),
-            BelongsTo::make(__('Requester'), 'requester', User::class)->default(function ($request) {
+            BelongsTo::make(__('Author'), 'author', User::class)->default(function ($request) {
                 return $request->user()->id;
             })->exceptOnForms(),
             BelongsTo::make(__('Worker'), 'worker', User::class),

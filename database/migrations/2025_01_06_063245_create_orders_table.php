@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('order_sheet_invoice_id')->nullable();
-            $table->string('type', 50)->nullable();
-            $table->integer('order_good_count')->nullable();
-            $table->integer('printed_count')->nullable()->default('0');
+            $table->foreignId('order_sheet_invoice_id')->nullable()->comment('주문서송장 아이디');
+            $table->string('type', 50)->nullable()->comment('센터 요청 12개 타입');
+            $table->integer('order_good_count')->nullable()->comment('주문 상품 갯수');
+            $table->integer('printed_count')->nullable()->default('0')->comment('출력 횟수');
             $table->timestamps();
         });
     }

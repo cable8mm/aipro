@@ -13,16 +13,16 @@ return new class extends Migration
     {
         Schema::create('inventory_histories', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable();
-            $table->foreignId('good_id')->nullable();
-            $table->string('type', 20)->nullable();
-            $table->integer('quantity')->nullable();
-            $table->integer('price')->nullable();
-            $table->integer('after_quantity')->nullable();
-            $table->string('model', 100)->nullable();
-            $table->unsignedInteger('attribute')->nullable();
-            $table->integer('cancel_id')->nullable();
-            $table->boolean('is_success')->nullable();
+            $table->foreignId('author_id')->comment('담당자 아이디');
+            $table->foreignId('good_id')->comment('상품 아이디');
+            $table->string('type', 20)->comment('타입(입고,출고)');
+            $table->integer('quantity')->comment('입출고 수량');
+            $table->integer('price')->comment('금액');
+            $table->integer('after_quantity')->comment('입출고 후 재고 수량');
+            $table->string('model', 100)->comment('입출고를 한 모델');
+            $table->unsignedInteger('attribute')->comment('입출고를 한 모델 속성');
+            $table->integer('cancel_id')->nullable()->comment('취소할 경우 저장되는 inventory_history_id');
+            $table->boolean('is_success')->comment('성공 유무');
             $table->timestamps();
         });
     }

@@ -19,7 +19,7 @@ class BoxOrderBoxFactory extends Factory
     {
         return [
             'box_order_id' => fake()->randomNumber(1) + 1,
-            'user_id' => fake()->randomNumber(1) + 1,
+            'author_id' => fake()->randomNumber(1) + 1,
             'box_supplier_id' => fake()->randomNumber(1) + 1,
             'box_id' => fake()->randomNumber(1) + 1,
             'warehouse_manager_id' => fake()->randomNumber(1) + 1,

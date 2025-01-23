@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('channels', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable();
+            $table->foreignId('author_id');
             $table->string('name', 255)->default('');
             $table->string('playauto_site', 190)->nullable();
             $table->string('siteid', 100)->nullable();

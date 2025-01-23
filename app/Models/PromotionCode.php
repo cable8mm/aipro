@@ -11,7 +11,7 @@ class PromotionCode extends Model
 {
     use Actionable, HasFactory;
 
-    protected $with = ['user'];
+    protected $with = ['author'];
 
     protected function casts(): array
     {
@@ -23,8 +23,8 @@ class PromotionCode extends Model
         ];
     }
 
-    public function user(): BelongsTo
+    public function author(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'author_id');
     }
 }

@@ -6,6 +6,7 @@ use App\Enums\UserType;
 use App\Traits\NovaAuthorizedByMd;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
@@ -52,7 +53,7 @@ class OptionGoodOption extends Resource
     {
         return [
             ID::make()->sortable(),
-            BelongsTo::make(__('User'), 'user', User::class),
+            BelongsTo::make(__('Author'), 'author', User::class),
             BelongsTo::make(__('Option Good'), 'optionGood', OptionGood::class),
             Text::make(__('Master Code'), 'master_code')->rules('required')->required()->maxlength(130),
             Text::make(__('Name'), 'name')->rules('required')->required()->maxlength(130),
@@ -60,6 +61,8 @@ class OptionGoodOption extends Resource
             Currency::make(__('Last Cost Price'), 'last_cost_price'),
             Currency::make(__('Zero Margin Price'), 'zero_margin_price'),
             Number::make(__('Order'), 'order'),
+            Boolean::make(__('Is My Shop Sale'), 'is_my_shop_sale'),
+            Boolean::make(__('Is Other Shop Sale'), 'is_other_shop_sale'),
             Stack::make(__('Created At').' & '.__('Updated At'), [
                 DateTime::make(__('Created At'), 'created_at'),
                 DateTime::make(__('Updated At'), 'updated_at'),

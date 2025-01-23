@@ -49,7 +49,7 @@ class PromotionCode extends Resource
     {
         return [
             ID::make()->sortable(),
-            BelongsTo::make(__('User'), 'user', User::class),
+            BelongsTo::make(__('Author'), 'author', User::class),
             Text::make(__('Master Code'), 'master_code')->rules('required')->required()->maxlength(100),
             DateTime::make(__('Started At'), 'started_at')->nullable(),
             DateTime::make(__('Finished At'), 'finished_at')->nullable(),
