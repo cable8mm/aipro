@@ -86,7 +86,7 @@ class PlacingOrderGood extends Resource
                 return number_format($value);
             }),
             Currency::make(__('Cost Price'), 'cost_price'),
-            Boolean::make(__('Is Promotion')),
+            Boolean::make(__('Is Promotion'), 'is_promotion'),
             DateTime::make(__('Warehoused At'), 'warehoused_at')->filterable(),
             Select::make(__('Status'), 'status')
                 ->options(PlacingOrderGoodStatus::array())->displayUsingLabels(),
