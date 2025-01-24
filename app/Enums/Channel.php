@@ -17,6 +17,7 @@ enum Channel: string
         return match ($this) {
             self::UPLOAD_COMPLETED => '업로드완료',
             self::ON_SELLING => '판매중',
+            self::FAILED => '실패',
         };
     }
 
