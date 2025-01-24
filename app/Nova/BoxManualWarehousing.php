@@ -5,6 +5,7 @@ namespace App\Nova;
 use App\Enums\ManualInventoryAdjustmentType;
 use App\Traits\NovaAuthorizedByWarehouser;
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\Badge;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
@@ -56,7 +57,16 @@ class BoxManualWarehousing extends Resource
             BelongsTo::make(__('Author'), 'author', User::class)->exceptOnForms(),
             Text::make(__('코드'), 'Box.code')->onlyOnIndex(),
             BelongsTo::make(__('Box'), 'box', Box::class),
-            Select::make(__('Type'), 'type')->options(ManualInventoryAdjustmentType::array())->displayUsingLabels()->filterable(),
+            Select::make(__('Type'), 'type')
+                ->rules('required')->required()
+                ->options(ManualInventoryAdjustmentType::array())
+                ->displayUsingLabels()
+                ->filterable()
+                ->hideFromIndex(),
+            Badge::make(__('Type'), 'type')
+                ->map(ManualInventoryAdjustmentType::array(value: 'success'))
+                ->labels(ManualInventoryAdjustmentType::array())
+                ->onlyOnIndex(),
             Number::make(__('Manual Add Inventory Count'), 'manual_add_inventory_count')
                 ->rules('required', 'notIn:0')->displayUsing(function ($value) {
                     return number_format($value);

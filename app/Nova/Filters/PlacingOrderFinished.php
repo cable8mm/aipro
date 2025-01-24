@@ -19,7 +19,7 @@ class PlacingOrderFinished extends BooleanFilter
     {
         return $query->where(function ($query) use ($value) {
             if ($value['except_warehoused_confirmed_deleted'] == 1) {
-                $query->whereIn('status', [PlacingOrder::WRITING, PlacingOrder::CONFIRMING, PlacingOrder::WAITING]);
+                $query->whereIn('status', PlacingOrder::finishedWhen());
             }
 
             return $query;

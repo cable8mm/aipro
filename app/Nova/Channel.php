@@ -10,8 +10,8 @@ use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\File;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
-use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Stack;
+use Laravel\Nova\Fields\Status;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -65,11 +65,18 @@ class Channel extends Resource
             DateTime::make(__('Last Processed At'), 'last_processed_at'),
             Textarea::make(__('Memo'), 'memo'),
             Boolean::make(__('Is Active'), 'is_active'),
-            Select::make(__('Status'), 'status')->options(EnumsChannel::array())->displayUsingLabels(),
+            Status::make(__('Status'), 'status')
+                ->loadingWhen(EnumsChannel::loadingWhen())
+                ->failedWhen(EnumsChannel::failedWhen())
+                ->filterable(function ($request, $query, $value, $attribute) {
+                    $query->where($attribute, $value);
+                })->displayUsing(function ($value) {
+                    return EnumsChannel::{$value}->value() ?? '-';
+                }),
             Stack::make(__('Created At').' & '.__('Updated At'), [
                 DateTime::make(__('Created At'), 'created_at'),
                 DateTime::make(__('Updated At'), 'updated_at'),
-            ]),
+            ])->hideFromIndex(),
         ];
     }
 

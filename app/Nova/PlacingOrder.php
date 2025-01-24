@@ -10,8 +10,8 @@ use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
-use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Stack;
+use Laravel\Nova\Fields\Status;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -63,18 +63,34 @@ class PlacingOrder extends Resource
             Number::make(__('Order Discount Percent'), 'order_discount_percent')->min(1)->max(100)->step(1)
                 ->displayUsing(fn () => "{$this->order_discount_percent}%")
                 ->exceptOnForms(),
-            DateTime::make(__('Ordered At'), 'ordered_at')->nullable()->filterable(),
-            DateTime::make(__('Predict Warehoused At'), 'predict_warehoused_at')->nullable()->filterable(),
-            DateTime::make(__('Sent At'), 'sent_at')->exceptOnForms(),
-            DateTime::make(__('Confirmed At'), 'confirmed_at')->exceptOnForms(),
-            DateTime::make(__('Warehoused At'), 'warehoused_at')->exceptOnForms(),
-            Textarea::make(__('Memo'), 'memo')->alwaysShow(),
-            Select::make(__('Status'), 'status')
-                ->options(EnumsPlacingOrder::array())->displayUsingLabels()->filterable(),
-            Stack::make(__('Created At').' & '.__('Updated At'), [
-                DateTime::make(__('Created At'), 'created_at'),
-                DateTime::make(__('Updated At'), 'updated_at'),
+            Stack::make(__('Dates'), [
+                DateTime::make(__('Ordered At'), 'ordered_at')
+                    ->displayUsing(fn ($value) => __('Order').' : '.($value ? $value->toDateTimeString() : '-'))
+                    ->nullable()->filterable(),
+                DateTime::make(__('Predict Warehoused At'), 'predict_warehoused_at')
+                    ->displayUsing(fn ($value) => __('Predict Warehousing').' : '.($value ? $value->toDateTimeString() : '-'))
+                    ->nullable()->filterable(),
+                DateTime::make(__('Sent At'), 'sent_at')
+                    ->displayUsing(fn ($value) => __('Sending').' : '.($value ? $value->toDateTimeString() : '-'))
+                    ->exceptOnForms(),
+                DateTime::make(__('Confirmed At'), 'confirmed_at')
+                    ->displayUsing(fn ($value) => __('Confirm').' : '.($value ? $value->toDateTimeString() : '-'))
+                    ->exceptOnForms(),
             ]),
+            DateTime::make(__('Warehoused At'), 'warehoused_at')->displayUsing(fn ($value) => $value ? $value->toDateTimeString() : '-')->exceptOnForms(),
+            Textarea::make(__('Memo'), 'memo')->alwaysShow(),
+            Status::make(__('Status'), 'status')
+                ->loadingWhen(EnumsPlacingOrder::loadingWhen())
+                ->failedWhen(EnumsPlacingOrder::failedWhen())
+                ->filterable(function ($request, $query, $value, $attribute) {
+                    $query->where($attribute, $value);
+                })->displayUsing(function ($value) {
+                    return EnumsPlacingOrder::{$value}->value() ?? '-';
+                }),
+            Stack::make(__('Created At').' & '.__('Updated At'), [
+                DateTime::make(__('Created At'), 'created_at')->displayUsing(fn ($value) => $value ? $value->toDateTimeString() : '-'),
+                DateTime::make(__('Updated At'), 'updated_at')->displayUsing(fn ($value) => $value ? $value->toDateTimeString() : '-'),
+            ])->hideFromIndex(),
 
             HasMany::make(__('Placing Order Goods'), 'placingOrderGoods', PlacingOrderGood::class),
         ];

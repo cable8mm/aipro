@@ -9,8 +9,8 @@ use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\File;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Stack;
+use Laravel\Nova\Fields\Status;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -40,6 +40,9 @@ class RegisterGoodRequest extends Resource
      */
     public static $search = [
         'id',
+        'author.name',
+        'worker.name',
+        'title',
     ];
 
     /**
@@ -59,7 +62,14 @@ class RegisterGoodRequest extends Resource
             File::make(__('Request File Url'), 'request_file_url'),
             File::make(__('Respond File Url'), 'respond_file_url'),
             Boolean::make(__('Has Supplier Monitoring Price'), 'has_supplier_monitoring_price')->default(false),
-            Select::make(__('Status'), 'status')->options(EnumsStatus::array())->displayUsingLabels(),
+            Status::make(__('Status'), 'status')
+                ->loadingWhen(EnumsStatus::loadingWhen())
+                ->failedWhen(EnumsStatus::failedWhen())
+                ->filterable(function ($request, $query, $value, $attribute) {
+                    $query->where($attribute, $value);
+                })->displayUsing(function ($value) {
+                    return EnumsStatus::{$value}->value() ?? '-';
+                }),
             Textarea::make(__('Memo'), 'memo')->alwaysShow(),
             Stack::make(__('Created At').' & '.__('Updated At'), [
                 DateTime::make(__('Created At'), 'created_at'),

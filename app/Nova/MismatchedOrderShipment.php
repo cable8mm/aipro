@@ -8,8 +8,8 @@ use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\KeyValue;
-use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Stack;
+use Laravel\Nova\Fields\Status;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
@@ -58,8 +58,15 @@ class MismatchedOrderShipment extends Resource
             Text::make(__('Goods Nm'), 'goods_nm')->maxlength(255),
             Text::make(__('Option'), 'option')->maxlength(255),
             KeyValue::make(__('Json'), 'json'),
-            Select::make(__('Status'), 'status')
-                ->options(EnumsStatus::array())->displayUsingLabels()->filterable(),
+            Status::make(__('Status'), 'status')
+                ->default(EnumsStatus::WAITING->name)
+                ->loadingWhen([EnumsStatus::WAITING->name, EnumsStatus::RUNNING->name])
+                ->failedWhen([EnumsStatus::FAILED->name])
+                ->filterable(function ($request, $query, $value, $attribute) {
+                    $query->where($attribute, $value);
+                })->displayUsing(function ($value) {
+                    return EnumsStatus::{$value}->value() ?? '-';
+                }),
             Stack::make(__('Created At').' & '.__('Updated At'), [
                 DateTime::make(__('Created At'), 'created_at'),
                 DateTime::make(__('Updated At'), 'updated_at'),

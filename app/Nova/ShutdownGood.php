@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Stack;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -29,7 +28,7 @@ class ShutdownGood extends Resource
      *
      * @var string
      */
-    public static $title = 'name';
+    public static $title = 'title';
 
     /**
      * The columns that should be searched.
@@ -38,7 +37,7 @@ class ShutdownGood extends Resource
      */
     public static $search = [
         'id',
-        'name',
+        'title',
         'master_code',
     ];
 
@@ -55,10 +54,8 @@ class ShutdownGood extends Resource
             Text::make(__('Master Code'), 'master_code')->maxlength(150),
             Text::make(__('Title'), 'title')->maxlength(255),
             Textarea::make(__('Reason'), 'reason')->alwaysShow(),
-            Stack::make(__('Created At').' & '.__('Updated At'), [
-                DateTime::make(__('Created At'), 'created_at'),
-                DateTime::make(__('Updated At'), 'updated_at'),
-            ]),
+            DateTime::make(__('Created At'), 'created_at')->exceptOnForms(),
+            DateTime::make(__('Updated At'), 'updated_at')->exceptOnForms(),
         ];
     }
 

@@ -6,7 +6,6 @@ use App\Traits\NovaAuthorizedByManager;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\KeyValue;
-use Laravel\Nova\Fields\Stack;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
@@ -49,10 +48,8 @@ class AlertEmail extends Resource
             Text::make(__('Name'), 'name')->rules('required')->required()->maxlength(255),
             Text::make(__('Action Name'), 'action_name')->rules('required')->required()->maxlength(255),
             KeyValue::make(__('Email List'), 'email_list'),
-            Stack::make(__('Created At').' & '.__('Updated At'), [
-                DateTime::make(__('Created At'), 'created_at'),
-                DateTime::make(__('Updated At'), 'updated_at'),
-            ]),
+            DateTime::make(__('Created At'), 'created_at')->exceptOnForms(),
+            DateTime::make(__('Updated At'), 'updated_at')->exceptOnForms(),
         ];
     }
 

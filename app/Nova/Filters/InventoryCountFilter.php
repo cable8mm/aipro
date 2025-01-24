@@ -5,6 +5,9 @@ namespace App\Nova\Filters;
 use Laravel\Nova\Filters\Filter;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
+/**
+ * The filter for inventory zero or nothing.
+ */
 class InventoryCountFilter extends Filter
 {
     /**

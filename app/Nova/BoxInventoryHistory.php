@@ -5,6 +5,7 @@ namespace App\Nova;
 use App\Enums\InventoryHistory;
 use App\Enums\InventoryHistoryModel;
 use App\Traits\NovaAuthorizedByNone;
+use Laravel\Nova\Fields\Badge;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\DateTime;
@@ -52,8 +53,16 @@ class BoxInventoryHistory extends Resource
         return [
             ID::make()->sortable(),
             BelongsTo::make(__('Box'), 'box', Box::class),
-            Select::make(__('Type'), 'type')->options(InventoryHistory::array())->displayUsingLabels()
-                ->rules('required')->required(),
+            Select::make(__('Type'), 'type')
+                ->rules('required')->required()
+                ->options(InventoryHistory::array())
+                ->displayUsingLabels()
+                ->filterable()
+                ->hideFromIndex(),
+            Badge::make(__('Type'), 'type')
+                ->map(InventoryHistory::array(value: 'success'))
+                ->labels(InventoryHistory::array())
+                ->onlyOnIndex(),
             Select::make(__('Model'), 'model')->options(InventoryHistoryModel::array())->displayUsingLabels()->rules('required')->required(),
             Text::make(__('Attribute'), 'attribute')->rules('required', 'gt:0')->required(),
             Number::make(__('Quantity'), 'quantity')->rules('required')->required()->displayUsing(function ($value) {

@@ -11,7 +11,7 @@ use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\Hidden;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
-use Laravel\Nova\Fields\Select;
+use Laravel\Nova\Fields\Status;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -53,8 +53,14 @@ class BoxOrder extends Resource
     {
         return [
             ID::make()->sortable(),
-            Select::make(__('Status'), 'status')
-                ->options(PlacingOrder::array())->displayUsingLabels()->filterable(),
+            Status::make(__('Status'), 'status')
+                ->loadingWhen(PlacingOrder::loadingWhen())
+                ->failedWhen(PlacingOrder::failedWhen())
+                ->filterable(function ($request, $query, $value, $attribute) {
+                    $query->where($attribute, $value);
+                })->displayUsing(function ($value) {
+                    return PlacingOrder::{$value}->value() ?? '-';
+                }),
             Hidden::make('Author', 'author_id')->default(function ($request) {
                 return $request->user()->id;
             }),

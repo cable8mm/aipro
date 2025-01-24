@@ -119,7 +119,7 @@ class OrderSheetInvoice extends Resource
                 ->loadingWhen([Status::WAITING->name, Status::RUNNING->name])
                 ->failedWhen([Status::FAILED->name])
                 ->filterable(function ($request, $query, $value, $attribute) {
-                    $query->where($attribute, 'LIKE', "{$value}%");
+                    $query->where($attribute, $value);
                 })->displayUsing(function ($value) {
                     return Status::{$value}->value() ?? '-';
                 }),

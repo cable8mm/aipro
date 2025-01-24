@@ -5,6 +5,7 @@ namespace App\Nova;
 use App\Enums\InventoryHistory as EnumsInventoryHistory;
 use App\Enums\InventoryHistoryModel;
 use App\Traits\NovaAuthorizedByNone;
+use Laravel\Nova\Fields\Badge;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Currency;
@@ -53,8 +54,16 @@ class InventoryHistory extends Resource
             ID::make()->sortable(),
             BelongsTo::make(__('Author'), 'author', User::class),
             BelongsTo::make(__('Good'), 'good', Good::class),
-            Select::make(__('Type'), 'type')->options(EnumsInventoryHistory::array())
-                ->rules('required')->required()->displayUsingLabels(),
+            Select::make(__('Type'), 'type')
+                ->rules('required')->required()
+                ->options(EnumsInventoryHistory::array())
+                ->displayUsingLabels()
+                ->filterable()
+                ->hideFromIndex(),
+            Badge::make(__('Type'), 'type')
+                ->map(EnumsInventoryHistory::array(value: 'success'))
+                ->labels(EnumsInventoryHistory::array())
+                ->onlyOnIndex(),
             Number::make(__('Quantity'), 'quantity')->displayUsing(function ($value) {
                 return number_format($value);
             })->rules('required')->required(),

@@ -10,8 +10,8 @@ use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\File;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Stack;
+use Laravel\Nova\Fields\Status as FieldsStatus;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -57,7 +57,14 @@ class RegisterOptionGoodRequest extends Resource
             Text::make(__('Title'), 'title')->rules('required')->required()->maxlength(190),
             File::make(__('Request File Url'), 'request_file_url'),
             File::make(__('Respond File Url'), 'respond_file_url'),
-            Select::make(__('Status'), 'status')->rules('required')->required()->options(Status::array())->displayUsingLabels(),
+            FieldsStatus::make(__('Status'), 'status')
+                ->loadingWhen(Status::loadingWhen())
+                ->failedWhen(Status::failedWhen())
+                ->filterable(function ($request, $query, $value, $attribute) {
+                    $query->where($attribute, $value);
+                })->displayUsing(function ($value) {
+                    return Status::{$value}->value() ?? '-';
+                }),
             Textarea::make(__('Memo'), 'memo')->alwaysShow(),
             Stack::make(__('Created At').' & '.__('Updated At'), [
                 DateTime::make(__('Created At'), 'created_at'),
