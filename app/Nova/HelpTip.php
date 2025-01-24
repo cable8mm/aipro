@@ -5,7 +5,6 @@ namespace App\Nova;
 use App\Traits\NovaAuthorizedByManager;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Stack;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
@@ -52,10 +51,8 @@ class HelpTip extends Resource
                 ->updateRules('required')
                 ->required()->maxlength(100),
             Text::make(__('Help Tip'), 'help_tip')->rules('required')->required()->maxlength(190),
-            Stack::make(__('Created At').' & '.__('Updated At'), [
-                DateTime::make(__('Created At'), 'created_at'),
-                DateTime::make(__('Updated At'), 'updated_at'),
-            ]),
+            DateTime::make(__('Created At'), 'created_at')->exceptOnForms(),
+            DateTime::make(__('Updated At'), 'updated_at')->exceptOnForms(),
         ];
     }
 

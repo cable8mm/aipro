@@ -3,7 +3,6 @@
 namespace App\Nova;
 
 use App\Enums\SafeClass;
-use App\Enums\Status;
 use App\Enums\UserType;
 use App\Traits\NovaAuthorizedByDeveloper;
 use Illuminate\Http\Request;
@@ -55,10 +54,9 @@ class GoodInventorySnapshot extends Resource
             ID::make()->sortable(),
             BelongsTo::make(__('Author'), 'author', User::class),
             BelongsTo::make(__('Good'), 'good', Good::class),
-            Text::make('Playauto Master Code')->maxlength(50),
-            Number::make('Inventory'),
+            Text::make(__('Playauto Master Code'), 'playauto_master_code')->maxlength(50),
+            Number::make(__('Inventory'), 'inventory'),
             Select::make(__('Safe Class'), 'safe_class')->options(SafeClass::array())->displayUsingLabels(),
-            Select::make(__('Type'), 'type')->options(Status::array())->displayUsingLabels(),
             Stack::make(__('Created At').' & '.__('Updated At'), [
                 DateTime::make(__('Created At'), 'created_at'),
                 DateTime::make(__('Updated At'), 'updated_at'),

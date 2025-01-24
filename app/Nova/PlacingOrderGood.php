@@ -12,8 +12,8 @@ use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
-use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Stack;
+use Laravel\Nova\Fields\Status;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -80,21 +80,27 @@ class PlacingOrderGood extends Resource
             Currency::make(__('Order Price'), 'order_price')->rules('required')->required(),
             Number::make(__('Supplier Confirmed Count'), 'supplier_confirmed_count')->displayUsing(function ($value) {
                 return number_format($value);
-            })->exceptOnForms(),
-            Currency::make(__('Supplier Confirmed Price'), 'supplier_confirmed_price')->exceptOnForms(),
+            })->exceptOnForms()->hideFromIndex(),
+            Currency::make(__('Supplier Confirmed Price'), 'supplier_confirmed_price')->exceptOnForms()->hideFromIndex(),
             Number::make(__('Cost Count'), 'cost_count')->rules('required')->required()->displayUsing(function ($value) {
                 return number_format($value);
             }),
             Currency::make(__('Cost Price'), 'cost_price'),
             Boolean::make(__('Is Promotion'), 'is_promotion'),
             DateTime::make(__('Warehoused At'), 'warehoused_at')->filterable(),
-            Select::make(__('Status'), 'status')
-                ->options(PlacingOrderGoodStatus::array())->displayUsingLabels(),
+            Status::make(__('Status'), 'status')
+                ->loadingWhen(PlacingOrderGoodStatus::loadingWhen())
+                ->failedWhen(PlacingOrderGoodStatus::failedWhen())
+                ->filterable(function ($request, $query, $value, $attribute) {
+                    $query->where($attribute, $value);
+                })->displayUsing(function ($value) {
+                    return PlacingOrderGoodStatus::{$value}->value() ?? '-';
+                }),
             Textarea::make(__('Memo'), 'memo')->alwaysShow(),
             Stack::make(__('Created At').' & '.__('Updated At'), [
                 DateTime::make(__('Created At'), 'created_at'),
                 DateTime::make(__('Updated At'), 'updated_at'),
-            ]),
+            ])->hideFromIndex(),
         ];
     }
 

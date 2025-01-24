@@ -5,6 +5,7 @@ namespace App\Nova;
 use App\Enums\ManualInventoryAdjustmentType;
 use App\Traits\NovaAuthorizedByWarehouser;
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\Badge;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
@@ -55,12 +56,23 @@ class GoodManualWarehousing extends Resource
             ID::make()->sortable(),
             Text::make(__('마스터 코드'), 'Good.master_code')->onlyOnIndex(),
             Text::make(__('공급사'), 'Good.supplier.name')->onlyOnIndex(),
-            BelongsTo::make(__('Good'), 'good', Good::class),
-            BelongsTo::make(__('Author'), 'author', User::class),
-            Select::make(__('Type'), 'type')->options(ManualInventoryAdjustmentType::array())->displayUsingLabels()->filterable(),
-            Number::make(__('Manual Add Inventory Count'), 'manual_add_inventory_count')->displayUsing(function ($value) {
-                return number_format($value);
-            }),
+            BelongsTo::make(__('Good'), 'good', Good::class)->searchable(),
+            BelongsTo::make(__('Author'), 'author', User::class)->exceptOnForms(),
+            Select::make(__('Type'), 'type')
+                ->rules('required')->required()
+                ->options(ManualInventoryAdjustmentType::array())
+                ->displayUsingLabels()
+                ->filterable()
+                ->hideFromIndex(),
+            Badge::make(__('Type'), 'type')
+                ->map(ManualInventoryAdjustmentType::array(value: 'success'))
+                ->labels(ManualInventoryAdjustmentType::array())
+                ->onlyOnIndex(),
+            Number::make(__('Manual Add Inventory Count'), 'manual_add_inventory_count')
+                ->rules('required')->required()
+                ->displayUsing(function ($value) {
+                    return number_format($value);
+                }),
             Text::make(__('Memo'), 'memo')->nullable(),
             Stack::make(__('Created At').' & '.__('Updated At'), [
                 DateTime::make(__('Created At'), 'created_at'),

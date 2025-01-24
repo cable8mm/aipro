@@ -12,6 +12,7 @@ use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
+use Laravel\Nova\Fields\Status as FieldsStatus;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Outl1ne\NovaInputFilter\InputFilter;
@@ -61,7 +62,15 @@ class OrderShipment extends Resource
             DateTime::make(__('Payment Date'), 'paymentDate'),
             DateTime::make(__('Status Date'), 'statusDate'),
             DateTime::make(__('Delivery Date'), 'deliveryDate'),
-            Select::make(__('Status'), 'status')->options(Status::array())->displayUsingLabels(),
+            FieldsStatus::make(__('Status'), 'status')
+                ->default(Status::WAITING->name)
+                ->loadingWhen([Status::WAITING->name, Status::RUNNING->name])
+                ->failedWhen([Status::FAILED->name])
+                ->filterable(function ($request, $query, $value, $attribute) {
+                    $query->where($attribute, $value);
+                })->displayUsing(function ($value) {
+                    return Status::{$value}->value() ?? '-';
+                }),
             Text::make(__('Site Order No'), 'siteOrderNo')->maxlength(255),
             Text::make(__('Site Goods Cd'), 'siteGoodsCd')->maxlength(255),
             Text::make(__('Goods Nm'), 'goodsNm')->maxlength(255),

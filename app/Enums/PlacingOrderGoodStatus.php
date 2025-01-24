@@ -24,4 +24,14 @@ enum PlacingOrderGoodStatus: string
             self::CONFIRMING => '확인중',
         };
     }
+
+    public static function loadingWhen(): array
+    {
+        return [self::NOT_IN_STOCK->name, self::BEING_IN_STOCK->name, self::CONFIRMING->name];
+    }
+
+    public static function failedWhen(): array
+    {
+        return [self::DELETE->name];
+    }
 }
