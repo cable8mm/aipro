@@ -2,12 +2,13 @@
 
 namespace App\Nova\Metrics;
 
-use App\Models\Good;
+use App\Models\Box;
 use App\Models\Setting;
+use Illuminate\Database\Query\Expression;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Metrics\Progress;
 
-class GoodSumCostPrice extends Progress
+class BoxSumCostPrice extends Progress
 {
     /**
      * Calculate the value of the metric.
@@ -16,9 +17,14 @@ class GoodSumCostPrice extends Progress
      */
     public function calculate(NovaRequest $request)
     {
-        return $this->sum($request, Good::class, function ($query) {
+        return $this->sum($request, Box::class, function ($query) {
             return $query;
-        }, 'cost_price', target: Setting::get('GOAL_FOR_COST_PRICE_SUM_OF_GOODS'))->suffix(__('Won'));
+        }, column: new Expression('cost_price * inventory'), target: Setting::get('GOAL_FOR_COST_PRICE_SUM_OF_BOXES')
+        )
+            ->suffix(__('Won'))
+            ->format([
+                'thousandSeparated' => true,
+            ]);
     }
 
     /**
@@ -38,11 +44,11 @@ class GoodSumCostPrice extends Progress
      */
     public function uriKey()
     {
-        return 'good-sum-price';
+        return 'box-sum-cost-price';
     }
 
     public function name()
     {
-        return __('Good Sum Cost Price');
+        return __('Box Sum Cost Price');
     }
 }
