@@ -13,6 +13,7 @@ use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Stack;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
+use Laravel\Nova\Fields\Trix;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class SupplierGood extends Resource
@@ -75,7 +76,7 @@ class SupplierGood extends Resource
             Number::make(__('Inventory'), 'inventory')->displayUsing(function ($value) {
                 return number_format($value);
             }),
-            Textarea::make(__('Description'), 'description')->alwaysShow(),
+            Trix::make(__('Description'), 'description')->alwaysShow(),
             Currency::make(__('Price'), 'price'),
             Currency::make(__('Suggested Selling Price'), 'suggested_selling_price'),
             Currency::make(__('Suggested Retail Price'), 'suggested_retail_price'),

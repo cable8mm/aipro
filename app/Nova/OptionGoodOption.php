@@ -55,12 +55,15 @@ class OptionGoodOption extends Resource
             ID::make()->sortable(),
             BelongsTo::make(__('Author'), 'author', User::class),
             BelongsTo::make(__('Option Good'), 'optionGood', OptionGood::class),
-            Text::make(__('Master Code'), 'master_code')->rules('required')->required()->maxlength(130),
+            Text::make(__('Master Code'), 'master_code')
+                ->rules('required')->required()
+                ->copyable()
+                ->maxlength(130),
             Text::make(__('Name'), 'name')->rules('required')->required()->maxlength(130),
             Currency::make(__('Goods Price'), 'goods_price'),
             Currency::make(__('Last Cost Price'), 'last_cost_price'),
             Currency::make(__('Zero Margin Price'), 'zero_margin_price'),
-            Number::make(__('Order'), 'order'),
+            Number::make('순서', 'order'),
             Boolean::make(__('Is My Shop Sale'), 'is_my_shop_sale'),
             Boolean::make(__('Is Other Shop Sale'), 'is_other_shop_sale'),
             Stack::make(__('Created At').' & '.__('Updated At'), [

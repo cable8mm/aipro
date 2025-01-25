@@ -13,6 +13,7 @@ use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Image;
+use Laravel\Nova\Fields\MorphOne;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Stack;
@@ -61,7 +62,10 @@ class BasicGood extends Resource
             ID::make()->sortable(),
             BelongsTo::make(__('Author'), 'author', User::class),
             Image::make(__('List Image'), 'list_image'),
-            Text::make(__('Master Code'), 'master_code')->rules('required')->required()->maxlength(255)->sortable(),
+            Text::make(__('Master Code'), 'master_code')
+                ->rules('required')->required()
+                ->maxlength(100)
+                ->copyable(),
             BelongsTo::make(__('Playauto Category'), 'playautoCategory', PlayautoCategory::class),
             Text::make(__('Name'), 'name')->rules('required')->required()->maxlength(255),
             Text::make(__('Godo Name'), 'godo_name')->maxlength(255),
@@ -104,6 +108,8 @@ class BasicGood extends Resource
                 DateTime::make(__('Created At'), 'created_at'),
                 DateTime::make(__('Updated At'), 'updated_at'),
             ]),
+
+            MorphOne::make('PromotionCode', 'promotionCode'),
         ];
     }
 

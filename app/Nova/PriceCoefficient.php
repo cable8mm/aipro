@@ -9,7 +9,6 @@ use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
-use Laravel\Nova\Fields\Stack;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class PriceCoefficient extends Resource
@@ -52,10 +51,8 @@ class PriceCoefficient extends Resource
             Currency::make(__('Start Price'), 'start_price'),
             Currency::make(__('End Price'), 'end_price'),
             Number::make(__('Coefficient'), 'coefficient')->step('any'),
-            Stack::make(__('Created At').' & '.__('Updated At'), [
-                DateTime::make(__('Created At'), 'created_at'),
-                DateTime::make(__('Updated At'), 'updated_at'),
-            ])->hideFromIndex(),
+            DateTime::make(__('Created At'), 'created_at')->exceptOnForms(),
+            DateTime::make(__('Updated At'), 'updated_at')->exceptOnForms(),
         ];
     }
 

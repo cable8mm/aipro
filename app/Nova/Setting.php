@@ -3,9 +3,9 @@
 namespace App\Nova;
 
 use App\Traits\NovaAuthorizedByManager;
+use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Setting extends Resource
@@ -46,8 +46,10 @@ class Setting extends Resource
         return [
             ID::make()->sortable(),
             Text::make(__('Key'), 'key')->rules('required')->required()->maxlength(255)->copyable(),
-            Text::make(__('Value'), 'value')->rules('required')->required()->maxlength(255),
-            Textarea::make(__('Memo'), 'memo')->maxlength(255),
+            Text::make(__('Value'), 'value')->rules('required')->required()->maxlength(255)->copyable(),
+            Text::make(__('Memo'), 'memo')->maxlength(255)->showOnIndex(),
+            DateTime::make(__('Created At'), 'created_at')->exceptOnForms(),
+            DateTime::make(__('Updated At'), 'updated_at')->exceptOnForms(),
         ];
     }
 

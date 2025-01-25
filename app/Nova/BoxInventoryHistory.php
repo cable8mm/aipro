@@ -52,6 +52,8 @@ class BoxInventoryHistory extends Resource
     {
         return [
             ID::make()->sortable(),
+            Text::make(__('Code'), 'box.code')->exceptOnForms(),
+            BelongsTo::make(__('Author'), 'author', User::class),
             BelongsTo::make(__('Box'), 'box', Box::class),
             Select::make(__('Type'), 'type')
                 ->rules('required')->required()

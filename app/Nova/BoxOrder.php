@@ -78,7 +78,7 @@ class BoxOrder extends Resource
             DateTime::make(__('Warehoused At'), 'warehoused_at')->nullable()->exceptOnForms(),
             Textarea::make(__('Memo'), 'memo')->alwaysShow(),
 
-            HasMany::make(__('BoxOrderBox'), 'boxOrderBoxes', BoxOrderBox::class),
+            HasMany::make(__('Box Order Boxes'), 'boxOrderBoxes', BoxOrderBox::class),
         ];
     }
 

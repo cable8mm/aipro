@@ -5,7 +5,6 @@ namespace App\Nova;
 use App\Traits\NovaAuthorizedByManager;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Stack;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
@@ -49,10 +48,8 @@ class PickingZone extends Resource
             ID::make()->sortable(),
             Text::make(__('Name'), 'name')->maxlength(50),
             Text::make(__('Code'), 'code')->maxlength(10),
-            Stack::make(__('Created At').' & '.__('Updated At'), [
-                DateTime::make(__('Created At'), 'created_at'),
-                DateTime::make(__('Updated At'), 'updated_at'),
-            ])->hideFromIndex(),
+            DateTime::make(__('Created At'), 'created_at')->exceptOnForms(),
+            DateTime::make(__('Updated At'), 'updated_at')->exceptOnForms(),
         ];
     }
 

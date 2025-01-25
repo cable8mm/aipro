@@ -106,4 +106,9 @@ class BoxOrderBox extends Resource
     {
         return [];
     }
+
+    public static function label()
+    {
+        return __('Box Order Boxes');
+    }
 }

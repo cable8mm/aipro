@@ -7,6 +7,7 @@ use App\Traits\NovaAuthorizedByWarehouser;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\DateTime;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Stack;
@@ -63,6 +64,8 @@ class BoxSupplier extends Resource
                 DateTime::make(__('Created At'), 'created_at'),
                 DateTime::make(__('Updated At'), 'updated_at'),
             ])->hideFromIndex(),
+
+            HasMany::make(__('Box Order Boxes'), 'boxOrderBoxes', BoxOrderBox::class),
         ];
     }
 

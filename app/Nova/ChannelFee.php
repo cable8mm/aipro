@@ -8,7 +8,6 @@ use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
-use Laravel\Nova\Fields\Stack;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class ChannelFee extends Resource
@@ -49,10 +48,8 @@ class ChannelFee extends Resource
             ID::make()->sortable(),
             Select::make(__('Channel'), 'channel')->options(Site::array())->displayUsingLabels(),
             Number::make(__('Fee Rate'), 'fee_rate')->step('any'),
-            Stack::make(__('Created At').' & '.__('Updated At'), [
-                DateTime::make(__('Created At'), 'created_at'),
-                DateTime::make(__('Updated At'), 'updated_at'),
-            ]),
+            DateTime::make(__('Created At'), 'created_at')->exceptOnForms(),
+            DateTime::make(__('Updated At'), 'updated_at')->exceptOnForms(),
         ];
     }
 

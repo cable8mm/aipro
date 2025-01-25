@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Laravel\Nova\Actions\Actionable;
 
 class BoxSupplier extends Model
@@ -20,5 +21,10 @@ class BoxSupplier extends Model
             'contact_cel' => 'string',
             'min_order_price' => 'integer',
         ];
+    }
+
+    public function boxOrderBoxes(): HasMany
+    {
+        return $this->hasMany(BoxOrderBox::class);
     }
 }

@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('box_inventory_histories', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('author_id');
             $table->foreignId('box_id');
             $table->string('type', 20);
             $table->bigInteger('quantity');
