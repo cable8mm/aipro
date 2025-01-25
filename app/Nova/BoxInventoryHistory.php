@@ -12,7 +12,6 @@ use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
-use Laravel\Nova\Fields\Stack;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
@@ -52,8 +51,8 @@ class BoxInventoryHistory extends Resource
     {
         return [
             ID::make()->sortable(),
+            BelongsTo::make(__('Author'), 'author', User::class)->exceptOnForms(),
             Text::make(__('Code'), 'box.code')->exceptOnForms(),
-            BelongsTo::make(__('Author'), 'author', User::class),
             BelongsTo::make(__('Box'), 'box', Box::class),
             Select::make(__('Type'), 'type')
                 ->rules('required')->required()
@@ -71,10 +70,8 @@ class BoxInventoryHistory extends Resource
                 return number_format($value);
             }),
             Boolean::make(__('Is Success'), 'is_success')->rules('required')->required(),
-            Stack::make(__('Created At').' & '.__('Updated At'), [
-                DateTime::make(__('Created At'), 'created_at'),
-                DateTime::make(__('Updated At'), 'updated_at'),
-            ]),
+            DateTime::make(__('Created At'), 'created_at')->exceptOnForms(),
+            DateTime::make(__('Updated At'), 'updated_at')->exceptOnForms(),
         ];
     }
 

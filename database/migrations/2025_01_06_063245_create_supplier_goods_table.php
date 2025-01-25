@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('supplier_goods', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('author_id')->comment('등록자');
             $table->foreignId('supplier_id')->comment('공급사 아이디');
             $table->string('good_code', 100)->nullable()->comment('(공급사) 상품 코드');
             $table->string('supplier_attribute', 50)->nullable()->comment('공급사 상품 속성');

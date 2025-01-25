@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Nova\Actions\Actionable;
 
 class OptionGood extends Model
@@ -25,6 +26,13 @@ class OptionGood extends Model
             'other_shop_sale_option_count' => 'integer',
             'is_active' => 'boolean',
         ];
+    }
+
+    protected static function booted(): void
+    {
+        static::creating(function (OptionGood $optionGood) {
+            $optionGood->author_id = $optionGood->author_id ?? Auth::user()->id;
+        });
     }
 
     public function author(): BelongsTo

@@ -53,7 +53,7 @@ class OptionGood extends Resource
     {
         return [
             ID::make()->sortable(),
-            BelongsTo::make(__('Author'), 'author', User::class),
+            BelongsTo::make(__('Author'), 'author', User::class)->exceptOnForms(),
             Text::make(__('Master Code'), 'master_code')
                 ->rules('required')->required()
                 ->copyable()

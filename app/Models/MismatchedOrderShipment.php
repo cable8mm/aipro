@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Nova\Actions\Actionable;
 
 class MismatchedOrderShipment extends Model
@@ -24,6 +25,13 @@ class MismatchedOrderShipment extends Model
             'status' => 'string',
             'json' => 'array',
         ];
+    }
+
+    protected static function booted(): void
+    {
+        static::creating(function (MismatchedOrderShipment $mismatchedOrderShipment) {
+            $mismatchedOrderShipment->author_id = $mismatchedOrderShipment->author_id ?? Auth::user()->id;
+        });
     }
 
     public function author(): BelongsTo

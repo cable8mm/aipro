@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Nova\Actions\Actionable;
 
 class PlacingOrderGood extends Model
@@ -28,6 +29,13 @@ class PlacingOrderGood extends Model
             'status' => 'string',
             'placing_ordered_at' => 'datetime',
         ];
+    }
+
+    protected static function booted(): void
+    {
+        static::creating(function (PlacingOrderGood $placingOrderGood) {
+            $placingOrderGood->author_id = $placingOrderGood->author_id ?? Auth::user()->id;
+        });
     }
 
     public function placingOrder(): BelongsTo

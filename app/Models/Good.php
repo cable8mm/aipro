@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Nova\Actions\Actionable;
 
 class Good extends Model
@@ -77,6 +78,13 @@ class Good extends Model
             'supplier_out_of_stock_off_datetime' => 'datetime',
             'can_be_shipped' => 'boolean',
         ];
+    }
+
+    protected static function booted(): void
+    {
+        static::creating(function (Good $good) {
+            $good->author_id = $good->author_id ?? Auth::user()->id;
+        });
     }
 
     public function box(): BelongsTo

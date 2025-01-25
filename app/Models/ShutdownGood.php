@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Auth;
 
 class ShutdownGood extends Model
 {
@@ -19,6 +20,13 @@ class ShutdownGood extends Model
             'title' => 'string',
             'reason' => 'string',
         ];
+    }
+
+    protected static function booted(): void
+    {
+        static::creating(function (ShutdownGood $shutdownGood) {
+            $shutdownGood->author_id = $shutdownGood->author_id ?? Auth::user()->id;
+        });
     }
 
     public function author(): BelongsTo

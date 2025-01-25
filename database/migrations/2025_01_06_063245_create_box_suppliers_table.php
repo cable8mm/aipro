@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('box_suppliers', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('author_id')->comment('등록자');
             $table->string('name', 255)->nullable();
             $table->string('ordered_email', 255)->nullable();
             $table->string('contact_name', 255)->nullable();

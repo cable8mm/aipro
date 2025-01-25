@@ -20,6 +20,7 @@ class SupplierGoodFactory extends Factory
         fake()->addProvider(new \Bezhanov\Faker\Provider\Device(fake()));
 
         return [
+            'author_id' => fake()->randomNumber(1) + 1,
             'supplier_id' => fake()->randomNumber(1) + 1,
             'good_code' => fake()->numerify('GOOD-###'),
             'supplier_category' => fake()->randomElement(['꽃게|암컷', '꽃게|숫컷']),

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Nova\Actions\Actionable;
 
 class SetGood extends Model
@@ -31,6 +32,13 @@ class SetGood extends Model
             'is_my_shop_sale' => 'boolean',
             'is_other_shop_sale' => 'boolean',
         ];
+    }
+
+    protected static function booted(): void
+    {
+        static::creating(function (SetGood $setGood) {
+            $setGood->author_id = $setGood->author_id ?? Auth::user()->id;
+        });
     }
 
     public function author(): BelongsTo

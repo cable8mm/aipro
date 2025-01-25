@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Nova\Actions\Actionable;
 
 class RegisterGoodRequest extends Model
@@ -24,6 +25,13 @@ class RegisterGoodRequest extends Model
             'has_supplier_monitoring_price' => 'integer',
             'status' => 'string',
         ];
+    }
+
+    protected static function booted(): void
+    {
+        static::creating(function (RegisterGoodRequest $registerGoodRequest) {
+            $registerGoodRequest->author_id = $registerGoodRequest->author_id ?? Auth::user()->id;
+        });
     }
 
     public function author(): BelongsTo

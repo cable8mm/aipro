@@ -54,10 +54,10 @@ class GoodManualWarehousing extends Resource
     {
         return [
             ID::make()->sortable(),
+            BelongsTo::make(__('Author'), 'author', User::class)->exceptOnForms(),
             Text::make(__('마스터 코드'), 'Good.master_code')->onlyOnIndex(),
             Text::make(__('공급사'), 'Good.supplier.name')->onlyOnIndex(),
             BelongsTo::make(__('Good'), 'good', Good::class)->searchable(),
-            BelongsTo::make(__('Author'), 'author', User::class)->exceptOnForms(),
             Select::make(__('Type'), 'type')
                 ->rules('required')->required()
                 ->options(ManualInventoryAdjustmentType::array())

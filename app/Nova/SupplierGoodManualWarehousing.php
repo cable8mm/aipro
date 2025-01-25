@@ -8,7 +8,6 @@ use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
-use Laravel\Nova\Fields\Stack;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
@@ -41,14 +40,14 @@ class SupplierGoodManualWarehousing extends Resource
     {
         return [
             ID::make()->sortable(),
-            BelongsTo::make(__('Author'), 'author', SupplierGood::class),
-            BelongsTo::make(__('Supplier Good'), 'supplierGood', SupplierGood::class),
-            Number::make(__('Manual Add Inventory Count'), 'manual_add_inventory_count'),
-            Text::make(__('Memo'), 'memo')->maxlength(255),
-            Stack::make(__('Created At').' & '.__('Updated At'), [
-                DateTime::make(__('Created At'), 'created_at'),
-                DateTime::make(__('Updated At'), 'updated_at'),
-            ]),
+            BelongsTo::make(__('Author'), 'author', SupplierGood::class)->exceptOnForms(),
+            BelongsTo::make(__('Supplier Good'), 'supplierGood', SupplierGood::class)->searchable(),
+            Number::make(__('Manual Add Inventory Count'), 'manual_add_inventory_count')
+                ->rules('required', 'integer')->required(),
+            Text::make(__('Memo'), 'memo')->maxlength(255)
+                ->rules('required', 'integer')->required(),
+            DateTime::make(__('Created At'), 'created_at')->exceptOnForms(),
+            DateTime::make(__('Updated At'), 'updated_at')->exceptOnForms(),
         ];
     }
 
