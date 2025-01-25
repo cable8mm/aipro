@@ -30,7 +30,7 @@ class InventoryHistory extends Model
     protected static function booted(): void
     {
         static::creating(function (InventoryHistory $inventoryHistory) {
-            $inventoryHistory->author_id = $supplier->inventoryHistory ?? Auth::user()->id;
+            $inventoryHistory->author_id = $inventoryHistory->author_id ?? Auth::user()->id;
         });
     }
 
