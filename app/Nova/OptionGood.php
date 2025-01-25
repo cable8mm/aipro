@@ -10,6 +10,7 @@ use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\MorphOne;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Stack;
 use Laravel\Nova\Fields\Text;
@@ -40,6 +41,7 @@ class OptionGood extends Resource
      */
     public static $search = [
         'id',
+        'master_code',
     ];
 
     /**
@@ -52,7 +54,10 @@ class OptionGood extends Resource
         return [
             ID::make()->sortable(),
             BelongsTo::make(__('Author'), 'author', User::class),
-            Text::make(__('Master Code'), 'master_code')->rules('required')->required()->maxlength(130),
+            Text::make(__('Master Code'), 'master_code')
+                ->rules('required')->required()
+                ->copyable()
+                ->maxlength(130),
             Text::make(__('Name'), 'name')->rules('required')->required()->maxlength(130),
             Number::make(__('Option Count'), 'option_count')->exceptOnForms(),
             Number::make(__('My Shop Sale Option Count'), 'my_shop_sale_option_count')->exceptOnForms(),
@@ -64,6 +69,8 @@ class OptionGood extends Resource
             ]),
 
             HasMany::make(__('Option Good Options'), 'optionGoodOptions', OptionGoodOption::class),
+
+            MorphOne::make('PromotionCode'),
         ];
     }
 

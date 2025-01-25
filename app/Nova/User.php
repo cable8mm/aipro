@@ -12,7 +12,6 @@ use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Password;
 use Laravel\Nova\Fields\PasswordConfirmation;
 use Laravel\Nova\Fields\Select;
-use Laravel\Nova\Fields\Stack;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Timezone;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -81,10 +80,8 @@ class User extends Resource
                 PasswordConfirmation::make(__('Password Confirmation'), 'password_confirmation'),
             ])->limit(1),
 
-            Stack::make(__('Created At').' & '.__('Updated At'), [
-                DateTime::make(__('Created At'), 'created_at'),
-                DateTime::make(__('Updated At'), 'updated_at'),
-            ]),
+            DateTime::make(__('Created At'), 'created_at')->exceptOnForms(),
+            DateTime::make(__('Updated At'), 'updated_at')->exceptOnForms(),
         ];
     }
 

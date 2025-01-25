@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('promotion_codes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('author_id');
-            $table->string('master_code', 100);
+            $table->foreignId('promotion_codable_id');
+            $table->string('promotion_codable_type', 50);
+            $table->unsignedInteger('ordinal_number')->default(0)->comment('같은 상품을 가리킬 경우 이 숫자로 구분한다. 이 수는 auto increment 성질을 갖는다.');
             $table->string('memo', 190)->nullable();
             $table->dateTime('started_at')->nullable();
             $table->dateTime('finished_at')->nullable();

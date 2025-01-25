@@ -10,8 +10,6 @@ class Setting extends Model
 {
     use Actionable, HasFactory;
 
-    public $timestamps = false;
-
     protected function casts(): array
     {
         return [

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\MorphTo;
 use Laravel\Nova\Fields\Stack;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
@@ -50,7 +51,18 @@ class PromotionCode extends Resource
         return [
             ID::make()->sortable(),
             BelongsTo::make(__('Author'), 'author', User::class),
-            Text::make(__('Master Code'), 'master_code')->rules('required')->required()->maxlength(100),
+            MorphTo::make(__('Promotion Codable'), 'promotionCodable')
+                ->types([
+                    Good::class,
+                    SetGood::class,
+                    OptionGood::class,
+                ]),
+            Text::make(__('Master Code'), 'master_code')
+                ->rules('required')->required()
+                ->copyable()
+                ->exceptOnForms()
+                ->maxlength(100),
+            Text::make(__('Memo'), 'memo')->rules('required')->required()->maxlength(255),
             DateTime::make(__('Started At'), 'started_at')->nullable(),
             DateTime::make(__('Finished At'), 'finished_at')->nullable(),
             Textarea::make(__('Memo'), 'memo')->maxlength(190)->alwaysShow(),

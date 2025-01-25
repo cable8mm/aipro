@@ -10,6 +10,7 @@ use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\MorphOne;
 use Laravel\Nova\Fields\Stack;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -39,6 +40,7 @@ class SetGood extends Resource
      */
     public static $search = [
         'id',
+        'master_code',
     ];
 
     /**
@@ -50,8 +52,13 @@ class SetGood extends Resource
     {
         return [
             ID::make()->sortable(),
-            BelongsTo::make(__('Author'), 'author', User::class)->rules('required')->required(),
-            Text::make(__('Master Code'), 'master_code')->rules('required')->required()->maxlength(255),
+            BelongsTo::make(__('Author'), 'author', User::class)
+                ->rules('required')->required()
+                ->filterable(),
+            Text::make(__('Master Code'), 'master_code')
+                ->rules('required')->required()
+                ->maxlength(255)
+                ->copyable(),
             Text::make(__('Featured Good List'), 'featured_good_list')->maxlength(255),
             Text::make(__('Name'), 'name')->rules('required')->required()->maxlength(255),
             Currency::make(__('Goods Price'), 'goods_price')->rules('required')->required(),
@@ -62,6 +69,8 @@ class SetGood extends Resource
                 DateTime::make(__('Created At'), 'created_at'),
                 DateTime::make(__('Updated At'), 'updated_at'),
             ]),
+
+            MorphOne::make('PromotionCode'),
         ];
     }
 

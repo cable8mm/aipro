@@ -19,6 +19,7 @@ class BoxInventoryHistoryFactory extends Factory
     public function definition(): array
     {
         return [
+            'author_id' => fake()->randomNumber(1) + 1,
             'box_id' => fake()->randomNumber(1) + 1,
             'type' => fake()->randomElement(InventoryHistory::names()),
             'quantity' => (fake()->boolean() ? 1 : -1) * fake()->randomNumber(1),

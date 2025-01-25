@@ -4,6 +4,7 @@ namespace App\Nova;
 
 use App\Enums\InventoryHistory as EnumsInventoryHistory;
 use App\Enums\InventoryHistoryModel;
+use App\Enums\SafeClass;
 use App\Traits\NovaAuthorizedByNone;
 use Laravel\Nova\Fields\Badge;
 use Laravel\Nova\Fields\BelongsTo;
@@ -14,6 +15,7 @@ use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Stack;
+use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class InventoryHistory extends Resource
@@ -52,7 +54,9 @@ class InventoryHistory extends Resource
     {
         return [
             ID::make()->sortable(),
+            Text::make(__('Master Code'), 'good.master_code')->exceptOnForms(),
             BelongsTo::make(__('Author'), 'author', User::class),
+            Select::make(__('Safe Class'), 'good.safe_class')->options(SafeClass::array())->displayUsingLabels()->exceptOnForms(),
             BelongsTo::make(__('Good'), 'good', Good::class),
             Select::make(__('Type'), 'type')
                 ->rules('required')->required()

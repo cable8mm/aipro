@@ -34,6 +34,8 @@ class AlertEmail extends Resource
      */
     public static $search = [
         'id',
+        'action_name',
+        'email_list',
     ];
 
     /**
@@ -46,7 +48,7 @@ class AlertEmail extends Resource
         return [
             ID::make()->sortable(),
             Text::make(__('Name'), 'name')->rules('required')->required()->maxlength(255),
-            Text::make(__('Action Name'), 'action_name')->rules('required')->required()->maxlength(255),
+            Text::make(__('Action Name'), 'action_name')->rules('required')->required()->maxlength(255)->copyable(),
             KeyValue::make(__('Email List'), 'email_list'),
             DateTime::make(__('Created At'), 'created_at')->exceptOnForms(),
             DateTime::make(__('Updated At'), 'updated_at')->exceptOnForms(),
