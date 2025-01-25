@@ -2,13 +2,14 @@
 
 namespace App\Nova;
 
+use App\Nova\Metrics\BoxSumCostPrice;
+use App\Nova\Metrics\BoxSumInventory;
 use App\Traits\NovaAuthorizedByManager;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
-use Laravel\Nova\Fields\Stack;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -55,15 +56,13 @@ class Box extends Resource
             Text::make(__('Code'), 'code')->maxlength(50),
             Text::make(__('Name'), 'name')->maxlength(100)->sortable(),
             Currency::make(__('Delivery Price'), 'delivery_price'),
-            Currency::make(__('Box Price'), 'box_price'),
+            Currency::make(__('Cost Price'), 'cost_price'),
             Number::make(__('Inventory'), 'inventory')->displayUsing(function ($value) {
                 return number_format($value);
             }),
             Textarea::make(__('Memo'), 'memo')->maxlength(255)->alwaysShow(),
-            Stack::make(__('Created At').' & '.__('Updated At'), [
-                DateTime::make(__('Created At'), 'created_at'),
-                DateTime::make(__('Updated At'), 'updated_at'),
-            ]),
+            DateTime::make(__('Created At'), 'created_at')->exceptOnForms(),
+            DateTime::make(__('Updated At'), 'updated_at')->exceptOnForms(),
         ];
     }
 
@@ -74,7 +73,10 @@ class Box extends Resource
      */
     public function cards(NovaRequest $request)
     {
-        return [];
+        return [
+            new BoxSumCostPrice,
+            new BoxSumInventory,
+        ];
     }
 
     /**
