@@ -18,6 +18,7 @@ class BoxSupplierFactory extends Factory
     public function definition(): array
     {
         return [
+            'author_id' => fake()->randomNumber(1) + 1,  // Assuming User has an id column
             'name' => fake('ko_KR')->company(),
             'ordered_email' => fake()->email(),
             'contact_name' => fake('ko_KR')->name(),

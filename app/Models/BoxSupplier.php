@@ -4,7 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Nova\Actions\Actionable;
 
 class BoxSupplier extends Model
@@ -23,8 +25,20 @@ class BoxSupplier extends Model
         ];
     }
 
+    protected static function booted(): void
+    {
+        static::creating(function (BoxSupplier $boxSupplier) {
+            $boxSupplier->author_id = $boxSupplier->author_id ?? Auth::user()->id;
+        });
+    }
+
     public function boxOrderBoxes(): HasMany
     {
         return $this->hasMany(BoxOrderBox::class);
+    }
+
+    public function author(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'author_id');
     }
 }

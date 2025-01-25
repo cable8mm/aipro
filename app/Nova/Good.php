@@ -60,6 +60,7 @@ class Good extends Resource
     {
         return [
             ID::make()->sortable(),
+            BelongsTo::make(__('Author'), 'author', User::class)->exceptOnForms(),
             Image::make(__('List Image'), 'list_image'),
             Text::make(__('Master Code'), 'master_code')->rules('required')->required()->maxlength(255)->sortable(),
             Boolean::make(__('Is Shutdown'), 'is_shutdown')->filterable(),
@@ -87,9 +88,6 @@ class Good extends Resource
             Currency::make(__('Cost Price'), 'cost_price'),
             Currency::make(__('Last Cost Price'), 'last_cost_price')->exceptOnForms(),
             Currency::make(__('Goods Price'), 'goods_price'),
-
-            BelongsTo::make(__('Author'), 'author', User::class),
-
             BelongsTo::make(__('Supplier Good'), 'supplierGood', SupplierGood::class)->hideFromIndex(),
             BelongsTo::make(__('Box'), 'box', Box::class)->hideFromIndex(),
             BelongsTo::make(__('Playauto Category'), 'playautoCategory', PlayautoCategory::class)->hideFromIndex(),

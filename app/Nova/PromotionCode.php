@@ -50,7 +50,7 @@ class PromotionCode extends Resource
     {
         return [
             ID::make()->sortable(),
-            BelongsTo::make(__('Author'), 'author', User::class),
+            BelongsTo::make(__('Author'), 'author', User::class)->exceptOnForms(),
             MorphTo::make(__('Promotion Codable'), 'promotionCodable')
                 ->types([
                     Good::class,

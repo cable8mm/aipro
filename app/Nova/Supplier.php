@@ -4,6 +4,7 @@ namespace App\Nova;
 
 use App\Enums\OrderMethod;
 use App\Traits\NovaAuthorizedByWarehouser;
+use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\DateTime;
@@ -56,6 +57,7 @@ class Supplier extends Resource
     {
         return [
             ID::make()->sortable(),
+            BelongsTo::make(__('Author'), 'author', User::class)->exceptOnForms(),
             Text::make(__('Name'), 'name')->maxlength(50)->rules('required')->required(),
             Text::make(__('Contact Name'), 'contact_name')->maxlength(50)->rules('required')->required(),
             Email::make(__('Ordered Email'), 'ordered_email')->maxlength(100),

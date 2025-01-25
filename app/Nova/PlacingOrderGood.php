@@ -58,7 +58,7 @@ class PlacingOrderGood extends Resource
         return [
             ID::make()->sortable(),
             BelongsTo::make(__('Placing Order'), 'placingOrder', PlacingOrder::class),
-            BelongsTo::make(__('Author'), 'author', User::class),
+            BelongsTo::make(__('Author'), 'author', User::class)->exceptOnForms(),
             BelongsTo::make(__('Warehouse Manager'), 'warehouseManager', User::class),
             Text::make(__('Master Code'), 'Good.master_code')->exceptOnForms(),
             Text::make(__('Safe Class'), 'Good.safe_class')->exceptOnForms()
@@ -70,7 +70,7 @@ class PlacingOrderGood extends Resource
                     return CenterClass::{$value}->value();
                 }),
             Text::make(__('Supplier'), 'Good.supplier.name')->exceptOnForms(),
-            BelongsTo::make(__('Good'), 'good', Good::class),
+            BelongsTo::make(__('Good'), 'good', Good::class)->searchable(),
             Number::make(__('Order Count'), 'order_count')->rules('required')->required()->displayUsing(function ($value) {
                 return number_format($value);
             }),

@@ -14,7 +14,6 @@ use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
-use Laravel\Nova\Fields\Stack;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
@@ -55,7 +54,7 @@ class InventoryHistory extends Resource
         return [
             ID::make()->sortable(),
             Text::make(__('Master Code'), 'good.master_code')->exceptOnForms(),
-            BelongsTo::make(__('Author'), 'author', User::class),
+            BelongsTo::make(__('Author'), 'author', User::class)->exceptOnForms(),
             Select::make(__('Safe Class'), 'good.safe_class')->options(SafeClass::array())->displayUsingLabels()->exceptOnForms(),
             BelongsTo::make(__('Good'), 'good', Good::class),
             Select::make(__('Type'), 'type')
@@ -81,10 +80,8 @@ class InventoryHistory extends Resource
             Number::make(__('Cancel Id'), 'cancel_id'),
             BelongsTo::make(__('Cancel Id'), 'bySelf', InventoryHistory::class),
             Boolean::make(__('Is Success'), 'is_success')->rules('required')->required(),
-            Stack::make(__('Created At').' & '.__('Updated At'), [
-                DateTime::make(__('Created At'), 'created_at'),
-                DateTime::make(__('Updated At'), 'updated_at'),
-            ]),
+            DateTime::make(__('Created At'), 'created_at')->exceptOnForms(),
+            DateTime::make(__('Updated At'), 'updated_at')->exceptOnForms(),
         ];
     }
 

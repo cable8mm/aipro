@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Nova\Actions\Actionable;
 
 class OptionGoodOption extends Model
@@ -27,6 +28,13 @@ class OptionGoodOption extends Model
             'is_my_shop_sale' => 'boolean',
             'is_other_shop_sale' => 'boolean',
         ];
+    }
+
+    protected static function booted(): void
+    {
+        static::creating(function (OptionGoodOption $optionGoodOption) {
+            $optionGoodOption->author_id = $optionGoodOption->author_id ?? Auth::user()->id;
+        });
     }
 
     public function author(): BelongsTo

@@ -54,9 +54,7 @@ class RegisterGoodRequest extends Resource
     {
         return [
             ID::make()->sortable(),
-            BelongsTo::make(__('Author'), 'author', User::class)->default(function ($request) {
-                return $request->user()->id;
-            })->exceptOnForms(),
+            BelongsTo::make(__('Author'), 'author', User::class)->exceptOnForms(),
             BelongsTo::make(__('Worker'), 'worker', User::class),
             Text::make(__('Title'), 'title')->rules('required')->required()->maxlength(255),
             File::make(__('Request File Url'), 'request_file_url'),

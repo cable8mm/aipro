@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('box_manual_warehousings', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('box_id');
             $table->foreignId('author_id');
+            $table->foreignId('box_id');
             $table->string('type', 100)->default('미입력');
             $table->integer('manual_add_inventory_count');
             $table->text('memo')->nullable();

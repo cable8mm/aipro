@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Nova\Actions\Actionable;
 
 class BoxOrder extends Model
@@ -27,6 +28,13 @@ class BoxOrder extends Model
             'warehoused_at' => 'datetime',
             'status' => 'string',
         ];
+    }
+
+    protected static function booted(): void
+    {
+        static::creating(function (BoxOrder $boxOrder) {
+            $boxOrder->author_id = $boxOrder->author_id ?? Auth::user()->id;
+        });
     }
 
     public function author(): BelongsTo

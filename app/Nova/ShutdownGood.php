@@ -50,10 +50,10 @@ class ShutdownGood extends Resource
     {
         return [
             ID::make()->sortable(),
-            BelongsTo::make(__('Author'), 'author', User::class),
-            Text::make(__('Master Code'), 'master_code')->maxlength(150),
-            Text::make(__('Title'), 'title')->maxlength(255),
-            Textarea::make(__('Reason'), 'reason')->alwaysShow(),
+            BelongsTo::make(__('Author'), 'author', User::class)->exceptOnForms(),
+            Text::make(__('Master Code'), 'master_code')->rules('required')->required()->maxlength(150)->copyable(),
+            Text::make(__('Title'), 'title')->rules('required')->required()->maxlength(255),
+            Textarea::make(__('Reason'), 'reason')->rules('required')->required()->alwaysShow(),
             DateTime::make(__('Created At'), 'created_at')->exceptOnForms(),
             DateTime::make(__('Updated At'), 'updated_at')->exceptOnForms(),
         ];

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Nova\Actions\Actionable;
 
 class RegisterOptionGoodRequest extends Model
@@ -20,6 +21,13 @@ class RegisterOptionGoodRequest extends Model
             'request_file_url' => 'string',
             'respond_file_url' => 'string',
         ];
+    }
+
+    protected static function booted(): void
+    {
+        static::creating(function (RegisterOptionGoodRequest $registerOptionGoodRequest) {
+            $registerOptionGoodRequest->author_id = $registerOptionGoodRequest->author_id ?? Auth::user()->id;
+        });
     }
 
     public function author(): BelongsTo

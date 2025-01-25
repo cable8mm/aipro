@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Nova\Actions\Actionable;
 
 class Box extends Model
@@ -21,5 +23,17 @@ class Box extends Model
             'inventory' => 'integer',
             'memo' => 'string',
         ];
+    }
+
+    protected static function booted(): void
+    {
+        static::creating(function (Box $box) {
+            $box->author_id = $box->author_id ?? Auth::user()->id;
+        });
+    }
+
+    public function author(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'author_id');
     }
 }

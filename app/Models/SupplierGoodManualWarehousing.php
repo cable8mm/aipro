@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Nova\Actions\Actionable;
 
 class SupplierGoodManualWarehousing extends Model
@@ -20,6 +21,13 @@ class SupplierGoodManualWarehousing extends Model
             'author_id' => 'integer',
             'manual_add_inventory_count' => 'integer',
         ];
+    }
+
+    protected static function booted(): void
+    {
+        static::creating(function (SupplierGoodManualWarehousing $supplierGoodManualWarehousing) {
+            $supplierGoodManualWarehousing->author_id = $supplierGoodManualWarehousing->author_id ?? Auth::user()->id;
+        });
     }
 
     public function supplierGood(): BelongsTo

@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('boxes', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('author_id');
             $table->string('name', 100)->nullable()->comment('박스 이름');
             $table->string('code', 50)->comment('박스 코드');
             $table->unsignedInteger('size')->comment('박스 사이즈');

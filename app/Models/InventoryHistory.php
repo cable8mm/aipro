@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Auth;
 
 class InventoryHistory extends Model
 {
@@ -24,6 +25,13 @@ class InventoryHistory extends Model
             'cancel_id' => 'integer',
             'is_success' => 'boolean',
         ];
+    }
+
+    protected static function booted(): void
+    {
+        static::creating(function (InventoryHistory $inventoryHistory) {
+            $inventoryHistory->author_id = $inventoryHistory->author_id ?? Auth::user()->id;
+        });
     }
 
     public function author(): BelongsTo

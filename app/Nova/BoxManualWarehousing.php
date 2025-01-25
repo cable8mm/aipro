@@ -54,8 +54,8 @@ class BoxManualWarehousing extends Resource
     {
         return [
             ID::make()->sortable(),
-            BelongsTo::make(__('Box'), 'box', Box::class),
             BelongsTo::make(__('Author'), 'author', User::class)->exceptOnForms(),
+            BelongsTo::make(__('Box'), 'box', Box::class),
             Select::make(__('Type'), 'type')
                 ->rules('required')->required()
                 ->options(ManualInventoryAdjustmentType::array())

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Auth;
 
 class BoxInventoryHistory extends Model
 {
@@ -21,6 +22,13 @@ class BoxInventoryHistory extends Model
             'attribute' => 'string',
             'is_success' => 'boolean',
         ];
+    }
+
+    protected static function booted(): void
+    {
+        static::creating(function (BoxInventoryHistory $boxInventoryHistory) {
+            $boxInventoryHistory->author_id = $boxInventoryHistory->author_id ?? Auth::user()->id;
+        });
     }
 
     public function box(): BelongsTo

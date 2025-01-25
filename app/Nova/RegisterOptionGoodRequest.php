@@ -52,7 +52,7 @@ class RegisterOptionGoodRequest extends Resource
     {
         return [
             ID::make()->sortable(),
-            BelongsTo::make(__('Author'), 'Author', User::class),
+            BelongsTo::make(__('Author'), 'Author', User::class)->exceptOnForms(),
             BelongsTo::make(__('Worker'), 'worker', User::class),
             Text::make(__('Title'), 'title')->rules('required')->required()->maxlength(190),
             File::make(__('Request File Url'), 'request_file_url'),

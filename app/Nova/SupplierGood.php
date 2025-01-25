@@ -55,6 +55,7 @@ class SupplierGood extends Resource
     {
         return [
             ID::make()->sortable(),
+            BelongsTo::make(__('Author'), 'author', User::class)->exceptOnForms(),
             BelongsTo::make(__('Supplier'), 'supplier', Supplier::class)->filterable(),
             Text::make(__('Good Code'), 'good_code')->maxlength(100),
             Text::make(__('Supplier Category'), 'supplier_category')->maxlength(100),

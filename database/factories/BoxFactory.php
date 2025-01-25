@@ -17,6 +17,7 @@ class BoxFactory extends Factory
     public function definition(): array
     {
         return [
+            'author_id' => fake()->randomNumber(1) + 1,
             'name' => fake()->word(),
             'code' => fake()->numerify('BOX-###'),
             'size' => fake()->randomNumber(),

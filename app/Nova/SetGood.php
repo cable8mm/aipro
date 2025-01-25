@@ -53,7 +53,7 @@ class SetGood extends Resource
         return [
             ID::make()->sortable(),
             BelongsTo::make(__('Author'), 'author', User::class)
-                ->rules('required')->required()
+                ->exceptOnForms()
                 ->filterable(),
             Text::make(__('Master Code'), 'master_code')
                 ->rules('required')->required()

@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('suppliers', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('author_id')->comment('등록자');
             $table->string('name', 50);
             $table->string('ordered_email', 100)->nullable();
             $table->string('contact_name', 50)->nullable();
