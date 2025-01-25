@@ -55,6 +55,9 @@ class SetGood extends Resource
             BelongsTo::make(__('Author'), 'author', User::class)
                 ->exceptOnForms()
                 ->filterable(),
+            Text::make(__('Shortening Master Code'), fn () => 'COM'.$this->id)
+                ->copyable()
+                ->exceptOnForms(),
             Text::make(__('Master Code'), 'master_code')
                 ->rules('required')->required()
                 ->maxlength(255)

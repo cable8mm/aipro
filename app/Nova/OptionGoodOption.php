@@ -6,7 +6,6 @@ use App\Enums\UserType;
 use App\Traits\NovaAuthorizedByMd;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
-use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
@@ -64,8 +63,6 @@ class OptionGoodOption extends Resource
             Currency::make(__('Last Cost Price'), 'last_cost_price'),
             Currency::make(__('Zero Margin Price'), 'zero_margin_price'),
             Number::make('순서', 'order'),
-            Boolean::make(__('Is My Shop Sale'), 'is_my_shop_sale'),
-            Boolean::make(__('Is Other Shop Sale'), 'is_other_shop_sale'),
             Stack::make(__('Created At').' & '.__('Updated At'), [
                 DateTime::make(__('Created At'), 'created_at'),
                 DateTime::make(__('Updated At'), 'updated_at'),

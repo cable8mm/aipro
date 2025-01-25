@@ -12,7 +12,6 @@ use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\MorphOne;
 use Laravel\Nova\Fields\Number;
-use Laravel\Nova\Fields\Stack;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
@@ -60,13 +59,9 @@ class OptionGood extends Resource
                 ->maxlength(130),
             Text::make(__('Name'), 'name')->rules('required')->required()->maxlength(130),
             Number::make(__('Option Count'), 'option_count')->exceptOnForms(),
-            Number::make(__('My Shop Sale Option Count'), 'my_shop_sale_option_count')->exceptOnForms(),
-            Number::make(__('Other Shop Sale Option Count'), 'other_shop_sale_option_count')->exceptOnForms(),
             Boolean::make(__('Is Active'), 'is_active'),
-            Stack::make(__('Created At').' & '.__('Updated At'), [
-                DateTime::make(__('Created At'), 'created_at'),
-                DateTime::make(__('Updated At'), 'updated_at'),
-            ]),
+            DateTime::make(__('Created At'), 'created_at')->exceptOnForms(),
+            DateTime::make(__('Updated At'), 'updated_at')->exceptOnForms(),
 
             HasMany::make(__('Option Good Options'), 'optionGoodOptions', OptionGoodOption::class),
 

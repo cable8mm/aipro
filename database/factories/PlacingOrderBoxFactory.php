@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
  */
-class BoxOrderBoxFactory extends Factory
+class PlacingOrderBoxFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,7 +18,7 @@ class BoxOrderBoxFactory extends Factory
     public function definition(): array
     {
         return [
-            'box_order_id' => fake()->randomNumber(1) + 1,
+            'box_placing_order_id' => fake()->randomNumber(1) + 1,
             'author_id' => fake()->randomNumber(1) + 1,
             'box_supplier_id' => fake()->randomNumber(1) + 1,
             'box_id' => fake()->randomNumber(1) + 1,
