@@ -25,13 +25,6 @@ class PromotionCode extends Model
         ];
     }
 
-    protected static function booted(): void
-    {
-        static::creating(function (PromotionCode $promotionCode) {
-            $promotionCode->ordinal_number = $promotionCode->getOrdinalNumber();
-        });
-    }
-
     public function author(): BelongsTo
     {
         return $this->belongsTo(User::class, 'author_id');
@@ -50,16 +43,7 @@ class PromotionCode extends Model
     protected function masterCode(): Attribute
     {
         return Attribute::make(
-            get: fn (mixed $value, array $attributes) => $this->promotionCodable->master_code.'+'.$this->ordinal_number,
+            get: fn (mixed $value, array $attributes) => $this->promotionCodable->master_code.'+'.$this->id,
         );
-    }
-
-    public function getOrdinalNumber(): int
-    {
-        return (self::where('promotion_codable_type', $this->promotion_codable_type)
-            ->where('promotion_codable_id', $this->promotion_codable_id)
-            ->orderBy('ordinal_number', 'desc')
-            ->limit(1)
-            ->value('ordinal_number') ?? 0) + 1;
     }
 }

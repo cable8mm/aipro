@@ -140,7 +140,7 @@ class PlacingOrder extends Resource
 
     public static function label()
     {
-        return __('Placing Order');
+        return __('Placing Order And Warehousing');
     }
 
     public function title()

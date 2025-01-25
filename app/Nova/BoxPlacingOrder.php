@@ -16,16 +16,16 @@ use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
-class BoxOrder extends Resource
+class BoxPlacingOrder extends Resource
 {
     use NovaAuthorizedByWarehouser;
 
     /**
      * The model the resource corresponds to.
      *
-     * @var class-string<\App\Models\BoxOrder>
+     * @var class-string<\App\Models\BoxPlacingOrder>
      */
-    public static $model = \App\Models\BoxOrder::class;
+    public static $model = \App\Models\BoxPlacingOrder::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -78,7 +78,7 @@ class BoxOrder extends Resource
             DateTime::make(__('Warehoused At'), 'warehoused_at')->nullable()->exceptOnForms(),
             Textarea::make(__('Memo'), 'memo')->alwaysShow(),
 
-            HasMany::make(__('Box Order Boxes'), 'boxOrderBoxes', BoxOrderBox::class),
+            HasMany::make(__('Placing Order Boxes'), 'placingOrderBoxes', PlacingOrderBox::class),
         ];
     }
 
@@ -126,6 +126,6 @@ class BoxOrder extends Resource
 
     public static function label()
     {
-        return __('Box Order');
+        return __('Box Placing Order And Warehousing');
     }
 }

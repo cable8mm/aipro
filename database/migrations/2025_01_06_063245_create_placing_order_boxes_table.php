@@ -12,9 +12,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('box_order_boxes', function (Blueprint $table) {
+        Schema::create('placing_order_boxes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('box_order_id');
+            $table->foreignId('box_placing_order_id');
             $table->foreignId('author_id');
             $table->foreignId('box_supplier_id');
             $table->foreignId('box_id');
@@ -35,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('box_order_boxes');
+        Schema::dropIfExists('placing_order_boxes');
     }
 };

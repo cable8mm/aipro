@@ -13,14 +13,14 @@ use Laravel\Nova\Fields\Stack;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
-class BoxOrderBox extends Resource
+class PlacingOrderBox extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
-     * @var class-string<\App\Models\BoxOrderBox>
+     * @var class-string<\App\Models\PlacingOrderBox>
      */
-    public static $model = \App\Models\BoxOrderBox::class;
+    public static $model = \App\Models\PlacingOrderBox::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -47,7 +47,7 @@ class BoxOrderBox extends Resource
     {
         return [
             ID::make()->sortable(),
-            BelongsTo::make(__('Box Order'), 'boxOrder', BoxOrder::class),
+            BelongsTo::make(__('Box Order'), 'boxPlacingOrder', BoxPlacingOrder::class),
             BelongsTo::make(__('Author'), 'author', User::class),
             BelongsTo::make(__('Box Supplier'), 'boxSupplier', BoxSupplier::class),
             BelongsTo::make(__('Box'), 'box', Box::class),
@@ -109,6 +109,6 @@ class BoxOrderBox extends Resource
 
     public static function label()
     {
-        return __('Box Order Boxes');
+        return __('Placing Order Boxes');
     }
 }

@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Nova\Actions\Actionable;
 
-class BoxOrder extends Model
+class BoxPlacingOrder extends Model
 {
     use Actionable, HasFactory;
 
@@ -32,8 +32,8 @@ class BoxOrder extends Model
 
     protected static function booted(): void
     {
-        static::creating(function (BoxOrder $boxOrder) {
-            $boxOrder->author_id = $boxOrder->author_id ?? Auth::user()->id;
+        static::creating(function (BoxPlacingOrder $boxPlacingOrder) {
+            $boxPlacingOrder->author_id = $boxPlacingOrder->author_id ?? Auth::user()->id;
         });
     }
 
@@ -52,8 +52,8 @@ class BoxOrder extends Model
         return $this->belongsTo(BoxSupplier::class);
     }
 
-    public function boxOrderBoxes(): HasMany
+    public function placingOrderBoxes(): HasMany
     {
-        return $this->hasMany(BoxOrderBox::class);
+        return $this->hasMany(PlacingOrderBox::class);
     }
 }
