@@ -54,7 +54,7 @@ class GoodFactory extends Factory
             'spec' => fake()->randomElement(['5g*10p', '15mm']),
             'order_rule' => fake()->randomElement(['12', '24']),
             'barcode' => fake()->ean13(),
-            'picking_box_number' => fake()->bothify('??-##-###'),
+            'picking_zone_number' => fake()->bothify('??-##-###'),
             'goods_division_color' => fake()->randomElement(GoodColor::names()),
             'ship_quantity' => fake()->randomElement([1, 2, 4, 8, 16]),
             'memo' => fake()->paragraph(),

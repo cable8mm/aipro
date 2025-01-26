@@ -91,7 +91,7 @@ class ManagedGood extends Resource
             Text::make(__('Spec'), 'spec')->maxlength(255),
             Text::make(__('Order Rule'), 'order_rule')->maxlength(255),
             Text::make(__('Barcode'), 'barcode')->maxlength(255),
-            Text::make(__('Picking Box Number'), 'picking_box_number')->maxlength(255),
+            Text::make(__('Picking Zone Number'), 'picking_zone_number')->maxlength(255),
             Select::make(__('Goods Division Color'), 'goods_division_color')->options(GoodColor::array())->displayUsingLabels(),
             Number::make(__('Ship Quantity'), 'ship_quantity')->displayUsing(function ($value) {
                 return number_format($value);

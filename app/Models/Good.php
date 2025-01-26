@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Nova\Actions\Actionable;
@@ -50,7 +51,7 @@ class Good extends Model
             'order_rule' => 'string',
             'barcode_type' => 'string',
             'barcode' => 'string',
-            'picking_box_number' => 'string',
+            'picking_zone_number' => 'string',
             'storage_box_zone' => 'string',
             'goods_division_color' => 'string',
             'ship_quantity' => 'integer',
@@ -120,6 +121,11 @@ class Good extends Model
     public function promotionCode(): MorphOne
     {
         return $this->morphOne(PromotionCode::class, 'promotion_codable');
+    }
+
+    public function placingOrderGoods(): HasMany
+    {
+        return $this->hasMany(PlacingOrderGood::class);
     }
 
     public function scopeShutdown($query)

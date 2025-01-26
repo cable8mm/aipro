@@ -77,7 +77,9 @@ class SupplierGood extends Resource
             Number::make(__('Inventory'), 'inventory')->displayUsing(function ($value) {
                 return number_format($value);
             }),
-            Trix::make(__('Description'), 'description')->alwaysShow(),
+            Trix::make(__('Description'), 'description')
+                ->withFiles('public/uploads/supplier_goods')
+                ->alwaysShow(),
             Currency::make(__('Price'), 'price'),
             Currency::make(__('Suggested Selling Price'), 'suggested_selling_price'),
             Currency::make(__('Suggested Retail Price'), 'suggested_retail_price'),
