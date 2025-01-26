@@ -12,7 +12,7 @@ class PlayautoCategorySeeder extends Seeder
     public function run(): void
     {
         $row = 1;
-        if (($handle = fopen(base_path('docs/csv/playauto_categories_for_test.csv'), 'r')) !== false) {
+        if (($handle = fopen(base_path('tests/files/playauto_categories_for_test.csv'), 'r')) !== false) {
             while (($data = fgetcsv($handle, 1000, ',')) !== false) {
                 $num = count($data);
                 $row++;

@@ -12,7 +12,7 @@ class ChannelSeeder extends Seeder
      */
     public function run(): void
     {
-        if (($handle = fopen(base_path('docs/csv/channels.csv'), 'r')) !== false) {
+        if (($handle = fopen(base_path('tests/files/channels.csv'), 'r')) !== false) {
             while (($data = fgetcsv($handle, 1000, ',')) !== false) {
                 \App\Models\Channel::factory(1, [
                     'author_id' => fake()->randomNumber(1) + 1,

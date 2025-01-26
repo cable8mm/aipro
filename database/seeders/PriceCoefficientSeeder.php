@@ -11,7 +11,7 @@ class PriceCoefficientSeeder extends Seeder
      */
     public function run(): void
     {
-        if (($handle = fopen(base_path('docs/csv/price_coefficients.csv'), 'r')) !== false) {
+        if (($handle = fopen(base_path('tests/files/price_coefficients.csv'), 'r')) !== false) {
             while (($data = fgetcsv($handle, 1000, ',')) !== false) {
                 \App\Models\PriceCoefficient::factory(1, [
                     'id' => $data[0],
