@@ -11,7 +11,7 @@ class PlayautoGoodSeeder extends Seeder
      */
     public function run(): void
     {
-        if (($handle = fopen(base_path('docs/csv/playauto_goods_for_test.csv'), 'r')) !== false) {
+        if (($handle = fopen(base_path('tests/files/playauto_goods_for_test.csv'), 'r')) !== false) {
             while (($data = fgetcsv($handle, 1000, ',')) !== false) {
                 try {
                     \App\Models\PlayautoGood::factory(1, [

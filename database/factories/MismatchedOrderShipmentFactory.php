@@ -19,7 +19,7 @@ class MismatchedOrderShipmentFactory extends Factory
     {
         $row = 1;
         $sites = [];
-        if (($handle = fopen(base_path('docs/csv/site.csv'), 'r')) !== false) {
+        if (($handle = fopen(base_path('tests/files/site.csv'), 'r')) !== false) {
             while (($data = fgetcsv($handle, 1000, ',')) !== false) {
                 $sites[] = $data[0];
             }

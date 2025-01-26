@@ -12,7 +12,7 @@ class HelpTipSeeder extends Seeder
     public function run(): void
     {
         $row = 1;
-        if (($handle = fopen(base_path('docs/csv/help_tips.csv'), 'r')) !== false) {
+        if (($handle = fopen(base_path('tests/files/help_tips.csv'), 'r')) !== false) {
             while (($data = fgetcsv($handle, 1000, ',')) !== false) {
                 $num = count($data);
                 $row++;
