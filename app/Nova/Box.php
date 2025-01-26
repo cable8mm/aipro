@@ -8,6 +8,7 @@ use App\Traits\NovaAuthorizedByManager;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\DateTime;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
@@ -63,6 +64,8 @@ class Box extends Resource
             Textarea::make(__('Memo'), 'memo')->maxlength(255)->alwaysShow(),
             DateTime::make(__('Created At'), 'created_at')->exceptOnForms(),
             DateTime::make(__('Updated At'), 'updated_at')->exceptOnForms(),
+
+            HasMany::make(__('Placing Order Boxes'), 'placingOrderBoxes', PlacingOrderBox::class),
         ];
     }
 

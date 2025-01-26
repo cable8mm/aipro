@@ -15,7 +15,6 @@ use App\Models\PromotionCode as ModelsPromotionCode;
 use App\Models\SetGood as ModelsSetGood;
 use App\Models\Setting as ModelsSetting;
 use App\Models\Supplier as ModelsSupplier;
-use App\Models\SupplierGood as ModelsSupplierGood;
 use App\Models\User as ModelsUser;
 use App\Nova\AlertEmail;
 use App\Nova\BarcodeCommand;
@@ -46,7 +45,6 @@ use App\Nova\RegisterOptionGoodRequest;
 use App\Nova\SetGood;
 use App\Nova\Setting;
 use App\Nova\Supplier;
-use App\Nova\SupplierGood;
 use App\Nova\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Blade;
@@ -109,7 +107,6 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 ])->icon('cube')->collapsable(),
 
                 MenuSection::make('공급사/상품 관리', [
-                    MenuItem::resource(SupplierGood::class)->withBadge(fn () => ModelsSupplierGood::count(), 'info'),
                     MenuItem::resource(Supplier::class)->withBadge(fn () => ModelsSupplier::count(), 'info'),
                     MenuItem::resource(BoxSupplier::class)->withBadge(fn () => ModelsBoxSupplier::count(), 'info'),
                 ])->icon('inbox-in')->collapsable(),

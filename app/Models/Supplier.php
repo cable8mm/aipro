@@ -40,6 +40,16 @@ class Supplier extends Model
         return $this->hasMany(SupplierGood::class);
     }
 
+    public function goods(): HasMany
+    {
+        return $this->hasMany(Good::class);
+    }
+
+    public function placingOrders(): HasMany
+    {
+        return $this->hasMany(PlacingOrder::class);
+    }
+
     public function author(): BelongsTo
     {
         return $this->belongsTo(User::class, 'author_id');

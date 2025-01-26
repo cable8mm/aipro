@@ -74,9 +74,6 @@ class PlacingOrderGood extends Resource
             Number::make(__('Order Count'), 'order_count')->rules('required')->required()->displayUsing(function ($value) {
                 return number_format($value);
             }),
-            Currency::make('단가', function () {
-                return (int) ($this->order_price / $this->order_count);
-            }),
             Currency::make(__('Order Price'), 'order_price')->rules('required')->required(),
             Number::make(__('Supplier Confirmed Count'), 'supplier_confirmed_count')->displayUsing(function ($value) {
                 return number_format($value);
@@ -86,6 +83,9 @@ class PlacingOrderGood extends Resource
                 return number_format($value);
             }),
             Currency::make(__('Cost Price'), 'cost_price'),
+            Currency::make(__('Unit Price'), function () {
+                return (int) round($this->cost_price / $this->cost_count);
+            }),
             Boolean::make(__('Is Promotion'), 'is_promotion'),
             DateTime::make(__('Warehoused At'), 'warehoused_at')->filterable(),
             Status::make(__('Status'), 'status')
