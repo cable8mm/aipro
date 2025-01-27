@@ -73,8 +73,9 @@ class OrderSheetInvoice extends Resource
                     'nullable',
                     RulesFile::types(['xlsx', 'xls', 'csv'])->max(48 * 1024),
                 ])
-                ->help('엑셀 파일을 업로드합니다. (xlsx, xls, csv)')
-                ->path('upload/order_sheets')
+                ->help(__('Upload an Excel file (xlsx, xls, csv)'))
+                ->disk('public')
+                ->path('uploads/order_sheets')
                 ->storeOriginalName('order_sheet_file_name')
                 ->storeSize('order_sheet_file_size')
                 ->prunable(),
@@ -87,7 +88,7 @@ class OrderSheetInvoice extends Resource
                     RulesFile::types(['pdf'])->max(48 * 1024),
                 ])
                 ->help('운송장 파일을 업로드합니다. (pdf)')
-                ->path('upload/invoices')
+                ->path('uploads/invoices')
                 ->storeOriginalName('invoice_file_name')
                 ->storeSize('invoice_file_size')
                 ->prunable(),
