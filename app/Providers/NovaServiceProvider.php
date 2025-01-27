@@ -27,6 +27,7 @@ use App\Nova\BoxSupplier;
 use App\Nova\Dashboards\Main;
 use App\Nova\Good;
 use App\Nova\GoodManualWarehousing;
+use App\Nova\HelpfulFile;
 use App\Nova\HelpTip;
 use App\Nova\InventoryHistory;
 use App\Nova\MismatchedOrderShipment;
@@ -41,6 +42,7 @@ use App\Nova\PlacingOrderBox;
 use App\Nova\PlacingOrderGood;
 use App\Nova\PromotionCode;
 use App\Nova\RegisterGoodRequest;
+use App\Nova\RegisterImportFile;
 use App\Nova\RegisterOptionGoodRequest;
 use App\Nova\SetGood;
 use App\Nova\Setting;
@@ -128,6 +130,8 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 MenuSection::make(__('Tools'), [
                     MenuItem::resource(BarcodeCommand::class)->withBadge(fn () => ModelsBarcodeCommand::count(), 'info'),
                     MenuItem::externalLink(__('Print Barcode Commands'), '/barcode-command')->openInNewTab(),
+                    MenuItem::resource(RegisterImportFile::class),
+                    MenuItem::resource(HelpfulFile::class),
                 ])->icon('scissors')->collapsable(),
 
                 MenuSection::make(__('Services'), [

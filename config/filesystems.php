@@ -37,6 +37,13 @@ return [
             'throw' => false,
         ],
 
+        'builtin' => [
+            'driver' => 'local',
+            'root' => storage_path('app/builtin'),
+            'serve' => true,
+            'throw' => false,
+        ],
+
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),

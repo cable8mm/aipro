@@ -22,6 +22,8 @@
         "laravel/tinker": "^2.9",
         "livewire/livewire": "^3.4",
         "livewire/volt": "^1.0",
+        "maatwebsite/excel": "^3.1",
+        "maatwebsite/laravel-nova-excel": "^1.3",
         "outl1ne/nova-input-filter": "^2.0",
         "outl1ne/nova-multiselect-filter": "^4.0",
         "picqer/php-barcode-generator": "^3.2"

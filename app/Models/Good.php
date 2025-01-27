@@ -16,6 +16,8 @@ class Good extends Model
 
     protected $with = ['box', 'author', 'supplier', 'supplierGood', 'playautoCategory'];
 
+    protected $guarded = [];
+
     protected function casts(): array
     {
         return [
@@ -85,6 +87,13 @@ class Good extends Model
     {
         static::creating(function (Good $good) {
             $good->author_id = $good->author_id ?? Auth::user()->id;
+        });
+
+        static::created(function (Good $good) {
+            if (is_null($good->master_code)) {
+                $good->master_code = $good->id;
+                $good->save();
+            }
         });
     }
 
