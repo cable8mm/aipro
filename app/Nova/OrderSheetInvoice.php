@@ -2,8 +2,8 @@
 
 namespace App\Nova;
 
-use App\Enums\Status;
-use App\Nova\Actions\OrderFromOrderSheetInvoice;
+use App\Enums\OrderSheetInvoiceStatus;
+use App\Nova\Actions\ImportOrdersFromOrderSheetInvoiceAction;
 use App\Traits\NovaAuthorizedByWarehouser;
 use Illuminate\Support\Number as SupportNumber;
 use Illuminate\Validation\Rules\File as RulesFile;
@@ -74,8 +74,8 @@ class OrderSheetInvoice extends Resource
                     RulesFile::types(['xlsx', 'xls', 'csv'])->max(48 * 1024),
                 ])
                 ->help(__('Upload an Excel file (xlsx, xls, csv)'))
-                ->disk('public')
-                ->path('uploads/order_sheets')
+                ->disk('local')
+                ->path('invoices')
                 ->storeOriginalName('order_sheet_file_name')
                 ->storeSize('order_sheet_file_size')
                 ->prunable(),
@@ -88,6 +88,9 @@ class OrderSheetInvoice extends Resource
                     RulesFile::types(['pdf'])->max(48 * 1024),
                 ])
                 ->help('운송장 파일을 업로드합니다. (pdf)')
+                ->disk('local')
+                ->path('invoices')
+                ->disk('test')
                 ->path('uploads/invoices')
                 ->storeOriginalName('invoice_file_name')
                 ->storeSize('invoice_file_size')
@@ -116,13 +119,13 @@ class OrderSheetInvoice extends Resource
             ]),
 
             FieldsStatus::make(__('Status'), 'status')
-                ->default(Status::WAITING->name)
-                ->loadingWhen([Status::WAITING->name, Status::RUNNING->name])
-                ->failedWhen([Status::FAILED->name])
+                ->default(OrderSheetInvoiceStatus::FILE_UPLOADED->name)
+                ->loadingWhen(OrderSheetInvoiceStatus::loadingWhen())
+                ->failedWhen(OrderSheetInvoiceStatus::failedWhen())
                 ->filterable(function ($request, $query, $value, $attribute) {
                     $query->where($attribute, $value);
                 })->displayUsing(function ($value) {
-                    return Status::{$value}->value() ?? '-';
+                    return OrderSheetInvoiceStatus::{$value}->value() ?? '-';
                 }),
             Stack::make(__('Created At').' & '.__('Updated At'), [
                 DateTime::make(__('Created At'), 'created_at'),
@@ -173,7 +176,7 @@ class OrderSheetInvoice extends Resource
     public function actions(NovaRequest $request)
     {
         return [
-            (new OrderFromOrderSheetInvoice)->showInline(),
+            (new ImportOrdersFromOrderSheetInvoiceAction)->showInline(),
         ];
     }
 
