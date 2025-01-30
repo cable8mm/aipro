@@ -57,11 +57,11 @@ class OrderShipment extends Resource
             BelongsTo::make(__('Order Sheet Invoice'), 'orderSheetInvoice', OrderSheetInvoice::class),
             Text::make(__('Order No'), 'orderNo')->maxlength(255),
             Select::make(__('Site'), 'site')->options(Site::array())->displayUsingLabels(),
-            DateTime::make(__('Regist Date'), 'registDate'),
-            DateTime::make(__('Order Date'), 'orderDate'),
-            DateTime::make(__('Payment Date'), 'paymentDate'),
-            DateTime::make(__('Status Date'), 'statusDate'),
-            DateTime::make(__('Delivery Date'), 'deliveryDate'),
+            Text::make(__('Regist Date'), 'registDate')->maxlength(255),
+            Text::make(__('Order Date'), 'orderDate')->maxlength(255),
+            Text::make(__('Payment Date'), 'paymentDate')->maxlength(255),
+            Text::make(__('Status Date'), 'statusDate')->maxlength(255),
+            Text::make(__('Delivery Date'), 'deliveryDate')->maxlength(255),
             FieldsStatus::make(__('Status'), 'status')
                 ->default(Status::WAITING->name)
                 ->loadingWhen([Status::WAITING->name, Status::RUNNING->name])

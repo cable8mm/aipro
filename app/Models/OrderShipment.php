@@ -12,17 +12,19 @@ class OrderShipment extends Model
 
     protected $with = ['orderSheetInvoice'];
 
+    protected $guarded = [];
+
     protected function casts(): array
     {
         return [
             'order_sheet_invoice_id' => 'integer',
             'orderNo' => 'string',
             'site' => 'string',
-            'registDate' => 'datetime',
-            'orderDate' => 'datetime',
-            'paymentDate' => 'datetime',
-            'statusDate' => 'datetime',
-            'deliveryDate' => 'datetime',
+            'registDate' => 'string',
+            'orderDate' => 'string',
+            'paymentDate' => 'string',
+            'statusDate' => 'string',
+            'deliveryDate' => 'string',
             'status' => 'string',
             'siteOrderNo' => 'string',
             'siteGoodsCd' => 'string',
