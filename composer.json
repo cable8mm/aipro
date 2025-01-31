@@ -92,7 +92,8 @@
         "migrate": [
             "@php artisan migrate:fresh --seed --force"
         ],
-        "nova-user": "@php artisan aipro:create-nova-account"
+        "nova-user": "@php artisan aipro:create-nova-account",
+        "queue": "@php artisan queue:work --queue=high,default"
     },
     "extra": {
         "laravel": {
