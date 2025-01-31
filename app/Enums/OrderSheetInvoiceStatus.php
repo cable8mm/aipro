@@ -10,6 +10,7 @@ enum OrderSheetInvoiceStatus: string
 
     case FILE_UPLOADED = 'file uploaded';
     case FILE_ON_SUCCESS = 'file on success';
+    case RUNNING = 'running';
     case SUCCESS = 'success';
     case ERROR = 'error';
 
@@ -18,6 +19,7 @@ enum OrderSheetInvoiceStatus: string
         return match ($this) {
             self::FILE_UPLOADED => '파일업로드',
             self::FILE_ON_SUCCESS => '정상확인완료',
+            self::RUNNING => '작업중',
             self::SUCCESS => '주문서입력완료',
             self::ERROR => '에러',
         };

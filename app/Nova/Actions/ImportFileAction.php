@@ -2,6 +2,7 @@
 
 namespace App\Nova\Actions;
 
+use App\Enums\ImportType;
 use App\Enums\Status;
 use App\Imports\GoodsImport;
 use Illuminate\Bus\Queueable;
@@ -25,7 +26,16 @@ class ImportFileAction extends Action
     {
         foreach ($models as $model) {
             try {
-                Excel::import(new GoodsImport, $model->attachment, 'public');
+                switch ($model->type) {
+                    case ImportType::GOOD->name:
+                        Excel::import(new GoodsImport, $model->attachment, 'public');
+                        break;
+                    case ImportType::ORDER_SHEET_INVOICE->name:
+                        Excel::import(new ImportOrdersFromOrderSheetInvoiceAction, $model->attachment, 'public');
+                        break;
+                    default:
+                        throw new \Exception(__('Invalid import type.'));
+                }
 
                 $model->status = Status::SUCCESS->name;
                 $model->save();

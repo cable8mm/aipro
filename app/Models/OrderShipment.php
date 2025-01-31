@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class OrderShipment extends Model
 {
@@ -77,5 +78,10 @@ class OrderShipment extends Model
     public function orderSheetInvoice(): BelongsTo
     {
         return $this->belongsTo(OrderSheetInvoice::class);
+    }
+
+    public function good(): HasOne
+    {
+        return $this->hasOne(Good::class, 'masterGoodsCd', 'master_code');
     }
 }
