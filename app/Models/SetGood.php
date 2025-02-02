@@ -21,7 +21,6 @@ class SetGood extends Model
     {
         return [
             'master_code' => 'string',
-            'featured_good_list' => 'string',
             'name' => 'string',
             'goods_price' => 'integer',
             'last_cost_price' => 'integer',

@@ -64,7 +64,6 @@ class SetGood extends Resource
                 ->copyable()
                 ->readonly()
                 ->help(__('This value can only input by adding or updating related goods')),
-            Text::make(__('Featured Good List'), 'featured_good_list')->maxlength(255),
             Text::make(__('Name'), 'name')->rules('required')->required()->maxlength(255),
             Currency::make(__('Goods Price'), 'goods_price')->rules('required')->required(),
             Currency::make(__('Last Cost Price'), 'last_cost_price')->exceptOnForms(),
