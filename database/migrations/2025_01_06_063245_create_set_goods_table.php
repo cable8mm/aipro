@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('set_goods', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('author_id');
-            $table->string('master_code', 255);
+            $table->foreignId('author_id')->comment('작성자');
+            $table->string('master_code', 255)->nullable()->comment('마스터코드');
             $table->string('featured_good_list', 255)->nullable();
-            $table->string('name', 255);
+            $table->string('name', 255)->comment('상품명');
             $table->unsignedBigInteger('goods_price')->comment('판매가');
             $table->unsignedBigInteger('last_cost_price')->nullable()->comment('마지막 매입가');
             $table->unsignedBigInteger('zero_margin_price')->nullable()->comment('제로마진판매가');
