@@ -55,6 +55,7 @@ return new class extends Migration
             $table->string('payGoodsCd', 190)->nullable()->comment('결제용마스터상품코드, 일반상품/세트상품 코드가 저장됨');
             $table->string('masterGoodsCd', 255)->nullable()->comment('마스터상품코드');
             $table->text('memo')->nullable()->comment('주의메시지');
+            $table->text('sellerGoodsCd')->comment('판매자상품코드');
             $table->integer('validator')->nullable();
             $table->string('isSet', 1)->default('N');
             $table->string('printed', 1)->default('N');

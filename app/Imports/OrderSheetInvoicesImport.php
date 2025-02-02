@@ -79,32 +79,33 @@ class OrderSheetInvoicesImport implements SkipsEmptyRows, ToModel, WithStartRow
             'totalDeliveryPrice' => $row[29],
             // 구매자ID
             // 구매자명
-            'orderName' => $row[30],
+            'orderName' => $row[31],
             // 구매자전화번호
-            'orderPhone' => $row[31],
+            'orderPhone' => $row[32],
             // 구매자휴대폰번호
-            'orderCellPhone' => $row[32],
+            'orderCellPhone' => $row[33],
             // 수령자명
-            'receiverName' => $row[33],
+            'receiverName' => $row[34],
             // 수령자전화번호
-            'receiverPhone' => $row[34],
+            'receiverPhone' => $row[35],
             // 수령자휴대폰번호
-            'receiverCellPhone' => $row[35],
+            'receiverCellPhone' => $row[36],
             // 배송지우편번호
-            'postcode' => $row[36],
+            'postcode' => $row[37],
             // 배송지주소
-            'address' => $row[37],
+            'address' => $row[38],
             // 배송메세지
-            'deliveryMemo' => $row[38],
+            'deliveryMemo' => $row[39],
             // 배송사명
-            'invoiceCompany' => $row[39],
+            'invoiceCompany' => $row[40],
             // 송장번호
-            'invoiceNo' => $row[40],
+            'invoiceNo' => $row[41],
             // 마스터상품코드
-            'masterGoodsCd' => $row[41],
+            'masterGoodsCd' => $row[42],
             // 주의메세지
-            'memo' => $row[42],
+            'memo' => $row[43],
             // 판매자상품코드
+            'sellerGoodsCd' => $row[44],
         ]);
     }
 
