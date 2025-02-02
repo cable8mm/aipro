@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Cable8mm\GoodCodeParser\Parsers\OptionGood;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -21,7 +22,7 @@ class OptionGoodFactory extends Factory
 
         return [
             'author_id' => fake()->randomNumber(1) + 1,
-            'master_code' => 'OG'.fake()->randomNumber(3, true),
+            'master_code' => OptionGood::PREFIX.fake()->randomNumber(3, true),
             'name' => fake('ko_KR')->productName(),
             'option_count' => fake()->randomNumber(2),
             'my_shop_sale_option_count' => fake()->randomNumber(1),

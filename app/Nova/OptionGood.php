@@ -10,7 +10,6 @@ use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\MorphOne;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -54,18 +53,19 @@ class OptionGood extends Resource
             ID::make()->sortable(),
             BelongsTo::make(__('Author'), 'author', User::class)->exceptOnForms(),
             Text::make(__('Master Code'), 'master_code')
-                ->rules('required')->required()
+                ->readonly()
                 ->copyable()
-                ->maxlength(130),
+                ->maxlength(130)
+                ->exceptOnForms()
+                ->help(__('This value can only input by adding or updating related goods')),
             Text::make(__('Name'), 'name')->rules('required')->required()->maxlength(130),
             Number::make(__('Option Count'), 'option_count')->exceptOnForms(),
-            Boolean::make(__('Is Active'), 'is_active'),
+            Boolean::make(__('Is Active'), 'is_active')
+                ->exceptOnForms(),
             DateTime::make(__('Created At'), 'created_at')->exceptOnForms(),
             DateTime::make(__('Updated At'), 'updated_at')->exceptOnForms(),
 
             HasMany::make(__('Option Good Options'), 'optionGoodOptions', OptionGoodOption::class),
-
-            MorphOne::make('PromotionCode'),
         ];
     }
 

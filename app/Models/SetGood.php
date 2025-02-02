@@ -53,7 +53,17 @@ class SetGood extends Model
      */
     public function promotionCode(): MorphOne
     {
-        return $this->morphOne(PromotionCode::class, 'promotion_codable');
+        return $this->morphOne(PromotionCode::class, 'promotionCodable');
+    }
+
+    /**
+     * Get the option good option's master code.
+     *
+     * @see https://laravel.com/docs/11.x/eloquent-relationships#one-to-one-polymorphic-model-structure
+     */
+    public function optionGoodOption(): MorphOne
+    {
+        return $this->morphOne(OptionGoodOption::class, 'optionGoodOptionable');
     }
 
     public function goods(): BelongsToMany

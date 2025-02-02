@@ -6,17 +6,18 @@ use App\Enums\UserType;
 use App\Traits\NovaAuthorizedByMd;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
-use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\MorphTo;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Stack;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use Outl1ne\NovaSortable\Traits\HasSortableRows;
 
 class OptionGoodOption extends Resource
 {
-    use NovaAuthorizedByMd;
+    use HasSortableRows, NovaAuthorizedByMd;
 
     /**
      * The model the resource corresponds to.
@@ -38,9 +39,7 @@ class OptionGoodOption extends Resource
      * @var array
      */
     public static $search = [
-        'id',
-        'master_code',
-        'name',
+        'sort_order',
     ];
 
     /**
@@ -51,18 +50,18 @@ class OptionGoodOption extends Resource
     public function fields(NovaRequest $request)
     {
         return [
-            ID::make()->sortable(),
+            ID::make(),
             BelongsTo::make(__('Author'), 'author', User::class)->exceptOnForms(),
             BelongsTo::make(__('Option Good'), 'optionGood', OptionGood::class),
-            Text::make(__('Master Code'), 'master_code')
-                ->rules('required')->required()
-                ->copyable()
-                ->maxlength(130),
-            Text::make(__('Name'), 'name')->rules('required')->required()->maxlength(130),
-            Currency::make(__('Goods Price'), 'goods_price'),
-            Currency::make(__('Last Cost Price'), 'last_cost_price'),
-            Currency::make(__('Zero Margin Price'), 'zero_margin_price'),
-            Number::make('순서', 'order'),
+            Text::make(__('Master Code'), function () {
+                return $this->optionGoodOptionable->master_code;
+            }),
+            MorphTo::make(__('Option Good Optionable'), 'optionGoodOptionable')
+                ->types([
+                    Good::class,
+                    SetGood::class,
+                ]),
+            Number::make(__('Sort Order'), 'sort_order')->sortable(),
             Stack::make(__('Created At').' & '.__('Updated At'), [
                 DateTime::make(__('Created At'), 'created_at'),
                 DateTime::make(__('Updated At'), 'updated_at'),
