@@ -22,12 +22,8 @@ class OptionGoodOptionFactory extends Factory
         return [
             'author_id' => fake()->randomNumber(1) + 1,
             'option_good_id' => fake()->randomNumber(1) + 1,
-            'master_code' => 'OGO'.fake()->randomNumber(3, true),
-            'name' => fake('ko_KR')->productName(),
-            'goods_price' => fake()->randomNumber(5),
-            'last_cost_price' => fake()->randomNumber(5),
-            'zero_margin_price' => fake()->randomNumber(5),
-            'order' => fake()->randomNumber(2),
+            'option_good_optionable_id' => fake()->randomNumber(1) + 1,
+            'option_good_optionable_type' => fake()->randomElement(['App\Models\Good', 'App\Models\SetGood']), // change this to your model class name
             'is_my_shop_sale' => fake()->boolean(),
             'is_other_shop_sale' => fake()->boolean(),
         ];

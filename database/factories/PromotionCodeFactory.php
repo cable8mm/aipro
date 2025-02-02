@@ -20,7 +20,7 @@ class PromotionCodeFactory extends Factory
         return [
             'author_id' => fake()->randomNumber(1) + 1,
             'promotion_codable_id' => fake()->randomNumber(1) + 1,
-            'promotion_codable_type' => fake()->randomElement(['App\Models\Good', 'App\Models\SetGood', 'App\Models\OptionGood']), // change this to your model class name
+            'promotion_codable_type' => fake()->randomElement(['App\Models\Good', 'App\Models\SetGood']), // change this to your model class name
             'memo' => fake()->randomElement(Site::values()).'용 프로모션 코드 입니다.',
             'started_at' => fake()->dateTime(),
             'finished_at' => fake()->dateTime(),

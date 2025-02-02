@@ -5,14 +5,24 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Nova\Actions\Actionable;
+use Spatie\EloquentSortable\Sortable;
+use Spatie\EloquentSortable\SortableTrait;
 
-class OptionGoodOption extends Model
+class OptionGoodOption extends Model implements Sortable
 {
-    use Actionable, HasFactory;
+    use Actionable, HasFactory, SortableTrait;
 
     protected $with = ['author', 'optionGood'];
+
+    public $sortable = [
+        'order_column_name' => 'sort_order',
+        'sort_when_creating' => true,
+        'nova_order_by' => 'DESC',
+        'sort_on_has_many' => true,
+    ];
 
     protected function casts(): array
     {
@@ -45,5 +55,10 @@ class OptionGoodOption extends Model
     public function optionGood(): BelongsTo
     {
         return $this->belongsTo(OptionGood::class);
+    }
+
+    public function optionGoodOptionable(): MorphTo
+    {
+        return $this->morphTo();
     }
 }

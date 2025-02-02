@@ -11,6 +11,10 @@ class OptionGoodOptionSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\OptionGoodOption::factory()->count(10)->create();
+        for ($i = 1; $i <= 10; $i++) {
+            \App\Models\OptionGoodOption::factory()->state([
+                'sort_order' => $i,
+            ])->create();
+        }
     }
 }

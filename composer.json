@@ -26,6 +26,7 @@
         "maatwebsite/laravel-nova-excel": "^1.3",
         "outl1ne/nova-input-filter": "^2.0",
         "outl1ne/nova-multiselect-filter": "^4.0",
+        "outl1ne/nova-sortable": "^3.0",
         "picqer/php-barcode-generator": "^3.2"
     },
     "require-dev": {
@@ -116,6 +117,7 @@
         "mbezhanov/faker-provider-collection": "Adds custom Faker providers for Laravel applications.",
         "outl1ne/nova-input-filter": "Provides Laravel Nova filter for matching the exactly value with text input element.",
         "outl1ne/nova-multiselect-filter": "Provides Laravel Nova filter for Multiselect field.",
+        "outl1ne/nova-sortable": "Provides a sort order function into OptionGoodOptions object",
         "picqer/php-barcode-generator": "Required to generate a barcode"
     },
     "config": {
