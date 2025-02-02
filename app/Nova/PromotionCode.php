@@ -55,7 +55,6 @@ class PromotionCode extends Resource
                 ->types([
                     Good::class,
                     SetGood::class,
-                    OptionGood::class,
                 ]),
             Text::make(__('Master Code'), 'master_code')
                 ->rules('required')->required()
