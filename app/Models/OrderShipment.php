@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class OrderShipment extends Model
 {
@@ -80,8 +80,13 @@ class OrderShipment extends Model
         return $this->belongsTo(OrderSheetInvoice::class);
     }
 
-    public function good(): HasOne
+    public function good(): BelongsTo
     {
-        return $this->hasOne(Good::class, 'masterGoodsCd', 'master_code');
+        return $this->belongsTo(Good::class, 'masterGoodsCd', 'master_code');
+    }
+
+    public function setGoods(): HasMany
+    {
+        return $this->hasMany(SetGood::class);
     }
 }
