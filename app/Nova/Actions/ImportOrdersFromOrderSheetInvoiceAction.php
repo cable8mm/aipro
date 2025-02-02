@@ -24,6 +24,9 @@ class ImportOrdersFromOrderSheetInvoiceAction extends Action
      */
     public function handle(ActionFields $fields, Collection $models)
     {
+        /**
+         * @var \App\Models\OrderSheetInvoice $model
+         */
         foreach ($models as $model) {
             $model->status = OrderSheetInvoiceStatus::RUNNING->name;
             $model->save();
@@ -40,6 +43,10 @@ class ImportOrdersFromOrderSheetInvoiceAction extends Action
                     $importFormat
                 );
 
+                $model->row_count = $model->orderShipments()->count();
+                $model->order_count = $model->orderShipments()->count();
+                $model->order_good_count = $model->orderShipments()->count();   // only as good master codes
+                $model->mismatched_order_good_count = $model->order_good_count - $model->goods()->count();
                 $model->status = OrderSheetInvoiceStatus::SUCCESS->name;
                 $model->save();
             } catch (\Exception $e) {

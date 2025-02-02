@@ -27,7 +27,7 @@ enum OrderSheetInvoiceStatus: string
 
     public static function loadingWhen(): array
     {
-        return [self::FILE_UPLOADED->name, self::FILE_ON_SUCCESS->name, self::SUCCESS->name];
+        return [self::FILE_UPLOADED->name, self::FILE_ON_SUCCESS->name];
     }
 
     public static function failedWhen(): array

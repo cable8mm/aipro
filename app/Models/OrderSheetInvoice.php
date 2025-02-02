@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Support\Facades\Auth;
 
 class OrderSheetInvoice extends Model
@@ -53,5 +54,17 @@ class OrderSheetInvoice extends Model
     public function orderShipments(): HasMany
     {
         return $this->hasMany(OrderShipment::class);
+    }
+
+    public function goods(): HasManyThrough
+    {
+        return $this->hasManyThrough(
+            Good::class,
+            OrderShipment::class,
+            'order_sheet_invoice_id',
+            'master_code',
+            'id',
+            'masterGoodsCd'
+        );
     }
 }
