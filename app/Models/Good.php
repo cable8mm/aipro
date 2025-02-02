@@ -89,7 +89,7 @@ class Good extends Model
             $good->author_id = $good->author_id ?? Auth::user()->id;
         });
 
-        static::created(function (Good $good) {
+        static::saved(function (Good $good) {
             if (is_null($good->master_code)) {
                 $good->master_code = $good->id;
                 $good->save();

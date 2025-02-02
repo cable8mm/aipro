@@ -15,6 +15,8 @@ class PromotionCode extends Model
 
     protected $with = ['author'];
 
+    protected $guarded = [];
+
     protected function casts(): array
     {
         return [

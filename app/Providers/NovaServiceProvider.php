@@ -2,20 +2,6 @@
 
 namespace App\Providers;
 
-use App\Models\AlertEmail as ModelsAlertEmail;
-use App\Models\BarcodeCommand as ModelsBarcodeCommand;
-use App\Models\Box as ModelsBox;
-use App\Models\BoxSupplier as ModelsBoxSupplier;
-use App\Models\Good as ModelsGood;
-use App\Models\HelpTip as ModelsHelpTip;
-use App\Models\OptionGood as ModelsOptionGood;
-use App\Models\OptionGoodOption as ModelsOptionGoodOption;
-use App\Models\PickingZone as ModelsPickingZone;
-use App\Models\PromotionCode as ModelsPromotionCode;
-use App\Models\SetGood as ModelsSetGood;
-use App\Models\Setting as ModelsSetting;
-use App\Models\Supplier as ModelsSupplier;
-use App\Models\User as ModelsUser;
 use App\Nova\AlertEmail;
 use App\Nova\BarcodeCommand;
 use App\Nova\BasicGood;
@@ -87,8 +73,8 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 MenuSection::dashboard(Main::class)->icon('home'),
 
                 MenuSection::make('상품/박스 관리', [
-                    MenuItem::resource(Good::class)->withBadge(fn () => ModelsGood::count(), 'info'),
-                    MenuItem::resource(Box::class)->withBadge(fn () => ModelsBox::count(), 'info'),
+                    MenuItem::resource(Good::class),
+                    MenuItem::resource(Box::class),
                     MenuItem::resource(RegisterGoodRequest::class),
                 ])->icon('truck')->collapsable(),
 
@@ -109,8 +95,8 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 ])->icon('cube')->collapsable(),
 
                 MenuSection::make('공급사/상품 관리', [
-                    MenuItem::resource(Supplier::class)->withBadge(fn () => ModelsSupplier::count(), 'info'),
-                    MenuItem::resource(BoxSupplier::class)->withBadge(fn () => ModelsBoxSupplier::count(), 'info'),
+                    MenuItem::resource(Supplier::class),
+                    MenuItem::resource(BoxSupplier::class),
                 ])->icon('inbox-in')->collapsable(),
 
                 MenuSection::make('통계와 모니터링', [
@@ -119,30 +105,30 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 ])->icon('eye')->collapsable(),
 
                 MenuSection::make(__('MD'), [
-                    MenuItem::resource(BasicGood::class)->withBadge(fn () => ModelsGood::count(), 'info'),
-                    MenuItem::resource(SetGood::class)->withBadge(fn () => ModelsSetGood::count(), 'info'),
-                    MenuItem::resource(OptionGood::class)->withBadge(fn () => ModelsOptionGood::count(), 'info'),
-                    MenuItem::resource(OptionGoodOption::class)->withBadge(fn () => ModelsOptionGoodOption::count(), 'info'),
-                    MenuItem::resource(PromotionCode::class)->withBadge(fn () => ModelsPromotionCode::count(), 'info'),
+                    MenuItem::resource(BasicGood::class),
+                    MenuItem::resource(SetGood::class),
+                    MenuItem::resource(OptionGood::class),
+                    MenuItem::resource(OptionGoodOption::class),
+                    MenuItem::resource(PromotionCode::class),
                     MenuItem::resource(RegisterOptionGoodRequest::class),
                 ])->icon('shopping-cart')->collapsable(),
 
                 MenuSection::make(__('Tools'), [
-                    MenuItem::resource(BarcodeCommand::class)->withBadge(fn () => ModelsBarcodeCommand::count(), 'info'),
+                    MenuItem::resource(BarcodeCommand::class),
                     MenuItem::externalLink(__('Print Barcode Commands'), '/barcode-command')->openInNewTab(),
                     MenuItem::resource(RegisterImportFile::class),
                     MenuItem::resource(HelpfulFile::class),
                 ])->icon('scissors')->collapsable(),
 
                 MenuSection::make(__('Services'), [
-                    MenuItem::resource(AlertEmail::class)->withBadge(fn () => ModelsAlertEmail::count(), 'info'),
-                    MenuItem::resource(HelpTip::class)->withBadge(fn () => ModelsHelpTip::count(), 'info'),
+                    MenuItem::resource(AlertEmail::class),
+                    MenuItem::resource(HelpTip::class),
                 ])->icon('sparkles')->collapsable(),
 
                 MenuSection::make(__('Setting'), [
-                    MenuItem::resource(User::class)->withBadge(fn () => ModelsUser::count(), 'info'),
-                    MenuItem::resource(Setting::class)->withBadge(fn () => ModelsSetting::count(), 'info'),
-                    MenuItem::resource(PickingZone::class)->withBadge(fn () => ModelsPickingZone::count(), 'info'),
+                    MenuItem::resource(User::class),
+                    MenuItem::resource(Setting::class),
+                    MenuItem::resource(PickingZone::class),
                 ])->icon('cog')->collapsable(),
 
                 MenuSection::make(__('Helpful Links'), [

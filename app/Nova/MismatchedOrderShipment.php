@@ -2,7 +2,8 @@
 
 namespace App\Nova;
 
-use App\Enums\Status as EnumsStatus;
+use App\Enums\MismatchedStatus;
+use App\Nova\Actions\ChangeStatusAction;
 use App\Traits\NovaAuthorizedByWarehouser;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\DateTime;
@@ -50,7 +51,6 @@ class MismatchedOrderShipment extends Resource
     {
         return [
             ID::make()->sortable(),
-            BelongsTo::make(__('Author'), 'author', User::class),
             BelongsTo::make(__('Order Sheet Invoice'), 'orderSheetInvoice', OrderSheetInvoice::class),
             Text::make(__('Order No'), 'order_no')->maxlength(100),
             Text::make(__('Site'), 'site')->maxlength(100),
@@ -59,14 +59,15 @@ class MismatchedOrderShipment extends Resource
             Text::make(__('Option'), 'option')->maxlength(255),
             KeyValue::make(__('Json'), 'json'),
             Status::make(__('Status'), 'status')
-                ->default(EnumsStatus::WAITING->name)
-                ->loadingWhen([EnumsStatus::WAITING->name, EnumsStatus::RUNNING->name])
-                ->failedWhen([EnumsStatus::FAILED->name])
+                ->default(MismatchedStatus::READY->name)
+                ->loadingWhen(MismatchedStatus::loadingWhen())
+                ->failedWhen(MismatchedStatus::failedWhen())
                 ->filterable(function ($request, $query, $value, $attribute) {
                     $query->where($attribute, $value);
                 })->displayUsing(function ($value) {
-                    return EnumsStatus::{$value}->value() ?? '-';
+                    return MismatchedStatus::{$value}->value() ?? '-';
                 }),
+            BelongsTo::make(__('Author'), 'author', User::class),
             Stack::make(__('Created At').' & '.__('Updated At'), [
                 DateTime::make(__('Created At'), 'created_at'),
                 DateTime::make(__('Updated At'), 'updated_at'),
@@ -111,7 +112,9 @@ class MismatchedOrderShipment extends Resource
      */
     public function actions(NovaRequest $request)
     {
-        return [];
+        return [
+            (new ChangeStatusAction(MismatchedStatus::COMPLETED->name))->showInline(),
+        ];
     }
 
     public static function label()

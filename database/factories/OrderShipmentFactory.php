@@ -64,6 +64,7 @@ class OrderShipmentFactory extends Factory
             'invoiceGoodsCd' => fake()->randomNumber(7) + 1,
             'payGoodsCd' => fake()->randomNumber(9) + 1,
             'masterGoodsCd' => fake()->randomNumber(9) + 1,
+            'sellerGoodsCd' => fake()->randomNumber(9) + 1,
             'memo' => '',
             'validator' => fake()->randomNumber(1) + 1,
             'isSet' => fake()->randomElement([0, 1]),

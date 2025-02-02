@@ -1,6 +1,6 @@
 <?php
 
-use App\Enums\Status;
+use App\Enums\OrderSheetInvoiceStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('invoice_file_name')->comment('운송장파일 이름');
             $table->unsignedBigInteger('invoice_file_size')->comment('운송장파일 사이즈');
             $table->json('excel_json')->nullable();
-            $table->string('status', 50)->nullable()->default(Status::WAITING)->comment('에러,파일업로드,정상확인완료,주문서입력완료');
+            $table->string('status', 50)->nullable()->default(OrderSheetInvoiceStatus::FILE_UPLOADED)->comment('에러,파일업로드,정상확인완료,주문서입력완료');
             $table->timestamps();
         });
     }

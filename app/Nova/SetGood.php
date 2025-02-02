@@ -6,11 +6,12 @@ use App\Enums\UserType;
 use App\Traits\NovaAuthorizedByMd;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\MorphOne;
+use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Stack;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -59,21 +60,29 @@ class SetGood extends Resource
                 ->copyable()
                 ->exceptOnForms(),
             Text::make(__('Master Code'), 'master_code')
-                ->rules('required')->required()
                 ->maxlength(255)
-                ->copyable(),
-            Text::make(__('Featured Good List'), 'featured_good_list')->maxlength(255),
+                ->copyable()
+                ->readonly()
+                ->help(__('This value can only input by adding or updating related goods')),
             Text::make(__('Name'), 'name')->rules('required')->required()->maxlength(255),
             Currency::make(__('Goods Price'), 'goods_price')->rules('required')->required(),
             Currency::make(__('Last Cost Price'), 'last_cost_price')->exceptOnForms(),
             Currency::make(__('Zero Margin Price'), 'zero_margin_price')->exceptOnForms(),
-            Boolean::make(__('is Shutdown'), 'is_shutdown'),
+            Boolean::make(__('Is Shutdown'), 'is_shutdown'),
             Stack::make(__('Created At').' & '.__('Updated At'), [
                 DateTime::make(__('Created At'), 'created_at'),
                 DateTime::make(__('Updated At'), 'updated_at'),
             ]),
 
-            MorphOne::make('PromotionCode'),
+            BelongsToMany::make(__('Goods'), 'goods', Good::class)
+                ->searchable()
+                ->fields(
+                    function ($request, $relatedModel) {
+                        return [
+                            Number::make(__('Count'), 'count')->rules('required')->required()->default(1),
+                        ];
+                    }
+                ),
         ];
     }
 
