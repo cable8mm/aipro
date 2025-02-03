@@ -2,10 +2,15 @@
 
 [![build & tests](https://github.com/cable8mm/aipro/actions/workflows/tests.yml/badge.svg)](https://github.com/cable8mm/aipro/actions/workflows/tests.yml)
 [![coding style](https://github.com/cable8mm/aipro/actions/workflows/coding-style-php.yml/badge.svg)](https://github.com/cable8mm/aipro/actions/workflows/coding-style-php.yml)
-[![release date](https://img.shields.io/github/release-date/cable8mm/aipro)](https://github.com/cable8mm/aipro/releases)
-[![minimum PHP version](https://img.shields.io/badge/php-%3E%3D_8.2.0-8892BF.svg)](https://github.com/cable8mm/aipro)
+[![minimum PHP version](https://img.shields.io/badge/php-%5E8.3-8892BF?logo=php)](https://github.com/cable8mm/aipro)
+![Laravel 11.x](https://img.shields.io/badge/Laravel-%5E11.0-FF2D20?logo=Laravel&logoColor=FF2D20&labelColor=white)
+![Laravel Nova 4.x](https://img.shields.io/badge/Nova-%5E4.0-00E2FE?logo=Laravel%20nova&logoColor=00E2FE&color=00E2FE)
 
 에이아이프로는 물류센터를 보유한 회사가 WMS(창고관리시스템)와 상품 정보를 최신 상태로 유지하며, 이를 벤더와 소비자에게 효과적으로 제공할 수 있도록 설계된 솔루션입니다. AI 기술과 모바일 도구를 활용하여 운영의 편의성을 높이고, 비용 효율적인 서비스를 제공합니다.
+
+![Main Screen](docs/images/aipro_screen_main.png)
+
+![Goods Screen](docs/images/aipro_screen_goods.png)
 
 ## Installation
 
@@ -77,7 +82,7 @@ Visit to <http://localhost:8025>
 ### Add languages
 
 ```sh
-php artisan lang:add af
+php artisan lang:add jp
 ```
 
 Refer to [this link](https://laravel-lang.com/available-locales-list.html#lists-available-locales-am) about it.
