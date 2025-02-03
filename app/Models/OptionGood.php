@@ -35,10 +35,7 @@ class OptionGood extends Model
         });
 
         static::saved(function (OptionGood $optionGood) {
-            if (is_null($optionGood->master_code)) {
-                $optionGood->master_code = ParsersOptionGood::PREFIX.$optionGood->id;
-                $optionGood->save();
-            }
+            $optionGood->updateSpecificFields();
         });
     }
 
@@ -50,5 +47,21 @@ class OptionGood extends Model
     public function optionGoodOptions(): HasMany
     {
         return $this->hasMany(OptionGoodOption::class);
+    }
+
+    /**
+     * Generate specific fields for the option good.
+     *
+     * @return bool The method returns the result of success or fail
+     */
+    public function updateSpecificFields(): bool
+    {
+        if (is_null($this->master_code)) {
+            $this->master_code = ParsersOptionGood::PREFIX.$this->id;
+        }
+
+        $this->option_count = $this->optionGoodOptions()->count();
+
+        return $this->saveQuietly();
     }
 }

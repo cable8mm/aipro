@@ -16,7 +16,8 @@ return new class extends Migration
             $table->foreignId('author_id')->comment('작성자');
             $table->string('master_code', 255)->nullable()->comment('마스터코드');
             $table->string('name', 255)->comment('상품명');
-            $table->unsignedBigInteger('goods_price')->comment('판매가');
+            $table->unsignedInteger('good_count')->comment('상품갯수');
+            $table->unsignedBigInteger('goods_price')->nullable()->comment('판매가');
             $table->unsignedBigInteger('last_cost_price')->nullable()->comment('마지막 매입가');
             $table->unsignedBigInteger('zero_margin_price')->nullable()->comment('제로마진판매가');
             $table->boolean('is_shutdown')->default(false)->comment('판매 중지 유무');

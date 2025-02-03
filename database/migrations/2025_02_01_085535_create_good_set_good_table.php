@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('good_set_good', function (Blueprint $table) {
             $table->foreignId('good_id');
             $table->foreignId('set_good_id');
-            $table->unsignedInteger('count');
+            $table->unsignedInteger('quantity');
             $table->primary(['good_id', 'set_good_id']);
             $table->index(['good_id', 'set_good_id']);
         });

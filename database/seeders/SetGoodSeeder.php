@@ -11,6 +11,20 @@ class SetGoodSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\SetGood::factory()->count(10)->create();
+        for ($i = 1; $i <= 10; $i++) {
+            $goodCount = rand(1, 5);
+            $setGood = \App\Models\SetGood::factory()
+                ->state([
+                    'good_count' => $goodCount,
+                ])
+                ->create();
+
+            for ($j = 1; $j <= $goodCount; $j++) {
+                $quantity = rand(1, 12);
+                $setGood->goods()->attach($j, [
+                    'quantity' => $quantity,
+                ]);
+            }
+        }
     }
 }

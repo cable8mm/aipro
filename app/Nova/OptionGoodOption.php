@@ -53,6 +53,8 @@ class OptionGoodOption extends Resource
             ID::make(),
             BelongsTo::make(__('Author'), 'author', User::class)->exceptOnForms(),
             BelongsTo::make(__('Option Good'), 'optionGood', OptionGood::class),
+            Text::make(__('Name'), 'name')->rules('required')->required()
+                ->help(__('The option must match this field, so please enter the exact name.')),
             Text::make(__('Master Code'), function () {
                 return $this->optionGoodOptionable->master_code;
             }),
@@ -61,7 +63,7 @@ class OptionGoodOption extends Resource
                     Good::class,
                     SetGood::class,
                 ]),
-            Number::make(__('Sort Order'), 'sort_order')->sortable(),
+            Number::make(__('Sort Order'), 'sort_order')->exceptOnForms(),
             Stack::make(__('Created At').' & '.__('Updated At'), [
                 DateTime::make(__('Created At'), 'created_at'),
                 DateTime::make(__('Updated At'), 'updated_at'),
@@ -116,7 +118,7 @@ class OptionGoodOption extends Resource
 
     public function title()
     {
-        return '['.$this->master_code.'] '.$this->name;
+        return $this->name;
     }
 
     public function authorizedToUpdate(Request $request)

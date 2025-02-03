@@ -64,6 +64,7 @@ class SetGood extends Resource
                 ->copyable()
                 ->readonly()
                 ->help(__('This value can only input by adding or updating related goods')),
+            Number::make(__('Good Count'), 'good_count')->exceptOnForms(),
             Text::make(__('Name'), 'name')->rules('required')->required()->maxlength(255),
             Currency::make(__('Goods Price'), 'goods_price')->rules('required')->required(),
             Currency::make(__('Last Cost Price'), 'last_cost_price')->exceptOnForms(),
@@ -79,7 +80,7 @@ class SetGood extends Resource
                 ->fields(
                     function ($request, $relatedModel) {
                         return [
-                            Number::make(__('Count'), 'count')->rules('required')->required()->default(1),
+                            Number::make(__('Quantity'), 'quantity')->rules('required')->required()->default(1),
                         ];
                     }
                 ),

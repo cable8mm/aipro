@@ -35,8 +35,8 @@ class DatabaseSeeder extends Seeder
             IssueSeeder::class,
             MismatchedOrderShipmentSeeder::class,
             NaverCategorySeeder::class,
+            OptionGoodSeeder::class,    // This must be over `OptionGoodOptionSeeder::class`
             OptionGoodOptionSeeder::class,
-            OptionGoodSeeder::class,
             OrderSheetInvoiceSeeder::class,
             OrderSeeder::class,
             OrderShipmentSeeder::class,
