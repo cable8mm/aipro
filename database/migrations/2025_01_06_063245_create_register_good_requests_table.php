@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\Status;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,14 +18,14 @@ return new class extends Migration
                 table: 'users', indexName: 'register_good_requests_requester_user_id'
             )->onUpdate('cascade')->restrictOnDelete()->comment('요청자');
             $table->string('title', 255);
-            $table->string('request_file_url', 255);
+            $table->string('request_file_url', 255)->nullable();
             $table->foreignId('worker_id')->constrained(
                 table: 'users', indexName: 'register_good_requests_worker_user_id'
             )->onUpdate('cascade')->restrictOnDelete()->nullable();
             $table->string('respond_file_url', 255)->nullable();
             $table->boolean('has_supplier_monitoring_price')->default(false);
             $table->text('memo')->nullable();
-            $table->string('status', 50)->default('waiting');
+            $table->string('status', 50)->default(Status::WAITING->name);
             $table->timestamps();
         });
     }

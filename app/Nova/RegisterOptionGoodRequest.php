@@ -4,6 +4,7 @@ namespace App\Nova;
 
 use App\Enums\Status;
 use App\Enums\UserType;
+use App\Nova\Actions\ChangeStatusAction;
 use App\Traits\NovaAuthorizedByNotReviewer;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
@@ -52,8 +53,8 @@ class RegisterOptionGoodRequest extends Resource
     {
         return [
             ID::make()->sortable(),
-            BelongsTo::make(__('Author'), 'Author', User::class)->exceptOnForms(),
-            BelongsTo::make(__('Worker'), 'worker', User::class),
+            BelongsTo::make(__('Author'), 'author', User::class)->exceptOnForms(),
+            BelongsTo::make(__('Worker'), 'worker', User::class)->rules('required')->required(),
             Text::make(__('Title'), 'title')->rules('required')->required()->maxlength(190),
             File::make(__('Request File Url'), 'request_file_url'),
             File::make(__('Respond File Url'), 'respond_file_url'),
@@ -110,7 +111,9 @@ class RegisterOptionGoodRequest extends Resource
      */
     public function actions(NovaRequest $request)
     {
-        return [];
+        return [
+            (new ChangeStatusAction(Status::SUCCESS))->showInline(),
+        ];
     }
 
     public static function label()
