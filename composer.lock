@@ -224,20 +224,20 @@
         },
         {
             "name": "cable8mm/good-code",
-            "version": "v2.1.0",
+            "version": "v2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cable8mm/good-code.git",
-                "reference": "14b2c61a6fab6f31499455e33b407aea8c756048"
+                "reference": "2d741022c82d697662f05317a38e752964e97b13"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cable8mm/good-code/zipball/14b2c61a6fab6f31499455e33b407aea8c756048",
-                "reference": "14b2c61a6fab6f31499455e33b407aea8c756048",
+                "url": "https://api.github.com/repos/cable8mm/good-code/zipball/2d741022c82d697662f05317a38e752964e97b13",
+                "reference": "2d741022c82d697662f05317a38e752964e97b13",
                 "shasum": ""
             },
             "require": {
-                "php": "^8.0"
+                "php": "^8.1"
             },
             "require-dev": {
                 "laravel/pint": "^1.0",
@@ -270,9 +270,9 @@
             ],
             "support": {
                 "issues": "https://github.com/cable8mm/good-code/issues",
-                "source": "https://github.com/cable8mm/good-code/tree/v2.1.0"
+                "source": "https://github.com/cable8mm/good-code/tree/v2.2.0"
             },
-            "time": "2025-02-01T11:52:12+00:00"
+            "time": "2025-02-03T09:51:36+00:00"
         },
         {
             "name": "cable8mm/laravel-validation-kisa-rules",
