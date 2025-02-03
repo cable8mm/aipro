@@ -3,6 +3,7 @@
 namespace App\Nova;
 
 use App\Enums\Status as EnumsStatus;
+use App\Nova\Actions\ChangeStatusAction;
 use App\Traits\NovaAuthorizedByNotReviewer;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
@@ -113,7 +114,9 @@ class RegisterGoodRequest extends Resource
      */
     public function actions(NovaRequest $request)
     {
-        return [];
+        return [
+            (new ChangeStatusAction(EnumsStatus::SUCCESS))->showInline(),
+        ];
     }
 
     public static function label()

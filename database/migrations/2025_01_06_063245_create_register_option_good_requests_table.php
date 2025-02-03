@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\Status;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -18,7 +19,7 @@ return new class extends Migration
             $table->string('title', 190);
             $table->string('request_file_url', 190)->nullable();
             $table->string('respond_file_url', 190)->nullable();
-            $table->string('status', 10)->default('등록대기');
+            $table->string('status', 10)->default(Status::WAITING->name);
             $table->text('memo')->nullable();
             $table->timestamps();
         });
