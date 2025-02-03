@@ -12,7 +12,7 @@ class GoodSetGood extends Pivot
     protected static function booted(): void
     {
         static::saved(function (GoodSetGood $goodSetGood) {
-            $goodSetGood->setGood->updateMasterCode();
+            $goodSetGood->setGood->updateSpecificFields();
         });
     }
 

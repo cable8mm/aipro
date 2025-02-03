@@ -37,7 +37,7 @@ class SetGood extends Model
         });
 
         static::saved(function (SetGood $setGood) {
-            $setGood->updateMasterCode();
+            $setGood->updateSpecificFields();
         });
     }
 
@@ -69,7 +69,7 @@ class SetGood extends Model
     public function goods(): BelongsToMany
     {
         return $this->belongsToMany(Good::class)
-            ->withPivot('count')
+            ->withPivot('quantity')
             ->using(GoodSetGood::class);
     }
 
@@ -78,10 +78,17 @@ class SetGood extends Model
      *
      * @return bool The method returns the result of success or fail
      */
-    public function updateMasterCode(): bool
+    public function updateSpecificFields(): bool
     {
-        $setCodes = $this->goods()->pluck('count', 'master_code')->toArray();
+        $goodsOfSetGoods = $this->goods();
+
+        $setCodes = $goodsOfSetGoods->pluck('quantity', 'master_code')->toArray();
         $this->master_code = empty($setCodes) ? null : GoodCode::makeSetCode($setCodes);
+        $this->good_count = count($setCodes);
+
+        $this->goods_price = $goodsOfSetGoods->sum('goods_price');
+        $this->last_cost_price = $goodsOfSetGoods->sum('last_cost_price');
+        $this->zero_margin_price = $goodsOfSetGoods->sum('zero_margin_price');
 
         return $this->saveQuietly();
     }
