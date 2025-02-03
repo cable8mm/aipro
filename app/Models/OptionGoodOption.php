@@ -45,6 +45,10 @@ class OptionGoodOption extends Model implements Sortable
         static::creating(function (OptionGoodOption $optionGoodOption) {
             $optionGoodOption->author_id = $optionGoodOption->author_id ?? Auth::user()->id;
         });
+
+        static::saved(function (OptionGoodOption $optionGoodOption) {
+            $optionGoodOption->optionGood->updateSpecificFields();
+        });
     }
 
     public function author(): BelongsTo
