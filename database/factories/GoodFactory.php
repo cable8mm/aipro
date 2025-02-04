@@ -30,7 +30,6 @@ class GoodFactory extends Factory
             'supplier_good_id' => fake()->randomNumber(1) + 1,
             'box_id' => fake()->randomNumber(1) + 1,
             'list_image' => 'placeholder_list_image.png',
-            'master_code' => 'PM'.fake()->randomNumber(3, true),
             'playauto_category_id' => fake()->randomElement([10020400, 10030200, 10060600, 10061000]),
             'name' => $productName,
             'godo_name' => $productName,
