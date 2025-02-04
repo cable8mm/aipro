@@ -63,9 +63,9 @@ class OrderShipment extends Resource
             BelongsTo::make(__('Order Sheet Invoice'), 'orderSheetInvoice', OrderSheetInvoice::class),
             BelongsTo::make(__('Good'), 'good', Good::class),
             Panel::make(__('Additional Information'), [
-                Text::make(__('Master Code'), 'masterGoodsCd'),
-                Text::make(__('Seller Good Code'), 'sellerGoodsCd'),
-                Text::make(__('Order No'), 'orderNo')->maxlength(255),
+                Text::make(__('Master Code'), 'masterGoodsCd')->copyable(),
+                Text::make(__('Seller Good Code'), 'sellerGoodsCd')->copyable(),
+                Text::make(__('Order No'), 'orderNo')->maxlength(255)->copyable(),
                 Select::make(__('Site'), 'site')->options(Site::array())->displayUsingLabels(),
                 Text::make(__('Regist Date'), 'registDate')->maxlength(255)
                     ->hideFromIndex(),
@@ -75,8 +75,8 @@ class OrderShipment extends Resource
                     ->hideFromIndex(),
                 Text::make(__('Delivery Date'), 'deliveryDate')->maxlength(255)
                     ->hideFromIndex(),
-                Text::make(__('Site Order No'), 'siteOrderNo')->maxlength(255),
-                Text::make(__('Site Goods Cd'), 'siteGoodsCd')->maxlength(255),
+                Text::make(__('Site Order No'), 'siteOrderNo')->maxlength(255)->copyable(),
+                Text::make(__('Site Goods Cd'), 'siteGoodsCd')->maxlength(255)->copyable(),
                 Boolean::make(__('Printed'), 'printed')
                     ->trueValue('Y')
                     ->falseValue('N'),
