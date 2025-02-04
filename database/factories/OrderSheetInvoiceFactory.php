@@ -20,7 +20,7 @@ class OrderSheetInvoiceFactory extends Factory
     {
         return [
             'author_id' => fake()->numberBetween(1, UserSeeder::COUNT),
-            'order_sheet_file' => 'invoices/order_sheet_invoice.xls',
+            'order_sheet_file' => 'invoices/order_sheet_invoice_simple.xlsx',
             'order_sheet_file_name' => 'order_sheet_invoice.xls',
             'order_sheet_file_size' => fake()->randomNumber(8, true),
             'invoice_file' => 'invoices/order_sheet_invoice.pdf',

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\OptionGood;
 use Illuminate\Database\Seeder;
 
 class OptionGoodOptionSeeder extends Seeder
@@ -16,5 +17,9 @@ class OptionGoodOptionSeeder extends Seeder
                 'sort_order' => $i,
             ])->create();
         }
+
+        OptionGood::findMasterCode('OPT8')->optionGoodOptions()->first()->update(['name' => '데이지(닭)']);
+
+        OptionGood::findMasterCode('OPT4')->optionGoodOptions()->first()->update(['name' => '미트앤피쉬 레귤러 12kg']);
     }
 }

@@ -21,11 +21,9 @@ class OrderSheetInvoiceSeeder extends Seeder
         );
 
         File::copy(
-            base_path('tests/files/invoices/order_sheet_invoice.xls'),
-            storage_path('app/private/invoices/order_sheet_invoice.xls')
+            base_path('tests/files/invoices/order_sheet_invoice_simple.xlsx'),
+            storage_path('app/private/invoices/order_sheet_invoice_simple.xlsx')
         );
-
-        File::copy(base_path('tests/files/invoices/order_sheet_invoice.pdf'), storage_path('app/private/invoices/order_sheet_invoice.pdf'));
 
         \App\Models\OrderSheetInvoice::factory()->count(10)->create();
     }

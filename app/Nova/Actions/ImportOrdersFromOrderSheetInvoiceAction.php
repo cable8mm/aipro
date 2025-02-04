@@ -44,7 +44,7 @@ class ImportOrdersFromOrderSheetInvoiceAction extends Action
                 );
 
                 $model->row_count = $model->orderShipments()->count();
-                $model->order_count = $model->orderShipments()->count();
+                $model->order_count = $model->orderShipments()->distinct()->count('orderNo');
                 $model->order_good_count = $model->orderShipments()->count();   // only as good master codes
                 $model->mismatched_order_good_count = $model->order_good_count - $model->goods()->count();
                 $model->status = OrderSheetInvoiceStatus::SUCCESS->name;

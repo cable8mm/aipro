@@ -11,6 +11,10 @@ class GoodSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\Good::factory()->count(10)->create();
+        for ($i = 1; $i <= 10; $i++) {
+            \App\Models\Good::factory()->state([
+                'master_code' => $i,
+            ])->create();
+        }
     }
 }

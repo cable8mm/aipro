@@ -39,7 +39,7 @@ class DatabaseSeeder extends Seeder
             OptionGoodOptionSeeder::class,
             OrderSheetInvoiceSeeder::class,
             OrderSeeder::class,
-            OrderShipmentSeeder::class,
+            //            OrderShipmentSeeder::class,
             PickingZoneSeeder::class,
             PlacingOrderGoodSeeder::class,
             PlacingOrderSeeder::class,
