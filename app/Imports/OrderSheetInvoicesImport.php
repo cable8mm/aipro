@@ -28,8 +28,15 @@ class OrderSheetInvoicesImport implements SkipsEmptyRows, ToCollection, WithStar
          * @var \Illuminate\Support\Collection $row
          */
         foreach ($rows as $row) {
-            $optionShipments = (new ArrayObjectsOrderShipment($row, id: $this->orderSheetInvoice->id))->toArray();
+            $optionShipments = ArrayObjectsOrderShipment::of(
+                $row,
+                id: $this->orderSheetInvoice->id
+            )->toArray();
 
+            /**
+             * @var array<T> $optionShipments Collection of `OrderShipment` model values of the rows
+             * @var array<string, TValue> $optionShipment `OrderShipment` model values of the row
+             */
             foreach ($optionShipments as $optionShipment) {
                 OrderShipment::create(
                     $optionShipment

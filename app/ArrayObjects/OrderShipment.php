@@ -6,6 +6,7 @@ use App\Models\OptionGood;
 use App\Models\SetGood;
 use Cable8mm\GoodCode\Enums\GoodCodeType;
 use Cable8mm\GoodCode\GoodCode;
+use Cable8mm\GoodCode\ValueObjects\SetGood as ValueObjectsSetGood;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Collection;
 
@@ -102,14 +103,16 @@ class OrderShipment implements Arrayable
             // 주의메세지
             'memo' => $row[43],
             // 판매자상품코드
-            // 옥션은 판매자상품코드에 상품과 옵션코드를 합치며, 롯데아이몰과 롯데백화점, 카페24(신) 등 몇개의 쇼핑몰은 판매자상품코드를 별도로 입력하지 않는다.
+            // Auction combines the product and option codes in the seller's product code,
+            // while some shopping malls, such as Lotte iMall, Lotte Department Store, and Cafe24 (new),
+            // do not require a separate seller's product code.
             'sellerGoodsCd' => empty($row[44])
                 ? $row[42]
                 : ($row[44] != $row[42] ? $row[42] : $row[44]),
         ]);
 
         /**
-         * 옵션상품일 경우 옵션의 master_code를 구해서 업데이트 합니다.
+         * For option products, retrieve the master_code of the option and update it.
          */
         if (GoodCodeType::of($this->data->get('sellerGoodsCd')) == GoodCodeType::OPTION) {
             $code = GoodCode::of(
@@ -123,6 +126,9 @@ class OrderShipment implements Arrayable
             $this->data->put('masterGoodsCd', $code);
         }
 
+        /**
+         * For composite and gift products, retrieve the set product and update the master_code.
+         */
         if (
             GoodCodeType::of($this->data->get('sellerGoodsCd')) == GoodCodeType::COMPLEX
             || GoodCodeType::of($this->data->get('sellerGoodsCd')) == GoodCodeType::GIFT
@@ -137,11 +143,40 @@ class OrderShipment implements Arrayable
             $this->data->put('masterGoodsCd', $code);
         }
 
-        $this->containers[] = $this->data->toArray();
+        /**
+         * If the master_code is a set good, copy it as multiple individual goods.
+         */
+        if (GoodCodeType::of($this->data->get('masterGoodsCd')) == GoodCodeType::SET) {
+            $goods = ValueObjectsSetGood::of($this->data->get('masterGoodsCd'))->goods();
+
+            $i = 0;
+            foreach ($goods as $code => $quantity) {
+                if ($i++ != 0) {
+                    $this->data->put('costPrice', 0);
+                    $this->data->put('fixedPrice', 0);
+                    $this->data->put('totalPrice', 0);
+                    $this->data->put('deliveryPrice', 0);
+                    $this->data->put('totalDeliveryPrice', 0);
+                }
+                $this->data->put('amount', $this->data->get('amount') * $quantity);
+                $this->data->put('totalAmount', $this->data->get('totalAmount') * $quantity);
+                $this->data->put('amount', $this->data->get('amount') * $quantity);
+                $this->data->put('masterGoodsCd', $code);
+
+                $this->containers[] = $this->data->toArray();
+            }
+        } else {
+            $this->containers[] = $this->data->toArray();
+        }
     }
 
     public function toArray(): array
     {
         return $this->containers;
+    }
+
+    public static function of(Collection $row, int $id): static
+    {
+        return new static($row, $id);
     }
 }

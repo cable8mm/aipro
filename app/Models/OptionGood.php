@@ -79,7 +79,7 @@ class OptionGood extends Model
         return $this->saveQuietly();
     }
 
-    public static function findMasterCode(string $code): static
+    public static function findMasterCode(string $code): OptionGood
     {
         return static::where('master_code', $code)->first();
     }
