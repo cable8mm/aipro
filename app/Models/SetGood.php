@@ -83,7 +83,7 @@ class SetGood extends Model
         $goodsOfSetGoods = $this->goods();
 
         $setCodes = $goodsOfSetGoods->pluck('quantity', 'master_code')->toArray();
-        $this->master_code = empty($setCodes) ? null : GoodCode::setCodeOf($setCodes)->value();
+        $this->master_code = empty($setCodes) ? null : GoodCode::setCodeOf($setCodes)->code();
         $this->good_count = count($setCodes);
 
         $this->goods_price = $goodsOfSetGoods->sum('goods_price');
