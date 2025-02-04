@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Cable8mm\GoodCodeParser\Parsers\OptionGood as ParsersOptionGood;
+use Cable8mm\GoodCode\Enums\GoodCodeType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -57,7 +57,7 @@ class OptionGood extends Model
     public function updateSpecificFields(): bool
     {
         if (is_null($this->master_code)) {
-            $this->master_code = ParsersOptionGood::PREFIX.$this->id;
+            $this->master_code = GoodCodeType::OPTION->prefix().$this->id;
         }
 
         $this->option_count = $this->optionGoodOptions()->count();

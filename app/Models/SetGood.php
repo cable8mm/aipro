@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Cable8mm\GoodCodeParser\GoodCode;
+use Cable8mm\GoodCode\GoodCode;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -83,7 +83,7 @@ class SetGood extends Model
         $goodsOfSetGoods = $this->goods();
 
         $setCodes = $goodsOfSetGoods->pluck('quantity', 'master_code')->toArray();
-        $this->master_code = empty($setCodes) ? null : GoodCode::makeSetCode($setCodes);
+        $this->master_code = empty($setCodes) ? null : GoodCode::setCodeOf($setCodes)->value();
         $this->good_count = count($setCodes);
 
         $this->goods_price = $goodsOfSetGoods->sum('goods_price');

@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use Cable8mm\GoodCodeParser\Parsers\OptionGood;
+use Cable8mm\GoodCode\Enums\GoodCodeType;
 use Illuminate\Database\Seeder;
 
 class OptionGoodSeeder extends Seeder
@@ -14,7 +14,7 @@ class OptionGoodSeeder extends Seeder
     {
         for ($i = 1; $i <= 10; $i++) {
             \App\Models\OptionGood::factory()->state([
-                'master_code' => OptionGood::PREFIX.$i,
+                'master_code' => GoodCodeType::OPTION->prefix().$i,
             ])->create();
         }
     }
