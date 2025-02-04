@@ -65,4 +65,9 @@ class OptionGoodOption extends Model implements Sortable
     {
         return $this->morphTo();
     }
+
+    public function masterCode(): string
+    {
+        return $this->optionGoodOptionable->master_code;
+    }
 }

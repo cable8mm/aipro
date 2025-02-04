@@ -73,6 +73,11 @@ class SetGood extends Model
             ->using(GoodSetGood::class);
     }
 
+    public static function findComCode(string $code): static
+    {
+        return static::find(GoodCode::getId($code));
+    }
+
     /**
      * Generate master code for the set good.
      *
