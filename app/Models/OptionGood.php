@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use InvalidArgumentException;
 use Laravel\Nova\Actions\Actionable;
 
 class OptionGood extends Model
@@ -54,11 +55,11 @@ class OptionGood extends Model
      * Gets option fitted from the option field of `OrderSheetInvoice` table
      *
      * @param  string  $optionName  The name of the option field of `OrderSheetInvoice` table
-     * @return OptionGoodOption The method returns the option
+     * @return ?OptionGoodOption The method returns the option
      *
      * @see https://stackoverflow.com/questions/472063/mysql-what-is-a-reverse-version-of-like
      */
-    public function option(string $optionName): OptionGoodOption
+    public function option(string $optionName): ?OptionGoodOption
     {
         return $this->optionGoodOptions()->where(DB::raw('\''.$optionName.'\''), 'like', DB::raw("CONCAT('%', name, '%')"))->first();
     }
@@ -79,8 +80,18 @@ class OptionGood extends Model
         return $this->saveQuietly();
     }
 
-    public static function findMasterCode(string $code): OptionGood
+    /**
+     * Find `OptionGood` model from master_code
+     *
+     * @param  string  $code  master_code
+     * @return ?OptionGood The method returns OptionGood instance from `master_code` value
+     */
+    public static function findMasterCode(string $code): ?OptionGood
     {
+        if (empty($code)) {
+            throw new InvalidArgumentException(__('Code must not be empty'));
+        }
+
         return static::where('master_code', $code)->first();
     }
 }

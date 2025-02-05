@@ -2,6 +2,7 @@
 
 namespace App\ArrayObjects;
 
+use App\Exceptions\OptionGoodInvalidArgumentException;
 use App\Models\OptionGood;
 use App\Models\SetGood;
 use Cable8mm\GoodCode\Enums\GoodCodeType;
@@ -9,6 +10,7 @@ use Cable8mm\GoodCode\GoodCode;
 use Cable8mm\GoodCode\ValueObjects\SetGood as ValueObjectsSetGood;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Collection;
+use Throwable;
 
 class OrderShipment implements Arrayable
 {
@@ -119,7 +121,13 @@ class OrderShipment implements Arrayable
                 $this->data->get('sellerGoodsCd'),
                 option: $this->data->get('option'),
                 callback: function ($key, $option) {
-                    return OptionGood::findMasterCode($key)->option($option)->first()->masterCode();
+                    try {
+                        $optionGoodOption = OptionGood::findMasterCode($key)->option($option)->first();
+                    } catch (Throwable $e) {
+                        throw new OptionGoodInvalidArgumentException(__('OptionGood not found for :key => :option', ['option' => $option, 'key' => $key]), $this);
+                    }
+
+                    return $optionGoodOption->masterCode();
                 }
             )->code();
 

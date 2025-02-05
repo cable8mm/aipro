@@ -52,9 +52,9 @@ class MismatchedOrderShipment extends Resource
         return [
             ID::make()->sortable(),
             BelongsTo::make(__('Order Sheet Invoice'), 'orderSheetInvoice', OrderSheetInvoice::class),
-            Text::make(__('Order No'), 'order_no')->maxlength(100),
+            Text::make(__('Order No'), 'order_no')->maxlength(100)->copyable(),
             Text::make(__('Site'), 'site')->maxlength(100),
-            Text::make(__('Master Goods Cd'), 'master_goods_cd')->maxlength(100),
+            Text::make(__('Master Goods Cd'), 'master_goods_cd')->maxlength(100)->copyable(),
             Text::make(__('Goods Nm'), 'goods_nm')->maxlength(255),
             Text::make(__('Option'), 'option')->maxlength(255),
             KeyValue::make(__('Json'), 'json'),
@@ -113,7 +113,7 @@ class MismatchedOrderShipment extends Resource
     public function actions(NovaRequest $request)
     {
         return [
-            (new ChangeStatusAction(MismatchedStatus::COMPLETED->name))->showInline(),
+            (new ChangeStatusAction(MismatchedStatus::COMPLETED))->showInline(),
         ];
     }
 

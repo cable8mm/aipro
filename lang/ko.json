@@ -448,6 +448,7 @@
     "Option Yn": "옵션 사용 여부",
     "OptionCount": "옵션갯수",
     "OptionFl": "옵션 사용 여부",
+    "OptionGood not found for :key => :option": "옵션상품의 마스터코드 :key, 이름 :option 에 해당하는 옵션이 없습니다.",
     "OptionGood Playauto Master Code": "옵션상품 P코드",
     "Order": "주문",
     "Order Cell Phone": "주문 휴대폰",

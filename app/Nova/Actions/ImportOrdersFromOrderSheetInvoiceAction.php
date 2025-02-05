@@ -3,6 +3,7 @@
 namespace App\Nova\Actions;
 
 use App\Enums\OrderSheetInvoiceStatus;
+use App\Exceptions\OptionGoodInvalidArgumentException;
 use App\Imports\OrderSheetInvoicesImport;
 use Illuminate\Bus\Batchable;
 use Illuminate\Bus\Queueable;
@@ -49,6 +50,13 @@ class ImportOrdersFromOrderSheetInvoiceAction extends Action
                 $model->mismatched_order_good_count = $model->order_good_count - $model->goods()->count();
                 $model->status = OrderSheetInvoiceStatus::SUCCESS->name;
                 $model->save();
+            } catch (OptionGoodInvalidArgumentException $e) {
+                $e->save();
+
+                $model->status = OrderSheetInvoiceStatus::ERROR->name;
+                $model->save();
+
+                return Action::danger($e->getMessage());
             } catch (\Exception $e) {
                 $model->status = OrderSheetInvoiceStatus::ERROR->name;
                 $model->save();
