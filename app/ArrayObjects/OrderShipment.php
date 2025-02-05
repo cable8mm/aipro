@@ -160,7 +160,6 @@ class OrderShipment implements Arrayable
                 }
                 $this->data->put('amount', $this->data->get('amount') * $quantity);
                 $this->data->put('totalAmount', $this->data->get('totalAmount') * $quantity);
-                $this->data->put('amount', $this->data->get('amount') * $quantity);
                 $this->data->put('masterGoodsCd', $code);
 
                 $this->containers[] = $this->data->toArray();
