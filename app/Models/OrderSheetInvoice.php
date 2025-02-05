@@ -56,6 +56,11 @@ class OrderSheetInvoice extends Model
         return $this->hasMany(OrderShipment::class);
     }
 
+    public function mismatchedOrderShipments(): HasMany
+    {
+        return $this->hasMany(MismatchedOrderShipment::class);
+    }
+
     public function goods(): HasManyThrough
     {
         return $this->hasManyThrough(
