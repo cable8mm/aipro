@@ -12,18 +12,20 @@ class MismatchedOrderShipment extends Model
 {
     use Actionable, HasFactory;
 
+    protected $guarded = [];
+
     protected $with = ['author', 'orderSheetInvoice'];
 
     protected function casts(): array
     {
         return [
-            'orderNo' => 'string',
+            'order_no' => 'string',
             'site' => 'string',
-            'masterGoodsCd' => 'string',
-            'goodsNm' => 'string',
+            'master_goods_cd' => 'string',
+            'goods_nm' => 'string',
             'option' => 'string',
             'status' => 'string',
-            'json' => 'array',
+            'json' => 'object',
         ];
     }
 
