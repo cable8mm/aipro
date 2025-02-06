@@ -13,6 +13,7 @@
         "cable8mm/enum-getter": "^1.0",
         "cable8mm/good-code": "^2.0",
         "cable8mm/laravel-validation-kisa-rules": "^1.0",
+        "carlos-meneses/laravel-mpdf": "^2.1",
         "dedoc/scramble": "^0.11.33",
         "laracraft-tech/laravel-useful-additions": "^4.0",
         "laravel-lang/common": "^6.4",
@@ -118,7 +119,8 @@
         "outl1ne/nova-input-filter": "Provides Laravel Nova filter for matching the exactly value with text input element.",
         "outl1ne/nova-multiselect-filter": "Provides Laravel Nova filter for Multiselect field.",
         "outl1ne/nova-sortable": "Provides a sort order function into OptionGoodOptions object",
-        "picqer/php-barcode-generator": "Required to generate a barcode"
+        "picqer/php-barcode-generator": "Required to generate a barcode",
+        "carlos-meneses/laravel-mpdf": "Required to generate PDF files for invoices and barcodes"
     },
     "config": {
         "optimize-autoloader": true,
