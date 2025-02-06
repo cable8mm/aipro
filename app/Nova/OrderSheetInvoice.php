@@ -6,6 +6,7 @@ use App\Enums\OrderSheetInvoiceStatus;
 use App\Nova\Actions\ChangeStatusAction;
 use App\Nova\Actions\ImportOrdersFromOrderSheetInvoiceAction;
 use App\Nova\Actions\OrderShipmentInvoiceResetAction;
+use App\Nova\Actions\PrintOrderSheetInvoice;
 use App\Traits\NovaAuthorizedByWarehouser;
 use Illuminate\Support\Number as SupportNumber;
 use Illuminate\Validation\Rules\File as RulesFile;
@@ -181,6 +182,7 @@ class OrderSheetInvoice extends Resource
             (new ImportOrdersFromOrderSheetInvoiceAction)->showInline(),
             (new ChangeStatusAction(OrderSheetInvoiceStatus::CANCEL))->showInline(),
             (new OrderShipmentInvoiceResetAction)->showInline(),
+            (new PrintOrderSheetInvoice)->showInline(),
         ];
     }
 

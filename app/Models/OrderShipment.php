@@ -80,6 +80,11 @@ class OrderShipment extends Model
         return $this->belongsTo(OrderSheetInvoice::class);
     }
 
+    public function orderShipments(): HasMany
+    {
+        return $this->hasMany(OrderShipment::class, 'orderNo', 'orderNo');
+    }
+
     public function good(): BelongsTo
     {
         return $this->belongsTo(Good::class, 'masterGoodsCd', 'master_code');
