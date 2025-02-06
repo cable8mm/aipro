@@ -22,7 +22,7 @@ class PrintOrderSheetInvoice extends Action
     public function handle(ActionFields $fields, Collection $models)
     {
         foreach ($models as $model) {
-            return ActionResponse::openInNewTab('/api/print/order-shipment/'.$model->id);
+            return ActionResponse::openInNewTab('/api/print/order-sheet-invoice/'.$model->id);
         }
     }
 
