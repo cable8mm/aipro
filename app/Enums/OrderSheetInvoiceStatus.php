@@ -12,6 +12,7 @@ enum OrderSheetInvoiceStatus: string
     case FILE_ON_SUCCESS = 'file on success';
     case RUNNING = 'running';
     case SUCCESS = 'success';
+    case CANCEL = 'cancel';
     case ERROR = 'error';
 
     public function value(): string
@@ -21,6 +22,7 @@ enum OrderSheetInvoiceStatus: string
             self::FILE_ON_SUCCESS => '정상확인완료',
             self::RUNNING => '작업중',
             self::SUCCESS => '주문서입력완료',
+            self::CANCEL => '취소',
             self::ERROR => '에러',
         };
     }

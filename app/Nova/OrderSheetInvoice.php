@@ -3,7 +3,10 @@
 namespace App\Nova;
 
 use App\Enums\OrderSheetInvoiceStatus;
+use App\Nova\Actions\ChangeStatusAction;
 use App\Nova\Actions\ImportOrdersFromOrderSheetInvoiceAction;
+use App\Nova\Actions\OrderShipmentInvoiceResetAction;
+use App\Nova\Actions\PrintOrderSheetInvoice;
 use App\Traits\NovaAuthorizedByWarehouser;
 use Illuminate\Support\Number as SupportNumber;
 use Illuminate\Validation\Rules\File as RulesFile;
@@ -87,7 +90,7 @@ class OrderSheetInvoice extends Resource
                 ->updateRules([
                     RulesFile::types(['pdf'])->max(48 * 1024),
                 ])
-                ->help('운송장 파일을 업로드합니다. (pdf)')
+                ->help(__('Upload Invoice file (pdf)'))
                 ->disk('local')
                 ->path('invoices')
                 ->disk('test')
@@ -177,6 +180,9 @@ class OrderSheetInvoice extends Resource
     {
         return [
             (new ImportOrdersFromOrderSheetInvoiceAction)->showInline(),
+            (new ChangeStatusAction(OrderSheetInvoiceStatus::CANCEL))->showInline(),
+            (new OrderShipmentInvoiceResetAction)->showInline(),
+            (new PrintOrderSheetInvoice)->showInline(),
         ];
     }
 

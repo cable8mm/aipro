@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class OrderSheetInvoice extends Model
 {
@@ -56,6 +58,11 @@ class OrderSheetInvoice extends Model
         return $this->hasMany(OrderShipment::class);
     }
 
+    public function mismatchedOrderShipments(): HasMany
+    {
+        return $this->hasMany(MismatchedOrderShipment::class);
+    }
+
     public function goods(): HasManyThrough
     {
         return $this->hasManyThrough(
@@ -66,5 +73,29 @@ class OrderSheetInvoice extends Model
             'id',
             'masterGoodsCd'
         );
+    }
+
+    /**
+     * Get the orders with siteOrderNo and order_good_count
+     *
+     * The return values can save them to `Order` model
+     *
+     * @return array<int,string> The method returns a collection with siteOrderNo and order_good_count
+     *
+     * @example $orderSheetInvoice->ordersWithSiteOrderNo() => [["id"=>193572321, "order_good_count"=>3], ["id"=>202010058612779, "order_good_count"=>1], ...]
+     */
+    public function ordersWithSiteOrderNo(): array
+    {
+        return $this->orderShipments()
+            ->select(
+                DB::raw('orderNo as id'),
+                DB::raw('count(*) as order_good_count'),
+                DB::raw('GROUP_CONCAT(DISTINCT `invoiceNo`) as invoice_numbers'),
+                'order_sheet_invoice_id'
+            )
+            ->groupBy('orderNo', 'order_sheet_invoice_id')
+            ->get()
+            ->select(['id', 'order_good_count', 'invoice_numbers', 'order_sheet_invoice_id'])
+            ->toArray();
     }
 }

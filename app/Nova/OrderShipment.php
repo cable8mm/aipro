@@ -62,10 +62,10 @@ class OrderShipment extends Resource
                 ->hideFromIndex(),
             BelongsTo::make(__('Order Sheet Invoice'), 'orderSheetInvoice', OrderSheetInvoice::class),
             BelongsTo::make(__('Good'), 'good', Good::class),
+            BelongsTo::make(__('Order Number'), 'order', Order::class),
             Panel::make(__('Additional Information'), [
                 Text::make(__('Master Code'), 'masterGoodsCd')->copyable(),
                 Text::make(__('Seller Good Code'), 'sellerGoodsCd')->copyable(),
-                Text::make(__('Order No'), 'orderNo')->maxlength(255)->copyable(),
                 Select::make(__('Site'), 'site')->options(Site::array())->displayUsingLabels(),
                 Text::make(__('Regist Date'), 'registDate')->maxlength(255)
                     ->hideFromIndex(),
@@ -128,8 +128,7 @@ class OrderShipment extends Resource
                 Text::make(__('Delivery Memo'), 'deliveryMemo'),
                 Text::make(__('Invoice Company'), 'invoiceCompany')->maxlength(255)
                     ->hideFromIndex(),
-                Text::make(__('Invoice No'), 'invoiceNo')->maxlength(255)
-                    ->hideFromIndex(),
+                Text::make(__('Invoice No'), 'invoiceNo')->maxlength(255),
                 Text::make(__('Invoice File Path'), 'invoiceFilePath')->maxlength(255)
                     ->hideFromIndex(),
                 Number::make(__('Invoice File age'), 'invoiceFilePage')

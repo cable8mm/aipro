@@ -11,4 +11,13 @@ enum BarcodeCommandType: string
     case ORDER = '0';
     case GOOD = '8';
     case COMMAND = '9';
+
+    public static function type(int $first): BarcodeCommandType
+    {
+        return match ($first) {
+            self::ORDER => self::ORDER,
+            self::COMMAND => self::COMMAND,
+            default => self::GOOD,
+        };
+    }
 }
