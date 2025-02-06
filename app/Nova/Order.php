@@ -5,12 +5,11 @@ namespace App\Nova;
 use App\Enums\OrderType;
 use App\Traits\NovaAuthorizedByWarehouser;
 use Laravel\Nova\Fields\BelongsTo;
-use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\DateTime;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\MultiSelect;
 use Laravel\Nova\Fields\Number;
-use Laravel\Nova\Fields\Stack;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Order extends Resource
@@ -59,11 +58,10 @@ class Order extends Resource
             Number::make(__('Printed Count'), 'printed_count')->displayUsing(function ($value) {
                 return number_format($value);
             })->exceptOnForms(),
-            Boolean::make(__('Is All Good Matched'), 'is_all_good_matched')->filterable(),
-            Stack::make(__('Created At').' & '.__('Updated At'), [
-                DateTime::make(__('Created At'), 'created_at'),
-                DateTime::make(__('Updated At'), 'updated_at'),
-            ]),
+            DateTime::make(__('Created At'), 'created_at'),
+            DateTime::make(__('Updated At'), 'updated_at'),
+
+            HasMany::make(__('Order Shipments'), 'orderShipments', OrderShipment::class),
         ];
     }
 
