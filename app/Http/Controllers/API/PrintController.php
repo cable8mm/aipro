@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\OrderSheetInvoice;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf;
+use OutOfRangeException;
 
 class PrintController extends Controller
 {
@@ -31,16 +32,15 @@ class PrintController extends Controller
         $pdf = LaravelMpdf::loadHTML($layout);
 
         foreach ($orderSheetInvoice->orders as $order) {
-
             if (! isset($order->latestOrderShipment)) {
-                continue;
+                throw new OutOfRangeException(__('Order #:order_id must have a order shipment.', ['order_id' => $order->id]));
             }
 
-            $html = view('pdf.order_invoice', [
-                'order' => $order,
-            ]);
-
-            $pdf->getMpdf()->WriteHTML($html);
+            $pdf->getMpdf()->WriteHTML(
+                view('pdf.order_invoice', [
+                    'order' => $order,
+                ])
+            );
 
             if ($order !== $orderSheetInvoice->orders->last()) {
                 $pdf->getMpdf()->WriteHTML('<pagebreak />');
