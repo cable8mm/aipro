@@ -26,7 +26,6 @@ class OrderSheetInvoice extends Model
             'row_count' => 'integer',
             'order_count' => 'integer',
             'order_good_count' => 'integer',
-            'mismatched_order_good_count' => 'integer',
             'order_sheet_file' => 'string',
             'order_sheet_file_name' => 'string',
             'order_sheet_file_size' => 'integer',

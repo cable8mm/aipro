@@ -18,7 +18,6 @@ return new class extends Migration
             $table->unsignedBigInteger('row_count')->nullable()->comment('주문 행수');
             $table->unsignedBigInteger('order_count')->nullable()->comment('주문수');
             $table->unsignedBigInteger('order_good_count')->nullable()->comment('주문 상품수');
-            $table->unsignedBigInteger('mismatched_order_good_count')->nullable()->comment('미매칭 상품수');
             $table->string('order_sheet_file', 255)->comment('주문서파일');
             $table->string('order_sheet_file_name')->comment('주문서파일 이름');
             $table->unsignedBigInteger('order_sheet_file_size')->comment('주문서파일 사이즈');
