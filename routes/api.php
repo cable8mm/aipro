@@ -13,3 +13,4 @@ Route::get('/generate-barcode/{barcodeNumber}', GenerateBarcodeController::class
 
 Route::get('/print/order-sheet-invoice/{orderSheetInvoice}', [PrintController::class, 'orderSheetInvoice']);
 Route::get('/print/order-shipment/{orderShipment}', [PrintController::class, 'orderShipment']);
+Route::get('/print/order/{order}', [PrintController::class, 'order']);

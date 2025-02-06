@@ -295,6 +295,7 @@
     "Invoice Filepath": "운송장 파일경로",
     "Invoice Goods Cd": "송장상품코드",
     "Invoice No": "송장번호",
+    "Invoice Numbers": "송장번호(들)",
     "Is Active": "운영중",
     "Is All Good Matched": "모든 상품 매칭 여부",
     "Is Applied Order Discount Percent": "발주 할인 적용",

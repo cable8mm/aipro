@@ -86,12 +86,16 @@ class OrderSheetInvoice extends Model
      */
     public function ordersWithSiteOrderNo(): array
     {
-        // OrderSheetInvoice::find(10)->orderShipments()->select(DB::raw('siteOrderNo as id'), DB::raw('count(*) as order_good_count'), 'order_sheet_invoice_id')->groupBy('order_sheet_invoice_id', 'siteOrderNo')->get()->select(['id', 'order_sheet_invoice_id', 'order_good_count'])->toArray();
         return $this->orderShipments()
-            ->select(DB::raw('orderNo as id'), DB::raw('count(*) as order_good_count'), 'order_sheet_invoice_id')
+            ->select(
+                DB::raw('orderNo as id'),
+                DB::raw('count(*) as order_good_count'),
+                DB::raw('GROUP_CONCAT(DISTINCT `invoiceNo`) as invoice_numbers'),
+                'order_sheet_invoice_id'
+            )
             ->groupBy('orderNo', 'order_sheet_invoice_id')
             ->get()
-            ->select(['id', 'order_good_count', 'order_sheet_invoice_id'])
+            ->select(['id', 'order_good_count', 'invoice_numbers', 'order_sheet_invoice_id'])
             ->toArray();
     }
 }

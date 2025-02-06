@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Laravel\Nova\Actions\Actionable;
 
 class Order extends Model
@@ -31,5 +32,10 @@ class Order extends Model
     public function orderShipments(): HasMany
     {
         return $this->hasMany(OrderShipment::class, 'orderNo', 'id');
+    }
+
+    public function latestOrderShipment(): HasOne
+    {
+        return $this->hasOne(OrderShipment::class, 'orderNo', 'id')->latestOfMany();
     }
 }

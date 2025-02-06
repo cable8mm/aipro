@@ -3,6 +3,7 @@
 namespace App\Nova;
 
 use App\Enums\OrderType;
+use App\Nova\Actions\PrintOrder;
 use App\Traits\NovaAuthorizedByWarehouser;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\DateTime;
@@ -10,6 +11,7 @@ use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\MultiSelect;
 use Laravel\Nova\Fields\Number;
+use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Order extends Resource
@@ -58,6 +60,7 @@ class Order extends Resource
             Number::make(__('Printed Count'), 'printed_count')->displayUsing(function ($value) {
                 return number_format($value);
             })->exceptOnForms(),
+            Text::make(__('Invoice Numbers'), 'invoice_numbers'),
             DateTime::make(__('Created At'), 'created_at'),
             DateTime::make(__('Updated At'), 'updated_at'),
 
@@ -102,7 +105,9 @@ class Order extends Resource
      */
     public function actions(NovaRequest $request)
     {
-        return [];
+        return [
+            (new PrintOrder)->showInline(),
+        ];
     }
 
     public static function label()
