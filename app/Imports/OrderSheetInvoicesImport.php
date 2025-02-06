@@ -14,6 +14,8 @@ class OrderSheetInvoicesImport implements SkipsEmptyRows, ToCollection, WithStar
 {
     private OrderSheetInvoice $orderSheetInvoice;
 
+    private int $numberOfLines = 0;
+
     public function __construct(OrderSheetInvoice $orderSheetInvoice)
     {
         $this->orderSheetInvoice = $orderSheetInvoice;
@@ -42,11 +44,18 @@ class OrderSheetInvoicesImport implements SkipsEmptyRows, ToCollection, WithStar
                     $optionShipment
                 );
             }
+
+            $this->numberOfLines++;
         }
     }
 
     public function startRow(): int
     {
         return 2;
+    }
+
+    public function getNumberOfLines(): int
+    {
+        return $this->numberOfLines;
     }
 }

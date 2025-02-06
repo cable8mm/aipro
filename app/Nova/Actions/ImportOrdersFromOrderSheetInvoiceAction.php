@@ -38,23 +38,24 @@ class ImportOrdersFromOrderSheetInvoiceAction extends Action
                     ? \Maatwebsite\Excel\Excel::XLSX
                     : \Maatwebsite\Excel\Excel::XLS;
 
+                $orderSheetInvoicesImport = new OrderSheetInvoicesImport($model);
+
                 Excel::import(
-                    new OrderSheetInvoicesImport($model),
+                    $orderSheetInvoicesImport,
                     $model->order_sheet_file,
                     'local',
                     $importFormat
                 );
 
-                $model->row_count = $model->orderShipments()->count();
-                $model->order_count = $model->orderShipments()->distinct()->count('orderNo');
-                $model->order_good_count = $model->orderShipments()->count();   // only as good master codes
-                $model->mismatched_order_good_count = $model->order_good_count - $model->goods()->count();
-                $model->status = OrderSheetInvoiceStatus::SUCCESS->name;
-                $model->save();
-
                 Order::insert(
                     $model->ordersWithSiteOrderNo()
                 );
+
+                $model->row_count = $orderSheetInvoicesImport->getNumberOfLines();
+                $model->order_count = $model->orderShipments()->distinct()->count('orderNo');
+                $model->order_good_count = $model->orderShipments()->count();   // only as good master codes
+                $model->status = OrderSheetInvoiceStatus::SUCCESS->name;
+                $model->save();
             } catch (OptionGoodInvalidArgumentException $e) {
                 $e->save();
 
