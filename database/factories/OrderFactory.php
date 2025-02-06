@@ -23,7 +23,6 @@ class OrderFactory extends Factory
             'type' => fake()->randomElements(OrderType::names(), fake()->randomNumber(2) % count(OrderType::cases())),
             'order_good_count' => fake()->numberBetween(1, 99),
             'printed_count' => fake()->numberBetween(0, 9),
-            'is_all_good_matched' => fake()->boolean(),
         ];
     }
 }

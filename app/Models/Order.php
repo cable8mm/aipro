@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Laravel\Nova\Actions\Actionable;
 
 class Order extends Model
@@ -19,12 +20,16 @@ class Order extends Model
             'type' => 'array',
             'order_good_count' => 'integer',
             'printed_count' => 'integer',
-            'is_all_good_matched' => 'boolean',
         ];
     }
 
     public function orderSheetInvoice(): BelongsTo
     {
         return $this->belongsTo(OrderSheetInvoice::class);
+    }
+
+    public function orderShipments(): HasMany
+    {
+        return $this->hasMany(OrderShipment::class, 'orderNo', 'id');
     }
 }
