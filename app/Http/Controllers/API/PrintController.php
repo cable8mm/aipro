@@ -42,7 +42,9 @@ class PrintController extends Controller
 
             $pdf->getMpdf()->WriteHTML($html);
 
-            $pdf->getMpdf()->WriteHTML('<pagebreak />');
+            if ($order !== $orderSheetInvoice->orders->last()) {
+                $pdf->getMpdf()->WriteHTML('<pagebreak />');
+            }
         }
 
         return $pdf->stream('document.pdf');
