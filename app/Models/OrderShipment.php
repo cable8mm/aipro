@@ -94,4 +94,9 @@ class OrderShipment extends Model
     {
         return $this->hasMany(SetGood::class);
     }
+
+    public function order(): BelongsTo
+    {
+        return $this->belongsTo(Order::class, 'orderNo', 'id');
+    }
 }
