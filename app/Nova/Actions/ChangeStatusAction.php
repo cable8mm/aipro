@@ -52,6 +52,6 @@ class ChangeStatusAction extends DestructiveAction
 
     public function name()
     {
-        return __('Change Status Action').' - '.$this->status->value();
+        return __('Change Status Action - :status', ['status' => $this->status->value()]);
     }
 }
