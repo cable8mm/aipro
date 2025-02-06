@@ -90,7 +90,7 @@ class OrderSheetInvoice extends Resource
                 ->updateRules([
                     RulesFile::types(['pdf'])->max(48 * 1024),
                 ])
-                ->help('운송장 파일을 업로드합니다. (pdf)')
+                ->help(__('Upload Invoice file (pdf)'))
                 ->disk('local')
                 ->path('invoices')
                 ->disk('test')
