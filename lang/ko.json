@@ -452,6 +452,7 @@
     "OptionGood not found for :key => :option": "옵션상품의 마스터코드 :key, 이름 :option 에 해당하는 옵션이 없습니다.",
     "OptionGood Playauto Master Code": "옵션상품 P코드",
     "Order": "주문",
+    "Order #:order_id must have a order shipment.": "#:order_id 주문은 적어도 하나의 주문서/출고가 있어야 합니다.",
     "Order Cell Phone": "주문 휴대폰",
     "Order Count": "주문수",
     "Order Date": "주문 일",

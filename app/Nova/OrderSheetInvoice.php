@@ -63,10 +63,6 @@ class OrderSheetInvoice extends Resource
                 return ! is_null($value) ? number_format($value) : null;
             })->exceptOnForms(),
 
-            Number::make(__('Mismatched Order Good Count'), 'mismatched_order_good_count')->nullable()->displayUsing(function ($value) {
-                return ! is_null($value) ? number_format($value) : null;
-            })->exceptOnForms(),
-
             File::make(__('Order Sheet File'), 'order_sheet_file')->required()
                 ->creationRules([
                     'required',

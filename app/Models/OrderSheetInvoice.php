@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -25,7 +26,6 @@ class OrderSheetInvoice extends Model
             'row_count' => 'integer',
             'order_count' => 'integer',
             'order_good_count' => 'integer',
-            'mismatched_order_good_count' => 'integer',
             'order_sheet_file' => 'string',
             'order_sheet_file_name' => 'string',
             'order_sheet_file_size' => 'integer',
@@ -51,6 +51,11 @@ class OrderSheetInvoice extends Model
     public function orders(): HasMany
     {
         return $this->hasMany(Order::class);
+    }
+
+    public function latestOrder(): HasOne
+    {
+        return $this->hasOne(Order::class)->latestOfMany();
     }
 
     public function orderShipments(): HasMany

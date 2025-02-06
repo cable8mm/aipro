@@ -34,7 +34,6 @@ class OrderShipmentInvoiceResetAction extends Action
                 'row_count' => null,
                 'order_count' => null,
                 'order_good_count' => null,
-                'mismatched_order_good_count' => null,
             ]);
         }
     }

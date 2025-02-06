@@ -1,3 +1,5 @@
+<html>
+<head>
 <style>
 	body {
 		font-size: 10pt;
@@ -145,7 +147,8 @@
 		text-decoration: underline;
 	}
 </style>
-
+</head>
+<body>
 
 <div class="wrap">
 	<h2>{{ __('Order Sheet') }}</h2>
@@ -302,3 +305,5 @@
 		</div>
 	</div>
 </div>
+</body>
+</html>

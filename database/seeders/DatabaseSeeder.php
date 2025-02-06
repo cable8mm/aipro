@@ -38,8 +38,8 @@ class DatabaseSeeder extends Seeder
             OptionGoodSeeder::class,    // This must be over `OptionGoodOptionSeeder::class`
             OptionGoodOptionSeeder::class,
             OrderSheetInvoiceSeeder::class,
-            OrderSeeder::class,
-            //            OrderShipmentSeeder::class,
+            // OrderSeeder::class,
+            // OrderShipmentSeeder::class,
             PickingZoneSeeder::class,
             PlacingOrderGoodSeeder::class,
             PlacingOrderSeeder::class,
