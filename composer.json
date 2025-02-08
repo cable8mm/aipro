@@ -33,6 +33,7 @@
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.14",
         "barryvdh/laravel-ide-helper": "^3.2",
+        "cable8mm/order-sheet": "^1.1",
         "cable8mm/xeed": "^1.5",
         "fakerphp/faker": "^1.23",
         "laravel/breeze": "^2.2",
@@ -120,7 +121,8 @@
         "outl1ne/nova-multiselect-filter": "Provides Laravel Nova filter for Multiselect field.",
         "outl1ne/nova-sortable": "Provides a sort order function into OptionGoodOptions object",
         "picqer/php-barcode-generator": "Required to generate a barcode",
-        "carlos-meneses/laravel-mpdf": "Required to generate PDF files for invoices and barcodes"
+        "carlos-meneses/laravel-mpdf": "Required to generate PDF files for invoices and barcode",
+        "cable8mm/order-sheet": "Provides making `order-sheet` excel files"
     },
     "config": {
         "optimize-autoloader": true,
