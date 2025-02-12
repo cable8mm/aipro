@@ -13,6 +13,7 @@
         "cable8mm/enum-getter": "^1.0",
         "cable8mm/good-code": "^2.0",
         "cable8mm/laravel-validation-kisa-rules": "^1.0",
+        "cable8mm/waybill": "^1.0",
         "carlos-meneses/laravel-mpdf": "^2.1",
         "dedoc/scramble": "^0.11.33",
         "laracraft-tech/laravel-useful-additions": "^4.0",
@@ -33,6 +34,7 @@
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.14",
         "barryvdh/laravel-ide-helper": "^3.2",
+        "cable8mm/order-sheet": "^1.1",
         "cable8mm/xeed": "^1.5",
         "fakerphp/faker": "^1.23",
         "laravel/breeze": "^2.2",
@@ -120,7 +122,9 @@
         "outl1ne/nova-multiselect-filter": "Provides Laravel Nova filter for Multiselect field.",
         "outl1ne/nova-sortable": "Provides a sort order function into OptionGoodOptions object",
         "picqer/php-barcode-generator": "Required to generate a barcode",
-        "carlos-meneses/laravel-mpdf": "Required to generate PDF files for invoices and barcodes"
+        "carlos-meneses/laravel-mpdf": "Required to generate PDF files for invoices and barcode",
+        "cable8mm/order-sheet": "Provides making `order-sheet` excel files",
+        "cable8mm/waybill": "Provides a waybill pdf for making seeders"
     },
     "config": {
         "optimize-autoloader": true,
