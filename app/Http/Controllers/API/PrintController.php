@@ -11,12 +11,14 @@ use OutOfRangeException;
 class PrintController extends Controller
 {
     /**
-     * Print Order Sheet Invoice
+     * /print/order-sheet-invoice/{id}
+     *
+     * Print the order sheet invoice
      *
      * @param  \App\Models\OrderSheetInvoice  $orderSheetInvoice  The Order Sheet Invoice instance to print
      * @return \Illuminate\Http\Response The method returns the response object with printing
      */
-    public function orderSheetInvoice(OrderSheetInvoice $orderSheetInvoice)
+    public function orderSheetInvoice(OrderSheetInvoice $orderSheetInvoice): \Illuminate\Http\Response
     {
         $layout = '
         <htmlpageheader name="myHTMLHeaderOdd" style="display:none">
@@ -50,7 +52,12 @@ class PrintController extends Controller
         return $pdf->stream('document.pdf');
     }
 
-    public function order(Order $order)
+    /**
+     * /print/order/{id}
+     *
+     * Print the order
+     */
+    public function order(Order $order): \Symfony\Component\HttpFoundation\Response
     {
         $pdf = LaravelMpdf::loadView('pdf.order_invoice', [
             'order' => $order,
