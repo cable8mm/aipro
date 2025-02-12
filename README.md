@@ -1,7 +1,7 @@
 # AI Pro - Smart WMS Solution
 
-[![build & tests](https://github.com/cable8mm/aipro/actions/workflows/tests.yml/badge.svg)](https://github.com/cable8mm/aipro/actions/workflows/tests.yml)
-[![coding style](https://github.com/cable8mm/aipro/actions/workflows/coding-style-php.yml/badge.svg)](https://github.com/cable8mm/aipro/actions/workflows/coding-style-php.yml)
+[![build & tests](https://github.com/cable8mm/aipro/actions/workflows/run-tests.yml/badge.svg)](https://github.com/cable8mm/aipro/actions/workflows/run-tests.yml)
+[![coding style](https://github.com/cable8mm/aipro/actions/workflows/code-style.yml/badge.svg)](https://github.com/cable8mm/aipro/actions/workflows/code-style.yml)
 [![minimum PHP version](https://img.shields.io/badge/php-%5E8.3-8892BF?logo=php)](https://github.com/cable8mm/aipro)
 ![Laravel 11.x](https://img.shields.io/badge/Laravel-%5E11.0-FF2D20?logo=Laravel&logoColor=FF2D20&labelColor=white)
 ![Laravel Nova 4.x](https://img.shields.io/badge/Nova-%5E4.0-00E2FE?logo=Laravel%20nova&logoColor=00E2FE&color=00E2FE)
