@@ -13,6 +13,7 @@
         "cable8mm/enum-getter": "^1.0",
         "cable8mm/good-code": "^2.0",
         "cable8mm/laravel-validation-kisa-rules": "^1.0",
+        "cable8mm/waybill": "^1.0",
         "carlos-meneses/laravel-mpdf": "^2.1",
         "dedoc/scramble": "^0.11.33",
         "laracraft-tech/laravel-useful-additions": "^4.0",
@@ -122,7 +123,8 @@
         "outl1ne/nova-sortable": "Provides a sort order function into OptionGoodOptions object",
         "picqer/php-barcode-generator": "Required to generate a barcode",
         "carlos-meneses/laravel-mpdf": "Required to generate PDF files for invoices and barcode",
-        "cable8mm/order-sheet": "Provides making `order-sheet` excel files"
+        "cable8mm/order-sheet": "Provides making `order-sheet` excel files",
+        "cable8mm/waybill": "Provides a waybill pdf for making seeders"
     },
     "config": {
         "optimize-autoloader": true,
