@@ -132,6 +132,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 ])->icon('cog')->collapsable(),
 
                 MenuSection::make(__('Helpful Links'), [
+                    MenuItem::externalLink(__('API'), 'https://aipro.test/docs/api')->openInNewTab(),
                     MenuItem::externalLink(__('GitHub'), 'https://github.com/cable8mm/aipro')->openInNewTab(),
                 ])->icon('external-link')->collapsable(),
             ];
