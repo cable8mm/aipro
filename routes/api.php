@@ -19,7 +19,9 @@ Route::get('/print/order/{order}', [PrintController::class, 'order']);
 
 Route::get('/good', [GoodController::class, 'index']);
 Route::get('/good/{good}', [GoodController::class, 'show']);
-Route::get('/good/{masterCode}', [GoodController::class, 'showByMasterCode']);
-Route::get('/good/{barcode}', [GoodController::class, 'showByBarcode']);
+Route::get('/good/master-code/{masterCode}', [GoodController::class, 'showByMasterCode']);
+Route::get('/good/barcode/{barcode}', [GoodController::class, 'showByBarcode']);
+Route::post('/good/{good}/balance', [GoodController::class, 'balance']);
+Route::post('/good/{good}/balance-by-barcode', [GoodController::class, 'balanceByBarcode']);
 
 Route::get('/box/{code}', [BoxController::class, 'showByCode']);

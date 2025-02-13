@@ -717,6 +717,7 @@
     "Temporary Redirect": "임시 리디렉션",
     "Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn't receive the email, we will gladly send you another.": "가입해 주셔서 감사합니다! 시작하시기 전에 방금 이메일로 보낸 링크를 클릭하여 이메일 주소를 확인해 주시겠습니까? 이메일을 받지 못한 경우 새 이메일을 보내 드리겠습니다.",
     "The ct_order has been saved.": "발주서가 저장되었습니다.",
+    "The given barcode was invalid.": "제공된 바코드가 유효하지 않습니다.",
     "The given data was invalid.": "제공된 데이터가 유효하지 않습니다.",
     "The option must match this field, so please enter the exact name.": "옵션은 이 필드와 일치해야 하므로 정확한 이름을 입력하세요.",
     "The response is not a streamed response.": "응답이 스트리밍 응답이 아닙니다.",

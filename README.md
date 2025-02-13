@@ -8,9 +8,11 @@
 
 에이아이프로는 물류센터를 보유한 회사가 WMS(창고관리시스템)와 상품 정보를 최신 상태로 유지하며, 이를 벤더와 소비자에게 효과적으로 제공할 수 있도록 설계된 솔루션입니다. AI 기술과 모바일 도구를 활용하여 운영의 편의성을 높이고, 비용 효율적인 서비스를 제공합니다.
 
-![Main Screen](docs/images/aipro_screen_main.png)
+![Main Screen](docs/images/aipro_screen_main.png)*Main page*
 
-![Goods Screen](docs/images/aipro_screen_goods.png)
+![Goods Screen](docs/images/aipro_screen_goods.png)*Goods List*
+
+![API document](docs/images/aipro_screen_apidoc.png)*API Documents*
 
 ## Installation
 
@@ -78,6 +80,10 @@ brew services start mailpit
 Visit to <http://localhost:8025>
 
 ## Maintenance
+
+### API Testing
+
+You would visit <https://aipro.test/docs/api> when you wanna test your apis
 
 ### Add languages
 

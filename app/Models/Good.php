@@ -156,4 +156,9 @@ class Good extends Model
     {
         return $query->where('is_shutdown', false);
     }
+
+    public function inventory(int $amount): bool
+    {
+        return $this->update(['inventory' => $this->inventory + $amount]);
+    }
 }
