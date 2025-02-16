@@ -23,8 +23,8 @@ class BoxInventoryHistoryFactory extends Factory
             'box_id' => fake()->randomNumber(1) + 1,
             'type' => fake()->randomElement(InventoryHistory::names()),
             'quantity' => (fake()->boolean() ? 1 : -1) * fake()->randomNumber(1),
-            'model' => fake()->randomElement(InventoryHistoryModel::names()),
-            'attribute' => fake()->randomNumber(3),
+            'model' => fake()->randomElement(InventoryHistoryModel::values()),
+            'attribute' => fake()->randomNumber(1) + 1,
             'is_success' => fake()->boolean(),
         ];
     }

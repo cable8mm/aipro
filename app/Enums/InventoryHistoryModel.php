@@ -2,6 +2,10 @@
 
 namespace App\Enums;
 
+use App\Models\GoodManualWarehousing;
+use App\Models\Order;
+use App\Models\OrderShipment;
+use App\Models\PlacingOrderGood;
 use Cable8mm\EnumGetter\EnumGetter;
 
 enum InventoryHistoryModel: string
@@ -10,18 +14,16 @@ enum InventoryHistoryModel: string
 
     case GOOD_MANUAL_WAREHOUSING = 'GoodManualWarehousing';
     case ORDER = 'Order';
-    case ORDER_GOOD = 'OrderGood';
     case PLACING_ORDER_GOOD = 'PlacingOrderGood';
     case ORDER_SHIPMENT = 'OrderShipment';
 
     public function value(): string
     {
         return match ($this) {
-            self::GOOD_MANUAL_WAREHOUSING => __('Good Manual Warehousing'),
-            self::ORDER => __('Order'),
-            self::ORDER_GOOD => __('Order Good'),
-            self::PLACING_ORDER_GOOD => __('Placing Order Good'),
-            self::ORDER_SHIPMENT => __('Order Shipment'),
+            self::GOOD_MANUAL_WAREHOUSING => GoodManualWarehousing::class,
+            self::ORDER => Order::class,
+            self::PLACING_ORDER_GOOD => PlacingOrderGood::class,
+            self::ORDER_SHIPMENT => OrderShipment::class,
         };
     }
 }

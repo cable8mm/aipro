@@ -26,13 +26,16 @@ class OrderSheetInvoicesImport implements SkipsEmptyRows, ToCollection, WithStar
      */
     public function collection(Collection $rows)
     {
+        $invoiceFilePage = 1;
+
         /**
          * @var \Illuminate\Support\Collection $row
          */
         foreach ($rows as $row) {
             $optionShipments = ArrayObjectsOrderShipment::of(
                 $row,
-                id: $this->orderSheetInvoice->id
+                id: $this->orderSheetInvoice->id,
+                invoiceFilePage: $invoiceFilePage++
             )->toArray();
 
             /**

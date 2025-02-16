@@ -13,7 +13,7 @@
             <div class="text-center">
                 <div class="text-2xl font-bold p-4">{{ $box->name }}</div>
                 <div>
-                    <img class="mx-auto" src="/api/generate-barcode/{{ \App\Support\GtinGenerator::ofBox($box->id) }}">
+                    <img class="mx-auto" src="/api/generate-barcode/{{ \App\Support\Gtin::ofBox($box->id) }}">
                 </div>
             </div>
             @endforeach

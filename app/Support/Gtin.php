@@ -5,7 +5,7 @@ namespace App\Support;
 /**
  * Gtin barcode number generator class
  */
-class GtinGenerator
+class Gtin
 {
     /**
      * GTIN barcode number length
@@ -74,6 +74,11 @@ class GtinGenerator
         }
 
         return substr(10 - (substr($iCalculation, -1)), -1);
+    }
+
+    public static function of(): static
+    {
+        return new static;
     }
 
     /**

@@ -126,13 +126,11 @@ class OrderShipment extends Resource
                 Text::make(__('Address'), 'address')->maxlength(255)
                     ->hideFromIndex(),
                 Text::make(__('Delivery Memo'), 'deliveryMemo'),
-                Text::make(__('Invoice Company'), 'invoiceCompany')->maxlength(255)
-                    ->hideFromIndex(),
+                Text::make(__('Invoice Company'), 'invoiceCompany')->maxlength(255),
                 Text::make(__('Invoice No'), 'invoiceNo')->maxlength(255),
                 Text::make(__('Invoice File Path'), 'invoiceFilePath')->maxlength(255)
                     ->hideFromIndex(),
-                Number::make(__('Invoice File age'), 'invoiceFilePage')
-                    ->hideFromIndex(),
+                Number::make(__('Invoice File Page'), 'invoiceFilePage'),
                 Text::make(__('Invoice Goods Cd'), 'invoiceGoodsCd')->maxlength(255)
                     ->hideFromIndex(),
                 Text::make(__('Pay Goods Cd'), 'payGoodsCd')->maxlength(190)
