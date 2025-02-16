@@ -13,6 +13,8 @@ class BoxInventoryHistory extends Model
 
     protected $with = ['box'];
 
+    protected $guarded = [];
+
     protected function casts(): array
     {
         return [
@@ -27,7 +29,7 @@ class BoxInventoryHistory extends Model
     protected static function booted(): void
     {
         static::creating(function (BoxInventoryHistory $boxInventoryHistory) {
-            $boxInventoryHistory->author_id = $boxInventoryHistory->author_id ?? Auth::user()->id;
+            $boxInventoryHistory->author_id = $boxInventoryHistory->author_id ?? Auth::user()->id ?? null;
         });
     }
 

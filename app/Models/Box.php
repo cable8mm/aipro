@@ -42,4 +42,35 @@ class Box extends Model
     {
         return $this->hasMany(PlacingOrderBox::class);
     }
+
+    public function boxInventoryHistories(): HasMany
+    {
+        return $this->hasMany(BoxInventoryHistory::class);
+    }
+
+    /**
+     * Update inventory.
+     *
+     * @param  int  $inventory  Box's inventory amount
+     * @param string caller model::class name
+     * @param  int  $attribute  caller's attribute
+     * @return mixed On success Model::$data if its not empty or true, false on failure
+     */
+    public function plusminus(int $inventory, string $model, int $attribute)
+    {
+        $this->inventory += $inventory;
+
+        $this->save();
+
+        $type = $inventory > 0 ? __('Receiving') : __('Shipping');
+
+        return $this->boxInventoryHistories()->create([
+            'box_id' => $this->id,
+            'type' => $type,
+            'quantity' => $inventory,
+            'model' => $model,
+            'attribute' => $attribute,
+            'is_success' => true,
+        ]);
+    }
 }

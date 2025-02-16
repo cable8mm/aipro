@@ -3,7 +3,9 @@
 use App\Http\Controllers\API\BoxController;
 use App\Http\Controllers\API\GenerateBarcodeController;
 use App\Http\Controllers\API\GoodController;
-use App\Http\Controllers\API\PrintController;
+use App\Http\Controllers\API\OrderController;
+use App\Http\Controllers\API\OrderSheetInvoiceController;
+use App\Http\Controllers\API\OrderShipmentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -13,15 +15,21 @@ Route::get('/user', function (Request $request) {
 
 Route::get('/generate-barcode/{barcodeNumber}', GenerateBarcodeController::class);
 
-Route::get('/print/order-sheet-invoice/{orderSheetInvoice}', [PrintController::class, 'orderSheetInvoice']);
-Route::get('/print/order-shipment/{orderShipment}', [PrintController::class, 'orderShipment']);
-Route::get('/print/order/{order}', [PrintController::class, 'order']);
+Route::get('/orders/{order}/print', [OrderController::class, 'print']);
+Route::put('/orders/{order}', [OrderController::class, 'update']);
+Route::get('/orders/{order}/waybill', [OrderController::class, 'waybill']);
 
-Route::get('/good', [GoodController::class, 'index']);
-Route::get('/good/{good}', [GoodController::class, 'show']);
-Route::get('/good/master-code/{masterCode}', [GoodController::class, 'showByMasterCode']);
-Route::get('/good/barcode/{barcode}', [GoodController::class, 'showByBarcode']);
-Route::post('/good/{good}/balance', [GoodController::class, 'balance']);
-Route::post('/good/{good}/balance-by-barcode', [GoodController::class, 'balanceByBarcode']);
+Route::get('/order-sheet-invoices/{orderSheetInvoice}/print', [OrderSheetInvoiceController::class, 'print']);
+
+Route::get('/goods', [GoodController::class, 'index']);
+Route::get('/goods/{good}', [GoodController::class, 'show']);
+Route::get('/goods/master-code/{masterCode}', [GoodController::class, 'showByMasterCode']);
+Route::get('/goods/barcode/{barcode}', [GoodController::class, 'showByBarcode']);
+Route::post('/goods/{good}/balance', [GoodController::class, 'balance']);
+Route::post('/goods/{good}/balance-by-barcode', [GoodController::class, 'balanceByBarcode']);
+
+Route::get('/order-shipments/order/{id}', [OrderShipmentController::class, 'order']);
+Route::get('/order-shipments/pause', [OrderShipmentController::class, 'pause']);
+Route::get('/order-shipments/clear-order/{orderNo}/order-no', [OrderShipmentController::class, 'clearOrder']);
 
 Route::get('/box/{code}', [BoxController::class, 'showByCode']);
