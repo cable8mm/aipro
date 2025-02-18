@@ -8,6 +8,7 @@ use App\Traits\NovaAuthorizedByWarehouser;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\HasMany;
+use Laravel\Nova\Fields\HasManyThrough;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\MultiSelect;
 use Laravel\Nova\Fields\Number;
@@ -57,14 +58,18 @@ class Order extends Resource
             Number::make(__('Order Good Count'), 'order_good_count')->displayUsing(function ($value) {
                 return number_format($value);
             })->exceptOnForms(),
+            BelongsTo::make(__('Box'), 'box', Box::class),
+            Number::make(__('Box Quantity'), 'box_quantity'),
             Number::make(__('Printed Count'), 'printed_count')->displayUsing(function ($value) {
                 return number_format($value);
             })->exceptOnForms(),
             Text::make(__('Invoice Numbers'), 'invoice_numbers'),
-            DateTime::make(__('Created At'), 'created_at'),
-            DateTime::make(__('Updated At'), 'updated_at'),
+            DateTime::make(__('Created At'), 'created_at')->exceptOnForms(),
+            DateTime::make(__('Updated At'), 'updated_at')->exceptOnForms(),
 
             HasMany::make(__('Order Shipments'), 'orderShipments', OrderShipment::class),
+
+            HasManyThrough::make(__('Goods'), 'goods', Good::class),
         ];
     }
 

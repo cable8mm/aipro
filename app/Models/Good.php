@@ -97,6 +97,16 @@ class Good extends Model
         });
     }
 
+    public function scopeShutdown($query)
+    {
+        return $query->where('is_shutdown', true);
+    }
+
+    public function scopeNotShutdown($query)
+    {
+        return $query->where('is_shutdown', false);
+    }
+
     public function box(): BelongsTo
     {
         return $this->belongsTo(Box::class);
@@ -147,18 +157,39 @@ class Good extends Model
         return $this->hasMany(PlacingOrderGood::class);
     }
 
-    public function scopeShutdown($query)
+    public function inventoryHistories(): HasMany
     {
-        return $query->where('is_shutdown', true);
-    }
-
-    public function scopeNotShutdown($query)
-    {
-        return $query->where('is_shutdown', false);
+        return $this->hasMany(InventoryHistory::class);
     }
 
     public function inventory(int $amount): bool
     {
         return $this->update(['inventory' => $this->inventory + $amount]);
+    }
+
+    /**
+     * Update inventory.
+     *
+     * @param  int  $inventory  Good's inventory amount
+     * @param string caller model::class name
+     * @param  int  $attribute  caller's attribute
+     * @return mixed On success Model::$data if its not empty or true, false on failure
+     */
+    public function plusminus(int $inventory, string $model, int $attribute)
+    {
+        $this->inventory += $inventory;
+
+        $this->save();
+
+        $type = $inventory > 0 ? __('Receiving') : __('Shipping');
+
+        return $this->inventoryHistories()->create([
+            'good_id' => $this->id,
+            'type' => $type,
+            'quantity' => $inventory,
+            'model' => $model,
+            'attribute' => $attribute,
+            'is_success' => true,
+        ]);
     }
 }

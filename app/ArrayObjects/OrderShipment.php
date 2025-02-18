@@ -20,7 +20,8 @@ class OrderShipment implements Arrayable
 
     public function __construct(
         Collection $row,
-        int $id
+        int $id,
+        int $invoiceFilePage
     ) {
         $this->data = new Collection([
             'order_sheet_invoice_id' => $id,
@@ -111,6 +112,8 @@ class OrderShipment implements Arrayable
             'sellerGoodsCd' => empty($row[44])
                 ? $row[42]
                 : ($row[44] != $row[42] ? $row[42] : $row[44]),
+            // 운송장 파일 페이지 번호
+            'invoiceFilePage' => $invoiceFilePage,
         ]);
 
         /**
@@ -182,8 +185,8 @@ class OrderShipment implements Arrayable
         return $this->containers;
     }
 
-    public static function of(Collection $row, int $id): static
+    public static function of(Collection $row, int $id, int $invoiceFilePage): static
     {
-        return new static($row, $id);
+        return new static($row, $id, $invoiceFilePage);
     }
 }

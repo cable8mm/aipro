@@ -3,22 +3,21 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Models\Order;
 use App\Models\OrderSheetInvoice;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf;
 use OutOfRangeException;
 
-class PrintController extends Controller
+class OrderSheetInvoiceController extends Controller
 {
     /**
-     * /print/order-sheet-invoice/{id}
+     * /order-sheet-invoice/{orderSheetInvoice}/print
      *
      * Print the order sheet invoice
      *
      * @param  \App\Models\OrderSheetInvoice  $orderSheetInvoice  The Order Sheet Invoice instance to print
      * @return \Illuminate\Http\Response The method returns the response object with printing
      */
-    public function orderSheetInvoice(OrderSheetInvoice $orderSheetInvoice): \Illuminate\Http\Response
+    public function print(OrderSheetInvoice $orderSheetInvoice)
     {
         $layout = '
         <htmlpageheader name="myHTMLHeaderOdd" style="display:none">
@@ -48,20 +47,6 @@ class PrintController extends Controller
                 $pdf->getMpdf()->WriteHTML('<pagebreak />');
             }
         }
-
-        return $pdf->stream('document.pdf');
-    }
-
-    /**
-     * /print/order/{id}
-     *
-     * Print the order
-     */
-    public function order(Order $order): \Symfony\Component\HttpFoundation\Response
-    {
-        $pdf = LaravelMpdf::loadView('pdf.order_invoice', [
-            'order' => $order,
-        ]);
 
         return $pdf->stream('document.pdf');
     }

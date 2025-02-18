@@ -119,6 +119,8 @@ class Good extends Resource
             ])->hideFromIndex(),
 
             HasMany::make(__('Placing Order Goods'), 'placingOrderGoods', PlacingOrderGood::class),
+
+            HasMany::make(__('Inventory Histories'), 'inventoryHistories', InventoryHistory::class),
         ];
     }
 
