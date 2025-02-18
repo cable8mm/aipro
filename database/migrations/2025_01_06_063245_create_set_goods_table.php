@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('set_goods', function (Blueprint $table) {
             $table->id();
             $table->foreignId('author_id')->comment('작성자');
-            $table->string('master_code', 255)->nullable()->comment('마스터코드');
+            $table->string('sku', 255)->nullable()->comment('마스터코드');
             $table->string('name', 255)->comment('상품명');
             $table->unsignedInteger('good_count')->comment('상품갯수');
             $table->unsignedBigInteger('goods_price')->nullable()->comment('판매가');

@@ -21,7 +21,7 @@ class OptionGood extends Model
     protected function casts(): array
     {
         return [
-            'master_code' => 'string',
+            'sku' => 'string',
             'name' => 'string',
             'option_count' => 'integer',
             'my_shop_sale_option_count' => 'integer',
@@ -71,8 +71,8 @@ class OptionGood extends Model
      */
     public function updateSpecificFields(): bool
     {
-        if (is_null($this->master_code)) {
-            $this->master_code = GoodCodeType::OPTION->prefix().$this->id;
+        if (is_null($this->sku)) {
+            $this->sku = GoodCodeType::OPTION->prefix().$this->id;
         }
 
         $this->option_count = $this->optionGoodOptions()->count();
@@ -81,17 +81,17 @@ class OptionGood extends Model
     }
 
     /**
-     * Find `OptionGood` model from master_code
+     * Find `OptionGood` model from sku
      *
-     * @param  string  $code  master_code
-     * @return ?OptionGood The method returns OptionGood instance from `master_code` value
+     * @param  string  $sku  sku
+     * @return ?OptionGood The method returns OptionGood instance from `sku` value
      */
-    public static function findMasterCode(string $code): ?OptionGood
+    public static function findSku(string $sku): ?OptionGood
     {
-        if (empty($code)) {
+        if (empty($sku)) {
             throw new InvalidArgumentException(__('Code must not be empty'));
         }
 
-        return static::where('master_code', $code)->first();
+        return static::where('sku', $sku)->first();
     }
 }

@@ -56,7 +56,7 @@ class OptionGoodOption extends Resource
             Text::make(__('Name'), 'name')->rules('required')->required()
                 ->help(__('The option must match this field, so please enter the exact name.')),
             Text::make(__('Master Code'), function () {
-                return $this->optionGoodOptionable->master_code;
+                return $this->optionGoodOptionable->sku;
             }),
             MorphTo::make(__('Option Good Optionable'), 'optionGoodOptionable')
                 ->types([

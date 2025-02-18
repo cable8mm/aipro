@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('shutdown_goods', function (Blueprint $table) {
             $table->id();
             $table->foreignId('author_id');
-            $table->string('master_code', 150);
+            $table->string('sku', 150);
             $table->string('title', 255);
             $table->text('reason');
             $table->timestamps();

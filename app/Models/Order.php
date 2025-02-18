@@ -43,7 +43,7 @@ class Order extends Model
 
     public function items(): HasManyThrough
     {
-        return $this->hasManyThrough(Item::class, OrderShipment::class, 'orderNo', 'master_code', 'id', 'masterGoodsCd');
+        return $this->hasManyThrough(Item::class, OrderShipment::class, 'orderNo', 'sku', 'id', 'masterGoodsCd');
     }
 
     public function box(): BelongsTo

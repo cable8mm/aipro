@@ -31,7 +31,7 @@ class ItemInventorySnapshot extends Resource
      *
      * @var string
      */
-    public static $title = 'playauto_master_code';
+    public static $title = 'playauto_sku';
 
     /**
      * The columns that should be searched.
@@ -40,7 +40,7 @@ class ItemInventorySnapshot extends Resource
      */
     public static $search = [
         'id',
-        'playauto_master_code',
+        'playauto_sku',
     ];
 
     /**
@@ -54,7 +54,7 @@ class ItemInventorySnapshot extends Resource
             ID::make()->sortable(),
             BelongsTo::make(__('Author'), 'author', User::class),
             BelongsTo::make(__('Item'), 'item', Item::class),
-            Text::make(__('Playauto Master Code'), 'playauto_master_code')->maxlength(50),
+            Text::make(__('Playauto SKU'), 'playauto_sku')->maxlength(50),
             Number::make(__('Inventory'), 'inventory'),
             Select::make(__('Safe Class'), 'safe_class')->options(SafeClass::array())->displayUsingLabels(),
             Stack::make(__('Created At').' & '.__('Updated At'), [

@@ -21,7 +21,7 @@ class ItemInventorySnapshotFactory extends Factory
         return [
             'author_id' => fake()->randomNumber(1) + 1,
             'item_id' => fake()->randomNumber(1) + 1,
-            'playauto_master_code' => 'PM'.fake()->randomNumber(3, true),
+            'playauto_sku' => 'PM'.fake()->randomNumber(3, true),
             'inventory' => fake()->randomNumber(2) + 1,
             'safe_class' => fake()->randomElement(SafeClass::names()),
             'type' => fake()->randomElement(Status::names()),

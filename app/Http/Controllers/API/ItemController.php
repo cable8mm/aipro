@@ -34,19 +34,19 @@ class ItemController extends Controller
     }
 
     /**
-     * /item/{masterCode}
+     * /item/{id}
      *
      * Get a item by master code
      */
-    public function showByMasterCode(string $masterCode)
+    public function showBySku(string $sku)
     {
         Validator::make(
-            ['masterCode' => $masterCode],
-            ['masterCode' => 'required|string']
+            ['sku' => $sku],
+            ['sku' => 'required|string']
         );
 
         try {
-            $item = Item::where('master_code', $masterCode)->firstOrFail();
+            $item = Item::where('sku', $sku)->firstOrFail();
         } catch (Exception $e) {
             return response()->json([
                 'message' => __('The given barcode was invalid.'),

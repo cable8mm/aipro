@@ -74,7 +74,7 @@ class OrderSheetWaybill extends Model
             Item::class,
             OrderShipment::class,
             'order_sheet_waybill_id',
-            'master_code',
+            'sku',
             'id',
             'masterGoodsCd'
         );

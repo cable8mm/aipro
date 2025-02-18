@@ -20,7 +20,7 @@ class SetGood extends Model
     protected function casts(): array
     {
         return [
-            'master_code' => 'string',
+            'sku' => 'string',
             'name' => 'string',
             'goods_price' => 'integer',
             'last_cost_price' => 'integer',
@@ -87,8 +87,8 @@ class SetGood extends Model
     {
         $goodsOfSetGoods = $this->items();
 
-        $setCodes = $goodsOfSetGoods->pluck('quantity', 'master_code')->toArray();
-        $this->master_code = empty($setCodes) ? null : GoodCode::setCodeOf($setCodes)->code();
+        $setCodes = $goodsOfSetGoods->pluck('quantity', 'sku')->toArray();
+        $this->sku = empty($setCodes) ? null : GoodCode::setCodeOf($setCodes)->code();
         $this->good_count = count($setCodes);
 
         $this->goods_price = $goodsOfSetGoods->sum('goods_price');

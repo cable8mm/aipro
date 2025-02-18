@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('author_id');
             $table->foreignId('item_id');
-            $table->string('playauto_master_code', 50);
+            $table->string('playauto_sku', 50);
             $table->integer('inventory');
             $table->string('safe_class', 20)->default(SafeClass::S1->name);
             $table->string('type', 50)->nullable();

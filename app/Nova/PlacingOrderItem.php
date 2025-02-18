@@ -43,7 +43,7 @@ class PlacingOrderItem extends Resource
      */
     public static $search = [
         'id',
-        'Item.master_code',
+        'Item.sku',
         'Item.name',
         'Item.supplier.name',
     ];
@@ -60,7 +60,7 @@ class PlacingOrderItem extends Resource
             BelongsTo::make(__('Placing Order'), 'placingOrder', PlacingOrder::class),
             BelongsTo::make(__('Author'), 'author', User::class)->exceptOnForms(),
             BelongsTo::make(__('Warehouse Manager'), 'warehouseManager', User::class),
-            Text::make(__('Master Code'), 'Item.master_code')->exceptOnForms(),
+            Text::make(__('SKU'), 'Item.sku')->exceptOnForms(),
             Text::make(__('Safe Class'), 'Item.safe_class')->exceptOnForms()
                 ->displayUsing(function ($value) {
                     return SafeClass::{$value}->value();
@@ -151,6 +151,6 @@ class PlacingOrderItem extends Resource
 
     public function title()
     {
-        return '['.$this->item->master_code.'] '.$this->item->name;
+        return '['.$this->item->sku.'] '.$this->item->name;
     }
 }

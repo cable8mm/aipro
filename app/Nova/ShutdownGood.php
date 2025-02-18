@@ -38,7 +38,7 @@ class ShutdownGood extends Resource
     public static $search = [
         'id',
         'title',
-        'master_code',
+        'sku',
     ];
 
     /**
@@ -51,7 +51,7 @@ class ShutdownGood extends Resource
         return [
             ID::make()->sortable(),
             BelongsTo::make(__('Author'), 'author', User::class)->exceptOnForms(),
-            Text::make(__('Master Code'), 'master_code')->rules('required')->required()->maxlength(150)->copyable(),
+            Text::make(__('SKU'), 'sku')->rules('required')->required()->maxlength(150)->copyable(),
             Text::make(__('Title'), 'title')->rules('required')->required()->maxlength(255),
             Textarea::make(__('Reason'), 'reason')->rules('required')->required()->alwaysShow(),
             DateTime::make(__('Created At'), 'created_at')->exceptOnForms(),

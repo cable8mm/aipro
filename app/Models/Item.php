@@ -24,7 +24,7 @@ class Item extends Model
             'list_image' => 'string',
             'godo_code' => 'integer',
             'retail_code' => 'string',
-            'playauto_master_code' => 'string',
+            'playauto_sku' => 'string',
             'center_code' => 'string',
             'playauto_category_id' => 'integer',
             'name' => 'string',
@@ -90,8 +90,8 @@ class Item extends Model
         });
 
         static::saved(function (Item $item) {
-            if (is_null($item->master_code)) {
-                $item->master_code = $item->id;
+            if (is_null($item->sku)) {
+                $item->sku = $item->id;
                 $item->save();
             }
         });

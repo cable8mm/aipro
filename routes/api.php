@@ -24,7 +24,7 @@ Route::get('/order-sheet-waybills/{orderSheetWaybill}/print', [OrderSheetWaybill
 
 Route::get('/goods', [GoodController::class, 'index']);
 Route::get('/goods/{good}', [GoodController::class, 'show']);
-Route::get('/goods/master-code/{masterCode}', [GoodController::class, 'showByMasterCode']);
+Route::get('/goods/sku/{sku}', [GoodController::class, 'showBySku']);
 Route::get('/goods/barcode/{barcode}', [GoodController::class, 'showByBarcode']);
 Route::post('/goods/{good}/balance', [GoodController::class, 'balance']);
 Route::post('/goods/{good}/balance-by-barcode', [GoodController::class, 'balanceByBarcode']);

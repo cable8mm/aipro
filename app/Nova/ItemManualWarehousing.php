@@ -41,7 +41,7 @@ class ItemManualWarehousing extends Resource
     public static $search = [
         'id',
         'Item.name',
-        'Item.master_code',
+        'Item.sku',
         'memo',
     ];
 
@@ -55,8 +55,8 @@ class ItemManualWarehousing extends Resource
         return [
             ID::make()->sortable(),
             BelongsTo::make(__('Author'), 'author', User::class)->exceptOnForms(),
-            Text::make(__('마스터 코드'), 'Item.master_code')->onlyOnIndex(),
-            Text::make(__('공급사'), 'Item.supplier.name')->onlyOnIndex(),
+            Text::make(__('SKU'), 'Item.sku')->onlyOnIndex(),
+            Text::make(__('Supplier Name'), 'Item.supplier.name')->onlyOnIndex(),
             BelongsTo::make(__('Item'), 'item', Item::class)->searchable(),
             Select::make(__('Type'), 'type')
                 ->rules('required')->required()

@@ -48,7 +48,7 @@ class Item extends Resource
     public static $search = [
         'id',
         'name',
-        'master_code',
+        'sku',
         'barcode',
     ];
 
@@ -62,9 +62,10 @@ class Item extends Resource
         return [
             ID::make()->sortable(),
             BelongsTo::make(__('Author'), 'author', User::class)->exceptOnForms(),
-            Text::make(__('Master Code'), 'master_code')
+            Text::make(__('SKU'), 'sku')
                 ->rules('required')->required()->maxlength(255)
                 ->sortable(),
+            Number::make(__('Units Per Case'), 'units_per_case'),
             BelongsTo::make(__('Supplier'), 'supplier', Supplier::class)->filterable(),
             Stack::make(__('Name').' & '.__('Godo Name'), [
                 Line::make(__('Name'), fn () => $this->name.' x'.$this->ship_quantity)
@@ -177,6 +178,6 @@ class Item extends Resource
 
     public function title()
     {
-        return '['.$this->master_code.'] '.$this->name;
+        return '['.$this->sku.'] '.$this->name;
     }
 }

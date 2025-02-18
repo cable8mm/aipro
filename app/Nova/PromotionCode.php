@@ -30,7 +30,7 @@ class PromotionCode extends Resource
      *
      * @var string
      */
-    public static $title = 'master_code';
+    public static $title = 'sku';
 
     /**
      * The columns that should be searched.
@@ -56,7 +56,7 @@ class PromotionCode extends Resource
                     Item::class,
                     SetGood::class,
                 ]),
-            Text::make(__('Master Code'), 'master_code')
+            Text::make(__('SKU'), 'sku')
                 ->rules('required')->required()
                 ->copyable()
                 ->exceptOnForms()

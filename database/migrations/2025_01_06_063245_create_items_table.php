@@ -20,7 +20,8 @@ return new class extends Migration
             $table->foreignId('supplier_item_id')->nullable()->comment('공급사 상품 아이디');
             $table->foreignId('box_id')->nullable()->comment('1개 패킹 시 사용되는 박스');
             $table->string('list_image', 190)->nullable()->comment('리스트이미지');
-            $table->string('master_code', 255)->nullable();
+            $table->string('sku', 255)->nullable();
+            $table->unsignedInteger('units_per_case')->default(1)->comment('입수량');
             $table->foreignId('playauto_category_id')->nullable()->comment('플레이오토 카테고리 코드');
             $table->string('name', 255);
             $table->string('godo_name', 255)->nullable();

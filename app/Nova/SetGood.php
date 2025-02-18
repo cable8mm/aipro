@@ -41,7 +41,7 @@ class SetGood extends Resource
      */
     public static $search = [
         'id',
-        'master_code',
+        'sku',
     ];
 
     /**
@@ -56,10 +56,10 @@ class SetGood extends Resource
             BelongsTo::make(__('Author'), 'author', User::class)
                 ->exceptOnForms()
                 ->filterable(),
-            Text::make(__('Shortening Master Code'), fn () => 'COM'.$this->id)
+            Text::make(__('Shortening SKU'), fn () => 'COM'.$this->id)
                 ->copyable()
                 ->exceptOnForms(),
-            Text::make(__('Master Code'), 'master_code')
+            Text::make(__('SKU'), 'sku')
                 ->maxlength(255)
                 ->copyable()
                 ->readonly()

@@ -13,7 +13,7 @@ class ItemSeeder extends Seeder
     {
         for ($i = 1; $i <= 10; $i++) {
             \App\Models\Item::factory()->state([
-                'master_code' => $i,
+                'sku' => $i,
             ])->create();
         }
     }

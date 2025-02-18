@@ -85,7 +85,7 @@ class OrderShipment extends Model
 
     public function item(): BelongsTo
     {
-        return $this->belongsTo(Item::class, 'masterGoodsCd', 'master_code');
+        return $this->belongsTo(Item::class, 'masterGoodsCd', 'sku');
     }
 
     public function setGoods(): HasMany

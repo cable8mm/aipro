@@ -17,7 +17,7 @@ class ItemInventorySnapshot extends Model
         return [
             'author_id' => 'integer',
             'item_id' => 'integer',
-            'playauto_master_code' => 'string',
+            'playauto_sku' => 'string',
             'inventory' => 'integer',
             'type' => 'string',
         ];

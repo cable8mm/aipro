@@ -16,7 +16,7 @@ class ShutdownGood extends Model
     protected function casts(): array
     {
         return [
-            'master_code' => 'string',
+            'sku' => 'string',
             'title' => 'string',
             'reason' => 'string',
         ];

@@ -117,7 +117,7 @@ class OrderShipment implements Arrayable
         ]);
 
         /**
-         * For option products, retrieve the master_code of the option and update it.
+         * For option products, retrieve the sku of the option and update it.
          */
         if (GoodCodeType::of($this->data->get('sellerGoodsCd')) == GoodCodeType::OPTION) {
             $code = GoodCode::of(
@@ -125,12 +125,12 @@ class OrderShipment implements Arrayable
                 option: $this->data->get('option'),
                 callback: function ($key, $option) {
                     try {
-                        $optionGoodOption = OptionGood::findMasterCode($key)->option($option)->first();
+                        $optionGoodOption = OptionGood::findSku($key)->option($option)->first();
                     } catch (Throwable $e) {
                         throw new OptionGoodInvalidArgumentException(__('OptionGood not found for :key => :option', ['option' => $option, 'key' => $key]), $this);
                     }
 
-                    return $optionGoodOption->masterCode();
+                    return $optionGoodOption->sku();
                 }
             )->code();
 
@@ -138,7 +138,7 @@ class OrderShipment implements Arrayable
         }
 
         /**
-         * For composite and gift products, retrieve the set product and update the master_code.
+         * For composite and gift products, retrieve the set product and update the sku.
          */
         if (
             GoodCodeType::of($this->data->get('sellerGoodsCd')) == GoodCodeType::COMPLEX
@@ -147,7 +147,7 @@ class OrderShipment implements Arrayable
             $code = GoodCode::of(
                 $this->data->get('sellerGoodsCd'),
                 callback: function ($key) {
-                    return SetGood::findComCode($key)->master_code;
+                    return SetGood::findComCode($key)->sku;
                 }
             )->code();
 
@@ -155,7 +155,7 @@ class OrderShipment implements Arrayable
         }
 
         /**
-         * If the master_code is a set good, copy it as multiple individual goods.
+         * If the sku is a set good, copy it as multiple individual goods.
          */
         if (GoodCodeType::of($this->data->get('masterGoodsCd')) == GoodCodeType::SET) {
             $goods = ValueObjectsSetGood::of($this->data->get('masterGoodsCd'))->goods();

@@ -197,7 +197,7 @@
 		<tr>
 			<td>{{$loop->iteration}}
 			</td>
-			<td>{{ $item->good->master_code }}
+			<td>{{ $item->good->sku }}
 			</td>
 			<td class="left">
 				<strong style="margin-bottom: 5px; display: block;">{{ $item->good->name ?? '미매칭상품 (확인필요)' }}</strong><br /><br />
