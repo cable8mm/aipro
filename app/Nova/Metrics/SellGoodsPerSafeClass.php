@@ -3,7 +3,7 @@
 namespace App\Nova\Metrics;
 
 use App\Enums\SafeClass;
-use App\Models\Good;
+use App\Models\Item;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Metrics\Partition;
 
@@ -16,7 +16,7 @@ class SellGoodsPerSafeClass extends Partition
      */
     public function calculate(NovaRequest $request)
     {
-        return $this->count($request, Good::notShutdown(), 'safe_class')
+        return $this->count($request, Item::notShutdown(), 'safe_class')
             ->label(fn ($value) => SafeClass::{$value}->value());
     }
 

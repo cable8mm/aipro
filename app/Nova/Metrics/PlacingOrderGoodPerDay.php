@@ -2,7 +2,7 @@
 
 namespace App\Nova\Metrics;
 
-use App\Models\PlacingOrderGood;
+use App\Models\PlacingOrderItem;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Metrics\Trend;
 use Laravel\Nova\Nova;
@@ -16,7 +16,7 @@ class PlacingOrderGoodPerDay extends Trend
      */
     public function calculate(NovaRequest $request)
     {
-        return $this->countByDays($request, PlacingOrderGood::class);
+        return $this->countByDays($request, PlacingOrderItem::class);
     }
 
     /**
