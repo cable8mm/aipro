@@ -97,6 +97,16 @@ class Good extends Model
         });
     }
 
+    public function scopeShutdown($query)
+    {
+        return $query->where('is_shutdown', true);
+    }
+
+    public function scopeNotShutdown($query)
+    {
+        return $query->where('is_shutdown', false);
+    }
+
     public function box(): BelongsTo
     {
         return $this->belongsTo(Box::class);
@@ -147,14 +157,9 @@ class Good extends Model
         return $this->hasMany(PlacingOrderGood::class);
     }
 
-    public function scopeShutdown($query)
+    public function inventoryHistories(): HasMany
     {
-        return $query->where('is_shutdown', true);
-    }
-
-    public function scopeNotShutdown($query)
-    {
-        return $query->where('is_shutdown', false);
+        return $this->hasMany(InventoryHistory::class);
     }
 
     public function inventory(int $amount): bool
