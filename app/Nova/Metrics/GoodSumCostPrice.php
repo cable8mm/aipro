@@ -2,7 +2,7 @@
 
 namespace App\Nova\Metrics;
 
-use App\Models\Good;
+use App\Models\Item;
 use App\Models\Setting;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Metrics\Progress;
@@ -16,7 +16,7 @@ class GoodSumCostPrice extends Progress
      */
     public function calculate(NovaRequest $request)
     {
-        return $this->sum($request, Good::class, function ($query) {
+        return $this->sum($request, Item::class, function ($query) {
             return $query;
         }, 'cost_price', target: Setting::get('GOAL_FOR_COST_PRICE_SUM_OF_GOODS'))->suffix(__('Won'));
     }

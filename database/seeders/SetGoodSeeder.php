@@ -21,7 +21,7 @@ class SetGoodSeeder extends Seeder
 
             for ($j = 1; $j <= $goodCount; $j++) {
                 $quantity = rand(1, 12);
-                $setGood->goods()->attach($j, [
+                $setGood->items()->attach($j, [
                     'quantity' => $quantity,
                 ]);
             }

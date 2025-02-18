@@ -22,7 +22,7 @@ class OrderController extends Controller
      */
     public function print(Order $order)
     {
-        $pdf = LaravelMpdf::loadView('pdf.order_invoice', [
+        $pdf = LaravelMpdf::loadView('pdf.order_waybill', [
             'order' => $order,
         ]);
 
@@ -36,10 +36,10 @@ class OrderController extends Controller
      */
     public function waybill(Order $order): mixed
     {
-        $invoiceFilePath = $order->orderSheetInvoice->invoice_file;
+        $waybillFilePath = $order->orderSheetWaybill->waybill_file;
 
-        return Slicer::of(ParcelService::Cj, $order->invoiceFilePage)
-            ->source($invoiceFilePath)
+        return Slicer::of(ParcelService::Cj, $order->waybillFilePage)
+            ->source($waybillFilePath)
             ->download('waybill_'.$order->id.'.pdf');
     }
 
@@ -60,11 +60,11 @@ class OrderController extends Controller
             'boxes.*' => 'required|array:size,quantity|not_in:0',
             'boxes.*.size' => 'required|integer|not_in:0',
             'boxes.*.quantity' => 'required_with:boxes.size|integer|not_in:0',
-            'invoices' => 'required|array|not_in:0',
+            'waybills' => 'required|array|not_in:0',
             'validator' => 'required|integer|not_in:0',
         ]);
 
-        $invoiceNos = implode(',', $validated['invoices']);
+        $waybillNos = implode(',', $validated['waybills']);
 
         if ($validated['mode'] == 'complete') {
             $status = OrderShipmentStatus::검수완료->value;
@@ -76,7 +76,7 @@ class OrderController extends Controller
 
         $order->orderShipments()->update([
             'validator' => $validated['validator'],
-            'invoiceNo' => $invoiceNos,
+            'waybillNo' => $waybillNos,
             'status' => $status,
         ]);
 
@@ -95,7 +95,7 @@ class OrderController extends Controller
                 $confirmAmount = $item['confirmAmount'] - $orderShipment->confirmAmount;
 
                 if ($confirmAmount > 0) {
-                    $orderShipment->good()->plusminus(
+                    $orderShipment->item()->plusminus(
                         $confirmAmount * (-1),
                         OrderShipment::class,
                         $orderShipment->id
@@ -118,8 +118,8 @@ class OrderController extends Controller
             'OrderShipment.status' => "'상품준비중'",
             'OrderShipment.confirmAmount' => 0,
             'OrderShipment.boxes' => null,
-            'OrderShipment.invoiceCompany' => null,
-            'OrderShipment.invoiceNo' => null,
+            'OrderShipment.waybillCompany' => null,
+            'OrderShipment.waybillNo' => null,
         ]);
 
         return response()->json([

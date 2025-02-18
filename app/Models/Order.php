@@ -14,7 +14,7 @@ class Order extends Model
 {
     use Actionable, HasFactory;
 
-    protected $with = ['orderSheetInvoice'];
+    protected $with = ['orderSheetWaybill'];
 
     protected function casts(): array
     {
@@ -26,9 +26,9 @@ class Order extends Model
         ];
     }
 
-    public function orderSheetInvoice(): BelongsTo
+    public function orderSheetWaybill(): BelongsTo
     {
-        return $this->belongsTo(OrderSheetInvoice::class);
+        return $this->belongsTo(OrderSheetWaybill::class);
     }
 
     public function orderShipments(): HasMany
@@ -41,9 +41,9 @@ class Order extends Model
         return $this->hasOne(OrderShipment::class, 'orderNo', 'id')->latestOfMany();
     }
 
-    public function goods(): HasManyThrough
+    public function items(): HasManyThrough
     {
-        return $this->hasManyThrough(Good::class, OrderShipment::class, 'orderNo', 'master_code', 'id', 'masterGoodsCd');
+        return $this->hasManyThrough(Item::class, OrderShipment::class, 'orderNo', 'sku', 'id', 'masterGoodsCd');
     }
 
     public function box(): BelongsTo

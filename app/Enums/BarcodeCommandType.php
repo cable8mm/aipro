@@ -9,7 +9,7 @@ enum BarcodeCommandType: string
     use EnumGetter;
 
     case ORDER = '0';
-    case GOOD = '8';
+    case ITEM = '8';
     case COMMAND = '9';
 
     public static function type(int $first): BarcodeCommandType
@@ -17,7 +17,7 @@ enum BarcodeCommandType: string
         return match ($first) {
             self::ORDER => self::ORDER,
             self::COMMAND => self::COMMAND,
-            default => self::GOOD,
+            default => self::ITEM,
         };
     }
 }

@@ -23,7 +23,7 @@ class OrderShipmentFactory extends Factory
         fake()->addProvider(new \Bezhanov\Faker\Provider\Device(fake()));
 
         return [
-            'order_sheet_invoice_id' => fake()->randomNumber(1) + 1,
+            'order_sheet_waybill_id' => fake()->randomNumber(1) + 1,
             'orderNo' => (string) fake()->randomNumber(9, true),
             'site' => fake()->randomElement(Site::names()),
             'registDate' => fake()->dateTime(),
@@ -57,11 +57,11 @@ class OrderShipmentFactory extends Factory
             'postcode' => fake('ko_KR')->postcode(),
             'address' => fake('ko_KR')->address(),
             'deliveryMemo' => fake()->randomElement(['문 앞에 놔 주세요', '', '부재 시 연락 주세요']),
-            'invoiceCompany' => fake()->company(),
-            'invoiceNo' => fake()->randomNumber(9) + 1,
-            'invoiceFilePath' => fake()->uuid().'.pdf',
-            'invoiceFilePage' => fake()->randomNumber(),
-            'invoiceGoodsCd' => fake()->randomNumber(7) + 1,
+            'waybillCompany' => fake()->company(),
+            'waybillNo' => fake()->randomNumber(9) + 1,
+            'waybillFilePath' => fake()->uuid().'.pdf',
+            'waybillFilePage' => fake()->randomNumber(),
+            'waybillGoodsCd' => fake()->randomNumber(7) + 1,
             'payGoodsCd' => fake()->randomNumber(9) + 1,
             'masterGoodsCd' => fake()->randomNumber(9) + 1,
             'sellerGoodsCd' => fake()->randomNumber(9) + 1,

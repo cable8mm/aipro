@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('option_goods', function (Blueprint $table) {
             $table->id();
             $table->foreignId('author_id');
-            $table->string('master_code', 130)->nullable();
+            $table->string('sku', 130)->nullable();
             $table->string('name', 255);
             $table->integer('option_count')->default(0)->comment('등록 옵션수');
             $table->integer('my_shop_sale_option_count')->default(0)->comment('자사몰 판매 가능 옵션수');

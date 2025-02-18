@@ -2,7 +2,7 @@
 
 namespace App\Nova\Metrics;
 
-use App\Models\Good;
+use App\Models\Item;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Metrics\Trend;
 use Laravel\Nova\Nova;
@@ -16,7 +16,7 @@ class GoodPerDay extends Trend
      */
     public function calculate(NovaRequest $request)
     {
-        return $this->countByDays($request, Good::class);
+        return $this->countByDays($request, Item::class);
     }
 
     /**

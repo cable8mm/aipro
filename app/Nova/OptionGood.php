@@ -39,7 +39,7 @@ class OptionGood extends Resource
      */
     public static $search = [
         'id',
-        'master_code',
+        'sku',
     ];
 
     /**
@@ -52,7 +52,7 @@ class OptionGood extends Resource
         return [
             ID::make()->sortable(),
             BelongsTo::make(__('Author'), 'author', User::class)->exceptOnForms(),
-            Text::make(__('Master Code'), 'master_code')
+            Text::make(__('SKU'), 'sku')
                 ->readonly()
                 ->copyable()
                 ->maxlength(130)
@@ -116,7 +116,7 @@ class OptionGood extends Resource
 
     public function title()
     {
-        return '['.$this->master_code.'] '.$this->name;
+        return '['.$this->sku.'] '.$this->name;
     }
 
     public function authorizedToUpdate(Request $request)

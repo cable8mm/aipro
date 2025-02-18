@@ -53,10 +53,10 @@ class InventoryHistory extends Resource
     {
         return [
             ID::make()->sortable(),
-            Text::make(__('Master Code'), 'good.master_code')->exceptOnForms(),
+            Text::make(__('SKU'), 'good.sku')->exceptOnForms(),
             BelongsTo::make(__('Author'), 'author', User::class)->exceptOnForms(),
             Select::make(__('Safe Class'), 'good.safe_class')->options(SafeClass::array())->displayUsingLabels()->exceptOnForms(),
-            BelongsTo::make(__('Good'), 'good', Good::class),
+            BelongsTo::make(__('Item'), 'item', Item::class),
             Select::make(__('Type'), 'type')
                 ->rules('required')->required()
                 ->options(EnumsInventoryHistory::array())

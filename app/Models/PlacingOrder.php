@@ -53,8 +53,8 @@ class PlacingOrder extends Model
         return $this->belongsTo(Supplier::class);
     }
 
-    public function placingOrderGoods(): HasMany
+    public function placingOrderItems(): HasMany
     {
-        return $this->hasMany(PlacingOrderGood::class);
+        return $this->hasMany(PlacingOrderItem::class);
     }
 }

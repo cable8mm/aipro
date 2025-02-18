@@ -20,7 +20,7 @@ class PromotionCode extends Model
     protected function casts(): array
     {
         return [
-            'master_code' => 'string',
+            'sku' => 'string',
             'memo' => 'string',
             'started_at' => 'datetime',
             'finished_at' => 'datetime',
@@ -40,12 +40,12 @@ class PromotionCode extends Model
     /**
      * Get the original master code as virtual field.
      *
-     * @example $model->real_master_code Original master code to be copied as virtual field.
+     * @example $model->real_sku Original master code to be copied as virtual field.
      */
-    protected function masterCode(): Attribute
+    protected function sku(): Attribute
     {
         return Attribute::make(
-            get: fn (mixed $value, array $attributes) => $this->promotionCodable->master_code.'+'.$this->id,
+            get: fn (mixed $value, array $attributes) => $this->promotionCodable->sku.'+'.$this->id,
         );
     }
 }

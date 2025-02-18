@@ -15,8 +15,6 @@ class OptionGoodOption extends Model implements Sortable
 {
     use Actionable, HasFactory, SortableTrait;
 
-    protected $with = ['author', 'optionGood'];
-
     public $sortable = [
         'order_column_name' => 'sort_order',
         'sort_when_creating' => true,
@@ -27,7 +25,7 @@ class OptionGoodOption extends Model implements Sortable
     protected function casts(): array
     {
         return [
-            'master_code' => 'string',
+            'sku' => 'string',
             'name' => 'string',
             'goods_price' => 'integer',
             'last_cost_price' => 'integer',
@@ -66,8 +64,8 @@ class OptionGoodOption extends Model implements Sortable
         return $this->morphTo();
     }
 
-    public function masterCode(): string
+    public function sku(): string
     {
-        return $this->optionGoodOptionable->master_code;
+        return $this->optionGoodOptionable->sku;
     }
 }

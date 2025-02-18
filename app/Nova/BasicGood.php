@@ -3,7 +3,7 @@
 namespace App\Nova;
 
 use App\Enums\CenterClass;
-use App\Enums\GoodColor;
+use App\Enums\ItemColor;
 use App\Enums\SafeClass;
 use App\Nova\Filters\InventoryCountFilter;
 use App\Traits\NovaAuthorizedByMd;
@@ -13,7 +13,6 @@ use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Image;
-use Laravel\Nova\Fields\MorphOne;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Stack;
@@ -28,9 +27,9 @@ class BasicGood extends Resource
     /**
      * The model the resource corresponds to.
      *
-     * @var class-string<\App\Models\Good>
+     * @var class-string<\App\Models\Item>
      */
-    public static $model = \App\Models\Good::class;
+    public static $model = \App\Models\Item::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -47,7 +46,7 @@ class BasicGood extends Resource
     public static $search = [
         'id',
         'name',
-        'master_code',
+        'sku',
         'barcode',
     ];
 
@@ -62,7 +61,7 @@ class BasicGood extends Resource
             ID::make()->sortable(),
             BelongsTo::make(__('Author'), 'author', User::class)->exceptOnForms(),
             Image::make(__('List Image'), 'list_image'),
-            Text::make(__('Master Code'), 'master_code')
+            Text::make(__('SKU'), 'sku')
                 ->rules('required')->required()
                 ->maxlength(100)
                 ->copyable(),
@@ -90,7 +89,7 @@ class BasicGood extends Resource
             Boolean::make(__('Supplier Monitoring Interruption'), 'supplier_monitoring_interruption'),
             Currency::make(__('Goods Price'), 'goods_price'),
             Text::make(__('Spec'), 'spec')->maxlength(255),
-            Select::make(__('Goods Division Color'), 'goods_division_color')->options(GoodColor::array())->displayUsingLabels(),
+            Select::make(__('Item Division Color'), 'item_division_color')->options(ItemColor::array())->displayUsingLabels(),
             Number::make(__('Ship Quantity'), 'ship_quantity')->displayUsing(function ($value) {
                 return number_format($value);
             }),
@@ -108,8 +107,6 @@ class BasicGood extends Resource
                 DateTime::make(__('Created At'), 'created_at'),
                 DateTime::make(__('Updated At'), 'updated_at'),
             ]),
-
-            MorphOne::make('PromotionCode', 'promotionCode'),
         ];
     }
 
@@ -162,6 +159,6 @@ class BasicGood extends Resource
 
     public function title()
     {
-        return '['.$this->master_code.'] '.$this->name;
+        return '['.$this->sku.'] '.$this->name;
     }
 }

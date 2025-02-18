@@ -11,21 +11,21 @@ use App\Nova\BoxManualWarehousing;
 use App\Nova\BoxPlacingOrder;
 use App\Nova\BoxSupplier;
 use App\Nova\Dashboards\Main;
-use App\Nova\Good;
-use App\Nova\GoodManualWarehousing;
 use App\Nova\HelpfulFile;
 use App\Nova\HelpTip;
 use App\Nova\InventoryHistory;
+use App\Nova\Item;
+use App\Nova\ItemManualWarehousing;
 use App\Nova\MismatchedOrderShipment;
 use App\Nova\OptionGood;
 use App\Nova\OptionGoodOption;
 use App\Nova\Order;
-use App\Nova\OrderSheetInvoice;
+use App\Nova\OrderSheetWaybill;
 use App\Nova\OrderShipment;
 use App\Nova\PickingZone;
 use App\Nova\PlacingOrder;
 use App\Nova\PlacingOrderBox;
-use App\Nova\PlacingOrderGood;
+use App\Nova\PlacingOrderItem;
 use App\Nova\PromotionCode;
 use App\Nova\RegisterGoodRequest;
 use App\Nova\RegisterImportFile;
@@ -73,13 +73,13 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 MenuSection::dashboard(Main::class)->icon('home'),
 
                 MenuSection::make('상품/박스 관리', [
-                    MenuItem::resource(Good::class),
+                    MenuItem::resource(Item::class),
                     MenuItem::resource(Box::class),
                     MenuItem::resource(RegisterGoodRequest::class),
                 ])->icon('truck')->collapsable(),
 
                 MenuSection::make('주문 관리(주문서+출고)', [
-                    MenuItem::resource(OrderSheetInvoice::class),
+                    MenuItem::resource(OrderSheetWaybill::class),
                     MenuItem::resource(Order::class),
                     MenuItem::resource(OrderShipment::class),
                     MenuItem::resource(MismatchedOrderShipment::class),
@@ -88,9 +88,9 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 MenuSection::make('재고 관리(발주+입고)', [
                     MenuItem::resource(PlacingOrder::class),
                     MenuItem::resource(BoxPlacingOrder::class),
-                    MenuItem::resource(GoodManualWarehousing::class),
+                    MenuItem::resource(ItemManualWarehousing::class),
                     MenuItem::resource(BoxManualWarehousing::class),
-                    MenuItem::resource(PlacingOrderGood::class),
+                    MenuItem::resource(PlacingOrderItem::class),
                     MenuItem::resource(PlacingOrderBox::class),
                 ])->icon('cube')->collapsable(),
 

@@ -20,7 +20,7 @@ class InventoryHistoryFactory extends Factory
     {
         return [
             'author_id' => fake()->randomNumber(1) + 1,
-            'good_id' => fake()->randomNumber(1) + 1,
+            'item_id' => fake()->randomNumber(1) + 1,
             'type' => fake()->randomElement(InventoryHistory::names()),
             'quantity' => (fake()->boolean() ? 1 : -1) * (fake()->randomNumber(2) + 1),
             'price' => fake()->numberBetween(5000, 50000),

@@ -75,7 +75,7 @@ class Supplier extends Resource
                 DateTime::make(__('Updated At'), 'updated_at'),
             ])->hideFromIndex(),
 
-            HasMany::make(__('Goods'), 'goods', Good::class),
+            HasMany::make(__('Items'), 'items', Item::class),
 
             HasMany::make(__('Placing Orders'), 'placingOrders', PlacingOrder::class),
         ];

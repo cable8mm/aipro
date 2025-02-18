@@ -35,14 +35,14 @@ class Supplier extends Model
         });
     }
 
-    public function supplierGoods(): HasMany
+    public function supplierItems(): HasMany
     {
-        return $this->hasMany(SupplierGood::class);
+        return $this->hasMany(SupplierItem::class);
     }
 
-    public function goods(): HasMany
+    public function items(): HasMany
     {
-        return $this->hasMany(Good::class);
+        return $this->hasMany(Item::class);
     }
 
     public function placingOrders(): HasMany

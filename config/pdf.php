@@ -12,7 +12,7 @@ return [
     'margin_header' => 5,
     'margin_footer' => 0,
     'orientation' => 'P',
-    'title' => 'AIPro Invoices',
+    'title' => 'AIPro Waybills',
     'subject' => '',
     'author' => '',
     'watermark' => '',
