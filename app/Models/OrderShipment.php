@@ -83,9 +83,9 @@ class OrderShipment extends Model
         return $this->hasMany(OrderShipment::class, 'orderNo', 'orderNo');
     }
 
-    public function good(): BelongsTo
+    public function item(): BelongsTo
     {
-        return $this->belongsTo(Good::class, 'masterGoodsCd', 'master_code');
+        return $this->belongsTo(Item::class, 'masterGoodsCd', 'master_code');
     }
 
     public function setGoods(): HasMany

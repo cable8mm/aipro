@@ -68,10 +68,10 @@ class OrderSheetWaybill extends Model
         return $this->hasMany(MismatchedOrderShipment::class);
     }
 
-    public function goods(): HasManyThrough
+    public function items(): HasManyThrough
     {
         return $this->hasManyThrough(
-            Good::class,
+            Item::class,
             OrderShipment::class,
             'order_sheet_waybill_id',
             'master_code',

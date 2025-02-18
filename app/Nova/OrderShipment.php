@@ -61,7 +61,7 @@ class OrderShipment extends Resource
             ID::make()
                 ->hideFromIndex(),
             BelongsTo::make(__('Order Sheet Waybill'), 'orderSheetWaybill', OrderSheetWaybill::class),
-            BelongsTo::make(__('Good'), 'good', Good::class),
+            BelongsTo::make(__('Item'), 'item', Item::class),
             BelongsTo::make(__('Order Number'), 'order', Order::class),
             Panel::make(__('Additional Information'), [
                 Text::make(__('Master Code'), 'masterGoodsCd')->copyable(),

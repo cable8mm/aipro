@@ -2,7 +2,7 @@
 
 namespace App\Nova\Metrics;
 
-use App\Models\Good;
+use App\Models\Item;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Metrics\Value;
 use Laravel\Nova\Nova;
@@ -16,7 +16,7 @@ class TotalGood extends Value
      */
     public function calculate(NovaRequest $request)
     {
-        return $this->count($request, Good::class);
+        return $this->count($request, Item::class);
     }
 
     /**

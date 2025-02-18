@@ -41,9 +41,9 @@ class Order extends Model
         return $this->hasOne(OrderShipment::class, 'orderNo', 'id')->latestOfMany();
     }
 
-    public function goods(): HasManyThrough
+    public function items(): HasManyThrough
     {
-        return $this->hasManyThrough(Good::class, OrderShipment::class, 'orderNo', 'master_code', 'id', 'masterGoodsCd');
+        return $this->hasManyThrough(Item::class, OrderShipment::class, 'orderNo', 'master_code', 'id', 'masterGoodsCd');
     }
 
     public function box(): BelongsTo

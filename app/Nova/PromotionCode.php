@@ -53,7 +53,7 @@ class PromotionCode extends Resource
             BelongsTo::make(__('Author'), 'author', User::class)->exceptOnForms(),
             MorphTo::make(__('Promotion Codable'), 'promotionCodable')
                 ->types([
-                    Good::class,
+                    Item::class,
                     SetGood::class,
                 ]),
             Text::make(__('Master Code'), 'master_code')

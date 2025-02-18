@@ -11,7 +11,7 @@ class InventoryHistory extends Model
 {
     use HasFactory;
 
-    protected $with = ['author', 'good'];
+    protected $with = ['author', 'item'];
 
     protected function casts(): array
     {
@@ -39,9 +39,9 @@ class InventoryHistory extends Model
         return $this->belongsTo(User::class, 'author_id');
     }
 
-    public function good(): BelongsTo
+    public function item(): BelongsTo
     {
-        return $this->belongsTo(Good::class);
+        return $this->belongsTo(Item::class);
     }
 
     public function bySelf(): BelongsTo

@@ -15,8 +15,6 @@ class OptionGoodOption extends Model implements Sortable
 {
     use Actionable, HasFactory, SortableTrait;
 
-    protected $with = ['author', 'optionGood'];
-
     public $sortable = [
         'order_column_name' => 'sort_order',
         'sort_when_creating' => true,

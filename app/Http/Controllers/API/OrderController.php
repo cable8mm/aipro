@@ -95,7 +95,7 @@ class OrderController extends Controller
                 $confirmAmount = $item['confirmAmount'] - $orderShipment->confirmAmount;
 
                 if ($confirmAmount > 0) {
-                    $orderShipment->good()->plusminus(
+                    $orderShipment->item()->plusminus(
                         $confirmAmount * (-1),
                         OrderShipment::class,
                         $orderShipment->id

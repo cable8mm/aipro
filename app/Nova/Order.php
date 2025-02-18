@@ -69,7 +69,7 @@ class Order extends Resource
 
             HasMany::make(__('Order Shipments'), 'orderShipments', OrderShipment::class),
 
-            HasManyThrough::make(__('Goods'), 'goods', Good::class),
+            HasManyThrough::make(__('Items'), 'items', Item::class),
         ];
     }
 

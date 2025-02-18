@@ -3,7 +3,7 @@
 namespace App\Nova;
 
 use App\Enums\CenterClass;
-use App\Enums\GoodColor;
+use App\Enums\ItemColor;
 use App\Enums\SafeClass;
 use App\Nova\Filters\InventoryCountFilter;
 use App\Traits\NovaAuthorizedByMd;
@@ -28,9 +28,9 @@ class BasicGood extends Resource
     /**
      * The model the resource corresponds to.
      *
-     * @var class-string<\App\Models\Good>
+     * @var class-string<\App\Models\Item>
      */
-    public static $model = \App\Models\Good::class;
+    public static $model = \App\Models\Item::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -90,7 +90,7 @@ class BasicGood extends Resource
             Boolean::make(__('Supplier Monitoring Interruption'), 'supplier_monitoring_interruption'),
             Currency::make(__('Goods Price'), 'goods_price'),
             Text::make(__('Spec'), 'spec')->maxlength(255),
-            Select::make(__('Goods Division Color'), 'goods_division_color')->options(GoodColor::array())->displayUsingLabels(),
+            Select::make(__('Item Division Color'), 'item_division_color')->options(ItemColor::array())->displayUsingLabels(),
             Number::make(__('Ship Quantity'), 'ship_quantity')->displayUsing(function ($value) {
                 return number_format($value);
             }),

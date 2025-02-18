@@ -60,7 +60,7 @@ class OptionGoodOption extends Resource
             }),
             MorphTo::make(__('Option Good Optionable'), 'optionGoodOptionable')
                 ->types([
-                    Good::class,
+                    Item::class,
                     SetGood::class,
                 ]),
             Number::make(__('Sort Order'), 'sort_order')->exceptOnForms(),

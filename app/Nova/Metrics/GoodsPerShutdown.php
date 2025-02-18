@@ -2,7 +2,7 @@
 
 namespace App\Nova\Metrics;
 
-use App\Models\Good;
+use App\Models\Item;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Metrics\Partition;
 
@@ -15,7 +15,7 @@ class GoodsPerShutdown extends Partition
      */
     public function calculate(NovaRequest $request)
     {
-        return $this->count($request, Good::class, 'is_shutdown')
+        return $this->count($request, Item::class, 'is_shutdown')
             ->label(fn ($value) => match ($value) {
                 1 => __('Off Sale'),
                 null => __('On Sale'),

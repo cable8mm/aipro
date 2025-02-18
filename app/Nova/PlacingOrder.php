@@ -92,7 +92,7 @@ class PlacingOrder extends Resource
                 DateTime::make(__('Updated At'), 'updated_at')->displayUsing(fn ($value) => $value ? $value->toDateTimeString() : '-'),
             ])->hideFromIndex(),
 
-            HasMany::make(__('Placing Order Goods'), 'placingOrderGoods', PlacingOrderGood::class),
+            HasMany::make(__('Placing Order Items'), 'placingOrderItems', PlacingOrderItem::class),
         ];
     }
 

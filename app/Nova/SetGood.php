@@ -75,7 +75,7 @@ class SetGood extends Resource
                 DateTime::make(__('Updated At'), 'updated_at'),
             ]),
 
-            BelongsToMany::make(__('Goods'), 'goods', Good::class)
+            BelongsToMany::make(__('Items'), 'items', Item::class)
                 ->searchable()
                 ->fields(
                     function ($request, $relatedModel) {

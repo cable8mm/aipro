@@ -66,11 +66,11 @@ class SetGood extends Model
         return $this->morphOne(OptionGoodOption::class, 'optionGoodOptionable');
     }
 
-    public function goods(): BelongsToMany
+    public function items(): BelongsToMany
     {
-        return $this->belongsToMany(Good::class)
+        return $this->belongsToMany(Item::class, 'set_good_item')
             ->withPivot('quantity')
-            ->using(GoodSetGood::class);
+            ->using(SetGoodItem::class);
     }
 
     public static function findComCode(string $code): static
@@ -85,7 +85,7 @@ class SetGood extends Model
      */
     public function updateSpecificFields(): bool
     {
-        $goodsOfSetGoods = $this->goods();
+        $goodsOfSetGoods = $this->items();
 
         $setCodes = $goodsOfSetGoods->pluck('quantity', 'master_code')->toArray();
         $this->master_code = empty($setCodes) ? null : GoodCode::setCodeOf($setCodes)->code();

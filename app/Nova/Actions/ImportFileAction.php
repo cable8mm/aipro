@@ -4,7 +4,7 @@ namespace App\Nova\Actions;
 
 use App\Enums\ImportType;
 use App\Enums\Status;
-use App\Imports\GoodsImport;
+use App\Imports\ItemsImport;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Collection;
@@ -27,8 +27,8 @@ class ImportFileAction extends Action
         foreach ($models as $model) {
             try {
                 switch ($model->type) {
-                    case ImportType::GOOD->name:
-                        Excel::import(new GoodsImport, $model->attachment, 'public');
+                    case ImportType::ITEM->name:
+                        Excel::import(new ItemsImport, $model->attachment, 'public');
                         break;
                     case ImportType::ORDER_SHEET_WAYBILL->name:
                         Excel::import(new ImportOrdersFromOrderSheetWaybillAction, $model->attachment, 'public');
