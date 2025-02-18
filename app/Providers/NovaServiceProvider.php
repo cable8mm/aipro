@@ -72,20 +72,20 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             return [
                 MenuSection::dashboard(Main::class)->icon('home'),
 
-                MenuSection::make('상품/박스 관리', [
+                MenuSection::make(__('Items & Boxes'), [
                     MenuItem::resource(Item::class),
                     MenuItem::resource(Box::class),
                     MenuItem::resource(RegisterGoodRequest::class),
                 ])->icon('truck')->collapsable(),
 
-                MenuSection::make('주문 관리(주문서+출고)', [
+                MenuSection::make(__('Order & Shipping'), [
                     MenuItem::resource(OrderSheetWaybill::class),
                     MenuItem::resource(Order::class),
                     MenuItem::resource(OrderShipment::class),
                     MenuItem::resource(MismatchedOrderShipment::class),
                 ])->icon('archive')->collapsable(),
 
-                MenuSection::make('재고 관리(발주+입고)', [
+                MenuSection::make(__('Inventory & Warehousing'), [
                     MenuItem::resource(PlacingOrder::class),
                     MenuItem::resource(BoxPlacingOrder::class),
                     MenuItem::resource(ItemManualWarehousing::class),
@@ -94,12 +94,12 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                     MenuItem::resource(PlacingOrderBox::class),
                 ])->icon('cube')->collapsable(),
 
-                MenuSection::make('공급사/상품 관리', [
+                MenuSection::make(__('Suppliers'), [
                     MenuItem::resource(Supplier::class),
                     MenuItem::resource(BoxSupplier::class),
                 ])->icon('inbox-in')->collapsable(),
 
-                MenuSection::make('통계와 모니터링', [
+                MenuSection::make(__('Tracking'), [
                     MenuItem::resource(InventoryHistory::class),
                     MenuItem::resource(BoxInventoryHistory::class),
                 ])->icon('eye')->collapsable(),

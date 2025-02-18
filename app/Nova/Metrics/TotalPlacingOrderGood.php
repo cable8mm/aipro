@@ -2,7 +2,7 @@
 
 namespace App\Nova\Metrics;
 
-use App\Models\PlacingOrderGood;
+use App\Models\PlacingOrderItem;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Metrics\Value;
 use Laravel\Nova\Nova;
@@ -16,7 +16,7 @@ class TotalPlacingOrderGood extends Value
      */
     public function calculate(NovaRequest $request)
     {
-        return $this->count($request, PlacingOrderGood::class);
+        return $this->count($request, PlacingOrderItem::class);
     }
 
     /**

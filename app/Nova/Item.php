@@ -133,9 +133,9 @@ class Item extends Resource
     public function cards(NovaRequest $request)
     {
         return [
-            // new Metrics\GoodSumCostPrice,
-            // new Metrics\SellGoodsPerSafeClass,
-            // new Metrics\GoodsPerShutdown,
+            new Metrics\GoodSumCostPrice,
+            new Metrics\SellGoodsPerSafeClass,
+            new Metrics\GoodsPerShutdown,
         ];
     }
 
