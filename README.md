@@ -6,11 +6,11 @@
 ![Laravel 11.x](https://img.shields.io/badge/Laravel-%5E11.0-FF2D20?logo=Laravel&logoColor=FF2D20&labelColor=white)
 ![Laravel Nova 4.x](https://img.shields.io/badge/Nova-%5E4.0-00E2FE?logo=Laravel%20nova&logoColor=00E2FE&color=00E2FE)
 
-에이아이프로는 물류센터를 보유한 회사가 WMS(창고관리시스템)와 상품 정보를 최신 상태로 유지하며, 이를 벤더와 소비자에게 효과적으로 제공할 수 있도록 설계된 솔루션입니다. AI 기술과 모바일 도구를 활용하여 운영의 편의성을 높이고, 비용 효율적인 서비스를 제공합니다.
+AIPro is a solution designed for companies with warehouses to keep their WMS (Warehouse Management System) and product information up-to-date, providing this information effectively to vendors and customers. It leverages AI technology and mobile tools to enhance operational convenience and deliver cost-efficient services.
 
 ![Main Screen](docs/images/aipro_screen_main.png)*Main page*
 
-![Goods Screen](docs/images/aipro_screen_goods.png)*Goods List*
+![Goods Screen](docs/images/aipro_screen_items.png)*Goods List*
 
 ![API document](docs/images/aipro_screen_apidoc.png)*API Documents*
 
