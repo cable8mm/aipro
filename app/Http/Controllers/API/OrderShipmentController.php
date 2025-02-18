@@ -52,24 +52,4 @@ class OrderShipmentController extends Controller
             'count' => $count,
         ]);
     }
-
-    /**
-     * /order-shipments/clear-order/{orderNo}
-     *
-     * Clear current orders from order number
-     */
-    public function clearOrder(string $orderNo)
-    {
-        OrderShipment::where('orderNo', $orderNo)->update([
-            'OrderShipment.status' => "'상품준비중'",
-            'OrderShipment.confirmAmount' => 0,
-            'OrderShipment.boxes' => null,
-            'OrderShipment.invoiceCompany' => null,
-            'OrderShipment.invoiceNo' => null,
-        ]);
-
-        return response()->json([
-            'result' => 'success',
-        ]);
-    }
 }

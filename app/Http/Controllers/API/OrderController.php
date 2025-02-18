@@ -106,4 +106,24 @@ class OrderController extends Controller
 
         return response()->json([], 200);
     }
+
+    /**
+     * /orders/{order}/clear-order
+     *
+     * Clear current orders from order number
+     */
+    public function clearOrder(Order $order)
+    {
+        $order->updateOrFail([
+            'OrderShipment.status' => "'상품준비중'",
+            'OrderShipment.confirmAmount' => 0,
+            'OrderShipment.boxes' => null,
+            'OrderShipment.invoiceCompany' => null,
+            'OrderShipment.invoiceNo' => null,
+        ]);
+
+        return response()->json([
+            'result' => 'success',
+        ]);
+    }
 }

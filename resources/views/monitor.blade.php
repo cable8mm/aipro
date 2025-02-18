@@ -562,7 +562,7 @@
 		},
 
 		clearTempOrder: function() {
-			$.get("/api/order-shipments/clear-order/" + Shipping.orderInfo.orderNo + "/order-no", function(data) {
+			$.get("/api/orders/" + Shipping.orderInfo.orderNo + "/clear-order", function(data) {
 				if (data.result == "success") {
 					location.reload();
 				}

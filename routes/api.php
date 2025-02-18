@@ -15,9 +15,10 @@ Route::get('/user', function (Request $request) {
 
 Route::get('/generate-barcode/{barcodeNumber}', GenerateBarcodeController::class);
 
-Route::get('/orders/{order}/print', [OrderController::class, 'print']);
 Route::put('/orders/{order}', [OrderController::class, 'update']);
+Route::get('/orders/{order}/print', [OrderController::class, 'print']);
 Route::get('/orders/{order}/waybill', [OrderController::class, 'waybill']);
+Route::get('/orders/{order}/clear-order', [OrderController::class, 'clearOrder']);
 
 Route::get('/order-sheet-invoices/{orderSheetInvoice}/print', [OrderSheetInvoiceController::class, 'print']);
 
@@ -30,6 +31,5 @@ Route::post('/goods/{good}/balance-by-barcode', [GoodController::class, 'balance
 
 Route::get('/order-shipments/order/{id}', [OrderShipmentController::class, 'order']);
 Route::get('/order-shipments/pause', [OrderShipmentController::class, 'pause']);
-Route::get('/order-shipments/clear-order/{orderNo}/order-no', [OrderShipmentController::class, 'clearOrder']);
 
 Route::get('/box/{code}', [BoxController::class, 'showByCode']);
