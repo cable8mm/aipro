@@ -2,7 +2,7 @@
 
 namespace App\Nova\Actions;
 
-use App\Enums\OrderSheetInvoiceStatus;
+use App\Enums\OrderSheetWaybillStatus;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Collection;
@@ -10,7 +10,7 @@ use Laravel\Nova\Actions\Action;
 use Laravel\Nova\Fields\ActionFields;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
-class OrderShipmentInvoiceResetAction extends Action
+class OrderShipmentWaybillResetAction extends Action
 {
     use InteractsWithQueue, Queueable;
 
@@ -22,7 +22,7 @@ class OrderShipmentInvoiceResetAction extends Action
     public function handle(ActionFields $fields, Collection $models)
     {
         /**
-         * @var \App\Models\OrderSheetInvoice $model
+         * @var \App\Models\OrderSheetWaybill $model
          */
         foreach ($models as $model) {
             $model->mismatchedOrderShipments()->delete();
@@ -30,7 +30,7 @@ class OrderShipmentInvoiceResetAction extends Action
             $model->OrderShipments()->delete();
 
             $model->update([
-                'status' => OrderSheetInvoiceStatus::FILE_UPLOADED->name,
+                'status' => OrderSheetWaybillStatus::FILE_UPLOADED->name,
                 'row_count' => null,
                 'order_count' => null,
                 'order_good_count' => null,

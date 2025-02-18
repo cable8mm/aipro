@@ -20,7 +20,7 @@ use App\Nova\MismatchedOrderShipment;
 use App\Nova\OptionGood;
 use App\Nova\OptionGoodOption;
 use App\Nova\Order;
-use App\Nova\OrderSheetInvoice;
+use App\Nova\OrderSheetWaybill;
 use App\Nova\OrderShipment;
 use App\Nova\PickingZone;
 use App\Nova\PlacingOrder;
@@ -79,7 +79,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 ])->icon('truck')->collapsable(),
 
                 MenuSection::make('주문 관리(주문서+출고)', [
-                    MenuItem::resource(OrderSheetInvoice::class),
+                    MenuItem::resource(OrderSheetWaybill::class),
                     MenuItem::resource(Order::class),
                     MenuItem::resource(OrderShipment::class),
                     MenuItem::resource(MismatchedOrderShipment::class),

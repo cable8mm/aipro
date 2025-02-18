@@ -28,8 +28,8 @@
 						Shipping.scanned = false;
 
 						// 송장입력모드이면
-						if (Shipping.scanMode == 'invoice') {
-							Shipping.setInvoice(barcode);
+						if (Shipping.scanMode == 'waybill') {
+							Shipping.setWaybill(barcode);
 							Shipping.scanMode = 'normal';
 							return;
 						}
@@ -58,7 +58,7 @@
 									Shipping.clearTempOrder();
 									break;
 								case "90000001000064": // 송장입력
-									Shipping.scanMode = "invoice";
+									Shipping.scanMode = "waybill";
 									break;
 								case "90000001000095": // 스크롤업
 									$('html, body').animate({
@@ -105,7 +105,7 @@
 
 							Shipping.getOrderDetail(
 								barcode
-							); // 주문번호(OrderShipment.id) 혹은 송장 번호(OrderShipment.invoiceNo)
+							); // 주문번호(OrderShipment.id) 혹은 송장 번호(OrderShipment.waybillNo)
 
 						} else { // 상품 완료
 
@@ -219,28 +219,28 @@
 			$("#box-item").tmpl(data).appendTo(".boxes");
 		},
 
-		setInvoice: function(barcode) {
+		setWaybill: function(barcode) {
 			if (!Shipping.orderNo) {
 				Shipping.showWarning("주문서 바코드를 먼저 스캔하세요.");
 				$("#barcode").val("");
 				return;
 			}
 			$('html, body').animate({
-				scrollTop: $(".invoices").offset().top
+				scrollTop: $(".waybills").offset().top
 			}, 500);
 
-			$(".invoices .message").remove();
+			$(".waybills .message").remove();
 
-			if ($("tr[data-invoice='" + barcode + "']").length > 0) {
+			if ($("tr[data-waybill='" + barcode + "']").length > 0) {
 				return;
 			}
 
 			var data = {
-				no: $(".invoices tr").length + 1,
-				invoice: barcode,
+				no: $(".waybills tr").length + 1,
+				waybill: barcode,
 			};
 
-			$("#invoice-item").tmpl(data).appendTo(".invoices");
+			$("#waybill-item").tmpl(data).appendTo(".waybills");
 		},
 
 		confirmGoods: function(barcode, force) {
@@ -346,10 +346,10 @@
 					}
 					$(".goods").empty();
 					$(".boxes").empty();
-					$(".invoices").empty();
+					$(".waybills").empty();
 
 					$("#box-message").tmpl().appendTo(".boxes");
-					$("#invoice-message").tmpl().appendTo(".invoices");
+					$("#waybill-message").tmpl().appendTo(".waybills");
 
 					$("footer .order-info").show();
 
@@ -386,19 +386,19 @@
 						});
 					}
 
-					if (order.invoiceNo) {
-						var invoiceNos = order.invoiceNo.split(",");
+					if (order.waybillNo) {
+						var waybillNos = order.waybillNo.split(",");
 
-						$(".invoices .message").remove();
+						$(".waybills .message").remove();
 
-						$(invoiceNos).each(function() {
+						$(waybillNos).each(function() {
 
 							var data = {
-								no: $(".invoices tr").length + 1,
-								invoice: this,
+								no: $(".waybills tr").length + 1,
+								waybill: this,
 							};
 
-							$("#invoice-item").tmpl(data).appendTo(".invoices");
+							$("#waybill-item").tmpl(data).appendTo(".waybills");
 						});
 					}
 
@@ -447,7 +447,7 @@
 
 			var items = [];
 			var boxes = [];
-			var invoices = [];
+			var waybills = [];
 
 			$(".goods tr").each(function() {
 				if ($(this).data("id")) {
@@ -473,9 +473,9 @@
 				}
 			});
 
-			$(".invoices tr").each(function() {
-				if ($(this).data('invoice')) {
-					invoices.push($(this).data('invoice'));
+			$(".waybills tr").each(function() {
+				if ($(this).data('waybill')) {
+					waybills.push($(this).data('waybill'));
 				}
 
 			});
@@ -503,7 +503,7 @@
 
 			}
 
-			if (invoices.length == 0) {
+			if (waybills.length == 0) {
 				Shipping.showWarning("송장번호가 입력되지 않았습니다.");
 				return;
 			}
@@ -513,7 +513,7 @@
 				orderNo: Shipping.orderInfo.orderNo,
 				items: items,
 				boxes: boxes,
-				invoices: invoices,
+				waybills: waybills,
 				validator: Shipping.validatorId,
 			};
 
@@ -592,7 +592,7 @@
 </header>
 <div class="content-wrap">
 	<style>
-		.invoice-barcodes {
+		.waybill-barcodes {
 			text-align: center;
 			color: #000;
 			background: #eee;
@@ -601,16 +601,16 @@
 			display: none;
 		}
 
-		.invoice-barcodes strong {
+		.waybill-barcodes strong {
 			display: inline-block;
 			background: #fff;
 		}
 
-		.invoice-barcodes img {
+		.waybill-barcodes img {
 			width: 400px;
 		}
 	</style>
-	<div class="invoice-barcodes">
+	<div class="waybill-barcodes">
 		<strong>
 			<label>출력완료</label>
 			<img src="/api/generate-barcode/100012" />
@@ -666,12 +666,12 @@
 				</table>
 			</td>
 			<td>
-				<table class="list-invoice" cellpadding="0" cellspacing="0">
+				<table class="list-waybill" cellpadding="0" cellspacing="0">
 					<tr>
 						<th>순서</th>
 						<th>송장</th>
 					</tr>
-					<tbody class="invoices">
+					<tbody class="waybills">
 						<tr class="message">
 							<td colspan="2" class="placeholder">송장 바코드를 스캔하세요.</td>
 						</tr>
@@ -754,13 +754,13 @@
 	</tr>
 </script>
 
-<script type="text/html" id="invoice-item">
-	<tr data-invoice="${invoice}">
+<script type="text/html" id="waybill-item">
+	<tr data-waybill="${waybill}">
 		<td class="center">${no}</td>
-		<td class="center">${invoice}</td>
+		<td class="center">${waybill}</td>
 	</tr>
 </script>
-<script type="text/html" id="invoice-message">
+<script type="text/html" id="waybill-message">
 	<tr class="message">
 		<td colspan="2" class="placeholder">송장 바코드를 스캔하세요.</td>
 	</tr>

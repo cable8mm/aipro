@@ -14,7 +14,7 @@ class MismatchedOrderShipment implements Arrayable
     public function __construct(
         OrderShipment $orderShipment
     ) {
-        $this->container['order_sheet_invoice_id'] = $orderShipment->data->get('order_sheet_invoice_id');
+        $this->container['order_sheet_waybill_id'] = $orderShipment->data->get('order_sheet_waybill_id');
         $this->container['order_no'] = $orderShipment->data->get('orderNo');
         $this->container['site'] = $orderShipment->data->get('site');
         $this->container['master_goods_cd'] = $orderShipment->data->get('masterGoodsCd');

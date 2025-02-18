@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-class OrderSheetInvoice extends Model
+class OrderSheetWaybill extends Model
 {
     use HasFactory;
 
@@ -29,17 +29,17 @@ class OrderSheetInvoice extends Model
             'order_sheet_file' => 'string',
             'order_sheet_file_name' => 'string',
             'order_sheet_file_size' => 'integer',
-            'invoice_file' => 'string',
-            'invoice_file_name' => 'string',
-            'invoice_file_size' => 'integer',
+            'waybill_file' => 'string',
+            'waybill_file_name' => 'string',
+            'waybill_file_size' => 'integer',
             'excel_json' => 'json',
         ];
     }
 
     protected static function booted(): void
     {
-        static::creating(function (OrderSheetInvoice $orderSheetInvoice) {
-            $orderSheetInvoice->author_id = $orderSheetInvoice->author_id ?? Auth::user()->id;
+        static::creating(function (OrderSheetWaybill $orderSheetWaybill) {
+            $orderSheetWaybill->author_id = $orderSheetWaybill->author_id ?? Auth::user()->id;
         });
     }
 
@@ -73,7 +73,7 @@ class OrderSheetInvoice extends Model
         return $this->hasManyThrough(
             Good::class,
             OrderShipment::class,
-            'order_sheet_invoice_id',
+            'order_sheet_waybill_id',
             'master_code',
             'id',
             'masterGoodsCd'
@@ -87,7 +87,7 @@ class OrderSheetInvoice extends Model
      *
      * @return array<int,string> The method returns a collection with siteOrderNo and order_good_count
      *
-     * @example $orderSheetInvoice->ordersWithSiteOrderNo() => [["id"=>193572321, "order_good_count"=>3], ["id"=>202010058612779, "order_good_count"=>1], ...]
+     * @example $orderSheetWaybill->ordersWithSiteOrderNo() => [["id"=>193572321, "order_good_count"=>3], ["id"=>202010058612779, "order_good_count"=>1], ...]
      */
     public function ordersWithSiteOrderNo(): array
     {
@@ -95,12 +95,12 @@ class OrderSheetInvoice extends Model
             ->select(
                 DB::raw('orderNo as id'),
                 DB::raw('count(*) as order_good_count'),
-                DB::raw('GROUP_CONCAT(DISTINCT `invoiceNo`) as invoice_numbers'),
-                'order_sheet_invoice_id'
+                DB::raw('GROUP_CONCAT(DISTINCT `waybillNo`) as waybill_numbers'),
+                'order_sheet_waybill_id'
             )
-            ->groupBy('orderNo', 'order_sheet_invoice_id')
+            ->groupBy('orderNo', 'order_sheet_waybill_id')
             ->get()
-            ->select(['id', 'order_good_count', 'invoice_numbers', 'order_sheet_invoice_id'])
+            ->select(['id', 'order_good_count', 'waybill_numbers', 'order_sheet_waybill_id'])
             ->toArray();
     }
 }

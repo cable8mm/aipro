@@ -9,25 +9,25 @@ use Cable8mm\Waybill\Waybill;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Storage;
 
-class OrderSheetInvoiceSeeder extends Seeder
+class OrderSheetWaybillSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Storage::disk('local')->makeDirectory('invoices');
+        Storage::disk('local')->makeDirectory('waybills');
 
         Waybill::of(ParcelService::Cj)
-            ->path(storage_path('app/private/invoices'))
-            ->save('order_sheet_invoice.pdf');
+            ->path(storage_path('app/private/waybills'))
+            ->save('order_sheet_waybill.pdf');
 
         OrderSheet::of(OrderSheetType::PlayautoType)
             ->count(10)
             ->header()
-            ->path(storage_path('app/private/invoices'))
-            ->xlsx('order_sheet_invoice_simple.xlsx');
+            ->path(storage_path('app/private/waybills'))
+            ->xlsx('order_sheet_waybill_simple.xlsx');
 
-        \App\Models\OrderSheetInvoice::factory()->count(10)->create();
+        \App\Models\OrderSheetWaybill::factory()->count(10)->create();
     }
 }

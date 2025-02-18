@@ -30,8 +30,8 @@ class ImportFileAction extends Action
                     case ImportType::GOOD->name:
                         Excel::import(new GoodsImport, $model->attachment, 'public');
                         break;
-                    case ImportType::ORDER_SHEET_INVOICE->name:
-                        Excel::import(new ImportOrdersFromOrderSheetInvoiceAction, $model->attachment, 'public');
+                    case ImportType::ORDER_SHEET_WAYBILL->name:
+                        Excel::import(new ImportOrdersFromOrderSheetWaybillAction, $model->attachment, 'public');
                         break;
                     default:
                         throw new \Exception(__('Invalid import type.'));

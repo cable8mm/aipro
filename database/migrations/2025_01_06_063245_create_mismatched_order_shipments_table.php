@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('mismatched_order_shipments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('author_id')->comment('등록자');
-            $table->foreignId('order_sheet_invoice_id')->nullable();
+            $table->foreignId('order_sheet_waybill_id')->nullable();
             $table->string('order_no', 100)->nullable()->comment('주문고유번호');
             $table->string('site', 100)->nullable()->comment('판매사이트');
             $table->string('master_goods_cd', 100)->nullable()->comment('마스터상품코드');

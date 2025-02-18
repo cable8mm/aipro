@@ -16,7 +16,7 @@ class OrderShipment extends Model
     protected function casts(): array
     {
         return [
-            'order_sheet_invoice_id' => 'integer',
+            'order_sheet_waybill_id' => 'integer',
             'orderNo' => 'string',
             'site' => 'string',
             'registDate' => 'string',
@@ -49,11 +49,11 @@ class OrderShipment extends Model
             'receiverCellPhone' => 'string',
             'postcode' => 'string',
             'address' => 'string',
-            'invoiceCompany' => 'string',
-            'invoiceNo' => 'string',
-            'invoiceFilePath' => 'string',
-            'invoiceFilePage' => 'integer',
-            'invoiceGoodsCd' => 'string',
+            'waybillCompany' => 'string',
+            'waybillNo' => 'string',
+            'waybillFilePath' => 'string',
+            'waybillFilePage' => 'integer',
+            'waybillGoodsCd' => 'string',
             'payGoodsCd' => 'string',
             'masterGoodsCd' => 'string',
             'validator' => 'integer',
@@ -73,9 +73,9 @@ class OrderShipment extends Model
         ];
     }
 
-    public function orderSheetInvoice(): BelongsTo
+    public function orderSheetWaybill(): BelongsTo
     {
-        return $this->belongsTo(OrderSheetInvoice::class);
+        return $this->belongsTo(OrderSheetWaybill::class);
     }
 
     public function orderShipments(): HasMany

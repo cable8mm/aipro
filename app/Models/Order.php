@@ -14,7 +14,7 @@ class Order extends Model
 {
     use Actionable, HasFactory;
 
-    protected $with = ['orderSheetInvoice'];
+    protected $with = ['orderSheetWaybill'];
 
     protected function casts(): array
     {
@@ -26,9 +26,9 @@ class Order extends Model
         ];
     }
 
-    public function orderSheetInvoice(): BelongsTo
+    public function orderSheetWaybill(): BelongsTo
     {
-        return $this->belongsTo(OrderSheetInvoice::class);
+        return $this->belongsTo(OrderSheetWaybill::class);
     }
 
     public function orderShipments(): HasMany

@@ -2,11 +2,11 @@
 
 namespace App\Nova;
 
-use App\Enums\OrderSheetInvoiceStatus;
+use App\Enums\OrderSheetWaybillStatus;
 use App\Nova\Actions\ChangeStatusAction;
-use App\Nova\Actions\ImportOrdersFromOrderSheetInvoiceAction;
-use App\Nova\Actions\OrderShipmentInvoiceResetAction;
-use App\Nova\Actions\PrintOrderSheetInvoice;
+use App\Nova\Actions\ImportOrdersFromOrderSheetWaybillAction;
+use App\Nova\Actions\OrderShipmentWaybillResetAction;
+use App\Nova\Actions\PrintOrderSheetWaybill;
 use App\Traits\NovaAuthorizedByWarehouser;
 use Illuminate\Support\Number as SupportNumber;
 use Illuminate\Validation\Rules\File as RulesFile;
@@ -21,16 +21,16 @@ use Laravel\Nova\Fields\Status as FieldsStatus;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
-class OrderSheetInvoice extends Resource
+class OrderSheetWaybill extends Resource
 {
     use NovaAuthorizedByWarehouser;
 
     /**
      * The model the resource corresponds to.
      *
-     * @var class-string<\App\Models\OrderSheetInvoice>
+     * @var class-string<\App\Models\OrderSheetWaybill>
      */
-    public static $model = \App\Models\OrderSheetInvoice::class;
+    public static $model = \App\Models\OrderSheetWaybill::class;
 
     /**
      * The columns that should be searched.
@@ -74,32 +74,32 @@ class OrderSheetInvoice extends Resource
                 ])
                 ->help(__('Upload an Excel file (xlsx, xls, csv)'))
                 ->disk('local')
-                ->path('invoices')
+                ->path('waybills')
                 ->storeOriginalName('order_sheet_file_name')
                 ->storeSize('order_sheet_file_size')
                 ->prunable(),
 
-            File::make(__('Invoice File'), 'invoice_file')
+            File::make(__('Waybill File'), 'waybill_file')
                 ->creationRules([
                     RulesFile::types(['pdf'])->max(48 * 1024),
                 ])
                 ->updateRules([
                     RulesFile::types(['pdf'])->max(48 * 1024),
                 ])
-                ->help(__('Upload Invoice file (pdf)'))
+                ->help(__('Upload Waybill file (pdf)'))
                 ->disk('local')
-                ->path('invoices')
+                ->path('waybills')
                 ->disk('test')
-                ->path('uploads/invoices')
-                ->storeOriginalName('invoice_file_name')
-                ->storeSize('invoice_file_size')
+                ->path('uploads/waybills')
+                ->storeOriginalName('waybill_file_name')
+                ->storeSize('waybill_file_size')
                 ->prunable(),
 
-            Stack::make(__('Order Sheet File').' & '.__('Invoice File Name'), [
+            Stack::make(__('Order Sheet File').' & '.__('Waybill File Name'), [
                 Text::make(__('Order Sheet File Name'), 'order_sheet_file_name')
                     ->exceptOnForms(),
 
-                Text::make(__('Invoice File Name'), 'invoice_file_name')
+                Text::make(__('Waybill File Name'), 'waybill_file_name')
                     ->exceptOnForms(),
             ]),
 
@@ -110,7 +110,7 @@ class OrderSheetInvoice extends Resource
                         return $value ? SupportNumber::fileSize($value, precision: 2) : '-';
                     }),
 
-                Number::make(__('Invoice File Size'), 'invoice_file_size')
+                Number::make(__('Waybill File Size'), 'waybill_file_size')
                     ->exceptOnForms()
                     ->displayUsing(function ($value) {
                         return $value ? SupportNumber::fileSize($value, precision: 2) : '-';
@@ -118,13 +118,13 @@ class OrderSheetInvoice extends Resource
             ]),
 
             FieldsStatus::make(__('Status'), 'status')
-                ->default(OrderSheetInvoiceStatus::FILE_UPLOADED->name)
-                ->loadingWhen(OrderSheetInvoiceStatus::loadingWhen())
-                ->failedWhen(OrderSheetInvoiceStatus::failedWhen())
+                ->default(OrderSheetWaybillStatus::FILE_UPLOADED->name)
+                ->loadingWhen(OrderSheetWaybillStatus::loadingWhen())
+                ->failedWhen(OrderSheetWaybillStatus::failedWhen())
                 ->filterable(function ($request, $query, $value, $attribute) {
                     $query->where($attribute, $value);
                 })->displayUsing(function ($value) {
-                    return OrderSheetInvoiceStatus::{$value}->value() ?? '-';
+                    return OrderSheetWaybillStatus::{$value}->value() ?? '-';
                 }),
             Stack::make(__('Created At').' & '.__('Updated At'), [
                 DateTime::make(__('Created At'), 'created_at'),
@@ -175,20 +175,20 @@ class OrderSheetInvoice extends Resource
     public function actions(NovaRequest $request)
     {
         return [
-            (new ImportOrdersFromOrderSheetInvoiceAction)->showInline(),
-            (new ChangeStatusAction(OrderSheetInvoiceStatus::CANCEL))->showInline(),
-            (new OrderShipmentInvoiceResetAction)->showInline(),
-            (new PrintOrderSheetInvoice)->showInline(),
+            (new ImportOrdersFromOrderSheetWaybillAction)->showInline(),
+            (new ChangeStatusAction(OrderSheetWaybillStatus::CANCEL))->showInline(),
+            (new OrderShipmentWaybillResetAction)->showInline(),
+            (new PrintOrderSheetWaybill)->showInline(),
         ];
     }
 
     public static function label()
     {
-        return __('Order Sheet Invoice');
+        return __('Order Sheet Waybill');
     }
 
     public function title()
     {
-        return __('Order Sheet Invoice').' '.'#'.$this->id;
+        return __('Order Sheet Waybill').' '.'#'.$this->id;
     }
 }

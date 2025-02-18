@@ -40,7 +40,7 @@ class Order extends Resource
      */
     public static $search = [
         'id',
-        'orderSheetInvoice.id',
+        'orderSheetWaybill.id',
     ];
 
     /**
@@ -52,7 +52,7 @@ class Order extends Resource
     {
         return [
             ID::make(__('Order Number'), 'id')->sortable(),
-            BelongsTo::make(__('Order Sheet Invoice'), 'orderSheetInvoice', OrderSheetInvoice::class),
+            BelongsTo::make(__('Order Sheet Waybill'), 'orderSheetWaybill', OrderSheetWaybill::class),
             MultiSelect::make(__('Type'), 'type')->options(OrderType::array())
                 ->rules('required')->required()->displayUsingLabels()->filterable(),
             Number::make(__('Order Good Count'), 'order_good_count')->displayUsing(function ($value) {
@@ -63,7 +63,7 @@ class Order extends Resource
             Number::make(__('Printed Count'), 'printed_count')->displayUsing(function ($value) {
                 return number_format($value);
             })->exceptOnForms(),
-            Text::make(__('Invoice Numbers'), 'invoice_numbers'),
+            Text::make(__('Waybill Numbers'), 'waybill_numbers'),
             DateTime::make(__('Created At'), 'created_at')->exceptOnForms(),
             DateTime::make(__('Updated At'), 'updated_at')->exceptOnForms(),
 

@@ -11,9 +11,9 @@ class OrderShipmentController extends Controller
     /**
      * /order-shipments/order/{id}
      *
-     * You can use this method by passing the `OrderShipment.id` of the order or the name of the `OrderShipment.invoiceNo`
+     * You can use this method by passing the `OrderShipment.id` of the order or the name of the `OrderShipment.waybillNo`
      *
-     * @param  int  $id  order_shipment.id 값 || order_shipment.invoiceNo 값
+     * @param  int  $id  order_shipment.id 값 || order_shipment.waybillNo 값
      * @return JSON
      */
     public function order($id)
@@ -26,8 +26,8 @@ class OrderShipmentController extends Controller
 
         if (OrderShipment::where('id', $id)->exists()) {
             $order = OrderShipment::find($id);
-        } elseif (OrderShipment::where('invoiceNo', $id)->exists()) {
-            $order = OrderShipment::where('invoiceNo', $id)->first();
+        } elseif (OrderShipment::where('waybillNo', $id)->exists()) {
+            $order = OrderShipment::where('waybillNo', $id)->first();
         }
 
         if (empty($order)) {

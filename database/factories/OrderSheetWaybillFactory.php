@@ -2,14 +2,14 @@
 
 namespace Database\Factories;
 
-use App\Enums\OrderSheetInvoiceStatus;
+use App\Enums\OrderSheetWaybillStatus;
 use Database\Seeders\UserSeeder;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
  */
-class OrderSheetInvoiceFactory extends Factory
+class OrderSheetWaybillFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -20,14 +20,14 @@ class OrderSheetInvoiceFactory extends Factory
     {
         return [
             'author_id' => fake()->numberBetween(1, UserSeeder::COUNT),
-            'order_sheet_file' => 'invoices/order_sheet_invoice_simple.xlsx',
-            'order_sheet_file_name' => 'order_sheet_invoice.xls',
+            'order_sheet_file' => 'waybills/order_sheet_waybill_simple.xlsx',
+            'order_sheet_file_name' => 'order_sheet_waybill.xls',
             'order_sheet_file_size' => fake()->randomNumber(8, true),
-            'invoice_file' => 'invoices/order_sheet_invoice.pdf',
-            'invoice_file_name' => 'order_sheet_invoice.pdf',
-            'invoice_file_size' => fake()->randomNumber(8, true),
+            'waybill_file' => 'waybills/order_sheet_waybill.pdf',
+            'waybill_file_name' => 'order_sheet_waybill.pdf',
+            'waybill_file_size' => fake()->randomNumber(8, true),
             'excel_json' => fake()->words(10),
-            'status' => OrderSheetInvoiceStatus::FILE_UPLOADED->name,
+            'status' => OrderSheetWaybillStatus::FILE_UPLOADED->name,
         ];
     }
 }

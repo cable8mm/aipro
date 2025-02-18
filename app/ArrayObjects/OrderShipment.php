@@ -21,10 +21,10 @@ class OrderShipment implements Arrayable
     public function __construct(
         Collection $row,
         int $id,
-        int $invoiceFilePage
+        int $waybillFilePage
     ) {
         $this->data = new Collection([
-            'order_sheet_invoice_id' => $id,
+            'order_sheet_waybill_id' => $id,
             // 주문고유번호
             'orderNo' => $row[0],
             // 판매사이트명
@@ -98,9 +98,9 @@ class OrderShipment implements Arrayable
             // 배송메세지
             'deliveryMemo' => $row[39],
             // 배송사명
-            'invoiceCompany' => $row[40],
+            'waybillCompany' => $row[40],
             // 송장번호
-            'invoiceNo' => $row[41],
+            'waybillNo' => $row[41],
             // 마스터상품코드
             'masterGoodsCd' => $row[42],
             // 주의메세지
@@ -113,7 +113,7 @@ class OrderShipment implements Arrayable
                 ? $row[42]
                 : ($row[44] != $row[42] ? $row[42] : $row[44]),
             // 운송장 파일 페이지 번호
-            'invoiceFilePage' => $invoiceFilePage,
+            'waybillFilePage' => $waybillFilePage,
         ]);
 
         /**
@@ -185,8 +185,8 @@ class OrderShipment implements Arrayable
         return $this->containers;
     }
 
-    public static function of(Collection $row, int $id, int $invoiceFilePage): static
+    public static function of(Collection $row, int $id, int $waybillFilePage): static
     {
-        return new static($row, $id, $invoiceFilePage);
+        return new static($row, $id, $waybillFilePage);
     }
 }

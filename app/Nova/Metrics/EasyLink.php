@@ -34,7 +34,7 @@ class EasyLink extends Table
                 ->subtitle('플레이오토에서 받은 주문서 엑셀을 업로드 하세요.')
                 ->actions(function () {
                     return [
-                        MenuItem::externalLink('바로가기', '/nova/resources/order-sheet-invoices/new'),
+                        MenuItem::externalLink('바로가기', '/nova/resources/order-sheet-waybills/new'),
                     ];
                 }),
         ];

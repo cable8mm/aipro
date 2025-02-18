@@ -39,7 +39,7 @@ class MismatchedOrderShipment extends Resource
      */
     public static $search = [
         'id',
-        'OrderSheetInvoice.id',
+        'OrderSheetWaybill.id',
     ];
 
     /**
@@ -51,7 +51,7 @@ class MismatchedOrderShipment extends Resource
     {
         return [
             ID::make()->sortable(),
-            BelongsTo::make(__('Order Sheet Invoice'), 'orderSheetInvoice', OrderSheetInvoice::class),
+            BelongsTo::make(__('Order Sheet Waybill'), 'orderSheetWaybill', OrderSheetWaybill::class),
             Text::make(__('Order No'), 'order_no')->maxlength(100)->copyable(),
             Text::make(__('Site'), 'site')->maxlength(100),
             Text::make(__('Master Goods Cd'), 'master_goods_cd')->maxlength(100)->copyable(),

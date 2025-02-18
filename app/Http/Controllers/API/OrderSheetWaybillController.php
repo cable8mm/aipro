@@ -3,21 +3,21 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Models\OrderSheetInvoice;
+use App\Models\OrderSheetWaybill;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf;
 use OutOfRangeException;
 
-class OrderSheetInvoiceController extends Controller
+class OrderSheetWaybillController extends Controller
 {
     /**
-     * /order-sheet-invoice/{orderSheetInvoice}/print
+     * /order-sheet-waybill/{orderSheetWaybill}/print
      *
-     * Print the order sheet invoice
+     * Print the order sheet waybill
      *
-     * @param  \App\Models\OrderSheetInvoice  $orderSheetInvoice  The Order Sheet Invoice instance to print
+     * @param  \App\Models\OrderSheetWaybill  $orderSheetWaybill  The Order Sheet waybill instance to print
      * @return \Illuminate\Http\Response The method returns the response object with printing
      */
-    public function print(OrderSheetInvoice $orderSheetInvoice)
+    public function print(OrderSheetWaybill $orderSheetWaybill)
     {
         $layout = '
         <htmlpageheader name="myHTMLHeaderOdd" style="display:none">
@@ -32,18 +32,18 @@ class OrderSheetInvoiceController extends Controller
 
         $pdf = LaravelMpdf::loadHTML($layout);
 
-        foreach ($orderSheetInvoice->orders as $order) {
+        foreach ($orderSheetWaybill->orders as $order) {
             if (! isset($order->latestOrderShipment)) {
                 throw new OutOfRangeException(__('Order #:order_id must have a order shipment.', ['order_id' => $order->id]));
             }
 
             $pdf->getMpdf()->WriteHTML(
-                view('pdf.order_invoice', [
+                view('pdf.order_waybill', [
                     'order' => $order,
                 ])
             );
 
-            if ($order !== $orderSheetInvoice->orders->last()) {
+            if ($order !== $orderSheetWaybill->orders->last()) {
                 $pdf->getMpdf()->WriteHTML('<pagebreak />');
             }
         }

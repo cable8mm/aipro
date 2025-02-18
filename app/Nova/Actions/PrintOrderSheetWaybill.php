@@ -10,7 +10,7 @@ use Laravel\Nova\Actions\ActionResponse;
 use Laravel\Nova\Fields\ActionFields;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
-class PrintOrderSheetInvoice extends Action
+class PrintOrderSheetWaybill extends Action
 {
     use InteractsWithQueue, Queueable;
 
@@ -22,7 +22,7 @@ class PrintOrderSheetInvoice extends Action
     public function handle(ActionFields $fields, Collection $models)
     {
         foreach ($models as $model) {
-            return ActionResponse::openInNewTab('/api/print/order-sheet-invoice/'.$model->id);
+            return ActionResponse::openInNewTab('/api/print/order-sheet-waybill/'.$model->id);
         }
     }
 
@@ -38,6 +38,6 @@ class PrintOrderSheetInvoice extends Action
 
     public function name()
     {
-        return __('Print Order Sheet Invoice');
+        return __('Print Order Sheet Waybill');
     }
 }

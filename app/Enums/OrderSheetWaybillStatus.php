@@ -4,7 +4,7 @@ namespace App\Enums;
 
 use Cable8mm\EnumGetter\EnumGetter;
 
-enum OrderSheetInvoiceStatus: string
+enum OrderSheetWaybillStatus: string
 {
     use EnumGetter;
 

@@ -122,7 +122,7 @@
         "outl1ne/nova-multiselect-filter": "Provides Laravel Nova filter for Multiselect field.",
         "outl1ne/nova-sortable": "Provides a sort order function into OptionGoodOptions object",
         "picqer/php-barcode-generator": "Required to generate a barcode",
-        "carlos-meneses/laravel-mpdf": "Required to generate PDF files for invoices and barcode",
+        "carlos-meneses/laravel-mpdf": "Required to generate PDF files for waybills and barcode",
         "cable8mm/order-sheet": "Provides making `order-sheet` excel files",
         "cable8mm/waybill": "Provides a waybill pdf for making seeders"
     },

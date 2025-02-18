@@ -1,6 +1,6 @@
 <?php
 
-use App\Enums\OrderSheetInvoiceStatus;
+use App\Enums\OrderSheetWaybillStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,7 +12,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('order_sheet_invoices', function (Blueprint $table) {
+        Schema::create('order_sheet_waybills', function (Blueprint $table) {
             $table->id();
             $table->foreignId('author_id');
             $table->unsignedBigInteger('row_count')->nullable()->comment('주문 행수');
@@ -21,11 +21,11 @@ return new class extends Migration
             $table->string('order_sheet_file', 255)->comment('주문서파일');
             $table->string('order_sheet_file_name')->comment('주문서파일 이름');
             $table->unsignedBigInteger('order_sheet_file_size')->comment('주문서파일 사이즈');
-            $table->string('invoice_file', 255)->comment('운송장파일');
-            $table->string('invoice_file_name')->comment('운송장파일 이름');
-            $table->unsignedBigInteger('invoice_file_size')->comment('운송장파일 사이즈');
+            $table->string('waybill_file', 255)->comment('운송장파일');
+            $table->string('waybill_file_name')->comment('운송장파일 이름');
+            $table->unsignedBigInteger('waybill_file_size')->comment('운송장파일 사이즈');
             $table->json('excel_json')->nullable();
-            $table->string('status', 50)->nullable()->default(OrderSheetInvoiceStatus::FILE_UPLOADED)->comment('에러,파일업로드,정상확인완료,주문서입력완료');
+            $table->string('status', 50)->nullable()->default(OrderSheetWaybillStatus::FILE_UPLOADED)->comment('에러,파일업로드,정상확인완료,주문서입력완료');
             $table->timestamps();
         });
     }
@@ -35,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('order_sheet_invoices');
+        Schema::dropIfExists('order_sheet_waybills');
     }
 };

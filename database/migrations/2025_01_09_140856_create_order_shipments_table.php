@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('order_shipments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('order_sheet_invoice_id')->nullable();
+            $table->foreignId('order_sheet_waybill_id')->nullable();
             $table->string('orderNo', 255)->nullable()->comment('주문고유번호');
             $table->string('site', 255)->nullable()->comment('판매사이트');
             $table->string('registDate', 255)->nullable()->comment('수집일');
@@ -47,11 +47,11 @@ return new class extends Migration
             $table->string('postcode', 255)->nullable()->comment('배송지우편번호');
             $table->string('address', 255)->nullable()->comment('배송지주소');
             $table->text('deliveryMemo')->nullable()->comment('배송메시지');
-            $table->string('invoiceCompany', 255)->nullable()->comment('배송사명');
-            $table->string('invoiceNo', 255)->nullable()->comment('송장번호');
-            $table->string('invoiceFilePath', 255)->nullable();
-            $table->unsignedInteger('invoiceFilePage')->nullable();
-            $table->string('invoiceGoodsCd', 255)->nullable()->comment('주문서 상품코드');
+            $table->string('waybillCompany', 255)->nullable()->comment('배송사명');
+            $table->string('waybillNo', 255)->nullable()->comment('송장번호');
+            $table->string('waybillFilePath', 255)->nullable();
+            $table->unsignedInteger('waybillFilePage')->nullable();
+            $table->string('waybillGoodsCd', 255)->nullable()->comment('주문서 상품코드');
             $table->string('payGoodsCd', 190)->nullable()->comment('결제용마스터상품코드, 일반상품/세트상품 코드가 저장됨');
             $table->string('masterGoodsCd', 255)->nullable()->comment('마스터상품코드');
             $table->text('memo')->nullable()->comment('주의메시지');

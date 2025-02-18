@@ -3,30 +3,30 @@
 namespace App\Imports;
 
 use App\ArrayObjects\OrderShipment as ArrayObjectsOrderShipment;
-use App\Models\OrderSheetInvoice;
+use App\Models\OrderSheetWaybill;
 use App\Models\OrderShipment;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\SkipsEmptyRows;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithStartRow;
 
-class OrderSheetInvoicesImport implements SkipsEmptyRows, ToCollection, WithStartRow
+class OrderSheetWaybillsImport implements SkipsEmptyRows, ToCollection, WithStartRow
 {
-    private OrderSheetInvoice $orderSheetInvoice;
+    private OrderSheetWaybill $orderSheetWaybill;
 
     private int $numberOfLines = 0;
 
-    public function __construct(OrderSheetInvoice $orderSheetInvoice)
+    public function __construct(OrderSheetWaybill $orderSheetWaybill)
     {
-        $this->orderSheetInvoice = $orderSheetInvoice;
+        $this->orderSheetWaybill = $orderSheetWaybill;
     }
 
     /**
-     * @return OrderSheetInvoice|null
+     * @return OrderSheetWaybill|null
      */
     public function collection(Collection $rows)
     {
-        $invoiceFilePage = 1;
+        $waybillFilePage = 1;
 
         /**
          * @var \Illuminate\Support\Collection $row
@@ -34,8 +34,8 @@ class OrderSheetInvoicesImport implements SkipsEmptyRows, ToCollection, WithStar
         foreach ($rows as $row) {
             $optionShipments = ArrayObjectsOrderShipment::of(
                 $row,
-                id: $this->orderSheetInvoice->id,
-                invoiceFilePage: $invoiceFilePage++
+                id: $this->orderSheetWaybill->id,
+                waybillFilePage: $waybillFilePage++
             )->toArray();
 
             /**

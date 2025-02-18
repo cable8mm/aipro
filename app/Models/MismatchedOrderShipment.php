@@ -14,7 +14,7 @@ class MismatchedOrderShipment extends Model
 
     protected $guarded = [];
 
-    protected $with = ['author', 'orderSheetInvoice'];
+    protected $with = ['author', 'orderSheetWaybill'];
 
     protected function casts(): array
     {
@@ -41,8 +41,8 @@ class MismatchedOrderShipment extends Model
         return $this->belongsTo(User::class, 'author_id');
     }
 
-    public function orderSheetInvoice(): BelongsTo
+    public function orderSheetWaybill(): BelongsTo
     {
-        return $this->belongsTo(OrderSheetInvoice::class);
+        return $this->belongsTo(OrderSheetWaybill::class);
     }
 }

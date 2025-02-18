@@ -52,9 +52,9 @@ class OptionGood extends Model
     }
 
     /**
-     * Gets option fitted from the option field of `OrderSheetInvoice` table
+     * Gets option fitted from the option field of `OrderSheetWaybill` table
      *
-     * @param  string  $optionName  The name of the option field of `OrderSheetInvoice` table
+     * @param  string  $optionName  The name of the option field of `OrderSheetWaybill` table
      * @return ?OptionGoodOption The method returns the option
      *
      * @see https://stackoverflow.com/questions/472063/mysql-what-is-a-reverse-version-of-like

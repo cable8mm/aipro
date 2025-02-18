@@ -62,29 +62,29 @@
 		text-align: right;
 	}
 
-	.invoice-info {
+	.waybill-info {
 		border: 1px solid #000;
 		margin-top: 10px;
 	}
 
-	.invoice-info div {
+	.waybill-info div {
 		width: 49%;
 	}
 
-	.invoice-info div img {
+	.waybill-info div img {
 		width: 100%;
 	}
 
-	.invoice-info .invoice-no {
+	.waybill-info .waybill-no {
 		padding: 20px 5px;
 		float: left;
 	}
 
-	.invoice-info .invoice-no strong {
+	.waybill-info .waybill-no strong {
 		font-size: 1.2em;
 	}
 
-	.invoice-info .invoice-barcode {
+	.waybill-info .waybill-barcode {
 		padding: 5px 0;
 		text-align: right;
 	}
@@ -170,13 +170,13 @@
 		</div>
 	</div>
 
-    @if ($order->invoice_numbers)
-	<div class="invoice-info">
-		<div class="invoice-no">
-			송장번호 : <strong>{{ $order->invoice_numbers }}</strong>
+    @if ($order->waybill_numbers)
+	<div class="waybill-info">
+		<div class="waybill-no">
+			송장번호 : <strong>{{ $order->waybill_numbers }}</strong>
 		</div>
-		<div class="invoice-barcode">
-			<img src="{{ url('api/generate-barcode', $order->invoice_numbers) }}"
+		<div class="waybill-barcode">
+			<img src="{{ url('api/generate-barcode', $order->waybill_numbers) }}"
 				width="80%" height="50" />
 		</div>
 	</div>
@@ -294,7 +294,7 @@
 				<tr>
 					<th>고객요청사항</th>
 					<td>
-                        {{ $order->orderSheetInvoice->deliveryMemo }}
+                        {{ $order->orderSheetWaybill->deliveryMemo }}
 					</td>
 				</tr>
 				<tr>

@@ -60,7 +60,7 @@ class OrderShipment extends Resource
         return [
             ID::make()
                 ->hideFromIndex(),
-            BelongsTo::make(__('Order Sheet Invoice'), 'orderSheetInvoice', OrderSheetInvoice::class),
+            BelongsTo::make(__('Order Sheet Waybill'), 'orderSheetWaybill', OrderSheetWaybill::class),
             BelongsTo::make(__('Good'), 'good', Good::class),
             BelongsTo::make(__('Order Number'), 'order', Order::class),
             Panel::make(__('Additional Information'), [
@@ -126,12 +126,12 @@ class OrderShipment extends Resource
                 Text::make(__('Address'), 'address')->maxlength(255)
                     ->hideFromIndex(),
                 Text::make(__('Delivery Memo'), 'deliveryMemo'),
-                Text::make(__('Invoice Company'), 'invoiceCompany')->maxlength(255),
-                Text::make(__('Invoice No'), 'invoiceNo')->maxlength(255),
-                Text::make(__('Invoice File Path'), 'invoiceFilePath')->maxlength(255)
+                Text::make(__('Waybill Company'), 'waybillCompany')->maxlength(255),
+                Text::make(__('Waybill No'), 'waybillNo')->maxlength(255),
+                Text::make(__('Waybill File Path'), 'waybillFilePath')->maxlength(255)
                     ->hideFromIndex(),
-                Number::make(__('Invoice File Page'), 'invoiceFilePage'),
-                Text::make(__('Invoice Goods Cd'), 'invoiceGoodsCd')->maxlength(255)
+                Number::make(__('Waybill File Page'), 'waybillFilePage'),
+                Text::make(__('Waybill Goods Cd'), 'waybillGoodsCd')->maxlength(255)
                     ->hideFromIndex(),
                 Text::make(__('Pay Goods Cd'), 'payGoodsCd')->maxlength(190)
                     ->hideFromIndex(),
@@ -187,7 +187,7 @@ class OrderShipment extends Resource
     public function filters(NovaRequest $request)
     {
         return [
-            InputFilter::make()->forColumns(['order_sheet_invoice_id'])->withName(__('Order Sheet Invoice').' ID'),
+            InputFilter::make()->forColumns(['order_sheet_waybill_id'])->withName(__('Order Sheet Waybill').' ID'),
         ];
     }
 

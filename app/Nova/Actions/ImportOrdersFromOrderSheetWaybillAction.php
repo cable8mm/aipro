@@ -2,9 +2,9 @@
 
 namespace App\Nova\Actions;
 
-use App\Enums\OrderSheetInvoiceStatus;
+use App\Enums\OrderSheetWaybillStatus;
 use App\Exceptions\OptionGoodInvalidArgumentException;
-use App\Imports\OrderSheetInvoicesImport;
+use App\Imports\OrderSheetWaybillsImport;
 use App\Models\Order;
 use Illuminate\Bus\Batchable;
 use Illuminate\Bus\Queueable;
@@ -15,7 +15,7 @@ use Laravel\Nova\Fields\ActionFields;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Maatwebsite\Excel\Facades\Excel;
 
-class ImportOrdersFromOrderSheetInvoiceAction extends Action
+class ImportOrdersFromOrderSheetWaybillAction extends Action
 {
     use InteractsWithQueue, Queueable;
 
@@ -27,10 +27,10 @@ class ImportOrdersFromOrderSheetInvoiceAction extends Action
     public function handle(ActionFields $fields, Collection $models)
     {
         /**
-         * @var \App\Models\OrderSheetInvoice $model
+         * @var \App\Models\OrderSheetWaybill $model
          */
         foreach ($models as $model) {
-            $model->status = OrderSheetInvoiceStatus::RUNNING->name;
+            $model->status = OrderSheetWaybillStatus::RUNNING->name;
             $model->save();
 
             try {
@@ -38,10 +38,10 @@ class ImportOrdersFromOrderSheetInvoiceAction extends Action
                     ? \Maatwebsite\Excel\Excel::XLSX
                     : \Maatwebsite\Excel\Excel::XLS;
 
-                $orderSheetInvoicesImport = new OrderSheetInvoicesImport($model);
+                $orderSheetWaybillsImport = new OrderSheetWaybillsImport($model);
 
                 Excel::import(
-                    $orderSheetInvoicesImport,
+                    $orderSheetWaybillsImport,
                     $model->order_sheet_file,
                     'local',
                     $importFormat
@@ -51,20 +51,20 @@ class ImportOrdersFromOrderSheetInvoiceAction extends Action
                     $model->ordersWithSiteOrderNo()
                 );
 
-                $model->row_count = $orderSheetInvoicesImport->getNumberOfLines();
+                $model->row_count = $orderSheetWaybillsImport->getNumberOfLines();
                 $model->order_count = $model->orderShipments()->distinct()->count('orderNo');
                 $model->order_good_count = $model->orderShipments()->count();   // only as good master codes
-                $model->status = OrderSheetInvoiceStatus::SUCCESS->name;
+                $model->status = OrderSheetWaybillStatus::SUCCESS->name;
                 $model->save();
             } catch (OptionGoodInvalidArgumentException $e) {
                 $e->save();
 
-                $model->status = OrderSheetInvoiceStatus::ERROR->name;
+                $model->status = OrderSheetWaybillStatus::ERROR->name;
                 $model->save();
 
                 return Action::danger($e->getMessage());
             } catch (\Exception $e) {
-                $model->status = OrderSheetInvoiceStatus::ERROR->name;
+                $model->status = OrderSheetWaybillStatus::ERROR->name;
                 $model->save();
 
                 return Action::danger($e->getMessage());
@@ -96,6 +96,6 @@ class ImportOrdersFromOrderSheetInvoiceAction extends Action
 
     public function name()
     {
-        return __('Import Orders From Order Sheet Invoice Action');
+        return __('Import Orders From Order Sheet Waybill Action');
     }
 }

@@ -19,10 +19,10 @@ class OrderFactory extends Factory
     {
         return [
             'id' => '100'.str_pad(fake()->randomNumber(9), 9, '0', STR_PAD_LEFT),
-            'order_sheet_invoice_id' => fake()->randomNumber(1) + 1,
+            'order_sheet_waybill_id' => fake()->randomNumber(1) + 1,
             'type' => fake()->randomElements(OrderType::names(), fake()->randomNumber(2) % count(OrderType::cases())),
             'order_good_count' => fake()->numberBetween(1, 99),
-            'invoice_numbers' => fake()->randomNumber(9, true).fake()->randomNumber(3, true),
+            'waybill_numbers' => fake()->randomNumber(9, true).fake()->randomNumber(3, true),
             'printed_count' => fake()->numberBetween(0, 9),
         ];
     }
