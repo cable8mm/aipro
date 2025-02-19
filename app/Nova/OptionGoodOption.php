@@ -118,7 +118,7 @@ class OptionGoodOption extends Resource
 
     public function title()
     {
-        return $this->name;
+        return '['.$this->name.'] '.$this->optionGood->title;
     }
 
     public function authorizedToUpdate(Request $request)

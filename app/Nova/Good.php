@@ -122,4 +122,9 @@ class Good extends Resource
     {
         return __('Good');
     }
+
+    public function title()
+    {
+        return '['.$this->goods_code.'] '.$this->name;
+    }
 }

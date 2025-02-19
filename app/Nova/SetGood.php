@@ -132,6 +132,11 @@ class SetGood extends Resource
         return __('Set Goods');
     }
 
+    public function title()
+    {
+        return '['.$this->goods_code.'] '.$this->name;
+    }
+
     public function authorizedToUpdate(Request $request)
     {
         return $request->user()?->type == UserType::ADMINISTRATOR->name
