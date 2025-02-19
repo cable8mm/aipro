@@ -38,11 +38,11 @@ class SupplierFactory extends Factory
     {
         return [
             'author_id' => fake()->randomNumber(1) + 1,
-            'name' => fake('ko_KR')->company(),
+            'name' => fake()->company(),
             'ordered_email' => fake()->email(),
-            'contact_name' => fake('ko_KR')->name(),
-            'contact_tel' => fake('ko_KR')->localAreaPhoneNumber(),
-            'contact_cel' => fake('ko_KR')->cellPhoneNumber(),
+            'contact_name' => fake()->name(),
+            'contact_tel' => fake()->localAreaPhoneNumber(),
+            'contact_cel' => fake()->cellPhoneNumber(),
             'order_method' => fake()->randomElements(OrderMethod::names(), fake()->numberBetween(0, count(OrderMethod::names()) - 1)),
             'balance_criteria' => fake()->randomElement(self::$balanceCriteria),
             'min_order_price' => fake()->randomElement([0, 100000, 200000, 500000, 1000000, 2000000]),

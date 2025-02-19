@@ -19,15 +19,15 @@ class BoxSupplierFactory extends Factory
     {
         return [
             'author_id' => fake()->randomNumber(1) + 1,  // Assuming User has an id column
-            'name' => fake('ko_KR')->company(),
+            'name' => fake()->company(),
             'ordered_email' => fake()->email(),
-            'contact_name' => fake('ko_KR')->name(),
-            'contact_tel' => fake('ko_KR')->localAreaPhoneNumber(),
-            'contact_cel' => fake('ko_KR')->cellPhoneNumber(),
+            'contact_name' => fake()->name(),
+            'contact_tel' => fake()->localAreaPhoneNumber(),
+            'contact_cel' => fake()->cellPhoneNumber(),
             'order_method' => fake()->randomElement(OrderMethod::names()),
             'min_order_price' => fake()->randomElement([0, 100000, 200000, 500000, 1000000, 2000000]),
             'is_parceled' => fake()->boolean(),
-            'additional_information' => fake('ko_KR')->paragraph(),
+            'additional_information' => fake()->paragraph(),
         ];
     }
 }

@@ -19,7 +19,7 @@ class ChannelFactory extends Factory
     {
         return [
             'author_id' => fake()->randomNumber(1) + 1,
-            'name' => fake('ko_KR')->name(),
+            'name' => fake()->name(),
             'playauto_site' => fake()->text(190),
             'siteid' => fake()->text(100),
             'fee_rate' => fake()->randomFloat(2, 0, 999),
