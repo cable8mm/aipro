@@ -10,14 +10,14 @@ use OutOfRangeException;
 class OrderSheetWaybillController extends Controller
 {
     /**
-     * /order-sheet-waybill/{orderSheetWaybill}/print
+     * /order-sheet-waybill/{id}/print
      *
      * Print the order sheet waybill
      *
-     * @param  \App\Models\OrderSheetWaybill  $orderSheetWaybill  The Order Sheet waybill instance to print
+     * @param  \App\Models\OrderSheetWaybill  $order_sheet_waybill  The Order Sheet waybill instance to print
      * @return \Illuminate\Http\Response The method returns the response object with printing
      */
-    public function print(OrderSheetWaybill $orderSheetWaybill)
+    public function print(OrderSheetWaybill $order_sheet_waybill)
     {
         $layout = '
         <htmlpageheader name="myHTMLHeaderOdd" style="display:none">
@@ -32,7 +32,7 @@ class OrderSheetWaybillController extends Controller
 
         $pdf = LaravelMpdf::loadHTML($layout);
 
-        foreach ($orderSheetWaybill->orders as $order) {
+        foreach ($order_sheet_waybill->orders as $order) {
             if (! isset($order->latestOrderShipment)) {
                 throw new OutOfRangeException(__('Order #:order_id must have a order shipment.', ['order_id' => $order->id]));
             }
@@ -43,7 +43,7 @@ class OrderSheetWaybillController extends Controller
                 ])
             );
 
-            if ($order !== $orderSheetWaybill->orders->last()) {
+            if ($order !== $order_sheet_waybill->orders->last()) {
                 $pdf->getMpdf()->WriteHTML('<pagebreak />');
             }
         }

@@ -86,7 +86,7 @@ class ItemController extends Controller
     }
 
     /**
-     * /item/{item}/balance
+     * /item/{id}/balance
      *
      * Add or subtract a inventory amount
      *
@@ -109,7 +109,7 @@ class ItemController extends Controller
     }
 
     /**
-     * /item/{item}/balance-by-barcode
+     * /item/{barcode}/balance-by-barcode
      *
      * Add or subtract a inventory amount
      *

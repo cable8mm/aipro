@@ -13,7 +13,7 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::get('/generate-barcode/{barcodeNumber}', GenerateBarcodeController::class);
+Route::get('/generate-barcode/{barcode}', GenerateBarcodeController::class);
 
 Route::put('/orders/{order}', [OrderController::class, 'update']);
 Route::get('/orders/{order}/print', [OrderController::class, 'print']);
@@ -21,7 +21,7 @@ Route::get('/orders/{order}/waybill', [OrderController::class, 'waybill']);
 Route::get('/orders/{order}/clear-order', [OrderController::class, 'clearOrder']);
 Route::get('/orders/{waybill_numbers}/order-shipments', [OrderController::class, 'orderShipments']);
 
-Route::get('/order-sheet-waybills/{orderSheetWaybill}/print', [OrderSheetWaybillController::class, 'print']);
+Route::get('/order-sheet-waybills/{order_sheet_waybill}/print', [OrderSheetWaybillController::class, 'print']);
 
 Route::get('/items', [ItemController::class, 'index']);
 Route::get('/items/{item}', [ItemController::class, 'show']);
@@ -32,7 +32,6 @@ Route::post('/items/{item}/balance-by-barcode', [ItemController::class, 'balance
 
 Route::get('/order-shipments', [OrderShipmentController::class, 'index']);
 Route::get('/order-shipments/{order_shipment}', [OrderShipmentController::class, 'show']);
-Route::get('/order-shipments/order/{id}', [OrderShipmentController::class, 'order']);
 Route::get('/order-shipments/pause', [OrderShipmentController::class, 'pause']);
 
 Route::get('/box/{code}', [BoxController::class, 'showByCode']);
