@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('author_id');
             $table->foreignId('item_id')->comment('아이템 아이디');
             $table->string('list_image', 190)->nullable()->comment('리스트이미지');
-            $table->string('sku', 255)->nullable();
+            $table->string('goods_code', 255)->nullable()->comment('상품코드');
             $table->foreignId('playauto_category_id')->nullable()->comment('플레이오토 카테고리 코드');
             $table->string('name', 255);
             $table->string('option', 100)->nullable()->comment('옵션');

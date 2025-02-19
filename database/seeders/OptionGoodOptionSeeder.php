@@ -18,8 +18,8 @@ class OptionGoodOptionSeeder extends Seeder
             ])->create();
         }
 
-        OptionGood::findSku('OPT8')->optionGoodOptions()->first()->update(['name' => '데이지(닭)']);
+        OptionGood::findGoodsCode('OPT8')->optionGoodOptions()->first()->update(['name' => '데이지(닭)']);
 
-        OptionGood::findSku('OPT4')->optionGoodOptions()->first()->update(['name' => '미트앤피쉬 레귤러 12kg']);
+        OptionGood::findGoodsCode('OPT4')->optionGoodOptions()->first()->update(['name' => '미트앤피쉬 레귤러 12kg']);
     }
 }

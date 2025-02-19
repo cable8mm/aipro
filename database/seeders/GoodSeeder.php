@@ -13,7 +13,7 @@ class GoodSeeder extends Seeder
     {
         for ($i = 1; $i <= 10; $i++) {
             \App\Models\Good::factory()->state([
-                'sku' => $i,
+                'goods_code' => $i,
             ])->create();
         }
     }

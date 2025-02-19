@@ -20,10 +20,9 @@ class SetGood extends Model
     protected function casts(): array
     {
         return [
-            'sku' => 'string',
+            'goods_code' => 'string',
             'name' => 'string',
             'goods_price' => 'integer',
-            'last_cost_price' => 'integer',
             'zero_margin_price' => 'integer',
             'suggested_selling_price_of_gms' => 'integer',
             'is_shutdown' => 'boolean',
@@ -66,11 +65,11 @@ class SetGood extends Model
         return $this->morphOne(OptionGoodOption::class, 'optionGoodOptionable');
     }
 
-    public function items(): BelongsToMany
+    public function goods(): BelongsToMany
     {
-        return $this->belongsToMany(Item::class, 'set_good_item')
+        return $this->belongsToMany(Good::class, 'set_good_good')
             ->withPivot('quantity')
-            ->using(SetGoodItem::class);
+            ->using(SetGoodGood::class);
     }
 
     public static function findComCode(string $code): static
@@ -85,15 +84,14 @@ class SetGood extends Model
      */
     public function updateSpecificFields(): bool
     {
-        $goodsOfSetGoods = $this->items();
+        $goodsOfSetGoods = $this->goods();
 
-        $setCodes = $goodsOfSetGoods->pluck('quantity', 'sku')->toArray();
-        $this->sku = empty($setCodes) ? null : GoodCode::setCodeOf($setCodes)->code();
+        $setCodes = $goodsOfSetGoods->pluck('quantity', 'goods_code')->toArray();
+        $this->goods_code = empty($setCodes) ? null : GoodCode::setCodeOf($setCodes)->code();
         $this->good_count = count($setCodes);
 
-        $this->goods_price = $goodsOfSetGoods->sum('suggested_selling_price');
-        $this->last_cost_price = $goodsOfSetGoods->sum('last_cost_price');
-        $this->zero_margin_price = $goodsOfSetGoods->sum('cost_price');
+        $this->goods_price = $goodsOfSetGoods->sum('goods_price');
+        $this->zero_margin_price = $goodsOfSetGoods->sum('zero_margin_price');
 
         return $this->saveQuietly();
     }

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Nova\Actions\Actionable;
 
@@ -42,8 +43,8 @@ class Good extends Model
         });
 
         static::saved(function (Good $good) {
-            if (is_null($good->sku)) {
-                $good->sku = $good->id;
+            if (is_null($good->goods_code)) {
+                $good->goods_code = $good->id;
                 $good->save();
             }
         });
@@ -57,5 +58,25 @@ class Good extends Model
     public function item(): BelongsTo
     {
         return $this->belongsTo(Item::class);
+    }
+
+    /**
+     * Get the good's promotion code.
+     *
+     * @see https://laravel.com/docs/11.x/eloquent-relationships#one-to-one-polymorphic-model-structure
+     */
+    public function promotionCode(): MorphOne
+    {
+        return $this->morphOne(PromotionCode::class, 'promotionCodable');
+    }
+
+    /**
+     * Get the option good option's master code.
+     *
+     * @see https://laravel.com/docs/11.x/eloquent-relationships#one-to-one-polymorphic-model-structure
+     */
+    public function optionGoodOption(): MorphOne
+    {
+        return $this->morphOne(OptionGoodOption::class, 'optionGoodOptionable');
     }
 }

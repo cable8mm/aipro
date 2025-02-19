@@ -29,7 +29,7 @@ class Good extends Resource
      *
      * @var string
      */
-    public static $title = 'id';
+    public static $title = 'name';
 
     /**
      * The columns that should be searched.
@@ -51,7 +51,7 @@ class Good extends Resource
             ID::make()->sortable(),
             BelongsTo::make(__('Author'), 'author', User::class)->exceptOnForms(),
             BelongsTo::make(__('Item'), 'item', Item::class),
-            Text::make(__('SKU'), 'sku')
+            Text::make(__('Goods Code'), 'goods_code')
                 ->rules('required')->required()->maxlength(255)
                 ->sortable(),
             Text::make(__('Name'), 'name')
@@ -116,5 +116,10 @@ class Good extends Resource
     public function actions(NovaRequest $request)
     {
         return [];
+    }
+
+    public static function label()
+    {
+        return __('Good');
     }
 }

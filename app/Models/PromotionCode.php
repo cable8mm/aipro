@@ -42,10 +42,10 @@ class PromotionCode extends Model
      *
      * @example $model->real_sku Original master code to be copied as virtual field.
      */
-    protected function sku(): Attribute
+    protected function goodsCode(): Attribute
     {
         return Attribute::make(
-            get: fn (mixed $value, array $attributes) => $this->promotionCodable->sku.'+'.$this->id,
+            get: fn (mixed $value, array $attributes) => $this->promotionCodable->goods_code.'+'.$this->id,
         );
     }
 }

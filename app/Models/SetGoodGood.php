@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class SetGoodItem extends Pivot
+class SetGoodGood extends Pivot
 {
     protected $touches = ['setGood'];
 
     protected static function booted(): void
     {
-        static::saved(function (SetGoodItem $setGoodItem) {
+        static::saved(function (SetGoodGood $setGoodItem) {
             $setGoodItem->setGood->updateSpecificFields();
         });
     }

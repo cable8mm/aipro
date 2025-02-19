@@ -55,12 +55,12 @@ class OptionGoodOption extends Resource
             BelongsTo::make(__('Option Good'), 'optionGood', OptionGood::class),
             Text::make(__('Name'), 'name')->rules('required')->required()
                 ->help(__('The option must match this field, so please enter the exact name.')),
-            Text::make(__('Master Code'), function () {
-                return $this->optionGoodOptionable->sku;
+            Text::make(__('Goods Code'), function () {
+                return $this->optionGoodOptionable->goods_code;
             }),
             MorphTo::make(__('Option Good Optionable'), 'optionGoodOptionable')
                 ->types([
-                    Item::class,
+                    Good::class,
                     SetGood::class,
                 ]),
             Number::make(__('Sort Order'), 'sort_order')->exceptOnForms(),

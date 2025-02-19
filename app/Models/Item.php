@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Nova\Actions\Actionable;
 
@@ -93,26 +92,6 @@ class Item extends Model
     public function playautoCategory(): BelongsTo
     {
         return $this->belongsTo(PlayautoCategory::class);
-    }
-
-    /**
-     * Get the good's promotion code.
-     *
-     * @see https://laravel.com/docs/11.x/eloquent-relationships#one-to-one-polymorphic-model-structure
-     */
-    public function promotionCode(): MorphOne
-    {
-        return $this->morphOne(PromotionCode::class, 'promotionCodable');
-    }
-
-    /**
-     * Get the option good option's master code.
-     *
-     * @see https://laravel.com/docs/11.x/eloquent-relationships#one-to-one-polymorphic-model-structure
-     */
-    public function optionGoodOption(): MorphOne
-    {
-        return $this->morphOne(OptionGoodOption::class, 'optionGoodOptionable');
     }
 
     public function placingOrderItems(): HasMany

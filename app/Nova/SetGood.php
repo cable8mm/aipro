@@ -56,10 +56,10 @@ class SetGood extends Resource
             BelongsTo::make(__('Author'), 'author', User::class)
                 ->exceptOnForms()
                 ->filterable(),
-            Text::make(__('Shortening SKU'), fn () => 'COM'.$this->id)
+            Text::make(__('Shortening Goods Code'), fn () => 'COM'.$this->id)
                 ->copyable()
                 ->exceptOnForms(),
-            Text::make(__('SKU'), 'sku')
+            Text::make(__('Goods Code'), 'goods_code')
                 ->maxlength(255)
                 ->copyable()
                 ->readonly()
@@ -75,7 +75,7 @@ class SetGood extends Resource
                 DateTime::make(__('Updated At'), 'updated_at'),
             ]),
 
-            BelongsToMany::make(__('Items'), 'items', Item::class)
+            BelongsToMany::make(__('Goods'), 'goods', Good::class)
                 ->searchable()
                 ->fields(
                     function ($request, $relatedModel) {

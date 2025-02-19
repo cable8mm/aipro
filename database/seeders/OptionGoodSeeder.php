@@ -14,7 +14,7 @@ class OptionGoodSeeder extends Seeder
     {
         for ($i = 1; $i <= 10; $i++) {
             \App\Models\OptionGood::factory()->state([
-                'sku' => GoodCodeType::OPTION->prefix().$i,
+                'goods_code' => GoodCodeType::OPTION->prefix().$i,
             ])->create();
         }
     }
