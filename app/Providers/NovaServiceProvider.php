@@ -9,6 +9,7 @@ use App\Nova\BoxInventoryHistory;
 use App\Nova\BoxManualWarehousing;
 use App\Nova\BoxPlacingOrder;
 use App\Nova\BoxSupplier;
+use App\Nova\Customer;
 use App\Nova\Dashboards\Main;
 use App\Nova\Good;
 use App\Nova\HelpfulFile;
@@ -75,34 +76,35 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 MenuSection::make(__('Items & Boxes'), [
                     MenuItem::resource(Item::class),
                     MenuItem::resource(Box::class),
-                    MenuItem::resource(RegisterGoodRequest::class),
+                    //                    MenuItem::resource(RegisterGoodRequest::class),
                 ])->icon('truck')->collapsable(),
 
-                MenuSection::make(__('Order & Shipping'), [
+                MenuSection::make(__('Online Order & Shipping'), [
                     MenuItem::resource(OrderSheetWaybill::class),
                     MenuItem::resource(Order::class),
                     MenuItem::resource(OrderShipment::class),
-                    MenuItem::resource(MismatchedOrderShipment::class),
+                    //                    MenuItem::resource(MismatchedOrderShipment::class),
                 ])->icon('archive')->collapsable(),
 
-                MenuSection::make(__('Inventory & Warehousing'), [
+                MenuSection::make(__('Purchase Ordering'), [
                     MenuItem::resource(PlacingOrder::class),
                     MenuItem::resource(BoxPlacingOrder::class),
-                    MenuItem::resource(ItemManualWarehousing::class),
-                    MenuItem::resource(BoxManualWarehousing::class),
-                    MenuItem::resource(PlacingOrderItem::class),
-                    MenuItem::resource(PlacingOrderBox::class),
+                    // MenuItem::resource(PlacingOrderItem::class),
+                    // MenuItem::resource(PlacingOrderBox::class),
                 ])->icon('cube')->collapsable(),
 
-                MenuSection::make(__('Suppliers'), [
-                    MenuItem::resource(Supplier::class),
-                    MenuItem::resource(BoxSupplier::class),
-                ])->icon('inbox-in')->collapsable(),
-
-                MenuSection::make(__('Tracking'), [
+                MenuSection::make(__('Inventory Management'), [
+                    MenuItem::resource(ItemManualWarehousing::class),
+                    MenuItem::resource(BoxManualWarehousing::class),
                     MenuItem::resource(InventoryHistory::class),
                     MenuItem::resource(BoxInventoryHistory::class),
                 ])->icon('eye')->collapsable(),
+
+                MenuSection::make(__('Partners'), [
+                    MenuItem::resource(Supplier::class),
+                    MenuItem::resource(BoxSupplier::class),
+                    MenuItem::resource(Customer::class),
+                ])->icon('inbox-in')->collapsable(),
 
                 MenuSection::make(__('MD'), [
                     MenuItem::resource(Good::class),
