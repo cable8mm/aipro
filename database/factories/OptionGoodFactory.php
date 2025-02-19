@@ -22,7 +22,7 @@ class OptionGoodFactory extends Factory
 
         return [
             'author_id' => fake()->randomNumber(1) + 1,
-            'sku' => GoodCodeType::OPTION->prefix().fake()->randomNumber(3, true),
+            'goods_code' => GoodCodeType::OPTION->prefix().fake()->randomNumber(3, true),
             'name' => fake('ko_KR')->productName(),
             'my_shop_sale_option_count' => fake()->randomNumber(1),
             'other_shop_sale_option_count' => fake()->randomNumber(1),

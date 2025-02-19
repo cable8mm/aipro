@@ -25,7 +25,7 @@ class OptionGoodOption extends Model implements Sortable
     protected function casts(): array
     {
         return [
-            'sku' => 'string',
+            'goods_code' => 'string',
             'name' => 'string',
             'goods_price' => 'integer',
             'last_cost_price' => 'integer',
@@ -64,8 +64,8 @@ class OptionGoodOption extends Model implements Sortable
         return $this->morphTo();
     }
 
-    public function sku(): string
+    public function goodsCode(): string
     {
-        return $this->optionGoodOptionable->sku;
+        return $this->optionGoodOptionable->goods_code;
     }
 }

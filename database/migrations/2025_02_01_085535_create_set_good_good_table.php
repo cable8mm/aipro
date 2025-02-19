@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('set_good_item', function (Blueprint $table) {
+        Schema::create('set_good_good', function (Blueprint $table) {
             $table->foreignId('set_good_id');
-            $table->foreignId('item_id');
+            $table->foreignId('good_id');
             $table->unsignedInteger('quantity');
-            $table->primary(['item_id', 'set_good_id']);
-            $table->index(['item_id', 'set_good_id']);
+            $table->primary(['set_good_id', 'good_id']);
+            $table->index(['set_good_id', 'good_id']);
         });
     }
 
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('set_good_item');
+        Schema::dropIfExists('set_good_good');
     }
 };

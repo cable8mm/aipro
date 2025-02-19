@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
             ItemInventorySnapshotSeeder::class,
             ItemManualWarehousingSeeder::class,
             ItemSeeder::class,
+            GoodSeeder::class,
             HelpTipSeeder::class,
             HelpfulFileSeeder::class,
             InventoryHistorySeeder::class,

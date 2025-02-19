@@ -2,11 +2,8 @@
 
 namespace App\Nova;
 
-use App\Enums\UserType;
-use App\Traits\NovaAuthorizedByMd;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
-use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\DateTime;
@@ -14,18 +11,18 @@ use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Stack;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use Laravel\Nova\Panel;
 
-class SetGood extends Resource
+class Good extends Resource
 {
-    use NovaAuthorizedByMd;
-
     /**
      * The model the resource corresponds to.
      *
-     * @var class-string<\App\Models\SetGood>
+     * @var class-string<\App\Models\Good>
      */
-    public static $model = \App\Models\SetGood::class;
+    public static $model = \App\Models\Good::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -41,7 +38,6 @@ class SetGood extends Resource
      */
     public static $search = [
         'id',
-        'sku',
     ];
 
     /**
@@ -53,37 +49,32 @@ class SetGood extends Resource
     {
         return [
             ID::make()->sortable(),
-            BelongsTo::make(__('Author'), 'author', User::class)
-                ->exceptOnForms()
-                ->filterable(),
-            Text::make(__('Shortening Goods Code'), fn () => 'COM'.$this->id)
-                ->copyable()
-                ->exceptOnForms(),
+            BelongsTo::make(__('Author'), 'author', User::class)->exceptOnForms(),
+            BelongsTo::make(__('Item'), 'item', Item::class),
             Text::make(__('Goods Code'), 'goods_code')
-                ->maxlength(255)
-                ->copyable()
-                ->readonly()
-                ->help(__('This value can only input by adding or updating related goods')),
-            Number::make(__('Good Count'), 'good_count')->exceptOnForms(),
-            Text::make(__('Name'), 'name')->rules('required')->required()->maxlength(255),
-            Currency::make(__('Goods Price'), 'goods_price')->rules('required')->required(),
-            Currency::make(__('Last Cost Price'), 'last_cost_price')->exceptOnForms(),
-            Currency::make(__('Zero Margin Price'), 'zero_margin_price')->exceptOnForms(),
-            Boolean::make(__('Is Shutdown'), 'is_shutdown'),
+                ->rules('required')->required()->maxlength(255)
+                ->sortable(),
+            Text::make(__('Name'), 'name')
+                ->rules('required')->required()->maxlength(255)->onlyOnForms(),
+            Text::make(__('Option'), 'option'),
+            Panel::make(__('Additional Information'), [
+                Currency::make(__('Supplier monitoring Price'), 'supplier_monitoring_price'),
+                Text::make(__('Supplier monitoring Status'), 'supplier_monitoring_status'),
+                Boolean::make(__('Supplier monitoring Interruption'), 'supplier_monitoring_interruption'),
+                Currency::make(__('Goods Price'), 'goods_price'),
+                Textarea::make(__('Memo'), 'memo')->alwaysShow(),
+                Number::make(__('Naver Category'), 'naver_category'),
+                Number::make(__('Naver Productid'), 'naver_productid'),
+                Boolean::make(__('Naver Lowest Price Wrong'), 'naver_lowest_price_wrong'),
+                Currency::make(__('Naver Lowest Price'), 'naver_lowest_price'),
+                Currency::make(__('Internet Lowest Price'), 'internet_lowest_price'),
+                Currency::make(__('Zero Margin Price'), 'zero_margin_price'),
+            ])->withToolbar()->limit(3),
+
             Stack::make(__('Created At').' & '.__('Updated At'), [
                 DateTime::make(__('Created At'), 'created_at'),
                 DateTime::make(__('Updated At'), 'updated_at'),
-            ]),
-
-            BelongsToMany::make(__('Goods'), 'goods', Good::class)
-                ->searchable()
-                ->fields(
-                    function ($request, $relatedModel) {
-                        return [
-                            Number::make(__('Quantity'), 'quantity')->rules('required')->required()->default(1),
-                        ];
-                    }
-                ),
+            ])->hideFromIndex(),
         ];
     }
 
@@ -129,18 +120,11 @@ class SetGood extends Resource
 
     public static function label()
     {
-        return __('Set Goods');
+        return __('Good');
     }
 
     public function title()
     {
         return '['.$this->goods_code.'] '.$this->name;
-    }
-
-    public function authorizedToUpdate(Request $request)
-    {
-        return $request->user()?->type == UserType::ADMINISTRATOR->name
-            || $request->user()?->type == UserType::DEVELOPER->name
-            || $request->user()?->type == UserType::MANAGER->name;
     }
 }
