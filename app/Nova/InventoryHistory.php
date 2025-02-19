@@ -53,9 +53,9 @@ class InventoryHistory extends Resource
     {
         return [
             ID::make()->sortable(),
-            Text::make(__('SKU'), 'good.sku')->exceptOnForms(),
+            Text::make(__('SKU'), 'item.sku')->exceptOnForms(),
             BelongsTo::make(__('Author'), 'author', User::class)->exceptOnForms(),
-            Select::make(__('Safe Class'), 'good.safe_class')->options(SafeClass::array())->displayUsingLabels()->exceptOnForms(),
+            Select::make(__('Safe Class'), 'item.safe_class')->options(SafeClass::array())->displayUsingLabels()->exceptOnForms(),
             BelongsTo::make(__('Item'), 'item', Item::class),
             Select::make(__('Type'), 'type')
                 ->rules('required')->required()
@@ -127,11 +127,11 @@ class InventoryHistory extends Resource
 
     public static function label()
     {
-        return __('Inventory History');
+        return __('Item Inventory History');
     }
 
     public function title()
     {
-        return __('Inventory History').' #'.$this->id;
+        return __('Item Inventory History').' #'.$this->id;
     }
 }
