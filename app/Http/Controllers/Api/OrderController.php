@@ -17,7 +17,7 @@ use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf;
 class OrderController extends Controller
 {
     /**
-     * /orders/{order}/print
+     * /orders/{id}/print
      *
      * Print the order
      */
@@ -31,7 +31,7 @@ class OrderController extends Controller
     }
 
     /**
-     * /orders/{order}/waybill
+     * /orders/{id}/waybill
      *
      * Download a waybill from order number
      */
@@ -45,7 +45,7 @@ class OrderController extends Controller
     }
 
     /**
-     * /orders/{order}
+     * /orders/{id}
      *
      * Update order shipment by monitoring
      */
@@ -109,7 +109,7 @@ class OrderController extends Controller
     }
 
     /**
-     * /orders/{order}/clear-order
+     * /orders/{id}/clear-order
      *
      * Clear current orders from order number
      */

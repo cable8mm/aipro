@@ -13,13 +13,13 @@ class GenerateBarcodeController extends Controller
      *
      * Generates a new barcode image
      *
-     * @param  string  $barcodeNumber  The barcode number. Example: "90000001010018"
+     * @param  string  $barcode  The barcode number. Example: "90000001010018"
      * @return \Illuminate\Http\Response A response object representing the requested barcode image
      */
-    public function __invoke(string $barcodeNumber): \Illuminate\Http\Response
+    public function __invoke(string $barcode): \Illuminate\Http\Response
     {
         return Response::make(
-            Barcode::factory($barcodeNumber)->render(),
+            Barcode::factory($barcode)->render(),
             200,
             ['Content-Type' => 'image/png']
         );
