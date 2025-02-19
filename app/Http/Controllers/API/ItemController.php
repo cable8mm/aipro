@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ItemResource;
@@ -24,7 +24,7 @@ class ItemController extends Controller
     }
 
     /**
-     * /item/{item}
+     * /item/{id}
      *
      * Get a item
      */
@@ -34,7 +34,7 @@ class ItemController extends Controller
     }
 
     /**
-     * /item/{id}
+     * /item/sku/{sku}
      *
      * Get a item by master code
      */

@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\Api;
 
 use App\Enums\OrderShipmentStatus;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\OrderShipmentResource;
 use App\Models\Box;
 use App\Models\Order;
 use App\Models\OrderShipment;
@@ -125,5 +126,19 @@ class OrderController extends Controller
         return response()->json([
             'result' => 'success',
         ]);
+    }
+
+    /**
+     * /order/{waybill_numbers}/order-shipments
+     *
+     * Get order-shipments by waybill number
+     *
+     * @param  string  $waybill_numbers  The waybill number
+     */
+    public function orderShipments(string $waybill_numbers)
+    {
+        $order = Order::where('waybill_numbers', $waybill_numbers)->firstOrFail();
+
+        return OrderShipmentResource::collection($order->orderShipments);
     }
 }

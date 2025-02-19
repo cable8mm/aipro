@@ -1,42 +1,63 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\OrderShipmentResource;
 use App\Models\OrderShipment;
+use Illuminate\Http\Request;
 
 class OrderShipmentController extends Controller
 {
     /**
-     * /order-shipments/order/{id}
+     * /order-shipments
      *
-     * You can use this method by passing the `OrderShipment.id` of the order or the name of the `OrderShipment.waybillNo`
-     *
-     * @param  int  $id  order_shipment.id 값 || order_shipment.waybillNo 값
-     * @return JSON
+     * Get order shipments with paging
      */
-    public function order($id)
+    public function index(Request $request)
     {
-        $order = [];
+        $validated = $request->validate([
+            /**
+             * Order number
+             *
+             * @example 407518300914
+             */
+            'order_no' => 'nullable|string',
+            /**
+             * Waybill number
+             *
+             * @example 912432837263
+             */
+            'waybill_no' => 'nullable|string',
+        ]);
 
-        // 주문번호 바코드에서 주문번호를 뽑는 로직 000+OrderShipmentId+0
-        // e.g. 0005668640
-        $id = preg_replace('/^0+([0-9]+)[0-9]$/', '\\1', $id);
+        $orderShipment = OrderShipment::on();
 
-        if (OrderShipment::where('id', $id)->exists()) {
-            $order = OrderShipment::find($id);
-        } elseif (OrderShipment::where('waybillNo', $id)->exists()) {
-            $order = OrderShipment::where('waybillNo', $id)->first();
+        if ($request->has('orderNo')) {
+            $orderShipment->where('orderNo', $validated['order_no']);
         }
 
-        if (empty($order)) {
-            throw new \InvalidArgumentException;
+        if ($request->has('waybillNo')) {
+            $orderShipment->where('waybillNo', $validated['waybill_no']);
         }
 
-        $orders = OrderShipment::where('orderNo', $order->orderNo)->get();
+        $orderShipments = $orderShipment->latest()
+            ->paginate(
+                perPage: $request->integer('per_page', 12),
+                page: $request->integer('page', 1)
+            );
 
-        return OrderShipmentResource::collection($orders);
+        return OrderShipmentResource::collection($orderShipments);
+    }
+
+    /**
+     * /order-shipments/{id}
+     *
+     * Get a order shipment resource
+     */
+    public function show(OrderShipment $order_shipment)
+    {
+        return new OrderShipmentResource($order_shipment);
     }
 
     /**
