@@ -77,14 +77,18 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                     MenuItem::resource(Item::class),
                     MenuItem::resource(Box::class),
                     //                    MenuItem::resource(RegisterGoodRequest::class),
-                ])->icon('truck')->collapsable(),
+                ])->icon('qrcode')->collapsable(),
 
                 MenuSection::make(__('Online Order & Shipping'), [
                     MenuItem::resource(OrderSheetWaybill::class),
                     MenuItem::resource(Order::class),
                     MenuItem::resource(OrderShipment::class),
                     //                    MenuItem::resource(MismatchedOrderShipment::class),
-                ])->icon('archive')->collapsable(),
+                ])->icon('truck')->collapsable(),
+
+                MenuSection::make(__('Offline Order & Shipping'), [
+                    MenuItem::resource(Order::class),
+                ])->icon('truck')->collapsable(),
 
                 MenuSection::make(__('Purchase Ordering'), [
                     MenuItem::resource(PlacingOrder::class),
@@ -100,11 +104,11 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                     MenuItem::resource(BoxInventoryHistory::class),
                 ])->icon('eye')->collapsable(),
 
-                MenuSection::make(__('Partners'), [
+                MenuSection::make(__('Business Management'), [
                     MenuItem::resource(Supplier::class),
                     MenuItem::resource(BoxSupplier::class),
                     MenuItem::resource(Customer::class),
-                ])->icon('inbox-in')->collapsable(),
+                ])->icon('phone')->collapsable(),
 
                 MenuSection::make(__('MD'), [
                     MenuItem::resource(Good::class),
