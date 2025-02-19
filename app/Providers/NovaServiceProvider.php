@@ -4,13 +4,13 @@ namespace App\Providers;
 
 use App\Nova\AlertEmail;
 use App\Nova\BarcodeCommand;
-use App\Nova\BasicGood;
 use App\Nova\Box;
 use App\Nova\BoxInventoryHistory;
 use App\Nova\BoxManualWarehousing;
 use App\Nova\BoxPlacingOrder;
 use App\Nova\BoxSupplier;
 use App\Nova\Dashboards\Main;
+use App\Nova\Good;
 use App\Nova\HelpfulFile;
 use App\Nova\HelpTip;
 use App\Nova\InventoryHistory;
@@ -105,7 +105,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 ])->icon('eye')->collapsable(),
 
                 MenuSection::make(__('MD'), [
-                    MenuItem::resource(BasicGood::class),
+                    MenuItem::resource(Good::class),
                     MenuItem::resource(SetGood::class),
                     MenuItem::resource(OptionGood::class),
                     MenuItem::resource(OptionGoodOption::class),

@@ -91,9 +91,9 @@ class SetGood extends Model
         $this->sku = empty($setCodes) ? null : GoodCode::setCodeOf($setCodes)->code();
         $this->good_count = count($setCodes);
 
-        $this->goods_price = $goodsOfSetGoods->sum('goods_price');
+        $this->goods_price = $goodsOfSetGoods->sum('suggested_selling_price');
         $this->last_cost_price = $goodsOfSetGoods->sum('last_cost_price');
-        $this->zero_margin_price = $goodsOfSetGoods->sum('zero_margin_price');
+        $this->zero_margin_price = $goodsOfSetGoods->sum('cost_price');
 
         return $this->saveQuietly();
     }
