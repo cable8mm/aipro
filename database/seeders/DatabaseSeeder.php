@@ -57,6 +57,7 @@ class DatabaseSeeder extends Seeder
             SupplierItemManualWarehousingSeeder::class,
             SupplierItemSeeder::class,
             SupplierSeeder::class,
+            CustomerSeeder::class,
         ]);
     }
 }
