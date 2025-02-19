@@ -11,6 +11,7 @@ use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\DateTime;
+use Laravel\Nova\Fields\HasOne;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
@@ -46,7 +47,7 @@ class OrderShipment extends Resource
         'orderNo',
         'siteOrderNo',
         'siteGoodsCd',
-        'masterGoodsCd',
+        'goodsCd',
         'goodsNm',
     ];
 
@@ -61,10 +62,10 @@ class OrderShipment extends Resource
             ID::make()
                 ->hideFromIndex(),
             BelongsTo::make(__('Order Sheet Waybill'), 'orderSheetWaybill', OrderSheetWaybill::class),
-            BelongsTo::make(__('Item'), 'item', Item::class),
+            HasOne::make(__('Item'), 'item', Item::class),
             BelongsTo::make(__('Order Number'), 'order', Order::class),
             Panel::make(__('Additional Information'), [
-                Text::make(__('Master Code'), 'masterGoodsCd')->copyable(),
+                Text::make(__('Goods Code'), 'goodsCd')->copyable(),
                 Text::make(__('Seller Good Code'), 'sellerGoodsCd')->copyable(),
                 Select::make(__('Site'), 'site')->options(Site::array())->displayUsingLabels(),
                 Text::make(__('Regist Date'), 'registDate')->maxlength(255)

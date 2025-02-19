@@ -102,7 +102,7 @@ class OrderShipment implements Arrayable
             // 송장번호
             'waybillNo' => $row[41],
             // 마스터상품코드
-            'masterGoodsCd' => $row[42],
+            'goodsCd' => $row[42],
             // 주의메세지
             'memo' => $row[43],
             // 판매자상품코드
@@ -134,7 +134,7 @@ class OrderShipment implements Arrayable
                 }
             )->code();
 
-            $this->data->put('masterGoodsCd', $code);
+            $this->data->put('goodsCd', $code);
         }
 
         /**
@@ -151,14 +151,14 @@ class OrderShipment implements Arrayable
                 }
             )->code();
 
-            $this->data->put('masterGoodsCd', $code);
+            $this->data->put('goodsCd', $code);
         }
 
         /**
          * If the sku is a set good, copy it as multiple individual goods.
          */
-        if (GoodCodeType::of($this->data->get('masterGoodsCd')) == GoodCodeType::SET) {
-            $goods = ValueObjectsSetGood::of($this->data->get('masterGoodsCd'))->goods();
+        if (GoodCodeType::of($this->data->get('goodsCd')) == GoodCodeType::SET) {
+            $goods = ValueObjectsSetGood::of($this->data->get('goodsCd'))->goods();
 
             $i = 0;
             foreach ($goods as $code => $quantity) {
@@ -171,7 +171,7 @@ class OrderShipment implements Arrayable
                 }
                 $this->data->put('amount', $this->data->get('amount') * $quantity);
                 $this->data->put('totalAmount', $this->data->get('totalAmount') * $quantity);
-                $this->data->put('masterGoodsCd', $code);
+                $this->data->put('goodsCd', $code);
 
                 $this->containers[] = $this->data->toArray();
             }

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('order_sheet_waybill_id')->nullable();
             $table->string('order_no', 100)->nullable()->comment('주문고유번호');
             $table->string('site', 100)->nullable()->comment('판매사이트');
-            $table->string('master_goods_cd', 100)->nullable()->comment('마스터상품코드');
+            $table->string('goods_cd', 100)->nullable()->comment('마스터상품코드');
             $table->string('goods_nm', 255)->nullable()->comment('상품명');
             $table->string('option', 255)->nullable()->comment('주문선택사항');
             $table->text('json')->nullable()->comment('주문 전체 데이터');

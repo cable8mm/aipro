@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class OrderShipment extends Model
 {
@@ -55,7 +56,7 @@ class OrderShipment extends Model
             'waybillFilePage' => 'integer',
             'waybillGoodsCd' => 'string',
             'payGoodsCd' => 'string',
-            'masterGoodsCd' => 'string',
+            'goodsCd' => 'string',
             'validator' => 'integer',
             'isSet' => 'string',
             'printed' => 'string',
@@ -83,9 +84,9 @@ class OrderShipment extends Model
         return $this->hasMany(OrderShipment::class, 'orderNo', 'orderNo');
     }
 
-    public function item(): BelongsTo
+    public function item(): HasOne
     {
-        return $this->belongsTo(Item::class, 'masterGoodsCd', 'sku');
+        return $this->HasOne(Item::class, 'sku', 'goodsCd');
     }
 
     public function setGoods(): HasMany
