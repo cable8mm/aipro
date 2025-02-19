@@ -76,7 +76,7 @@ class OrderSheetWaybill extends Model
             'order_sheet_waybill_id',
             'sku',
             'id',
-            'masterGoodsCd'
+            'goodsCd'
         );
     }
 

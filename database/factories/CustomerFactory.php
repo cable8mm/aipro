@@ -2,13 +2,12 @@
 
 namespace Database\Factories;
 
-use App\Enums\OrderMethod;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Customer>
  */
-class SupplierFactory extends Factory
+class CustomerFactory extends Factory
 {
     public static array $balanceCriteria = [
         '',
@@ -39,15 +38,12 @@ class SupplierFactory extends Factory
         return [
             'author_id' => fake()->randomNumber(1) + 1,
             'name' => fake()->company(),
-            'ordered_email' => fake()->email(),
             'contact_name' => fake()->name(),
+            'contact_email' => fake()->localAreaPhoneNumber(),
             'contact_tel' => fake()->localAreaPhoneNumber(),
             'contact_cel' => fake()->cellPhoneNumber(),
-            'order_method' => fake()->randomElements(OrderMethod::names(), fake()->numberBetween(0, count(OrderMethod::names()) - 1)),
             'balance_criteria' => fake()->randomElement(self::$balanceCriteria),
-            'min_order_price' => fake()->randomElement([0, 100000, 200000, 500000, 1000000, 2000000]),
             'additional_information' => fake()->paragraph(),
-            'is_parceled' => fake()->boolean(),
             'is_active' => fake()->boolean(),
         ];
     }

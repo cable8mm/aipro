@@ -21,7 +21,7 @@ class MismatchedOrderShipment extends Model
         return [
             'order_no' => 'string',
             'site' => 'string',
-            'master_goods_cd' => 'string',
+            'goods_cd' => 'string',
             'goods_nm' => 'string',
             'option' => 'string',
             'status' => 'string',

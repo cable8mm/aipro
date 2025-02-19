@@ -25,7 +25,7 @@ class SupplierItemFactory extends Factory
             'good_code' => fake()->numerify('GOOD-###'),
             'supplier_category' => fake()->randomElement(['꽃게|암컷', '꽃게|숫컷']),
             'name' => fake()->productName(),
-            'origin' => fake('ko_KR')->countryCode(),
+            'origin' => fake()->countryCode(),
             'maker' => fake()->company(),
             'brand' => fake()->deviceManufacturer(),
             'box_count' => fake()->randomNumber(1),

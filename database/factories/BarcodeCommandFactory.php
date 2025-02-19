@@ -17,7 +17,7 @@ class BarcodeCommandFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake('ko_KR')->word(),
+            'name' => fake()->word(),
             'barcode' => fake()->ean13(),
         ];
     }

@@ -54,7 +54,7 @@ class MismatchedOrderShipment extends Resource
             BelongsTo::make(__('Order Sheet Waybill'), 'orderSheetWaybill', OrderSheetWaybill::class),
             Text::make(__('Order No'), 'order_no')->maxlength(100)->copyable(),
             Text::make(__('Site'), 'site')->maxlength(100),
-            Text::make(__('Master Goods Cd'), 'master_goods_cd')->maxlength(100)->copyable(),
+            Text::make(__('Goods Cd'), 'goods_cd')->maxlength(100)->copyable(),
             Text::make(__('Goods Nm'), 'goods_nm')->maxlength(255),
             Text::make(__('Option'), 'option')->maxlength(255),
             KeyValue::make(__('Json'), 'json'),

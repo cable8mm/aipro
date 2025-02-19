@@ -22,8 +22,8 @@ class ShutdownGoodFactory extends Factory
         return [
             'author_id' => fake()->randomNumber(1) + 1,
             'sku' => fake()->randomElement(['SET1x1ZZ3x1', 'SET3x3ZZ7x3', 'SET6x4ZZ8x4']),
-            'title' => fake('ko_KR')->productName(),
-            'reason' => fake('ko_KR')->paragraph(),
+            'title' => fake()->productName(),
+            'reason' => fake()->paragraph(),
         ];
     }
 }
