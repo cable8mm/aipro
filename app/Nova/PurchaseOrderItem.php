@@ -3,7 +3,7 @@
 namespace App\Nova;
 
 use App\Enums\CenterClass;
-use App\Enums\PlacingOrderItemStatus;
+use App\Enums\PurchaseOrderItemStatus;
 use App\Enums\SafeClass;
 use App\Traits\NovaAuthorizedByWarehouser;
 use Laravel\Nova\Fields\BelongsTo;
@@ -18,16 +18,16 @@ use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
-class PlacingOrderItem extends Resource
+class PurchaseOrderItem extends Resource
 {
     use NovaAuthorizedByWarehouser;
 
     /**
      * The model the resource corresponds to.
      *
-     * @var class-string<\App\Models\PlacingOrderItem>
+     * @var class-string<\App\Models\PurchaseOrderItem>
      */
-    public static $model = \App\Models\PlacingOrderItem::class;
+    public static $model = \App\Models\PurchaseOrderItem::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -57,7 +57,7 @@ class PlacingOrderItem extends Resource
     {
         return [
             ID::make()->sortable(),
-            BelongsTo::make(__('Placing Order'), 'placingOrder', PlacingOrder::class),
+            BelongsTo::make(__('Purchase Order'), 'purchaseOrder', PurchaseOrder::class),
             BelongsTo::make(__('Author'), 'author', User::class)->exceptOnForms(),
             BelongsTo::make(__('Warehouse Manager'), 'warehouseManager', User::class),
             Text::make(__('SKU'), 'Item.sku')->exceptOnForms(),
@@ -89,12 +89,12 @@ class PlacingOrderItem extends Resource
             Boolean::make(__('Is Promotion'), 'is_promotion'),
             DateTime::make(__('Warehoused At'), 'warehoused_at')->filterable(),
             Status::make(__('Status'), 'status')
-                ->loadingWhen(PlacingOrderItemStatus::loadingWhen())
-                ->failedWhen(PlacingOrderItemStatus::failedWhen())
+                ->loadingWhen(PurchaseOrderItemStatus::loadingWhen())
+                ->failedWhen(PurchaseOrderItemStatus::failedWhen())
                 ->filterable(function ($request, $query, $value, $attribute) {
                     $query->where($attribute, $value);
                 })->displayUsing(function ($value) {
-                    return PlacingOrderItemStatus::{$value}->value() ?? '-';
+                    return PurchaseOrderItemStatus::{$value}->value() ?? '-';
                 }),
             Textarea::make(__('Memo'), 'memo')->alwaysShow(),
             Stack::make(__('Created At').' & '.__('Updated At'), [
@@ -146,7 +146,7 @@ class PlacingOrderItem extends Resource
 
     public static function label()
     {
-        return __('Placing Order Item');
+        return __('Purchase Order Item');
     }
 
     public function title()

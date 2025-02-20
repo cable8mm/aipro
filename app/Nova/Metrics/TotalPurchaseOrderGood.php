@@ -2,12 +2,12 @@
 
 namespace App\Nova\Metrics;
 
-use App\Models\PlacingOrderItem;
+use App\Models\PurchaseOrderItem;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Metrics\Value;
 use Laravel\Nova\Nova;
 
-class TotalPlacingOrderGood extends Value
+class TotalPurchaseOrderGood extends Value
 {
     /**
      * Calculate the value of the metric.
@@ -16,7 +16,7 @@ class TotalPlacingOrderGood extends Value
      */
     public function calculate(NovaRequest $request)
     {
-        return $this->count($request, PlacingOrderItem::class);
+        return $this->count($request, PurchaseOrderItem::class);
     }
 
     /**
@@ -50,6 +50,6 @@ class TotalPlacingOrderGood extends Value
 
     public function name()
     {
-        return __('Total Placing Order Good');
+        return __('Total Purchase Order Good');
     }
 }

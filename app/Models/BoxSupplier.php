@@ -32,9 +32,9 @@ class BoxSupplier extends Model
         });
     }
 
-    public function placingOrderBoxes(): HasMany
+    public function purchaseOrderBoxes(): HasMany
     {
-        return $this->hasMany(PlacingOrderBox::class);
+        return $this->hasMany(PurchaseOrderBox::class);
     }
 
     public function author(): BelongsTo

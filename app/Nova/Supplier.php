@@ -77,7 +77,7 @@ class Supplier extends Resource
 
             HasMany::make(__('Items'), 'items', Item::class),
 
-            HasMany::make(__('Placing Orders'), 'placingOrders', PlacingOrder::class),
+            HasMany::make(__('Purchase Orders'), 'purchaseOrders', PurchaseOrder::class),
         ];
     }
 

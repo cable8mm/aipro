@@ -2,7 +2,7 @@
 
 namespace App\Nova;
 
-use App\Enums\PlacingOrder;
+use App\Enums\PurchaseOrder;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\DateTime;
@@ -13,14 +13,14 @@ use Laravel\Nova\Fields\Stack;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
-class PlacingOrderBox extends Resource
+class PurchaseOrderBox extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
-     * @var class-string<\App\Models\PlacingOrderBox>
+     * @var class-string<\App\Models\PurchaseOrderBox>
      */
-    public static $model = \App\Models\PlacingOrderBox::class;
+    public static $model = \App\Models\PurchaseOrderBox::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -47,7 +47,7 @@ class PlacingOrderBox extends Resource
     {
         return [
             ID::make()->sortable(),
-            BelongsTo::make(__('Box Order'), 'boxPlacingOrder', BoxPlacingOrder::class),
+            BelongsTo::make(__('Box Order'), 'boxPurchaseOrder', BoxPurchaseOrder::class),
             BelongsTo::make(__('Author'), 'author', User::class),
             BelongsTo::make(__('Box Supplier'), 'boxSupplier', BoxSupplier::class),
             BelongsTo::make(__('Box'), 'box', Box::class),
@@ -58,7 +58,7 @@ class PlacingOrderBox extends Resource
             Currency::make(__('Cost Price'), 'cost_price'),
             DateTime::make(__('Warehoused At'), 'warehoused_at'),
             Select::make(__('Status'), 'status')
-                ->options(PlacingOrder::array())->displayUsingLabels()->filterable(),
+                ->options(PurchaseOrder::array())->displayUsingLabels()->filterable(),
             Textarea::make(__('Memo')),
             Stack::make(__('Created At').' & '.__('Updated At'), [
                 DateTime::make(__('Created At'), 'created_at'),
@@ -109,6 +109,6 @@ class PlacingOrderBox extends Resource
 
     public static function label()
     {
-        return __('Placing Order Boxes');
+        return __('Purchase Order Boxes');
     }
 }

@@ -7,7 +7,7 @@ use App\Nova\BarcodeCommand;
 use App\Nova\Box;
 use App\Nova\BoxInventoryHistory;
 use App\Nova\BoxManualWarehousing;
-use App\Nova\BoxPlacingOrder;
+use App\Nova\BoxPurchaseOrder;
 use App\Nova\BoxSupplier;
 use App\Nova\Customer;
 use App\Nova\Dashboards\Main;
@@ -24,10 +24,8 @@ use App\Nova\Order;
 use App\Nova\OrderSheetWaybill;
 use App\Nova\OrderShipment;
 use App\Nova\PickingZone;
-use App\Nova\PlacingOrder;
-use App\Nova\PlacingOrderBox;
-use App\Nova\PlacingOrderItem;
 use App\Nova\PromotionCode;
+use App\Nova\PurchaseOrder;
 use App\Nova\RegisterGoodRequest;
 use App\Nova\RegisterImportFile;
 use App\Nova\RegisterOptionGoodRequest;
@@ -91,10 +89,10 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 ])->icon('truck')->collapsable(),
 
                 MenuSection::make(__('Purchase Ordering'), [
-                    MenuItem::resource(PlacingOrder::class),
-                    MenuItem::resource(BoxPlacingOrder::class),
-                    // MenuItem::resource(PlacingOrderItem::class),
-                    // MenuItem::resource(PlacingOrderBox::class),
+                    MenuItem::resource(PurchaseOrder::class),
+                    MenuItem::resource(BoxPurchaseOrder::class),
+                    // MenuItem::resource(PurchaseOrderItem::class),
+                    // MenuItem::resource(PurchaseOrderBox::class),
                 ])->icon('cube')->collapsable(),
 
                 MenuSection::make(__('Inventory Management'), [

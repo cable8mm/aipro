@@ -4,7 +4,7 @@ namespace App\Enums;
 
 use Cable8mm\EnumGetter\EnumGetter;
 
-enum PlacingOrderItemStatus: string
+enum PurchaseOrderItemStatus: string
 {
     use EnumGetter;
 

@@ -94,9 +94,9 @@ class Item extends Model
         return $this->belongsTo(PlayautoCategory::class);
     }
 
-    public function placingOrderItems(): HasMany
+    public function purchaseOrderItems(): HasMany
     {
-        return $this->hasMany(PlacingOrderItem::class);
+        return $this->hasMany(PurchaseOrderItem::class);
     }
 
     public function inventoryHistories(): HasMany

@@ -2,12 +2,12 @@
 
 namespace App\Nova\Metrics;
 
-use App\Models\PlacingOrderItem;
+use App\Models\PurchaseOrderItem;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Metrics\Trend;
 use Laravel\Nova\Nova;
 
-class PlacingOrderGoodPerDay extends Trend
+class PurchaseOrderGoodPerDay extends Trend
 {
     /**
      * Calculate the value of the metric.
@@ -16,7 +16,7 @@ class PlacingOrderGoodPerDay extends Trend
      */
     public function calculate(NovaRequest $request)
     {
-        return $this->countByDays($request, PlacingOrderItem::class);
+        return $this->countByDays($request, PurchaseOrderItem::class);
     }
 
     /**
@@ -51,11 +51,11 @@ class PlacingOrderGoodPerDay extends Trend
      */
     public function uriKey()
     {
-        return 'placing-order-good-per-day';
+        return 'purchase-order-good-per-day';
     }
 
     public function name()
     {
-        return __('Placing Order Good Per Day');
+        return __('Purchase Order Good Per Day');
     }
 }

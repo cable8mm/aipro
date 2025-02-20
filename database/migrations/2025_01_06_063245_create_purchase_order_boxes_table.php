@@ -1,6 +1,6 @@
 <?php
 
-use App\Enums\PlacingOrder;
+use App\Enums\PurchaseOrder;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,9 +12,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('placing_order_boxes', function (Blueprint $table) {
+        Schema::create('purchase_order_boxes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('box_placing_order_id');
+            $table->foreignId('box_purchase_order_id');
             $table->foreignId('author_id');
             $table->foreignId('box_supplier_id');
             $table->foreignId('box_id');
@@ -24,7 +24,7 @@ return new class extends Migration
             $table->integer('cost_count')->nullable();
             $table->integer('cost_price')->nullable();
             $table->dateTime('warehoused_at')->nullable();
-            $table->string('status', 100)->nullable()->default(PlacingOrder::WAITING);
+            $table->string('status', 100)->nullable()->default(PurchaseOrder::WAITING);
             $table->text('memo')->nullable();
             $table->timestamps();
         });
@@ -35,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('placing_order_boxes');
+        Schema::dropIfExists('purchase_order_boxes');
     }
 };

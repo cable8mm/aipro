@@ -8,11 +8,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Nova\Actions\Actionable;
 
-class PlacingOrderItem extends Model
+class PurchaseOrderItem extends Model
 {
     use Actionable, HasFactory;
 
-    protected $with = ['placingOrder', 'author', 'warehouseManager', 'item'];
+    protected $with = ['purchaseOrder', 'author', 'warehouseManager', 'item'];
 
     protected function casts(): array
     {
@@ -27,20 +27,20 @@ class PlacingOrderItem extends Model
             'is_promotion' => 'boolean',
             'warehoused_at' => 'datetime',
             'status' => 'string',
-            'placing_ordered_at' => 'datetime',
+            'purchase_ordered_at' => 'datetime',
         ];
     }
 
     protected static function booted(): void
     {
-        static::creating(function (PlacingOrderItem $placingOrderItem) {
-            $placingOrderItem->author_id = $placingOrderItem->author_id ?? Auth::user()->id;
+        static::creating(function (PurchaseOrderItem $purchaseOrderItem) {
+            $purchaseOrderItem->author_id = $purchaseOrderItem->author_id ?? Auth::user()->id;
         });
     }
 
-    public function placingOrder(): BelongsTo
+    public function purchaseOrder(): BelongsTo
     {
-        return $this->belongsTo(PlacingOrder::class);
+        return $this->belongsTo(PurchaseOrder::class);
     }
 
     public function author(): BelongsTo

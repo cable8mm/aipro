@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('placing_order_items', function (Blueprint $table) {
+        Schema::create('purchase_order_items', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('placing_order_id')->comment('발주ID');
+            $table->foreignId('purchase_order_id')->comment('발주ID');
             $table->foreignId('author_id')->comment('등록자');
             $table->foreignId('item_id')->comment('상품');
             $table->integer('warehouse_manager_id')->nullable()->comment('입고 담당자');
@@ -26,7 +26,7 @@ return new class extends Migration
             $table->integer('cost_price')->nullable()->comment('매입가');
             $table->boolean('is_promotion')->nullable()->default('0')->comment('프로모션 상품 여부');
             $table->dateTime('warehoused_at')->nullable()->comment('입고시각');
-            $table->dateTime('placing_ordered_at')->nullable()->comment('발주시각');
+            $table->dateTime('purchase_ordered_at')->nullable()->comment('발주시각');
             $table->string('status', 100)->default('확인중')->comment('확인중,미입고,입고중,입고완료');
             $table->text('memo')->nullable();
             $table->timestamps();
@@ -38,6 +38,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('placing_order_goods');
+        Schema::dropIfExists('purchase_order_goods');
     }
 };

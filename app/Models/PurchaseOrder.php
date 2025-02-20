@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Nova\Actions\Actionable;
 
-class PlacingOrder extends Model
+class PurchaseOrder extends Model
 {
     use Actionable, HasFactory;
 
@@ -33,8 +33,8 @@ class PlacingOrder extends Model
 
     protected static function booted(): void
     {
-        static::creating(function (PlacingOrder $placingOrder) {
-            $placingOrder->author_id = $placingOrder->author_id ?? Auth::user()->id;
+        static::creating(function (PurchaseOrder $purchaseOrder) {
+            $purchaseOrder->author_id = $purchaseOrder->author_id ?? Auth::user()->id;
         });
     }
 
@@ -53,8 +53,8 @@ class PlacingOrder extends Model
         return $this->belongsTo(Supplier::class);
     }
 
-    public function placingOrderItems(): HasMany
+    public function purchaseOrderItems(): HasMany
     {
-        return $this->hasMany(PlacingOrderItem::class);
+        return $this->hasMany(PurchaseOrderItem::class);
     }
 }
