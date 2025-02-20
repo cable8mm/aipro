@@ -29,6 +29,8 @@ use App\Nova\PurchaseOrder;
 use App\Nova\RegisterGoodRequest;
 use App\Nova\RegisterImportFile;
 use App\Nova\RegisterOptionGoodRequest;
+use App\Nova\RetailPurchase;
+use App\Nova\RetailPurchaseItem;
 use App\Nova\SetGood;
 use App\Nova\Setting;
 use App\Nova\Supplier;
@@ -84,8 +86,9 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                     //                    MenuItem::resource(MismatchedOrderShipment::class),
                 ])->icon('truck')->collapsable(),
 
-                MenuSection::make(__('Offline Order & Shipping'), [
-                    MenuItem::resource(Order::class),
+                MenuSection::make(__('Offline Purchase'), [
+                    MenuItem::resource(RetailPurchase::class),
+                    MenuItem::resource(RetailPurchaseItem::class),
                 ])->icon('truck')->collapsable(),
 
                 MenuSection::make(__('Purchase Ordering'), [
