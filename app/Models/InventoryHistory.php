@@ -13,12 +13,13 @@ class InventoryHistory extends Model
 
     protected $with = ['author', 'item'];
 
+    protected $guarded = [];
+
     protected function casts(): array
     {
         return [
             'type' => 'string',
             'quantity' => 'integer',
-            'price' => 'integer',
             'after_quantity' => 'integer',
             'model' => 'string',
             'attribute' => 'integer',

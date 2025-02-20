@@ -17,7 +17,6 @@ return new class extends Migration
             $table->foreignId('item_id')->comment('상품 아이디');
             $table->string('type', 20)->comment('타입(입고,출고)');
             $table->integer('quantity')->comment('입출고 수량');
-            $table->integer('price')->comment('금액');
             $table->integer('after_quantity')->comment('입출고 후 재고 수량');
             $table->string('model', 100)->comment('입출고를 한 모델');
             $table->unsignedInteger('attribute')->comment('입출고를 한 모델 속성');
