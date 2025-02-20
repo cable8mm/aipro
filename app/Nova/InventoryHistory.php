@@ -3,13 +3,11 @@
 namespace App\Nova;
 
 use App\Enums\InventoryHistory as EnumsInventoryHistory;
-use App\Enums\InventoryHistoryModel;
 use App\Enums\SafeClass;
 use App\Traits\NovaAuthorizedByNone;
 use Laravel\Nova\Fields\Badge;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
-use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
@@ -70,12 +68,10 @@ class InventoryHistory extends Resource
             Number::make(__('Quantity'), 'quantity')->displayUsing(function ($value) {
                 return number_format($value);
             })->rules('required')->required(),
-            Currency::make(__('Price'), 'price')->rules('required')->required(),
             Number::make(__('After Quantity'), 'after_quantity')->displayUsing(function ($value) {
                 return number_format($value);
             })->rules('required')->required(),
-            Select::make(__('Model'), 'model')->options(InventoryHistoryModel::array())
-                ->rules('required')->required()->displayUsingLabels(),
+            Text::make(__('Model'), 'model')->rules('required')->required(),
             Number::make(__('Attribute'), 'attribute')->rules('required')->required(),
             Number::make(__('Cancel Id'), 'cancel_id'),
             BelongsTo::make(__('Cancel Id'), 'bySelf', InventoryHistory::class),

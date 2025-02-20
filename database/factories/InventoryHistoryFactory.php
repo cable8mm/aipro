@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Enums\InventoryHistory;
-use App\Enums\InventoryHistoryModel;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -23,9 +22,8 @@ class InventoryHistoryFactory extends Factory
             'item_id' => fake()->randomNumber(1) + 1,
             'type' => fake()->randomElement(InventoryHistory::names()),
             'quantity' => (fake()->boolean() ? 1 : -1) * (fake()->randomNumber(2) + 1),
-            'price' => fake()->numberBetween(5000, 50000),
             'after_quantity' => fake()->randomNumber(2) + 1,
-            'model' => fake()->randomElement(InventoryHistoryModel::names()),
+            'model' => fake()->randomElement(['App\Models\RetailPurchase']),
             'attribute' => fake()->randomNumber(1) + 1,
             'cancel_id' => fake()->randomNumber(1) + 1,
             'is_success' => fake()->boolean(),

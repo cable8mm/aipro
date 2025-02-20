@@ -32,4 +32,39 @@ enum RetailPurchaseStatus: string
     {
         return [self::CANCELED->name, self::REFUNDED->name];
     }
+
+    /**
+     * Whether the status can be changed.
+     *
+     * @param  RetailPurchaseStatus|string  $old  old status of retail purchase status
+     * @param  RetailPurchaseStatus  $new  new status of retail purchase status
+     * @return bool true if successful, false otherwise
+     */
+    public static function can(RetailPurchaseStatus|string $old, RetailPurchaseStatus $new): bool
+    {
+        if (is_string($old)) {
+            $old = self::of($old);
+        }
+
+        return match ($old) {
+            self::COMPLETED => match ($new) {
+                self::PENDING, self::CANCELED, self::COMPLETED => false,
+                default => true,
+            },
+            self::CANCELED, self::REFUNDED => false,
+            default => true,
+        };
+    }
+
+    /**
+     * Whether the status can NOT be changed.
+     *
+     * @param  RetailPurchaseStatus|string  $old  old status of retail purchase status
+     * @param  RetailPurchaseStatus  $new  new status of retail purchase status
+     * @return bool true if successful, false otherwise
+     */
+    public static function cannot(RetailPurchaseStatus|string $old, RetailPurchaseStatus $new): bool
+    {
+        return self::can($old, $new) === false;
+    }
 }

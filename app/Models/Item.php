@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\InventoryHistory as EnumInventoryHistory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -104,11 +105,6 @@ class Item extends Model
         return $this->hasMany(InventoryHistory::class);
     }
 
-    public function inventory(int $amount): bool
-    {
-        return $this->update(['inventory' => $this->inventory + $amount]);
-    }
-
     /**
      * Update inventory.
      *
@@ -123,12 +119,13 @@ class Item extends Model
 
         $this->save();
 
-        $type = $inventory > 0 ? __('Receiving') : __('Shipping');
+        $type = $inventory > 0 ? EnumInventoryHistory::WAREHOUSING->name : EnumInventoryHistory::SHIPPING->name;
 
         return $this->inventoryHistories()->create([
             'item_id' => $this->id,
             'type' => $type,
             'quantity' => $inventory,
+            'after_quantity' => $this->getOriginal('inventory'),
             'model' => $model,
             'attribute' => $attribute,
             'is_success' => true,

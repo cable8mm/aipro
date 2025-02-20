@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Enums\InventoryHistory;
-use App\Enums\InventoryHistoryModel;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -23,7 +22,7 @@ class BoxInventoryHistoryFactory extends Factory
             'box_id' => fake()->randomNumber(1) + 1,
             'type' => fake()->randomElement(InventoryHistory::names()),
             'quantity' => (fake()->boolean() ? 1 : -1) * fake()->randomNumber(1),
-            'model' => fake()->randomElement(InventoryHistoryModel::values()),
+            'model' => fake()->randomElement(['App\Models\BoxPurchaseOrders']),
             'attribute' => fake()->randomNumber(1) + 1,
             'is_success' => fake()->boolean(),
         ];

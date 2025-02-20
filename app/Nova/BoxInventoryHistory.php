@@ -3,7 +3,6 @@
 namespace App\Nova;
 
 use App\Enums\InventoryHistory;
-use App\Enums\InventoryHistoryModel;
 use App\Traits\NovaAuthorizedByNone;
 use Laravel\Nova\Fields\Badge;
 use Laravel\Nova\Fields\BelongsTo;
@@ -64,7 +63,7 @@ class BoxInventoryHistory extends Resource
                 ->map(InventoryHistory::array(value: 'success'))
                 ->labels(InventoryHistory::array())
                 ->onlyOnIndex(),
-            Select::make(__('Model'), 'model')->options(InventoryHistoryModel::array())->displayUsingLabels()->rules('required')->required(),
+            Text::make(__('Model'), 'model')->rules('required')->required(),
             Text::make(__('Attribute'), 'attribute')->rules('required', 'gt:0')->required(),
             Number::make(__('Quantity'), 'quantity')->rules('required')->required()->displayUsing(function ($value) {
                 return number_format($value);

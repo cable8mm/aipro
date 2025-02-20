@@ -4,6 +4,7 @@ namespace App\Nova;
 
 use App\Enums\PaymentMethod;
 use App\Enums\RetailPurchaseStatus;
+use App\Nova\Actions\RetailPurchaseStatusChanging;
 use App\Nova\Filters\RetailPurchaseStatusFilter;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
@@ -121,7 +122,11 @@ class RetailPurchase extends Resource
      */
     public function actions(NovaRequest $request)
     {
-        return [];
+        return [
+            (new RetailPurchaseStatusChanging(RetailPurchaseStatus::COMPLETED))->showInline(),
+            (new RetailPurchaseStatusChanging(RetailPurchaseStatus::CANCELED))->showInline(),
+            (new RetailPurchaseStatusChanging(RetailPurchaseStatus::REFUNDED))->showInline(),
+        ];
     }
 
     public static function label()
