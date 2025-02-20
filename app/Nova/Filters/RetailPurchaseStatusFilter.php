@@ -2,13 +2,11 @@
 
 namespace App\Nova\Filters;
 
+use App\Enums\RetailPurchaseStatus;
 use Laravel\Nova\Filters\Filter;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
-/**
- * The filter for inventory zero or nothing.
- */
-class InventoryCountFilter extends Filter
+class RetailPurchaseStatusFilter extends Filter
 {
     /**
      * The filter's component.
@@ -27,8 +25,8 @@ class InventoryCountFilter extends Filter
     public function apply(NovaRequest $request, $query, $value)
     {
         return $value == 0
-            ? $query->where('inventory', '=', '0')
-            : $query->where('inventory', '<>', '0');
+            ? $query->where('status', $value)
+            : $query->where('status', $value);
     }
 
     /**
@@ -38,14 +36,11 @@ class InventoryCountFilter extends Filter
      */
     public function options(NovaRequest $request)
     {
-        return [
-            '재고없음' => 0,
-            '재고있음' => 1,
-        ];
+        return RetailPurchaseStatus::reverse();
     }
 
     public function name()
     {
-        return __('Inventory Filter');
+        return __('Status');
     }
 }
