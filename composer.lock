@@ -172,24 +172,27 @@
         },
         {
             "name": "cable8mm/enum-getter",
-            "version": "v1.4.0",
+            "version": "v1.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cable8mm/enum-getter.git",
-                "reference": "8aa407ebda0850d497fcf39879820a907026b583"
+                "reference": "19e6ef4e1e62ab771d305d6127b3606f3b76bf12"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cable8mm/enum-getter/zipball/8aa407ebda0850d497fcf39879820a907026b583",
-                "reference": "8aa407ebda0850d497fcf39879820a907026b583",
+                "url": "https://api.github.com/repos/cable8mm/enum-getter/zipball/19e6ef4e1e62ab771d305d6127b3606f3b76bf12",
+                "reference": "19e6ef4e1e62ab771d305d6127b3606f3b76bf12",
                 "shasum": ""
             },
             "require": {
-                "php": "^8.1"
+                "php": "^8.3"
             },
             "require-dev": {
                 "laravel/pint": "^1.19",
                 "phpunit/phpunit": "^10.5"
+            },
+            "suggest": {
+                "laravel/pint": "Pint is a PHP static analysis tool that finds common mistakes in your Laravel application."
             },
             "type": "library",
             "autoload": {
@@ -218,9 +221,9 @@
             ],
             "support": {
                 "issues": "https://github.com/cable8mm/enum-getter/issues",
-                "source": "https://github.com/cable8mm/enum-getter/tree/v1.4.0"
+                "source": "https://github.com/cable8mm/enum-getter/tree/v1.5.0"
             },
-            "time": "2025-01-24T10:10:31+00:00"
+            "time": "2025-02-20T13:28:41+00:00"
         },
         {
             "name": "cable8mm/good-code",
@@ -2884,16 +2887,16 @@
         },
         {
             "name": "laravel-lang/lang",
-            "version": "15.15.0",
+            "version": "15.16.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Laravel-Lang/lang.git",
-                "reference": "f17718e233d3f97adac597a3d3e426f77b4dac36"
+                "reference": "14d24c0081c0d5d2b4ff9158df3ade839740b1d3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laravel-Lang/lang/zipball/f17718e233d3f97adac597a3d3e426f77b4dac36",
-                "reference": "f17718e233d3f97adac597a3d3e426f77b4dac36",
+                "url": "https://api.github.com/repos/Laravel-Lang/lang/zipball/14d24c0081c0d5d2b4ff9158df3ade839740b1d3",
+                "reference": "14d24c0081c0d5d2b4ff9158df3ade839740b1d3",
                 "shasum": ""
             },
             "require": {
@@ -2943,7 +2946,7 @@
                 "issues": "https://github.com/Laravel-Lang/lang/issues",
                 "source": "https://github.com/Laravel-Lang/lang"
             },
-            "time": "2025-02-18T07:29:32+00:00"
+            "time": "2025-02-20T06:35:03+00:00"
         },
         {
             "name": "laravel-lang/locale-list",
