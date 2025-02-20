@@ -46,6 +46,6 @@ class InventoryCountFilter extends Filter
 
     public function name()
     {
-        return '재고';
+        return __('Inventory Filter');
     }
 }
