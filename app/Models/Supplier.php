@@ -45,9 +45,9 @@ class Supplier extends Model
         return $this->hasMany(Item::class);
     }
 
-    public function placingOrders(): HasMany
+    public function purchaseOrders(): HasMany
     {
-        return $this->hasMany(PlacingOrder::class);
+        return $this->hasMany(PurchaseOrder::class);
     }
 
     public function author(): BelongsTo

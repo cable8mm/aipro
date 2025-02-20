@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Laravel\Nova\Actions\Actionable;
 
-class PlacingOrderBox extends Model
+class PurchaseOrderBox extends Model
 {
     use Actionable, HasFactory;
 
-    protected $with = ['boxPlacingOrder', 'author', 'boxSupplier', 'box', 'warehouseManager'];
+    protected $with = ['boxPurchaseOrder', 'author', 'boxSupplier', 'box', 'warehouseManager'];
 
     protected function casts(): array
     {
@@ -25,9 +25,9 @@ class PlacingOrderBox extends Model
         ];
     }
 
-    public function boxPlacingOrder(): BelongsTo
+    public function boxPurchaseOrder(): BelongsTo
     {
-        return $this->belongsTo(BoxPlacingOrder::class);
+        return $this->belongsTo(BoxPurchaseOrder::class);
     }
 
     public function author(): BelongsTo

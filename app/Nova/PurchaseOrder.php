@@ -2,7 +2,7 @@
 
 namespace App\Nova;
 
-use App\Enums\PlacingOrder as EnumsPlacingOrder;
+use App\Enums\PurchaseOrder as EnumsPurchaseOrder;
 use App\Traits\NovaAuthorizedByWarehouser;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Currency;
@@ -16,16 +16,16 @@ use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
-class PlacingOrder extends Resource
+class PurchaseOrder extends Resource
 {
     use NovaAuthorizedByWarehouser;
 
     /**
      * The model the resource corresponds to.
      *
-     * @var class-string<\App\Models\PlacingOrder>
+     * @var class-string<\App\Models\PurchaseOrder>
      */
-    public static $model = \App\Models\PlacingOrder::class;
+    public static $model = \App\Models\PurchaseOrder::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -80,19 +80,19 @@ class PlacingOrder extends Resource
             DateTime::make(__('Warehoused At'), 'warehoused_at')->displayUsing(fn ($value) => $value ? $value->toDateTimeString() : '-')->exceptOnForms(),
             Textarea::make(__('Memo'), 'memo')->alwaysShow(),
             Status::make(__('Status'), 'status')
-                ->loadingWhen(EnumsPlacingOrder::loadingWhen())
-                ->failedWhen(EnumsPlacingOrder::failedWhen())
+                ->loadingWhen(EnumsPurchaseOrder::loadingWhen())
+                ->failedWhen(EnumsPurchaseOrder::failedWhen())
                 ->filterable(function ($request, $query, $value, $attribute) {
                     $query->where($attribute, $value);
                 })->displayUsing(function ($value) {
-                    return EnumsPlacingOrder::{$value}->value() ?? '-';
+                    return EnumsPurchaseOrder::{$value}->value() ?? '-';
                 }),
             Stack::make(__('Created At').' & '.__('Updated At'), [
                 DateTime::make(__('Created At'), 'created_at')->displayUsing(fn ($value) => $value ? $value->toDateTimeString() : '-'),
                 DateTime::make(__('Updated At'), 'updated_at')->displayUsing(fn ($value) => $value ? $value->toDateTimeString() : '-'),
             ])->hideFromIndex(),
 
-            HasMany::make(__('Placing Order Items'), 'placingOrderItems', PlacingOrderItem::class),
+            HasMany::make(__('Purchase Order Items'), 'purchaseOrderItems', PurchaseOrderItem::class),
         ];
     }
 
@@ -114,7 +114,7 @@ class PlacingOrder extends Resource
     public function filters(NovaRequest $request)
     {
         return [
-            new Filters\PlacingOrderFinished,
+            new Filters\PurchaseOrderFinished,
         ];
     }
 
@@ -140,11 +140,11 @@ class PlacingOrder extends Resource
 
     public static function label()
     {
-        return __('Placing Order And Warehousing');
+        return __('Purchase Order And Warehousing');
     }
 
     public function title()
     {
-        return __('Placing Order').' '.'#'.$this->id;
+        return __('Purchase Order').' '.'#'.$this->id;
     }
 }

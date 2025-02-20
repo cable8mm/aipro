@@ -12,7 +12,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('placing_orders', function (Blueprint $table) {
+        Schema::create('purchase_orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('author_id')->comment('등록자');
             $table->foreignId('warehouse_manager_id')->nullable()->comment('입고 담당자');
@@ -37,6 +37,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('placing_orders');
+        Schema::dropIfExists('purchase_orders');
     }
 };

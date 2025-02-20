@@ -4,13 +4,13 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-class PlacingOrderBoxSeeder extends Seeder
+class PurchaseOrderSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        \App\Models\PlacingOrderBox::factory()->count(10)->create();
+        \App\Models\PurchaseOrder::factory()->count(10)->create();
     }
 }

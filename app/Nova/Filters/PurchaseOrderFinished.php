@@ -2,11 +2,11 @@
 
 namespace App\Nova\Filters;
 
-use App\Enums\PlacingOrder;
+use App\Enums\PurchaseOrder;
 use Laravel\Nova\Filters\BooleanFilter;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
-class PlacingOrderFinished extends BooleanFilter
+class PurchaseOrderFinished extends BooleanFilter
 {
     /**
      * Apply the filter to the given query.
@@ -19,7 +19,7 @@ class PlacingOrderFinished extends BooleanFilter
     {
         return $query->where(function ($query) use ($value) {
             if ($value['except_warehoused_confirmed_deleted'] == 1) {
-                $query->whereIn('status', PlacingOrder::finishedWhen());
+                $query->whereIn('status', PurchaseOrder::finishedWhen());
             }
 
             return $query;

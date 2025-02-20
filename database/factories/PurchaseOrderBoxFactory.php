@@ -2,13 +2,13 @@
 
 namespace Database\Factories;
 
-use App\Enums\PlacingOrder;
+use App\Enums\PurchaseOrder;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
  */
-class PlacingOrderBoxFactory extends Factory
+class PurchaseOrderBoxFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,7 +18,7 @@ class PlacingOrderBoxFactory extends Factory
     public function definition(): array
     {
         return [
-            'box_placing_order_id' => fake()->randomNumber(1) + 1,
+            'box_purchase_order_id' => fake()->randomNumber(1) + 1,
             'author_id' => fake()->randomNumber(1) + 1,
             'box_supplier_id' => fake()->randomNumber(1) + 1,
             'box_id' => fake()->randomNumber(1) + 1,
@@ -28,7 +28,7 @@ class PlacingOrderBoxFactory extends Factory
             'cost_count' => fake()->randomNumber(1),
             'cost_price' => fake()->randomNumber(5),
             'warehoused_at' => fake()->dateTime(),
-            'status' => fake()->randomElement(PlacingOrder::names()),
+            'status' => fake()->randomElement(PurchaseOrder::names()),
             'memo' => fake()->paragraph(),
         ];
     }

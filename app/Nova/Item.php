@@ -119,7 +119,7 @@ class Item extends Resource
                 DateTime::make(__('Updated At'), 'updated_at'),
             ])->hideFromIndex(),
 
-            HasMany::make(__('Placing Order Items'), 'placingOrderItems', PlacingOrderItem::class),
+            HasMany::make(__('Purchase Order Items'), 'purchaseOrderItems', PurchaseOrderItem::class),
 
             HasMany::make(__('Inventory Histories'), 'inventoryHistories', InventoryHistory::class),
         ];

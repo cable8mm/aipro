@@ -67,7 +67,7 @@ class BoxSupplier extends Resource
                 DateTime::make(__('Updated At'), 'updated_at'),
             ])->hideFromIndex(),
 
-            HasMany::make(__('Placing Order Boxes'), 'placingOrderBoxes', PlacingOrderBox::class),
+            HasMany::make(__('Purchase Order Boxes'), 'purchaseOrderBoxes', PurchaseOrderBox::class),
         ];
     }
 

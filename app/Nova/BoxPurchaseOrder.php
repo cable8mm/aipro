@@ -2,7 +2,7 @@
 
 namespace App\Nova;
 
-use App\Enums\PlacingOrder;
+use App\Enums\PurchaseOrder;
 use App\Traits\NovaAuthorizedByWarehouser;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Currency;
@@ -16,16 +16,16 @@ use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
-class BoxPlacingOrder extends Resource
+class BoxPurchaseOrder extends Resource
 {
     use NovaAuthorizedByWarehouser;
 
     /**
      * The model the resource corresponds to.
      *
-     * @var class-string<\App\Models\BoxPlacingOrder>
+     * @var class-string<\App\Models\BoxPurchaseOrder>
      */
-    public static $model = \App\Models\BoxPlacingOrder::class;
+    public static $model = \App\Models\BoxPurchaseOrder::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -54,12 +54,12 @@ class BoxPlacingOrder extends Resource
         return [
             ID::make()->sortable(),
             Status::make(__('Status'), 'status')
-                ->loadingWhen(PlacingOrder::loadingWhen())
-                ->failedWhen(PlacingOrder::failedWhen())
+                ->loadingWhen(PurchaseOrder::loadingWhen())
+                ->failedWhen(PurchaseOrder::failedWhen())
                 ->filterable(function ($request, $query, $value, $attribute) {
                     $query->where($attribute, $value);
                 })->displayUsing(function ($value) {
-                    return PlacingOrder::{$value}->value() ?? '-';
+                    return PurchaseOrder::{$value}->value() ?? '-';
                 }),
             Hidden::make('Author', 'author_id')->default(function ($request) {
                 return $request->user()->id;
@@ -78,7 +78,7 @@ class BoxPlacingOrder extends Resource
             DateTime::make(__('Warehoused At'), 'warehoused_at')->nullable()->exceptOnForms(),
             Textarea::make(__('Memo'), 'memo')->alwaysShow(),
 
-            HasMany::make(__('Placing Order Boxes'), 'placingOrderBoxes', PlacingOrderBox::class),
+            HasMany::make(__('Purchase Order Boxes'), 'purchaseOrderBoxes', PurchaseOrderBox::class),
         ];
     }
 
@@ -100,7 +100,7 @@ class BoxPlacingOrder extends Resource
     public function filters(NovaRequest $request)
     {
         return [
-            new Filters\PlacingOrderFinished,
+            new Filters\PurchaseOrderFinished,
         ];
     }
 
@@ -126,6 +126,6 @@ class BoxPlacingOrder extends Resource
 
     public static function label()
     {
-        return __('Box Placing Order And Warehousing');
+        return __('Box Purchase Order And Warehousing');
     }
 }

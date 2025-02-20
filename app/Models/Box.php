@@ -38,9 +38,9 @@ class Box extends Model
         return $this->belongsTo(User::class, 'author_id');
     }
 
-    public function placingOrderBoxes(): HasMany
+    public function purchaseOrderBoxes(): HasMany
     {
-        return $this->hasMany(PlacingOrderBox::class);
+        return $this->hasMany(PurchaseOrderBox::class);
     }
 
     public function boxInventoryHistories(): HasMany
