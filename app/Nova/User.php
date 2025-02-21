@@ -6,6 +6,7 @@ use App\Enums\UserType;
 use App\Traits\NovaAuthorizedByManager;
 use Cable8mm\ValidationKisaRules\Rules\KisaPassword;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\Email;
 use Laravel\Nova\Fields\Gravatar;
@@ -70,6 +71,7 @@ class User extends Resource
             Select::make(__('Type'), 'type')->required()->options(UserType::array())->displayUsingLabels(),
 
             Timezone::make(__('Timezone'), 'timezone')->required()->searchable()
+                ->default(Auth::user()?->timezone)
                 ->help(__('If you are in Korea, select "Asia/Seoul".')),
 
             Panel::make(__('Change Password'), [

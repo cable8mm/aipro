@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Cable8mm\GoodCode\ReceiptCode;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -18,7 +19,7 @@ class PurchaseOrder extends Model
     protected function casts(): array
     {
         return [
-            'title' => 'string',
+            'code' => 'string',
             'ordered_at' => 'datetime',
             'sent_at' => 'datetime',
             'confirmed_at' => 'datetime',
@@ -35,6 +36,10 @@ class PurchaseOrder extends Model
     {
         static::creating(function (PurchaseOrder $purchaseOrder) {
             $purchaseOrder->author_id = $purchaseOrder->author_id ?? Auth::user()->id;
+
+            $purchaseOrder->code = ReceiptCode::of(optional(
+                static::query()->latest('id')->first()
+            )->code)->nextCode();
         });
     }
 

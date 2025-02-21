@@ -36,14 +36,22 @@ enum RetailPurchaseStatus: string
     /**
      * Whether the status can be changed.
      *
-     * @param  RetailPurchaseStatus|string  $old  old status of retail purchase status
-     * @param  RetailPurchaseStatus  $new  new status of retail purchase status
+     * @param  RetailPurchaseStatus|string|null  $old  old status of retail purchase status
+     * @param  RetailPurchaseStatus:string  $new  new status of retail purchase status
      * @return bool true if successful, false otherwise
      */
-    public static function can(RetailPurchaseStatus|string $old, RetailPurchaseStatus $new): bool
+    public static function can(RetailPurchaseStatus|string|null $old, RetailPurchaseStatus|string $new): bool
     {
+        if (is_null($old)) {
+            return true;
+        }
+
         if (is_string($old)) {
             $old = self::of($old);
+        }
+
+        if (is_string($new)) {
+            $new = self::of($new);
         }
 
         return match ($old) {
