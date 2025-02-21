@@ -21,7 +21,6 @@ class PurchaseOrderFactory extends Factory
             'author_id' => fake()->numberBetween(1, 10),
             'warehouse_manager_id' => fake()->numberBetween(1, 10),
             'supplier_id' => fake()->numberBetween(1, 10),
-            'title' => date('Y년 m월 n일').' 발주합니다.',
             'ordered_at' => fake()->dateTime(),
             'total_good_count' => fake()->randomNumber() % 100,
             'total_order_price' => fake()->randomNumber(5),

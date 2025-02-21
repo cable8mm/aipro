@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('author_id')->comment('등록자');
             $table->foreignId('warehouse_manager_id')->nullable()->comment('입고 담당자');
             $table->foreignId('supplier_id')->comment('공급사');
-            $table->string('title', 190)->comment('제목');
+            $table->string('code', 50)->comment('발주코드');
             $table->dateTime('ordered_at')->nullable()->comment('발주 시각');
             $table->dateTime('sent_at')->nullable()->comment('발주서 보낸 시각');
             $table->dateTime('confirmed_at')->nullable()->comment('발주 확인 시각');

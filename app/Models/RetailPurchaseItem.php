@@ -11,6 +11,16 @@ class RetailPurchaseItem extends Model
     /** @use HasFactory<\Database\Factories\RetailPurchaseItemFactory> */
     use HasFactory;
 
+    protected static function booted(): void
+    {
+        static::saved(function (RetailPurchaseItem $retailPurchaseItem) {
+            $retailPurchaseItem->retailPurchase->update([
+                'total_price' => $retailPurchaseItem->retailPurchase->getTotalPrice(),
+                'item_count' => $retailPurchaseItem->retailPurchase->getItemCount(),
+            ]);
+        });
+    }
+
     public function retailPurchase(): BelongsTo
     {
         return $this->belongsTo(RetailPurchase::class);

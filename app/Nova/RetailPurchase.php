@@ -17,6 +17,7 @@ use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Stack;
 use Laravel\Nova\Fields\Status;
+use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
@@ -59,6 +60,8 @@ class RetailPurchase extends Resource
                 ->showCreateRelationButton()
                 ->modalSize('4xl')
                 ->filterable(),
+            Text::make(__('Code'), 'code')->exceptOnForms(),
+            Number::make(__('Item Count'), 'item_count')->exceptOnForms(),
             Currency::make(__('Total Price'), 'total_price')->exceptOnForms(),
             Select::make(__('Payment Method'), 'payment_method')
                 ->options(PaymentMethod::array())->displayUsingLabels()
@@ -71,7 +74,6 @@ class RetailPurchase extends Resource
                 }),
             Currency::make(__('Discount'), 'discount')->default(0),
             Currency::make(__('Tax'), 'tax')->exceptOnForms(),
-            Number::make(__('Receipt Number'), 'receipt_number')->exceptOnForms(),
             Date::make(__('Purchased At'), 'purchased_at')->default(now()),
             Textarea::make(__('Notes'), 'notes')->nullable()->alwaysShow(),
             Stack::make(__('Created At').' & '.__('Updated At'), [
@@ -136,6 +138,6 @@ class RetailPurchase extends Resource
 
     public function title()
     {
-        return '#'.$this->receipt_number;
+        return $this->code;
     }
 }

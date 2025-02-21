@@ -32,7 +32,7 @@ class PurchaseOrder extends Resource
      *
      * @var string
      */
-    public static $title = 'id';
+    public static $title = 'code';
 
     /**
      * The columns that should be searched.
@@ -52,10 +52,13 @@ class PurchaseOrder extends Resource
     {
         return [
             ID::make()->sortable(),
-            BelongsTo::make(__('Author'), 'author', User::class),
-            BelongsTo::make(__('Warehouse Manager'), 'warehouseManager', User::class),
-            BelongsTo::make(__('Supplier'), 'supplier', Supplier::class)->filterable(),
-            Text::make(__('Title'), 'title')->required()->rules('required')->maxlength(190),
+            BelongsTo::make(__('Author'), 'author', User::class)->exceptOnForms(),
+            BelongsTo::make(__('Warehouse Manager'), 'warehouseManager', User::class)
+                ->showCreateRelationButton(),
+            BelongsTo::make(__('Supplier'), 'supplier', Supplier::class)->filterable()
+                ->showCreateRelationButton()
+                ->modalSize('4xl'),
+            Text::make(__('Code'), 'code')->exceptOnForms(),
             Number::make(__('Total Good Count'), 'total_good_count')->exceptOnForms()->displayUsing(function ($value) {
                 return number_format($value);
             }),
@@ -141,10 +144,5 @@ class PurchaseOrder extends Resource
     public static function label()
     {
         return __('Purchase Order And Warehousing');
-    }
-
-    public function title()
-    {
-        return __('Purchase Order').' '.'#'.$this->id;
     }
 }
