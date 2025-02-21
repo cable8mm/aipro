@@ -16,10 +16,10 @@ enum PaymentMethod: string
     public function value(): string
     {
         return match ($this) {
-            self::CASH => __('Cash'),
-            self::CARD => __('Card'),
-            self::MOBILE => __('Mobile'),
-            self::OTHER => __('Other'),
+            self::CASH => '💰 '.__('Cash'),
+            self::CARD => '💳 '.__('Card'),
+            self::MOBILE => '📱 '.__('Mobile'),
+            self::OTHER => '🧾 '.__('Other'),
         };
     }
 }
