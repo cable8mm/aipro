@@ -9,11 +9,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Nova\Actions\Actionable;
 
-class PurchaseOrderItem extends Model
+class BoxPurchaseOrderItem extends Model
 {
     use Actionable, HasFactory;
 
-    protected $with = ['purchaseOrder', 'author', 'warehouseManager', 'item'];
+    protected $guarded = [];
 
     protected function casts(): array
     {
@@ -29,18 +29,18 @@ class PurchaseOrderItem extends Model
 
     protected static function booted(): void
     {
-        static::creating(function (PurchaseOrderItem $purchaseOrderItem) {
-            $purchaseOrderItem->author_id = $purchaseOrderItem->author_id ?? Auth::user()->id;
+        static::creating(function (BoxPurchaseOrderItem $boxPurchaseOrderItem) {
+            $boxPurchaseOrderItem->author_id = $boxPurchaseOrderItem->author_id ?? Auth::user()->id;
         });
 
-        static::saved(function (PurchaseOrderItem $purchaseOrderItem) {
-            $purchaseOrderItem->purchaseOrder->updateTotalGoodCount();
+        static::saved(function (BoxPurchaseOrderItem $boxPurchaseOrderItem) {
+            $boxPurchaseOrderItem->boxPurchaseOrder->updateTotalGoodCount();
         });
     }
 
-    public function purchaseOrder(): BelongsTo
+    public function boxPurchaseOrder(): BelongsTo
     {
-        return $this->belongsTo(PurchaseOrder::class);
+        return $this->belongsTo(BoxPurchaseOrder::class);
     }
 
     public function author(): BelongsTo
@@ -48,14 +48,19 @@ class PurchaseOrderItem extends Model
         return $this->belongsTo(User::class, 'author_id');
     }
 
+    public function boxSupplier(): BelongsTo
+    {
+        return $this->belongsTo(BoxSupplier::class);
+    }
+
+    public function box(): BelongsTo
+    {
+        return $this->belongsTo(Box::class);
+    }
+
     public function warehouseManager(): BelongsTo
     {
         return $this->belongsTo(User::class, 'warehouse_manager_id');
-    }
-
-    public function item(): BelongsTo
-    {
-        return $this->belongsTo(Item::class);
     }
 
     /**

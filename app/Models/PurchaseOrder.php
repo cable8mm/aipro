@@ -39,7 +39,7 @@ class PurchaseOrder extends Model
 
             $purchaseOrder->code = ReceiptCode::of(optional(
                 static::query()->latest('id')->first()
-            )->code)->nextCode();
+            )->code, 'PO')->nextCode();
         });
     }
 

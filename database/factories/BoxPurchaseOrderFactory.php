@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Enums\PurchaseOrderStatus;
-use Database\Seeders\UserSeeder;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,16 +18,11 @@ class BoxPurchaseOrderFactory extends Factory
     public function definition(): array
     {
         return [
-            'author_id' => fake()->numberBetween(0, UserSeeder::COUNT),
-            'warehouse_manager_id' => fake()->numberBetween(0, UserSeeder::COUNT),
-            'box_supplier_id' => fake()->numberBetween(0, UserSeeder::COUNT),
-            'title' => date('Y년 m월 n일').' 박스 발주합니다.',
-            'ordered_at' => fake()->dateTime(),
-            'total_box_count' => fake()->randomNumber(2),
-            'total_order_price' => fake()->randomNumber(5),
-            'sent_at' => fake()->dateTime(),
-            'confirmed_at' => fake()->dateTime(),
-            'predict_warehoused_at' => fake()->dateTime(),
+            'author_id' => fake()->numberBetween(1, 10),
+            'warehouse_manager_id' => fake()->numberBetween(1, 10),
+            'box_supplier_id' => fake()->numberBetween(1, 10),
+            'purchase_ordered_at' => fake()->date(),
+            'predict_warehoused_at' => fake()->date(),
             'warehoused_at' => fake()->dateTime(),
             'status' => fake()->randomElement(PurchaseOrderStatus::names()),
             'memo' => fake()->paragraph(),
