@@ -3,6 +3,7 @@
 namespace App\Nova;
 
 use App\Enums\PurchaseOrderItemStatus;
+use App\Nova\Actions\PurchaseOrderItemReturned;
 use App\Nova\Actions\PurchaseOrderItemStatusChanging;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Currency;
@@ -38,6 +39,7 @@ class PurchaseOrderItem extends Resource
      */
     public static $search = [
         'id',
+        'purchaseOrder.code',
         'Item.sku',
         'Item.name',
         'Item.supplier.name',
@@ -143,10 +145,9 @@ class PurchaseOrderItem extends Resource
     public function actions(NovaRequest $request)
     {
         return [
-            (new PurchaseOrderItemStatusChanging(PurchaseOrderItemStatus::RECEIVED))->showInline(),
             (new PurchaseOrderItemStatusChanging(PurchaseOrderItemStatus::STORED))->showInline(),
-            (new PurchaseOrderItemStatusChanging(PurchaseOrderItemStatus::DAMAGED))->showInline(),
-            (new PurchaseOrderItemStatusChanging(PurchaseOrderItemStatus::RETURNED))->showInline(),
+            (new PurchaseOrderItemStatusChanging(PurchaseOrderItemStatus::CANCELED))->showInline(),
+            (new PurchaseOrderItemReturned)->showInline(),
         ];
     }
 

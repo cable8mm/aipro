@@ -9,4 +9,5 @@ return [
     'stored'     => '보관 완료',
     'damaged'      => '손상됨',
     'returned'      => '반품 처리',
+    'canceled'      => '취소',
 ];

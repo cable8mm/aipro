@@ -14,6 +14,7 @@ enum PurchaseOrderItemStatus: string
     case STORED = 'stored';
     case DAMAGED = 'damaged';
     case RETURNED = 'returned';
+    case CANCELED = 'canceled';
 
     public function value(): string
     {
@@ -24,6 +25,7 @@ enum PurchaseOrderItemStatus: string
             self::STORED => __('purchases-order.stored'),
             self::DAMAGED => __('purchases-order.damaged'),
             self::RETURNED => __('purchases-order.returned'),
+            self::CANCELED => __('purchases-order.canceled'),
         };
     }
 
@@ -34,7 +36,7 @@ enum PurchaseOrderItemStatus: string
 
     public static function failedWhen(): array
     {
-        return [self::DAMAGED->name, self::RETURNED->name];
+        return [self::DAMAGED->name, self::RETURNED->name, self::CANCELED->name];
     }
 
     public static function replicates(bool $default = false): array|string

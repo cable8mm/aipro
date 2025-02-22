@@ -9,4 +9,5 @@ return [
     'stored'     => 'Stored',
     'damaged'      => 'Damaged',
     'returned'      => 'Returned',
+    'canceled'      => 'Canceled',
 ];
