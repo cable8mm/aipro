@@ -2,21 +2,19 @@
 
 namespace App\Nova\Actions;
 
-use App\Enums\PurchaseOrderStatus;
+use App\Enums\PurchaseOrderItemStatus;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Collection;
 use Laravel\Nova\Actions\Action;
+use Laravel\Nova\Actions\ActionResponse;
 use Laravel\Nova\Fields\ActionFields;
+use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
-class PurchaseOrderStatusChanging extends Action
+class BoxPurchaseOrderItemReturned extends Action
 {
     use InteractsWithQueue, Queueable;
-
-    public function __construct(
-        private PurchaseOrderStatus $status
-    ) {}
 
     /**
      * Perform the action on the given models.
@@ -25,18 +23,22 @@ class PurchaseOrderStatusChanging extends Action
      */
     public function handle(ActionFields $fields, Collection $models)
     {
+        if ($models->count() !== 1) {
+            return Action::danger(__('One item must be selected.'));
+        }
+
         try {
             /**
-             * @var \App\Models\PurchaseOrder|\App\Models\BoxPurchaseOrder $model
+             * @var \App\Models\BoxPurchaseOrderItem $model
              */
             foreach ($models as $model) {
-                if (PurchaseOrderStatus::cannot($model->status, $this->status)) {
+                if (PurchaseOrderItemStatus::can($model->status, PurchaseOrderItemStatus::RETURNED)) {
+                    $boxPurchaseOrderItem = $model->returned($fields->quantity);
+
+                    return ActionResponse::visit('/resources/box-purchase-order-items/'.$boxPurchaseOrderItem->id);
+                } else {
                     throw new \RuntimeException(__('The status cannot be changed.'));
                 }
-
-                $model->status = $this->status->name;
-
-                $model->save();
             }
         } catch (\Exception $e) {
             return Action::danger($e->getMessage());
@@ -52,11 +54,16 @@ class PurchaseOrderStatusChanging extends Action
      */
     public function fields(NovaRequest $request)
     {
-        return [];
+        return [
+            Number::make(__('Quantity'), 'quantity')
+                ->rules('required')->required()
+                ->default(-1)
+                ->help(__('If it sets the minus value, the status is going to set RETURNED automatically.')),
+        ];
     }
 
     public function name()
     {
-        return __('Treat as :status', ['status' => $this->status->value()]);
+        return __('Returning');
     }
 }

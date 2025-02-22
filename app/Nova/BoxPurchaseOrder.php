@@ -3,6 +3,7 @@
 namespace App\Nova;
 
 use App\Enums\PurchaseOrderStatus;
+use App\Nova\Actions\PurchaseOrderStatusChanging;
 use App\Traits\NovaAuthorizedByWarehouser;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Currency;
@@ -134,7 +135,10 @@ class BoxPurchaseOrder extends Resource
      */
     public function actions(NovaRequest $request)
     {
-        return [];
+        return [
+            (new PurchaseOrderStatusChanging(PurchaseOrderStatus::STORED))->showInline(),
+            (new PurchaseOrderStatusChanging(PurchaseOrderStatus::RETURNED))->showInline(),
+        ];
     }
 
     public static function label()
