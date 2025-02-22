@@ -2,26 +2,21 @@
 
 namespace App\Nova;
 
-use App\Enums\CenterClass;
 use App\Enums\PurchaseOrderItemStatus;
-use App\Enums\SafeClass;
-use App\Traits\NovaAuthorizedByWarehouser;
+use App\Nova\Actions\PurchaseOrderItemStatusChanging;
 use Laravel\Nova\Fields\BelongsTo;
-use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\DateTime;
+use Laravel\Nova\Fields\FormData;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Stack;
 use Laravel\Nova\Fields\Status;
-use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class PurchaseOrderItem extends Resource
 {
-    use NovaAuthorizedByWarehouser;
-
     /**
      * The model the resource corresponds to.
      *
@@ -58,36 +53,41 @@ class PurchaseOrderItem extends Resource
         return [
             ID::make()->sortable(),
             BelongsTo::make(__('Purchase Order'), 'purchaseOrder', PurchaseOrder::class),
-            BelongsTo::make(__('Author'), 'author', User::class)->exceptOnForms(),
-            BelongsTo::make(__('Warehouse Manager'), 'warehouseManager', User::class),
-            Text::make(__('SKU'), 'Item.sku')->exceptOnForms(),
-            Text::make(__('Safe Class'), 'Item.safe_class')->exceptOnForms()
-                ->displayUsing(function ($value) {
-                    return SafeClass::{$value}->value();
-                }),
-            Text::make(__('Center Class'), 'Item.center_class')->exceptOnForms()
-                ->displayUsing(function ($value) {
-                    return CenterClass::{$value}->value();
-                }),
-            Text::make(__('Supplier'), 'Item.supplier.name')->exceptOnForms(),
-            BelongsTo::make(__('Item'), 'item', Item::class)->searchable(),
-            Number::make(__('Order Count'), 'order_count')->rules('required')->required()->displayUsing(function ($value) {
-                return number_format($value);
-            }),
-            Currency::make(__('Order Price'), 'order_price')->rules('required')->required(),
-            Number::make(__('Supplier Confirmed Count'), 'supplier_confirmed_count')->displayUsing(function ($value) {
-                return number_format($value);
-            })->exceptOnForms()->hideFromIndex(),
-            Currency::make(__('Supplier Confirmed Price'), 'supplier_confirmed_price')->exceptOnForms()->hideFromIndex(),
-            Number::make(__('Cost Count'), 'cost_count')->rules('required')->required()->displayUsing(function ($value) {
-                return number_format($value);
-            }),
-            Currency::make(__('Cost Price'), 'cost_price'),
-            Currency::make(__('Unit Price'), function () {
-                return (int) round($this->cost_price / $this->cost_count);
-            }),
-            Boolean::make(__('Is Promotion'), 'is_promotion'),
-            DateTime::make(__('Warehoused At'), 'warehoused_at')->filterable(),
+            BelongsTo::make(__('Author'), 'author', User::class)
+                ->exceptOnForms(),
+            BelongsTo::make(__('Item'), 'item', Item::class),
+            Number::make(__('Quantity'), 'quantity')
+                ->rules('required')->required()
+                ->default(1)
+                ->help(__('If it sets the minus value, the status is going to set RETURNED automatically.')),
+            Currency::make(__('Unit Price'), 'unit_price')
+                ->rules('required')->required()
+                ->dependsOnUpdating(
+                    ['item'],
+                    function (Currency $field, NovaRequest $request, FormData $formData) {
+                        $itemId = (int) $formData->resource(Item::uriKey(), $formData->item);
+
+                        if (! empty($itemId)) {
+                            $item = \App\Models\Item::find($itemId);
+
+                            $field->setValue($item->suggested_selling_price);
+                        }
+                    }
+                ),
+            Currency::make(__('Subtotal'), 'subtotal')
+                ->rules('required')->required()
+                ->dependsOn(
+                    ['quantity', 'unit_price'],
+                    function (Currency $field, NovaRequest $request, FormData $formData) {
+                        if (! is_null($formData->unit_price) || ! is_null($formData->quantity)) {
+                            $field->setValue($formData->unit_price * $formData->quantity);
+                        }
+                    }
+                ),
+            DateTime::make(__('Purchase Ordered At'), 'purchase_ordered_at')
+                ->filterable(),
+            DateTime::make(__('Warehoused At'), 'warehoused_at')
+                ->filterable(),
             Status::make(__('Status'), 'status')
                 ->loadingWhen(PurchaseOrderItemStatus::loadingWhen())
                 ->failedWhen(PurchaseOrderItemStatus::failedWhen())
@@ -96,7 +96,8 @@ class PurchaseOrderItem extends Resource
                 })->displayUsing(function ($value) {
                     return PurchaseOrderItemStatus::{$value}->value() ?? '-';
                 }),
-            Textarea::make(__('Memo'), 'memo')->alwaysShow(),
+            Textarea::make(__('Memo'), 'memo')
+                ->alwaysShow(),
             Stack::make(__('Created At').' & '.__('Updated At'), [
                 DateTime::make(__('Created At'), 'created_at'),
                 DateTime::make(__('Updated At'), 'updated_at'),
@@ -141,7 +142,12 @@ class PurchaseOrderItem extends Resource
      */
     public function actions(NovaRequest $request)
     {
-        return [];
+        return [
+            (new PurchaseOrderItemStatusChanging(PurchaseOrderItemStatus::RECEIVED))->showInline(),
+            (new PurchaseOrderItemStatusChanging(PurchaseOrderItemStatus::STORED))->showInline(),
+            (new PurchaseOrderItemStatusChanging(PurchaseOrderItemStatus::DAMAGED))->showInline(),
+            (new PurchaseOrderItemStatusChanging(PurchaseOrderItemStatus::RETURNED))->showInline(),
+        ];
     }
 
     public static function label()

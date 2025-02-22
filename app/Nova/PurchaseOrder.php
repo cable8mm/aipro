@@ -2,7 +2,8 @@
 
 namespace App\Nova;
 
-use App\Enums\PurchaseOrder as EnumsPurchaseOrder;
+use App\Enums\PurchaseOrderStatus;
+use App\Nova\Actions\PurchaseOrderStatusChanging;
 use App\Traits\NovaAuthorizedByWarehouser;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Currency;
@@ -63,32 +64,28 @@ class PurchaseOrder extends Resource
                 return number_format($value);
             }),
             Currency::make(__('Total Order Price'), 'total_order_price')->exceptOnForms(),
-            Number::make(__('Order Discount Percent'), 'order_discount_percent')->min(1)->max(100)->step(1)
-                ->displayUsing(fn () => "{$this->order_discount_percent}%")
-                ->exceptOnForms(),
+            Currency::make(__('Discount Amount'), 'discount_amount')
+                ->rules('required')->required()
+                ->default(0),
             Stack::make(__('Dates'), [
-                DateTime::make(__('Ordered At'), 'ordered_at')
+                DateTime::make(__('Purchase Ordered At'), 'purchase_ordered_at')
                     ->displayUsing(fn ($value) => __('Order').' : '.($value ? $value->toDateTimeString() : '-'))
                     ->nullable()->filterable(),
                 DateTime::make(__('Predict Warehoused At'), 'predict_warehoused_at')
                     ->displayUsing(fn ($value) => __('Predict Warehousing').' : '.($value ? $value->toDateTimeString() : '-'))
                     ->nullable()->filterable(),
-                DateTime::make(__('Sent At'), 'sent_at')
-                    ->displayUsing(fn ($value) => __('Sending').' : '.($value ? $value->toDateTimeString() : '-'))
-                    ->exceptOnForms(),
-                DateTime::make(__('Confirmed At'), 'confirmed_at')
-                    ->displayUsing(fn ($value) => __('Confirm').' : '.($value ? $value->toDateTimeString() : '-'))
-                    ->exceptOnForms(),
             ]),
-            DateTime::make(__('Warehoused At'), 'warehoused_at')->displayUsing(fn ($value) => $value ? $value->toDateTimeString() : '-')->exceptOnForms(),
+            DateTime::make(__('Warehoused At'), 'warehoused_at')
+                ->displayUsing(fn ($value) => $value ? $value->toDateTimeString() : '-')
+                ->exceptOnForms(),
             Textarea::make(__('Memo'), 'memo')->alwaysShow(),
             Status::make(__('Status'), 'status')
-                ->loadingWhen(EnumsPurchaseOrder::loadingWhen())
-                ->failedWhen(EnumsPurchaseOrder::failedWhen())
+                ->loadingWhen(PurchaseOrderStatus::loadingWhen())
+                ->failedWhen(PurchaseOrderStatus::failedWhen())
                 ->filterable(function ($request, $query, $value, $attribute) {
                     $query->where($attribute, $value);
                 })->displayUsing(function ($value) {
-                    return EnumsPurchaseOrder::{$value}->value() ?? '-';
+                    return PurchaseOrderStatus::{$value}->value() ?? '-';
                 }),
             Stack::make(__('Created At').' & '.__('Updated At'), [
                 DateTime::make(__('Created At'), 'created_at')->displayUsing(fn ($value) => $value ? $value->toDateTimeString() : '-'),
@@ -117,7 +114,7 @@ class PurchaseOrder extends Resource
     public function filters(NovaRequest $request)
     {
         return [
-            new Filters\PurchaseOrderFinished,
+            //            new Filters\PurchaseOrderFinished,
         ];
     }
 
@@ -138,7 +135,10 @@ class PurchaseOrder extends Resource
      */
     public function actions(NovaRequest $request)
     {
-        return [];
+        return [
+            (new PurchaseOrderStatusChanging(PurchaseOrderStatus::STORED))->showInline(),
+            (new PurchaseOrderStatusChanging(PurchaseOrderStatus::RETURNED))->showInline(),
+        ];
     }
 
     public static function label()

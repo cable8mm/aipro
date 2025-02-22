@@ -16,18 +16,18 @@ class PurchaseOrder extends Model
 
     protected $with = ['author', 'warehouseManager', 'supplier'];
 
+    protected $guarded = [];
+
     protected function casts(): array
     {
         return [
             'code' => 'string',
-            'ordered_at' => 'datetime',
-            'sent_at' => 'datetime',
-            'confirmed_at' => 'datetime',
+            'purchase_ordered_at' => 'datetime',
             'predict_warehoused_at' => 'datetime',
             'warehoused_at' => 'datetime',
             'total_good_count' => 'integer',
             'total_order_price' => 'integer',
-            'order_discount_percent' => 'integer',
+            'discount_amount' => 'integer',
             'status' => 'string',
         ];
     }
@@ -61,5 +61,13 @@ class PurchaseOrder extends Model
     public function purchaseOrderItems(): HasMany
     {
         return $this->hasMany(PurchaseOrderItem::class);
+    }
+
+    public function updateTotalGoodCount(): bool
+    {
+        $this->total_good_count = $this->purchaseOrderItems()->count();
+        $this->total_order_price = $this->purchaseOrderItems()->sum('subtotal');
+
+        return $this->save();
     }
 }

@@ -36,6 +36,10 @@ class PurchaseOrderItem extends Model
         static::creating(function (PurchaseOrderItem $purchaseOrderItem) {
             $purchaseOrderItem->author_id = $purchaseOrderItem->author_id ?? Auth::user()->id;
         });
+
+        static::saved(function (PurchaseOrderItem $purchaseOrderItem) {
+            $purchaseOrderItem->purchaseOrder->updateTotalGoodCount();
+        });
     }
 
     public function purchaseOrder(): BelongsTo

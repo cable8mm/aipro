@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Enums\PurchaseOrder;
+use App\Enums\PurchaseOrderStatus;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -21,15 +21,10 @@ class PurchaseOrderFactory extends Factory
             'author_id' => fake()->numberBetween(1, 10),
             'warehouse_manager_id' => fake()->numberBetween(1, 10),
             'supplier_id' => fake()->numberBetween(1, 10),
-            'ordered_at' => fake()->dateTime(),
-            'total_good_count' => fake()->randomNumber() % 100,
-            'total_order_price' => fake()->randomNumber(5),
-            'order_discount_percent' => fake()->randomNumber(2),
-            'sent_at' => fake()->dateTime(),
-            'confirmed_at' => fake()->dateTime(),
+            'purchase_ordered_at' => fake()->date(),
             'predict_warehoused_at' => fake()->date(),
             'warehoused_at' => fake()->dateTime(),
-            'status' => fake()->randomElement(PurchaseOrder::names()),
+            'status' => fake()->randomElement(PurchaseOrderStatus::names()),
             'memo' => fake()->paragraph(),
         ];
     }
