@@ -95,7 +95,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                     MenuItem::resource(PurchaseOrder::class),
                     MenuItem::resource(BoxPurchaseOrder::class),
                     // MenuItem::resource(PurchaseOrderItem::class),
-                    // MenuItem::resource(PurchaseOrderBox::class),
+                    // MenuItem::resource(BoxPurchaseOrderItem::class),
                 ])->icon('cube')->collapsable(),
 
                 MenuSection::make(__('Inventory Management'), [

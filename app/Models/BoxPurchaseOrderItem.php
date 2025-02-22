@@ -5,24 +5,36 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Nova\Actions\Actionable;
 
-class PurchaseOrderBox extends Model
+class BoxPurchaseOrderItem extends Model
 {
     use Actionable, HasFactory;
 
-    protected $with = ['boxPurchaseOrder', 'author', 'boxSupplier', 'box', 'warehouseManager'];
+    protected $guarded = [];
 
     protected function casts(): array
     {
         return [
-            'order_count' => 'integer',
-            'order_price' => 'integer',
-            'cost_count' => 'integer',
-            'cost_price' => 'integer',
+            'quantity' => 'integer',
+            'subtotal' => 'integer',
+            'unit_price' => 'integer',
             'warehoused_at' => 'datetime',
+            'purchase_ordered_at' => 'datetime',
             'status' => 'string',
         ];
+    }
+
+    protected static function booted(): void
+    {
+        static::creating(function (BoxPurchaseOrderItem $boxPurchaseOrderItem) {
+            $boxPurchaseOrderItem->author_id = $boxPurchaseOrderItem->author_id ?? Auth::user()->id;
+        });
+
+        static::saved(function (BoxPurchaseOrderItem $boxPurchaseOrderItem) {
+            $boxPurchaseOrderItem->boxPurchaseOrder->updateTotalGoodCount();
+        });
     }
 
     public function boxPurchaseOrder(): BelongsTo

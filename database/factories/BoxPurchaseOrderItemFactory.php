@@ -2,12 +2,13 @@
 
 namespace Database\Factories;
 
+use App\Enums\PurchaseOrderItemStatus;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
  */
-class PurchaseOrderBoxFactory extends Factory
+class BoxPurchaseOrderItemFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -16,17 +17,19 @@ class PurchaseOrderBoxFactory extends Factory
      */
     public function definition(): array
     {
+        $quantity = fake()->randomNumber(2);
+        $unit_price = fake()->randomNumber(4);
+
         return [
             'box_purchase_order_id' => fake()->randomNumber(1) + 1,
             'author_id' => fake()->randomNumber(1) + 1,
-            'box_supplier_id' => fake()->randomNumber(1) + 1,
             'box_id' => fake()->randomNumber(1) + 1,
-            'warehouse_manager_id' => fake()->randomNumber(1) + 1,
-            'order_count' => fake()->randomNumber(2),
-            'order_price' => fake()->randomNumber(5),
-            'cost_count' => fake()->randomNumber(1),
-            'cost_price' => fake()->randomNumber(5),
+            'quantity' => $quantity,
+            'subtotal' => $quantity * $unit_price,
+            'unit_price' => $unit_price,
             'warehoused_at' => fake()->dateTime(),
+            'purchase_ordered_at' => fake()->dateTime(),
+            'status' => fake()->randomElement(PurchaseOrderItemStatus::names()),
             'memo' => fake()->paragraph(),
         ];
     }

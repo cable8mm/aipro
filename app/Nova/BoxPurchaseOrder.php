@@ -8,9 +8,9 @@ use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\HasMany;
-use Laravel\Nova\Fields\Hidden;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
+use Laravel\Nova\Fields\Stack;
 use Laravel\Nova\Fields\Status;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
@@ -32,7 +32,7 @@ class BoxPurchaseOrder extends Resource
      *
      * @var string
      */
-    public static $title = 'title';
+    public static $title = 'code';
 
     /**
      * The columns that should be searched.
@@ -53,6 +53,31 @@ class BoxPurchaseOrder extends Resource
     {
         return [
             ID::make()->sortable(),
+            BelongsTo::make(__('Author'), 'author', User::class)->exceptOnForms(),
+            BelongsTo::make(__('Warehouse Manager'), 'warehouseManager', User::class)
+                ->showCreateRelationButton(),
+            BelongsTo::make(__('Box Supplier'), 'boxSupplier', BoxSupplier::class)
+                ->showCreateRelationButton(),
+            Text::make(__('Code'), 'code')->exceptOnForms(),
+            Number::make(__('Total Box Count'), 'total_box_count')->displayUsing(function ($value) {
+                return number_format($value);
+            }),
+            Currency::make(__('Total Order Price'), 'total_order_price'),
+            Currency::make(__('Discount Amount'), 'discount_amount')
+                ->rules('required')->required()
+                ->default(0),
+            Stack::make(__('Dates'), [
+                DateTime::make(__('Purchase Ordered At'), 'purchase_ordered_at')
+                    ->displayUsing(fn ($value) => __('Order').' : '.($value ? $value->toDateTimeString() : '-'))
+                    ->nullable()->filterable(),
+                DateTime::make(__('Predict Warehoused At'), 'predict_warehoused_at')
+                    ->displayUsing(fn ($value) => __('Predict Warehousing').' : '.($value ? $value->toDateTimeString() : '-'))
+                    ->nullable()->filterable(),
+            ]),
+            DateTime::make(__('Warehoused At'), 'warehoused_at')
+                ->displayUsing(fn ($value) => $value ? $value->toDateTimeString() : '-')
+                ->exceptOnForms(),
+            Textarea::make(__('Memo'), 'memo')->alwaysShow(),
             Status::make(__('Status'), 'status')
                 ->loadingWhen(PurchaseOrderStatus::loadingWhen())
                 ->failedWhen(PurchaseOrderStatus::failedWhen())
@@ -61,24 +86,12 @@ class BoxPurchaseOrder extends Resource
                 })->displayUsing(function ($value) {
                     return PurchaseOrderStatus::{$value}->value() ?? '-';
                 }),
-            Hidden::make('Author', 'author_id')->default(function ($request) {
-                return $request->user()->id;
-            }),
-            BelongsTo::make(__('Warehouse Manager'), 'warehouseManager', User::class),
-            BelongsTo::make(__('Box Supplier'), 'boxSupplier', BoxSupplier::class),
-            Text::make(__('Title'), 'title')->rules('required')->required()->maxlength(190),
-            Number::make(__('Total Box Count'), 'total_box_count')->displayUsing(function ($value) {
-                return number_format($value);
-            }),
-            Currency::make(__('Total Order Price'), 'total_order_price'),
-            DateTime::make(__('Ordered At'), 'ordered_at')->nullable()->filterable(),
-            DateTime::make(__('Predict Warehoused At'), 'predict_warehoused_at')->nullable()->filterable(),
-            DateTime::make(__('Sent At'), 'sent_at')->nullable()->exceptOnForms(),
-            DateTime::make(__('Confirmed At'), 'confirmed_at')->nullable()->exceptOnForms(),
-            DateTime::make(__('Warehoused At'), 'warehoused_at')->nullable()->exceptOnForms(),
-            Textarea::make(__('Memo'), 'memo')->alwaysShow(),
+            Stack::make(__('Created At').' & '.__('Updated At'), [
+                DateTime::make(__('Created At'), 'created_at')->displayUsing(fn ($value) => $value ? $value->toDateTimeString() : '-'),
+                DateTime::make(__('Updated At'), 'updated_at')->displayUsing(fn ($value) => $value ? $value->toDateTimeString() : '-'),
+            ])->hideFromIndex(),
 
-            HasMany::make(__('Purchase Order Boxes'), 'purchaseOrderBoxes', PurchaseOrderBox::class),
+            HasMany::make(__('Box Purchase Order Items'), 'boxPurchaseOrderItems', BoxPurchaseOrderItem::class),
         ];
     }
 
@@ -100,7 +113,7 @@ class BoxPurchaseOrder extends Resource
     public function filters(NovaRequest $request)
     {
         return [
-            new Filters\PurchaseOrderFinished,
+            //            new Filters\PurchaseOrderFinished,
         ];
     }
 

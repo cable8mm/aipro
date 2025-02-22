@@ -18,17 +18,12 @@ class PurchaseOrderItem extends Model
     protected function casts(): array
     {
         return [
-            'order_count' => 'integer',
-            'order_price' => 'integer',
-            'supplier_confirmed_count' => 'integer',
-            'supplier_confirmed_price' => 'integer',
-            'cost_count' => 'integer',
-            'cost_promotion_count' => 'integer',
-            'cost_price' => 'integer',
-            'is_promotion' => 'boolean',
+            'quantity' => 'integer',
+            'subtotal' => 'integer',
+            'unit_price' => 'integer',
             'warehoused_at' => 'datetime',
-            'status' => 'string',
             'purchase_ordered_at' => 'datetime',
+            'status' => 'string',
         ];
     }
 

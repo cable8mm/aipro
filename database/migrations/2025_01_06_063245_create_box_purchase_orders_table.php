@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\PurchaseOrderStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,15 +17,14 @@ return new class extends Migration
             $table->foreignId('author_id');
             $table->foreignId('warehouse_manager_id')->nullable();
             $table->foreignId('box_supplier_id')->nullable();
-            $table->string('title', 190);
-            $table->dateTime('ordered_at');
-            $table->unsignedInteger('total_box_count')->nullable()->default('0');
-            $table->unsignedInteger('total_order_price')->nullable();
-            $table->dateTime('sent_at')->nullable();
-            $table->dateTime('confirmed_at')->nullable();
-            $table->dateTime('predict_warehoused_at')->nullable();
-            $table->dateTime('warehoused_at')->nullable();
-            $table->string('status', 25)->nullable()->default('발주작성중');
+            $table->string('code', 50)->comment('박스발주코드');
+            $table->bigInteger('total_box_count')->default(0)->comment('발주 총 상품 갯수');
+            $table->bigInteger('total_order_price')->default(0)->comment('발주 총 금액');
+            $table->dateTime('purchase_ordered_at')->nullable()->comment('발주 시각');
+            $table->dateTime('predict_warehoused_at')->nullable()->comment('예상 입고 날짜');
+            $table->dateTime('warehoused_at')->nullable()->comment('입고 시각');
+            $table->bigInteger('discount_amount')->default('0')->comment('할인가');
+            $table->string('status', 30)->default(PurchaseOrderStatus::PENDING->name)->comment('pending, received, inspected, stored, damaged, returned');
             $table->text('memo')->nullable();
             $table->timestamps();
         });
