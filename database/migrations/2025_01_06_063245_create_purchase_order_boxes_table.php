@@ -1,6 +1,6 @@
 <?php
 
-use App\Enums\PurchaseOrder;
+use App\Enums\PurchaseOrderStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -24,7 +24,7 @@ return new class extends Migration
             $table->integer('cost_count')->nullable();
             $table->integer('cost_price')->nullable();
             $table->dateTime('warehoused_at')->nullable();
-            $table->string('status', 100)->nullable()->default(PurchaseOrder::WAITING);
+            $table->string('status', 30)->default(PurchaseOrderStatus::PENDING->name)->comment('pending, received, inspected, stored, damaged, returned');
             $table->text('memo')->nullable();
             $table->timestamps();
         });

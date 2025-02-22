@@ -1,6 +1,6 @@
 <?php
 
-use App\Enums\Status;
+use App\Enums\PurchaseOrderStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -18,15 +18,13 @@ return new class extends Migration
             $table->foreignId('warehouse_manager_id')->nullable()->comment('입고 담당자');
             $table->foreignId('supplier_id')->comment('공급사');
             $table->string('code', 50)->comment('발주코드');
-            $table->dateTime('ordered_at')->nullable()->comment('발주 시각');
-            $table->dateTime('sent_at')->nullable()->comment('발주서 보낸 시각');
-            $table->dateTime('confirmed_at')->nullable()->comment('발주 확인 시각');
+            $table->dateTime('purchase_ordered_at')->nullable()->comment('발주 시각');
             $table->dateTime('predict_warehoused_at')->nullable()->comment('예상 입고 날짜');
             $table->dateTime('warehoused_at')->nullable()->comment('입고 시각');
-            $table->unsignedInteger('total_good_count')->default('0')->comment('발주 총 상품 갯수');
-            $table->unsignedInteger('total_order_price')->comment('발주 총 금액');
-            $table->integer('order_discount_percent')->default('0')->comment('발주 할인 퍼센트');
-            $table->string('status', 25)->default(Status::WAITING)->comment('발주 상태(발주작성중, 공급사확인중, 입고대기중, 입고중, 입고완료, 정산완료)');
+            $table->bigInteger('total_good_count')->default(0)->comment('발주 총 상품 갯수');
+            $table->bigInteger('total_order_price')->default(0)->comment('발주 총 금액');
+            $table->bigInteger('discount_amount')->default('0')->comment('할인가');
+            $table->string('status', 30)->default(PurchaseOrderStatus::PENDING->name)->comment('pending, received, inspected, stored, damaged, returned');
             $table->text('memo')->nullable()->comment('메모');
             $table->timestamps();
         });

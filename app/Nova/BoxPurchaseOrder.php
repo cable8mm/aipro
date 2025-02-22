@@ -2,7 +2,7 @@
 
 namespace App\Nova;
 
-use App\Enums\PurchaseOrder;
+use App\Enums\PurchaseOrderStatus;
 use App\Traits\NovaAuthorizedByWarehouser;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Currency;
@@ -54,12 +54,12 @@ class BoxPurchaseOrder extends Resource
         return [
             ID::make()->sortable(),
             Status::make(__('Status'), 'status')
-                ->loadingWhen(PurchaseOrder::loadingWhen())
-                ->failedWhen(PurchaseOrder::failedWhen())
+                ->loadingWhen(PurchaseOrderStatus::loadingWhen())
+                ->failedWhen(PurchaseOrderStatus::failedWhen())
                 ->filterable(function ($request, $query, $value, $attribute) {
                     $query->where($attribute, $value);
                 })->displayUsing(function ($value) {
-                    return PurchaseOrder::{$value}->value() ?? '-';
+                    return PurchaseOrderStatus::{$value}->value() ?? '-';
                 }),
             Hidden::make('Author', 'author_id')->default(function ($request) {
                 return $request->user()->id;

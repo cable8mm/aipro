@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\PurchaseOrderItemStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -36,6 +37,10 @@ class PurchaseOrderItem extends Model
         static::creating(function (PurchaseOrderItem $purchaseOrderItem) {
             $purchaseOrderItem->author_id = $purchaseOrderItem->author_id ?? Auth::user()->id;
         });
+
+        static::saved(function (PurchaseOrderItem $purchaseOrderItem) {
+            $purchaseOrderItem->purchaseOrder->updateTotalGoodCount();
+        });
     }
 
     public function purchaseOrder(): BelongsTo
@@ -56,5 +61,27 @@ class PurchaseOrderItem extends Model
     public function item(): BelongsTo
     {
         return $this->belongsTo(Item::class);
+    }
+
+    /**
+     * Create a new purchase order item for returning.
+     *
+     * @param  int  $quantity  The quantity of the item returned, in general the value should be negative value.
+     * @return static The new purchase order item for returning.
+     *
+     * @throws \RuntimeException
+     */
+    public function returned(int $quantity): static
+    {
+        if (PurchaseOrderItemStatus::cannot($this->status, PurchaseOrderItemStatus::RETURNED)) {
+            throw new \RuntimeException(__('The status cannot be changed.'));
+        }
+
+        $replicate = $this->replicate();
+        $replicate->status = PurchaseOrderItemStatus::RETURNED->name;
+        $replicate->quantity = $quantity;
+        $replicate->subtotal = $quantity * $replicate->unit_price;
+
+        return tap($replicate)->save();
     }
 }

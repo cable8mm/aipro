@@ -17,19 +17,16 @@ class PurchaseOrderItemFactory extends Factory
      */
     public function definition(): array
     {
+        $quantity = fake()->randomNumber(2);
+        $unit_price = fake()->randomNumber(4);
+
         return [
             'purchase_order_id' => fake()->randomNumber(1) + 1,
             'author_id' => fake()->randomNumber(1) + 1,
             'item_id' => fake()->randomNumber(1) + 1,
-            'warehouse_manager_id' => fake()->randomNumber(1) + 1,
-            'order_count' => fake()->randomNumber(2),
-            'order_price' => fake()->randomNumber(5),
-            'supplier_confirmed_count' => fake()->randomNumber(2),
-            'supplier_confirmed_price' => fake()->randomNumber(5),
-            'cost_count' => fake()->randomNumber(2),
-            'cost_promotion_count' => fake()->randomNumber(),
-            'cost_price' => fake()->randomNumber(5),
-            'is_promotion' => fake()->boolean(),
+            'quantity' => $quantity,
+            'subtotal' => $quantity * $unit_price,
+            'unit_price' => $unit_price,
             'warehoused_at' => fake()->dateTime(),
             'purchase_ordered_at' => fake()->dateTime(),
             'status' => fake()->randomElement(PurchaseOrderItemStatus::names()),

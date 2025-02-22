@@ -2,7 +2,7 @@
 
 namespace App\Nova;
 
-use App\Enums\PurchaseOrder;
+use App\Enums\PurchaseOrderStatus;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\DateTime;
@@ -58,7 +58,7 @@ class PurchaseOrderBox extends Resource
             Currency::make(__('Cost Price'), 'cost_price'),
             DateTime::make(__('Warehoused At'), 'warehoused_at'),
             Select::make(__('Status'), 'status')
-                ->options(PurchaseOrder::array())->displayUsingLabels()->filterable(),
+                ->options(PurchaseOrderStatus::array())->displayUsingLabels()->filterable(),
             Textarea::make(__('Memo')),
             Stack::make(__('Created At').' & '.__('Updated At'), [
                 DateTime::make(__('Created At'), 'created_at'),

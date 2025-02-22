@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Enums\PurchaseOrder;
+use App\Enums\PurchaseOrderStatus;
 use Database\Seeders\UserSeeder;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -30,7 +30,7 @@ class BoxPurchaseOrderFactory extends Factory
             'confirmed_at' => fake()->dateTime(),
             'predict_warehoused_at' => fake()->dateTime(),
             'warehoused_at' => fake()->dateTime(),
-            'status' => fake()->randomElement(PurchaseOrder::names()),
+            'status' => fake()->randomElement(PurchaseOrderStatus::names()),
             'memo' => fake()->paragraph(),
         ];
     }

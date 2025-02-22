@@ -11,6 +11,6 @@ class PurchaseOrderItemSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\PurchaseOrderItem::factory()->count(10)->create();
+        \App\Models\PurchaseOrderItem::factory()->count(100)->create();
     }
 }

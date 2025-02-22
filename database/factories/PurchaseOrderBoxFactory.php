@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Enums\PurchaseOrder;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -28,7 +27,6 @@ class PurchaseOrderBoxFactory extends Factory
             'cost_count' => fake()->randomNumber(1),
             'cost_price' => fake()->randomNumber(5),
             'warehoused_at' => fake()->dateTime(),
-            'status' => fake()->randomElement(PurchaseOrder::names()),
             'memo' => fake()->paragraph(),
         ];
     }
