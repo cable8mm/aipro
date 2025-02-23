@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class RetailPurchaseItem extends Model
 {
@@ -29,5 +30,13 @@ class RetailPurchaseItem extends Model
     public function item(): BelongsTo
     {
         return $this->belongsTo(Item::class);
+    }
+
+    /**
+     * Get the inventory history's retail purchase item.
+     */
+    public function inventoryHistory(): MorphOne
+    {
+        return $this->morphOne(InventoryHistory::class, 'historyable');
     }
 }

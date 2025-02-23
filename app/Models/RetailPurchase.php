@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Support\Facades\Auth;
 
 class RetailPurchase extends Model
@@ -67,13 +66,5 @@ class RetailPurchase extends Model
     public function getItemCount(): int
     {
         return $this->retailPurchaseItems->count();
-    }
-
-    /**
-     * Get the inventory history's retail purchase.
-     */
-    public function inventoryHistory(): MorphOne
-    {
-        return $this->morphOne(InventoryHistory::class, 'historyable');
     }
 }

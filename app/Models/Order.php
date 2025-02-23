@@ -53,14 +53,6 @@ class Order extends Model
     }
 
     /**
-     * Get the inventory history's order.
-     */
-    public function inventoryHistory(): MorphOne
-    {
-        return $this->morphOne(InventoryHistory::class, 'historyable');
-    }
-
-    /**
      * Get the box inventory history's order.
      */
     public function boxInventoryHistory(): MorphOne

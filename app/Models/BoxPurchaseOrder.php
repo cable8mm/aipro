@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Nova\Actions\Actionable;
 
@@ -68,13 +67,5 @@ class BoxPurchaseOrder extends Model
         $this->total_order_price = $this->boxPurchaseOrderItems()->sum('subtotal');
 
         return $this->save();
-    }
-
-    /**
-     * Get the box inventory history's box purchase order.
-     */
-    public function boxInventoryHistory(): MorphOne
-    {
-        return $this->morphOne(BoxInventoryHistory::class, 'historyable');
     }
 }

@@ -66,7 +66,7 @@ class BoxInventoryHistory extends Resource
                 ->onlyOnIndex(),
             MorphTo::make(__('Inventory Historyable'), 'historyable')
                 ->types([
-                    BoxPurchaseOrder::class,
+                    BoxPurchaseOrderItem::class,
                     Order::class,
                 ]),
             Number::make(__('Quantity'), 'quantity')->rules('required')->required()->displayUsing(function ($value) {

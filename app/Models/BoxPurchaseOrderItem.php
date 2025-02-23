@@ -6,6 +6,7 @@ use App\Enums\PurchaseOrderItemStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Nova\Actions\Actionable;
 
@@ -83,5 +84,13 @@ class BoxPurchaseOrderItem extends Model
         $replicate->subtotal = $quantity * $replicate->unit_price;
 
         return tap($replicate)->save();
+    }
+
+    /**
+     * Get the box inventory history's box purchase order item.
+     */
+    public function boxInventoryHistory(): MorphOne
+    {
+        return $this->morphOne(BoxInventoryHistory::class, 'historyable');
     }
 }

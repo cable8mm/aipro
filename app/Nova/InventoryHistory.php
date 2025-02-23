@@ -68,9 +68,8 @@ class InventoryHistory extends Resource
                 ->onlyOnIndex(),
             MorphTo::make(__('Inventory Historyable'), 'historyable')
                 ->types([
-                    RetailPurchase::class,
+                    RetailPurchaseItem::class,
                     OrderShipment::class,
-                    Order::class,
                 ]),
             Number::make(__('Quantity'), 'quantity')->displayUsing(function ($value) {
                 return number_format($value);
