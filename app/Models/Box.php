@@ -68,8 +68,9 @@ class Box extends Model
             'box_id' => $this->id,
             'type' => $type,
             'quantity' => $inventory,
-            'model' => $model,
-            'attribute' => $attribute,
+            'after_quantity' => $this->getOriginal('inventory') + $inventory,
+            'historyable_type' => $model,
+            'historyable_id' => $attribute,
             'is_success' => true,
         ]);
     }

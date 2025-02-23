@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Laravel\Nova\Actions\Actionable;
 
 class Order extends Model
@@ -49,5 +50,21 @@ class Order extends Model
     public function box(): BelongsTo
     {
         return $this->belongsTo(Box::class);
+    }
+
+    /**
+     * Get the inventory history's order.
+     */
+    public function inventoryHistory(): MorphOne
+    {
+        return $this->morphOne(InventoryHistory::class, 'historyable');
+    }
+
+    /**
+     * Get the box inventory history's order.
+     */
+    public function boxInventoryHistory(): MorphOne
+    {
+        return $this->morphOne(BoxInventoryHistory::class, 'historyable');
     }
 }

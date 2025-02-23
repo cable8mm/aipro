@@ -9,6 +9,7 @@ use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\MorphTo;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
@@ -63,11 +64,17 @@ class BoxInventoryHistory extends Resource
                 ->map(InventoryHistory::array(value: 'success'))
                 ->labels(InventoryHistory::array())
                 ->onlyOnIndex(),
-            Text::make(__('Model'), 'model')->rules('required')->required(),
-            Text::make(__('Attribute'), 'attribute')->rules('required', 'gt:0')->required(),
+            MorphTo::make(__('Inventory Historyable'), 'historyable')
+                ->types([
+                    BoxPurchaseOrder::class,
+                    Order::class,
+                ]),
             Number::make(__('Quantity'), 'quantity')->rules('required')->required()->displayUsing(function ($value) {
                 return number_format($value);
             }),
+            Number::make(__('After Quantity'), 'after_quantity')->displayUsing(function ($value) {
+                return number_format($value);
+            })->rules('required')->required(),
             Boolean::make(__('Is Success'), 'is_success')->rules('required')->required(),
             DateTime::make(__('Created At'), 'created_at')->exceptOnForms(),
             DateTime::make(__('Updated At'), 'updated_at')->exceptOnForms(),

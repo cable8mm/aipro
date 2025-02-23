@@ -125,9 +125,9 @@ class Item extends Model
             'item_id' => $this->id,
             'type' => $type,
             'quantity' => $inventory,
-            'after_quantity' => $this->getOriginal('inventory'),
-            'model' => $model,
-            'attribute' => $attribute,
+            'after_quantity' => $this->getOriginal('inventory') + $inventory,
+            'historyable_type' => $model,
+            'historyable_id' => $attribute,
             'is_success' => true,
         ]);
     }

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class OrderShipment extends Model
 {
@@ -97,5 +98,13 @@ class OrderShipment extends Model
     public function order(): BelongsTo
     {
         return $this->belongsTo(Order::class, 'orderNo', 'id');
+    }
+
+    /**
+     * Get the inventory history's order shipment.
+     */
+    public function inventoryHistory(): MorphOne
+    {
+        return $this->morphOne(InventoryHistory::class, 'historyable');
     }
 }
