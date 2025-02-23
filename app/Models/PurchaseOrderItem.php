@@ -72,10 +72,11 @@ class PurchaseOrderItem extends Model
             throw new \RuntimeException(__('The status cannot be changed.'));
         }
 
-        $replicate = $this->replicate();
-        $replicate->status = PurchaseOrderItemStatus::RETURNED->name;
-        $replicate->quantity = $quantity;
-        $replicate->subtotal = $quantity * $replicate->unit_price;
+        $replicate = $this->replicate()->fill([
+            'status' => PurchaseOrderItemStatus::RETURNED->name,
+            'quantity' => $quantity,
+            'subtotal' => $quantity * $this->unit_price,
+        ]);
 
         return tap($replicate)->save();
     }
