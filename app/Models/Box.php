@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\InventoryHistory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -62,14 +63,15 @@ class Box extends Model
 
         $this->save();
 
-        $type = $inventory > 0 ? __('Receiving') : __('Shipping');
+        $type = $inventory > 0 ? InventoryHistory::WAREHOUSING->name : InventoryHistory::SHIPPING->name;
 
         return $this->boxInventoryHistories()->create([
             'box_id' => $this->id,
             'type' => $type,
             'quantity' => $inventory,
-            'model' => $model,
-            'attribute' => $attribute,
+            'after_quantity' => $this->getOriginal('inventory'),
+            'historyable_type' => $model,
+            'historyable_id' => $attribute,
             'is_success' => true,
         ]);
     }

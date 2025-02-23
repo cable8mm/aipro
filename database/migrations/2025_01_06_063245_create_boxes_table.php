@@ -19,7 +19,7 @@ return new class extends Migration
             $table->unsignedInteger('size')->comment('박스 사이즈');
             $table->integer('delivery_price')->nullable()->comment('배송 금액');
             $table->integer('cost_price')->nullable()->comment('매입가');
-            $table->unsignedInteger('inventory')->nullable()->default('0')->comment('재고 수량');
+            $table->bigInteger('inventory')->default(0)->comment('재고 수량');
             $table->string('memo', 255)->nullable()->comment('메모');
             $table->timestamps();
         });

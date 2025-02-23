@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('sku', 255)->nullable();
             $table->unsignedInteger('units_per_case')->default(1)->comment('입수량');
             $table->string('name', 255);
-            $table->integer('inventory')->nullable()->comment('재고 갯수');
+            $table->bigInteger('inventory')->default(0)->comment('재고 갯수');
             $table->unsignedInteger('supplier_out_of_stock_count')->default(0)->comment('공급사 품절 등록 횟수');
             $table->integer('safe_inventory')->default(0)->comment('안전 재고 갯수');
             $table->string('safe_class', 10)->default(SafeClass::S1->name);

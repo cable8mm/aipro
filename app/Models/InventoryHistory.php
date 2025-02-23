@@ -2,15 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Facades\Auth;
 
 class InventoryHistory extends Model
 {
-    use HasFactory;
-
     protected $with = ['author', 'item'];
 
     protected $guarded = [];
@@ -31,7 +29,7 @@ class InventoryHistory extends Model
     protected static function booted(): void
     {
         static::creating(function (InventoryHistory $inventoryHistory) {
-            $inventoryHistory->author_id = $inventoryHistory->author_id ?? Auth::user()->id;
+            $inventoryHistory->author_id = $inventoryHistory->author_id ?? Auth::user()->id ?? null;
         });
     }
 
@@ -48,5 +46,13 @@ class InventoryHistory extends Model
     public function bySelf(): BelongsTo
     {
         return $this->belongsTo(InventoryHistory::class, 'cancel_id');
+    }
+
+    /**
+     * Get the parent historyable model (retail_purchase or ...).
+     */
+    public function historyable(): MorphTo
+    {
+        return $this->morphTo();
     }
 }

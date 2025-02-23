@@ -10,6 +10,7 @@ use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\MorphTo;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
@@ -65,14 +66,17 @@ class InventoryHistory extends Resource
                 ->map(EnumsInventoryHistory::array(value: 'success'))
                 ->labels(EnumsInventoryHistory::array())
                 ->onlyOnIndex(),
+            MorphTo::make(__('Inventory Historyable'), 'historyable')
+                ->types([
+                    RetailPurchaseItem::class,
+                    OrderShipment::class,
+                ]),
             Number::make(__('Quantity'), 'quantity')->displayUsing(function ($value) {
                 return number_format($value);
             })->rules('required')->required(),
             Number::make(__('After Quantity'), 'after_quantity')->displayUsing(function ($value) {
                 return number_format($value);
             })->rules('required')->required(),
-            Text::make(__('Model'), 'model')->rules('required')->required(),
-            Number::make(__('Attribute'), 'attribute')->rules('required')->required(),
             Number::make(__('Cancel Id'), 'cancel_id'),
             BelongsTo::make(__('Cancel Id'), 'bySelf', InventoryHistory::class),
             Boolean::make(__('Is Success'), 'is_success')->rules('required')->required(),

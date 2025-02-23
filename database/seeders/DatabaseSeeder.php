@@ -17,7 +17,6 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             AlertEmailSeeder::class,
             BarcodeCommandSeeder::class,
-            BoxInventoryHistorySeeder::class,
             BoxManualWarehousingSeeder::class,
             BoxPurchaseOrderSeeder::class,
             BoxPurchaseOrderItemSeeder::class,
@@ -31,7 +30,6 @@ class DatabaseSeeder extends Seeder
             GoodSeeder::class,
             HelpTipSeeder::class,
             HelpfulFileSeeder::class,
-            InventoryHistorySeeder::class,
             IssueCommentSeeder::class,
             IssueSeeder::class,
             MismatchedOrderShipmentSeeder::class,
@@ -60,6 +58,8 @@ class DatabaseSeeder extends Seeder
             CustomerSeeder::class,
             RetailPurchaseSeeder::class,
             RetailPurchaseItemSeeder::class,
+            InventoryHistorySeeder::class,
+            BoxInventoryHistorySeeder::class,
         ]);
     }
 }

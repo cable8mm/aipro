@@ -65,7 +65,7 @@ class Box extends Resource
             DateTime::make(__('Created At'), 'created_at')->exceptOnForms(),
             DateTime::make(__('Updated At'), 'updated_at')->exceptOnForms(),
 
-            HasMany::make(__('Box Purchase Order Items'), 'boxPurchaseOrderItems', BoxPurchaseOrderItem::class),
+            HasMany::make(__('Box Inventory Histories'), 'boxInventoryHistories', BoxInventoryHistory::class),
         ];
     }
 

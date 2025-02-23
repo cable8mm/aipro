@@ -13,13 +13,14 @@ return new class extends Migration
     {
         Schema::create('box_inventory_histories', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('author_id')->nullable();
-            $table->foreignId('box_id');
-            $table->string('type', 20);
-            $table->bigInteger('quantity');
-            $table->string('model', 100);
-            $table->unsignedBigInteger('attribute');
-            $table->boolean('is_success');
+            $table->foreignId('author_id')->nullable()->comment('담당자 아이디');
+            $table->foreignId('box_id')->comment('박스 아이디');
+            $table->string('type', 20)->comment('타입(입고,출고)');
+            $table->bigInteger('quantity')->comment('입출고 수량');
+            $table->bigInteger('after_quantity')->comment('입출고 후 재고 수량');
+            $table->morphs('historyable');
+            $table->unsignedBigInteger('cancel_id')->nullable()->comment('취소할 경우 저장되는 box_inventory_history_id');
+            $table->boolean('is_success')->comment('성공 유무');
             $table->timestamps();
         });
     }

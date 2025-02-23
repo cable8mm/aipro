@@ -23,7 +23,6 @@ class BoxFactory extends Factory
             'size' => fake()->randomNumber(1) + 1,
             'delivery_price' => fake()->randomElement([3000, 35000, 4000, 45000, 5000, 7000, 10000]),
             'cost_price' => fake()->randomNumber(4),
-            'inventory' => fake()->randomNumber(3),
             'memo' => fake()->text(10),
         ];
     }
