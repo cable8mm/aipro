@@ -30,7 +30,6 @@ class ItemFactory extends Factory
             'supplier_item_id' => fake()->randomNumber(1) + 1,
             'box_id' => fake()->randomNumber(1) + 1,
             'name' => $productName,
-            'inventory' => fake()->randomNumber(3),
             'supplier_out_of_stock_count' => fake()->randomNumber(),
             'safe_inventory' => fake()->randomNumber(1),
             'safe_class' => fake()->randomElement(SafeClass::names()),

@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
@@ -10,8 +9,6 @@ use Illuminate\Support\Facades\Auth;
 
 class BoxInventoryHistory extends Model
 {
-    use HasFactory;
-
     protected $with = ['box'];
 
     protected $guarded = [];
