@@ -35,7 +35,6 @@ class Item extends Model
             'spec' => 'string',
             'order_rule' => 'string',
             'barcode' => 'string',
-            'picking_zone_number' => 'string',
             'item_division_color' => 'string',
             'ship_quantity' => 'integer',
             'memo' => 'string',
@@ -93,6 +92,11 @@ class Item extends Model
     public function playautoCategory(): BelongsTo
     {
         return $this->belongsTo(PlayautoCategory::class);
+    }
+
+    public function location(): BelongsTo
+    {
+        return $this->belongsTo(Location::class);
     }
 
     public function purchaseOrderItems(): HasMany

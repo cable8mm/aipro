@@ -62,6 +62,7 @@ class Item extends Resource
         return [
             ID::make()->sortable(),
             BelongsTo::make(__('Author'), 'author', User::class)->exceptOnForms(),
+            BelongsTo::make(__('Location'), 'location', Location::class),
             Text::make(__('SKU'), 'sku')
                 ->rules('required')->required()->maxlength(255)
                 ->sortable(),
@@ -77,7 +78,6 @@ class Item extends Resource
                 ->rules('required')->required()->maxlength(255)->onlyOnForms(),
             Text::make(__('Godo Name'), 'godo_name')
                 ->maxlength(255)->onlyOnForms(),
-            Text::make(__('Picking Zone Number'), 'picking_zone_number')->maxlength(255),
             Select::make(__('Item Division Color'), 'item_division_color')->options(ItemColor::array())->displayUsingLabels(),
             Number::make(__('Inventory'), 'inventory')->displayUsing(function ($value) {
                 return number_format($value);

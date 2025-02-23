@@ -17,13 +17,13 @@ use App\Nova\HelpTip;
 use App\Nova\InventoryHistory;
 use App\Nova\Item;
 use App\Nova\ItemManualWarehousing;
+use App\Nova\Location;
 use App\Nova\MismatchedOrderShipment;
 use App\Nova\OptionGood;
 use App\Nova\OptionGoodOption;
 use App\Nova\Order;
 use App\Nova\OrderSheetWaybill;
 use App\Nova\OrderShipment;
-use App\Nova\PickingZone;
 use App\Nova\PromotionCode;
 use App\Nova\PurchaseOrder;
 use App\Nova\RegisterGoodRequest;
@@ -35,6 +35,7 @@ use App\Nova\SetGood;
 use App\Nova\Setting;
 use App\Nova\Supplier;
 use App\Nova\User;
+use App\Nova\Warehouse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Gate;
@@ -135,7 +136,8 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 MenuSection::make(__('Setting'), [
                     MenuItem::resource(User::class),
                     MenuItem::resource(Setting::class),
-                    MenuItem::resource(PickingZone::class),
+                    MenuItem::resource(Location::class),
+                    MenuItem::resource(Warehouse::class),
                 ])->icon('cog')->collapsable(),
 
                 MenuSection::make(__('Helpful Links'), [

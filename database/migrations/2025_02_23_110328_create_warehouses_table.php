@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('picking_zones', function (Blueprint $table) {
-            $table->id();
-            $table->string('name', 50)->comment('피킹 존 이름');
-            $table->string('code', 10)->comment('피킹 존 코드');
+        Schema::create('warehouses', function (Blueprint $table) {
+            $table->string('id', 2)->primary();
+            $table->string('description', 255)->comment('위치 이름');
             $table->timestamps();
         });
     }
@@ -24,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('zones');
+        Schema::dropIfExists('warehouses');
     }
 };

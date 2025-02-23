@@ -3,21 +3,22 @@
 namespace App\Nova;
 
 use App\Traits\NovaAuthorizedByManager;
+use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
-class PickingZone extends Resource
+class Location extends Resource
 {
     use NovaAuthorizedByManager;
 
     /**
      * The model the resource corresponds to.
      *
-     * @var class-string<\App\Models\PickingZone>
+     * @var class-string<\App\Models\Location>
      */
-    public static $model = \App\Models\PickingZone::class;
+    public static $model = \App\Models\Location::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -34,7 +35,6 @@ class PickingZone extends Resource
     public static $search = [
         'id',
         'name',
-        'code',
     ];
 
     /**
@@ -46,8 +46,8 @@ class PickingZone extends Resource
     {
         return [
             ID::make()->sortable(),
-            Text::make(__('Name'), 'name')->maxlength(50),
-            Text::make(__('Code'), 'code')->maxlength(10),
+            BelongsTo::make(__('Warehouse'), 'warehouse', Warehouse::class),
+            Text::make(__('Description'), 'description')->maxlength(50),
             DateTime::make(__('Created At'), 'created_at')->exceptOnForms(),
             DateTime::make(__('Updated At'), 'updated_at')->exceptOnForms(),
         ];
@@ -95,11 +95,6 @@ class PickingZone extends Resource
 
     public static function label()
     {
-        return __('Picking Zones');
-    }
-
-    public function title()
-    {
-        return __('Picking Zones').' '.$this->code;
+        return __('Locations');
     }
 }

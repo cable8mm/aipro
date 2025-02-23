@@ -227,16 +227,16 @@
         },
         {
             "name": "cable8mm/good-code",
-            "version": "v2.6.0",
+            "version": "v2.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cable8mm/good-code.git",
-                "reference": "24b7e504a64f89ab4f7f559603e35e02c0f2d082"
+                "reference": "88ad37899705eb23cc3cfc3e4083cadf0b7b88f3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cable8mm/good-code/zipball/24b7e504a64f89ab4f7f559603e35e02c0f2d082",
-                "reference": "24b7e504a64f89ab4f7f559603e35e02c0f2d082",
+                "url": "https://api.github.com/repos/cable8mm/good-code/zipball/88ad37899705eb23cc3cfc3e4083cadf0b7b88f3",
+                "reference": "88ad37899705eb23cc3cfc3e4083cadf0b7b88f3",
                 "shasum": ""
             },
             "require": {
@@ -273,9 +273,9 @@
             ],
             "support": {
                 "issues": "https://github.com/cable8mm/good-code/issues",
-                "source": "https://github.com/cable8mm/good-code/tree/v2.6.0"
+                "source": "https://github.com/cable8mm/good-code/tree/v2.7.0"
             },
-            "time": "2025-02-21T08:25:21+00:00"
+            "time": "2025-02-23T13:10:24+00:00"
         },
         {
             "name": "cable8mm/laravel-validation-kisa-rules",
@@ -2401,32 +2401,32 @@
         },
         {
             "name": "laracraft-tech/laravel-useful-additions",
-            "version": "v4.0.1",
+            "version": "v4.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laracraft-tech/laravel-useful-additions.git",
-                "reference": "cf1e6bf877492b7c555643f3396bc80ad0d12a6e"
+                "reference": "95e7e5e36ac72c3235198790c88c49f08737ed66"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laracraft-tech/laravel-useful-additions/zipball/cf1e6bf877492b7c555643f3396bc80ad0d12a6e",
-                "reference": "cf1e6bf877492b7c555643f3396bc80ad0d12a6e",
+                "url": "https://api.github.com/repos/laracraft-tech/laravel-useful-additions/zipball/95e7e5e36ac72c3235198790c88c49f08737ed66",
+                "reference": "95e7e5e36ac72c3235198790c88c49f08737ed66",
                 "shasum": ""
             },
             "require": {
-                "illuminate/contracts": "^9.0 || ^10.0 || ^11.0",
-                "illuminate/database": "^9.0 || ^10.0 || ^11.0",
-                "illuminate/support": "^9.0 || ^10.0 || ^11.0",
-                "illuminate/testing": "^9.0 || ^10.0 || ^11.0",
+                "illuminate/contracts": "^9.0 || ^10.0 || ^11.0 || ^12.0",
+                "illuminate/database": "^9.0 || ^10.0 || ^11.0 || ^12.0",
+                "illuminate/support": "^9.0 || ^10.0 || ^11.0 || ^12.0",
+                "illuminate/testing": "^9.0 || ^10.0 || ^11.0 || ^12.0",
                 "php": "^8.0",
                 "spatie/laravel-package-tools": "^1.12 || ^1.14"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^3.13",
-                "nunomaduro/larastan": "^1.0 || ^2.5",
-                "orchestra/testbench": "^7.0 || ^8.0 || ^9.0",
-                "pestphp/pest": "^1.22 || ^2.0",
-                "pestphp/pest-plugin-laravel": "^1.22 || ^2.0",
+                "nunomaduro/larastan": "^1.0 || ^2.5 || ^3.1",
+                "orchestra/testbench": "^7.0 || ^8.0 || ^9.0 || ^10.0",
+                "pestphp/pest": "^1.22 || ^2.0 || ^3.7",
+                "pestphp/pest-plugin-laravel": "^1.22 || ^2.0 || ^3.1",
                 "spatie/laravel-ray": "^1.32"
             },
             "type": "library",
@@ -2466,9 +2466,9 @@
             ],
             "support": {
                 "issues": "https://github.com/laracraft-tech/laravel-useful-additions/issues",
-                "source": "https://github.com/laracraft-tech/laravel-useful-additions/tree/v4.0.1"
+                "source": "https://github.com/laracraft-tech/laravel-useful-additions/tree/v4.1.0"
             },
-            "time": "2024-07-08T09:23:48+00:00"
+            "time": "2025-02-23T14:10:59+00:00"
         },
         {
             "name": "laravel-lang/actions",
