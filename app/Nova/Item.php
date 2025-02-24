@@ -3,7 +3,6 @@
 namespace App\Nova;
 
 use App\Enums\CenterClass;
-use App\Enums\ItemColor;
 use App\Enums\SafeClass;
 use App\Nova\Filters\InventoryCountFilter;
 use App\Traits\NovaAuthorizedByManager;
@@ -13,7 +12,6 @@ use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Line;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Stack;
@@ -68,17 +66,10 @@ class Item extends Resource
                 ->sortable(),
             Number::make(__('Units Per Case'), 'units_per_case'),
             BelongsTo::make(__('Supplier'), 'supplier', Supplier::class)->filterable(),
-            Stack::make(__('Name').' & '.__('Godo Name'), [
-                Line::make(__('Name'), fn () => $this->name.' x'.$this->ship_quantity)
-                    ->asHeading(),
-                Line::make(__('Godo Name'), fn () => '쇼핑몰 : '.$this->godo_name.' x'.$this->ship_quantity)
-                    ->asSmall(),
-            ]),
             Text::make(__('Name'), 'name')
-                ->rules('required')->required()->maxlength(255)->onlyOnForms(),
-            Text::make(__('Godo Name'), 'godo_name')
+                ->rules('required')->required()->maxlength(255),
+            Text::make(__('Godo Name'), 'good.name')
                 ->maxlength(255)->onlyOnForms(),
-            Select::make(__('Item Division Color'), 'item_division_color')->options(ItemColor::array())->displayUsingLabels(),
             Number::make(__('Inventory'), 'inventory')->displayUsing(function ($value) {
                 return number_format($value);
             })->sortable(),

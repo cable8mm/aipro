@@ -35,7 +35,6 @@ class Item extends Model
             'spec' => 'string',
             'order_rule' => 'string',
             'barcode' => 'string',
-            'item_division_color' => 'string',
             'ship_quantity' => 'integer',
             'memo' => 'string',
             'print_classification' => 'string',
