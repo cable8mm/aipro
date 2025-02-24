@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use Cable8mm\GoodCode\Location;
+use Cable8mm\GoodCode\LocationCode;
 use Illuminate\Database\Seeder;
 
 class LocationSeeder extends Seeder
@@ -14,8 +14,8 @@ class LocationSeeder extends Seeder
     {
         for ($i = 1; $i <= 3; $i++) {
             \App\Models\Location::create([
-                'id' => Location::of(warehouse: 'A'.$i),
-                'warehouse_id' => Location::of(warehouse: 'A'.$i),
+                'id' => LocationCode::of(warehouse: 'A'.$i),
+                'warehouse_id' => LocationCode::of(warehouse: 'A'.$i),
                 'description' => __('Warehouse')." A$i ",
             ]);
         }

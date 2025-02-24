@@ -75,4 +75,9 @@ class Box extends Model
             'is_success' => true,
         ]);
     }
+
+    public static function default(): static
+    {
+        return Box::where('is_default', true)->first();
+    }
 }

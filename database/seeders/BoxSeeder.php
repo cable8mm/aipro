@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Cable8mm\GoodCode\LocationCode;
 use Illuminate\Database\Seeder;
 
 class BoxSeeder extends Seeder
@@ -14,8 +15,12 @@ class BoxSeeder extends Seeder
         for ($i = 1; $i < 11; $i++) {
             \App\Models\Box::factory(1, [
                 'name' => '센터'.$i.'호',
-                'code' => 'BOX-'.$i,
+                'code' => LocationCode::of(''),
             ])->create();
         }
+
+        \App\Models\Box::inRandomOrder()->first()->update([
+            'is_default' => true,
+        ]);
     }
 }

@@ -5,7 +5,7 @@ namespace Database\Factories;
 use App\Enums\CenterClass;
 use App\Enums\ItemColor;
 use App\Enums\SafeClass;
-use Cable8mm\GoodCode\Location;
+use Cable8mm\GoodCode\LocationCode;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -27,7 +27,7 @@ class ItemFactory extends Factory
 
         return [
             'author_id' => fake()->randomNumber(1) + 1,
-            'location_id' => Location::of(warehouse: 'A'.fake()->numberBetween(1, 3)),
+            'location_id' => LocationCode::of(warehouse: 'A'.fake()->numberBetween(1, 3)),
             'supplier_id' => fake()->randomNumber(1) + 1,
             'supplier_item_id' => fake()->randomNumber(1) + 1,
             'box_id' => fake()->randomNumber(1) + 1,

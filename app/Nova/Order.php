@@ -2,7 +2,6 @@
 
 namespace App\Nova;
 
-use App\Enums\OrderType;
 use App\Nova\Actions\PrintOrder;
 use App\Traits\NovaAuthorizedByWarehouser;
 use Laravel\Nova\Fields\BelongsTo;
@@ -10,7 +9,6 @@ use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\HasManyThrough;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\MultiSelect;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -53,13 +51,10 @@ class Order extends Resource
         return [
             ID::make(__('Order Number'), 'id')->sortable(),
             BelongsTo::make(__('Order Sheet Waybill'), 'orderSheetWaybill', OrderSheetWaybill::class),
-            MultiSelect::make(__('Type'), 'type')->options(OrderType::array())
-                ->rules('required')->required()->displayUsingLabels()->filterable(),
             Number::make(__('Order Good Count'), 'order_good_count')->displayUsing(function ($value) {
                 return number_format($value);
             })->exceptOnForms(),
             BelongsTo::make(__('Box'), 'box', Box::class),
-            Number::make(__('Box Quantity'), 'box_quantity'),
             Number::make(__('Printed Count'), 'printed_count')->displayUsing(function ($value) {
                 return number_format($value);
             })->exceptOnForms(),

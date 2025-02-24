@@ -227,16 +227,16 @@
         },
         {
             "name": "cable8mm/good-code",
-            "version": "v2.7.0",
+            "version": "v2.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cable8mm/good-code.git",
-                "reference": "88ad37899705eb23cc3cfc3e4083cadf0b7b88f3"
+                "reference": "9c0ee7cc67cdad970d3589e1d978355ade946966"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cable8mm/good-code/zipball/88ad37899705eb23cc3cfc3e4083cadf0b7b88f3",
-                "reference": "88ad37899705eb23cc3cfc3e4083cadf0b7b88f3",
+                "url": "https://api.github.com/repos/cable8mm/good-code/zipball/9c0ee7cc67cdad970d3589e1d978355ade946966",
+                "reference": "9c0ee7cc67cdad970d3589e1d978355ade946966",
                 "shasum": ""
             },
             "require": {
@@ -273,9 +273,9 @@
             ],
             "support": {
                 "issues": "https://github.com/cable8mm/good-code/issues",
-                "source": "https://github.com/cable8mm/good-code/tree/v2.7.0"
+                "source": "https://github.com/cable8mm/good-code/tree/v2.8.0"
             },
-            "time": "2025-02-23T13:10:24+00:00"
+            "time": "2025-02-24T07:51:32+00:00"
         },
         {
             "name": "cable8mm/laravel-validation-kisa-rules",
@@ -3163,16 +3163,16 @@
         },
         {
             "name": "laravel-lang/moonshine",
-            "version": "1.1.0",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Laravel-Lang/moonshine.git",
-                "reference": "3fff17d1d5999f1964e522609db82463423e9e25"
+                "reference": "573e1568d1e7819ed5799dcac367080accdb7ee9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laravel-Lang/moonshine/zipball/3fff17d1d5999f1964e522609db82463423e9e25",
-                "reference": "3fff17d1d5999f1964e522609db82463423e9e25",
+                "url": "https://api.github.com/repos/Laravel-Lang/moonshine/zipball/573e1568d1e7819ed5799dcac367080accdb7ee9",
+                "reference": "573e1568d1e7819ed5799dcac367080accdb7ee9",
                 "shasum": ""
             },
             "require": {
@@ -3225,9 +3225,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Laravel-Lang/moonshine/issues",
-                "source": "https://github.com/Laravel-Lang/moonshine/tree/1.1.0"
+                "source": "https://github.com/Laravel-Lang/moonshine/tree/1.1.1"
             },
-            "time": "2025-02-17T10:31:11+00:00"
+            "time": "2025-02-23T18:22:17+00:00"
         },
         {
             "name": "laravel-lang/native-country-names",
