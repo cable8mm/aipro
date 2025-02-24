@@ -13,7 +13,7 @@ class WarehouseSeeder extends Seeder
     public function run(): void
     {
         for ($i = 1; $i <= 3; $i++) {
-            \App\Models\Warehouse::factory()->create([
+            \App\Models\Warehouse::create([
                 'id' => Location::of(warehouse: 'A'.$i),
                 'description' => __('Warehouse')." $i",
             ]);
