@@ -19,7 +19,8 @@ return new class extends Migration
             $table->foreignId('supplier_id')->comment('공급사 아이디');
             $table->foreignId('supplier_item_id')->nullable()->comment('공급사 상품 아이디');
             $table->foreignId('box_id')->nullable()->comment('1개 패킹 시 사용되는 박스');
-            $table->foreignId('location_id')->nullable()->comment('위치 아이디');
+            $table->string('location_id', 10)->comment('위치 코드');
+            $table->foreign('location_id')->references('id')->on('locations');
             $table->string('sku', 255)->nullable();
             $table->unsignedInteger('units_per_case')->default(1)->comment('입수량');
             $table->string('name', 255);

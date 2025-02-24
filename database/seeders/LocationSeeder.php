@@ -14,9 +14,9 @@ class LocationSeeder extends Seeder
     {
         for ($i = 1; $i <= 3; $i++) {
             \App\Models\Location::create([
-                'id' => Location::of(warehouse: 'A'.$i, rack: 'R1'),
+                'id' => Location::of(warehouse: 'A'.$i),
                 'warehouse_id' => Location::of(warehouse: 'A'.$i),
-                'description' => __('Warehouse')." A$i ".__('Rack').' R1',
+                'description' => __('Warehouse')." A$i ",
             ]);
         }
     }

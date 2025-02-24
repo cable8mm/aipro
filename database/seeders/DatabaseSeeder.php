@@ -14,6 +14,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
+            WarehouseSeeder::class,
+            LocationSeeder::class,
             UserSeeder::class,
             AlertEmailSeeder::class,
             BarcodeCommandSeeder::class,
@@ -39,7 +41,6 @@ class DatabaseSeeder extends Seeder
             OrderSheetWaybillSeeder::class,
             // OrderSeeder::class,
             // OrderShipmentSeeder::class,
-            LocationSeeder::class,
             PurchaseOrderSeeder::class,
             PurchaseOrderItemSeeder::class,
             PlayautoCategorySeeder::class,
@@ -58,7 +59,6 @@ class DatabaseSeeder extends Seeder
             CustomerSeeder::class,
             RetailPurchaseSeeder::class,
             RetailPurchaseItemSeeder::class,
-            WarehouseSeeder::class,
             InventoryHistorySeeder::class,
             BoxInventoryHistorySeeder::class,
         ]);
