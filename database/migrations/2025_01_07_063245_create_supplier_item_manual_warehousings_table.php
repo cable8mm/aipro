@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\SupplierItem;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('supplier_item_manual_warehousings', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('supplier_item_id');
-            $table->foreignId('author_id');
+            $table->foreignIdFor(User::class, 'author_id')->constrained()->comment('작성자 아이디');
+            $table->foreignIdFor(SupplierItem::class)->constrained()->comment('공급사 아이템 아이디');
             $table->integer('manual_add_inventory_count');
             $table->text('memo')->nullable()->comment('수동 입고 이유');
             $table->timestamps();

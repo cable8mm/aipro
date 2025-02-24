@@ -27,6 +27,13 @@ class Order extends Model
         ];
     }
 
+    protected static function booted(): void
+    {
+        static::creating(function (Order $order) {
+            $order->box_id = $order->box_id ?? Box::default()->id;
+        });
+    }
+
     public function orderSheetWaybill(): BelongsTo
     {
         return $this->belongsTo(OrderSheetWaybill::class);

@@ -1,6 +1,8 @@
 <?php
 
 use App\Enums\SafeClass;
+use App\Models\Item;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,8 +16,8 @@ return new class extends Migration
     {
         Schema::create('item_inventory_snapshots', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('author_id');
-            $table->foreignId('item_id');
+            $table->foreignIdFor(User::class, 'author_id')->constrained()->comment('작성자 아이디');
+            $table->foreignIdFor(Item::class)->constrained()->comment('아이템');
             $table->string('playauto_sku', 50);
             $table->integer('inventory');
             $table->string('safe_class', 20)->default(SafeClass::S1->name);

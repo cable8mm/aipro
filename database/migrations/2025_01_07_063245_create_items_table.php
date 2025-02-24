@@ -2,6 +2,10 @@
 
 use App\Enums\CenterClass;
 use App\Enums\SafeClass;
+use App\Models\Box;
+use App\Models\Supplier;
+use App\Models\SupplierItem;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,10 +19,12 @@ return new class extends Migration
     {
         Schema::create('items', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('author_id');
-            $table->foreignId('supplier_id')->comment('공급사 아이디');
-            $table->foreignId('supplier_item_id')->nullable()->comment('공급사 상품 아이디');
-            $table->foreignId('box_id')->nullable()->comment('1개 패킹 시 사용되는 박스');
+            $table->foreignIdFor(User::class, 'author_id')->constrained()->comment('작성자 아이디');
+            $table->foreignIdFor(Supplier::class)->nullable()->constrained()->comment('공급사 아이디');
+            $table->foreignIdFor(SupplierItem::class)->nullable()->constrained()->comment('공급사 아이디');
+            $table->foreignIdFor(Box::class)->nullable()->constrained()->comment('공급사 아이디');
+            $table->string('location_id', 10)->comment('위치 코드');
+            $table->foreign('location_id')->references('id')->on('locations');
             $table->string('sku', 255)->nullable();
             $table->unsignedInteger('units_per_case')->default(1)->comment('입수량');
             $table->string('name', 255);
@@ -37,7 +43,6 @@ return new class extends Migration
             $table->string('spec', 255)->nullable()->comment('공급가 규격1(상품규격관련항목)');
             $table->string('order_rule', 255)->nullable()->comment('규격2 (입수수량 정보)');
             $table->string('barcode', 20)->nullable()->comment('바코드');
-            $table->string('picking_zone_number', 30)->nullable()->comment('피킹 박스 번호');
             $table->string('item_division_color', 20)->nullable();
             $table->integer('ship_quantity')->default(1);
             $table->text('memo')->nullable();

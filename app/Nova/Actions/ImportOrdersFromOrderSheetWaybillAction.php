@@ -5,6 +5,7 @@ namespace App\Nova\Actions;
 use App\Enums\OrderSheetWaybillStatus;
 use App\Exceptions\OptionGoodInvalidArgumentException;
 use App\Imports\OrderSheetWaybillsImport;
+use App\Models\Box;
 use App\Models\Order;
 use Illuminate\Bus\Batchable;
 use Illuminate\Bus\Queueable;
@@ -50,6 +51,10 @@ class ImportOrdersFromOrderSheetWaybillAction extends Action
                 Order::insert(
                     $model->ordersWithSiteOrderNo()
                 );
+
+                $model->orders()->update([
+                    'box_id' => Box::default()->id,
+                ]);
 
                 $model->row_count = $orderSheetWaybillsImport->getNumberOfLines();
                 $model->order_count = $model->orderShipments()->distinct()->count('orderNo');

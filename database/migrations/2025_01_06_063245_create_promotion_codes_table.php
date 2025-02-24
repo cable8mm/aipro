@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('promotion_codes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('author_id');
+            $table->foreignIdFor(User::class, 'author_id')->constrained()->comment('작성자 아이디');
             $table->foreignId('promotion_codable_id');
             $table->string('promotion_codable_type', 50);
             $table->unsignedInteger('ordinal_number')->default(0)->comment('같은 상품을 가리킬 경우 이 숫자로 구분한다. 이 수는 auto increment 성질을 갖는다.');

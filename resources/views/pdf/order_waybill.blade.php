@@ -207,7 +207,7 @@
                 @endisset
 			</td>
 			<td>
-                {{ $item->good->picking_zone_number }}
+                {{ $item->good->location->code }}
 			</td>
 			<td>
 				주문: {{ $item->totalAmount }}<br />

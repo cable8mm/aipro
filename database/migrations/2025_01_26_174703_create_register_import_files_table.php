@@ -1,6 +1,7 @@
 <?php
 
 use App\Enums\Status;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('register_import_files', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('author_id');
+            $table->foreignIdFor(User::class, 'author_id')->constrained()->comment('작성자 아이디');
             $table->string('type', 30);
             $table->string('memo', 255)->nullable();
             $table->string('attachment', 255);

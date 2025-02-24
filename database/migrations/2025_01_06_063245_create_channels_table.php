@@ -1,6 +1,7 @@
 <?php
 
 use App\Enums\Channel;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('channels', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('author_id');
-            $table->string('name', 255)->default('');
+            $table->foreignIdFor(User::class, 'author_id')->constrained()->comment('작성자 아이디');
+            $table->string('name', 255);
             $table->string('playauto_site', 190)->nullable();
             $table->string('siteid', 100)->nullable();
             $table->decimal('fee_rate', 5, 2)->nullable();

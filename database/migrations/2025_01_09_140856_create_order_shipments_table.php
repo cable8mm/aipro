@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\OrderSheetWaybill;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('order_shipments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('order_sheet_waybill_id')->nullable();
+            $table->foreignIdFor(OrderSheetWaybill::class)->constrained()->comment('주문과송장 아이디');
             $table->string('orderNo', 255)->nullable()->comment('주문고유번호');
             $table->string('site', 255)->nullable()->comment('판매사이트');
             $table->string('registDate', 255)->nullable()->comment('수집일');

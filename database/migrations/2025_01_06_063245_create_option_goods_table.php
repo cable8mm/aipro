@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('option_goods', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('author_id');
+            $table->foreignIdFor(User::class, 'author_id')->constrained()->comment('작성자 아이디');
             $table->string('goods_code', 130)->nullable()->comment('상품코드');
             $table->string('name', 255);
             $table->integer('option_count')->default(0)->comment('등록 옵션수');

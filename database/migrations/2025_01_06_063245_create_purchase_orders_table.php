@@ -1,6 +1,8 @@
 <?php
 
 use App\Enums\PurchaseOrderStatus;
+use App\Models\Supplier;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,9 +16,9 @@ return new class extends Migration
     {
         Schema::create('purchase_orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('author_id')->comment('등록자');
-            $table->foreignId('warehouse_manager_id')->nullable()->comment('입고 담당자');
-            $table->foreignId('supplier_id')->comment('공급사');
+            $table->foreignIdFor(User::class, 'author_id')->constrained()->comment('작성자 아이디');
+            $table->foreignIdFor(User::class, 'warehouse_manager_id')->nullable()->constrained()->comment('창고 담당자 아이디');
+            $table->foreignIdFor(Supplier::class)->constrained()->comment('공급사 아이디');
             $table->string('code', 50)->comment('발주코드');
             $table->bigInteger('total_good_count')->default(0)->comment('발주 총 상품 갯수');
             $table->bigInteger('total_order_price')->default(0)->comment('발주 총 금액');

@@ -2,27 +2,21 @@
 
 namespace App\Nova;
 
-use App\Nova\Actions\PrintOrder;
-use App\Traits\NovaAuthorizedByWarehouser;
-use Laravel\Nova\Fields\BelongsTo;
+use Illuminate\Http\Request;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\HasMany;
-use Laravel\Nova\Fields\HasManyThrough;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
-class Order extends Resource
+class Warehouse extends Resource
 {
-    use NovaAuthorizedByWarehouser;
-
     /**
      * The model the resource corresponds to.
      *
-     * @var class-string<\App\Models\Order>
+     * @var class-string<\App\Models\Warehouse>
      */
-    public static $model = \App\Models\Order::class;
+    public static $model = \App\Models\Warehouse::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -38,7 +32,6 @@ class Order extends Resource
      */
     public static $search = [
         'id',
-        'orderSheetWaybill.id',
     ];
 
     /**
@@ -49,22 +42,12 @@ class Order extends Resource
     public function fields(NovaRequest $request)
     {
         return [
-            ID::make(__('Order Number'), 'id')->sortable(),
-            BelongsTo::make(__('Order Sheet Waybill'), 'orderSheetWaybill', OrderSheetWaybill::class),
-            Number::make(__('Order Good Count'), 'order_good_count')->displayUsing(function ($value) {
-                return number_format($value);
-            })->exceptOnForms(),
-            BelongsTo::make(__('Box'), 'box', Box::class),
-            Number::make(__('Printed Count'), 'printed_count')->displayUsing(function ($value) {
-                return number_format($value);
-            })->exceptOnForms(),
-            Text::make(__('Waybill Numbers'), 'waybill_numbers'),
+            ID::make()->sortable(),
+            Text::make(__('Description'), 'description'),
             DateTime::make(__('Created At'), 'created_at')->exceptOnForms(),
             DateTime::make(__('Updated At'), 'updated_at')->exceptOnForms(),
 
-            HasMany::make(__('Order Shipments'), 'orderShipments', OrderShipment::class),
-
-            HasManyThrough::make(__('Items'), 'items', Item::class),
+            HasMany::make(__('Locations'), 'locations', Location::class),
         ];
     }
 
@@ -105,13 +88,11 @@ class Order extends Resource
      */
     public function actions(NovaRequest $request)
     {
-        return [
-            (new PrintOrder)->showInline(),
-        ];
+        return [];
     }
 
     public static function label()
     {
-        return __('Orders');
+        return __('Warehouses');
     }
 }
