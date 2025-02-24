@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,8 +14,8 @@ return new class extends Migration
     {
         Schema::create('boxes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('author_id');
-            $table->string('name', 100)->nullable()->comment('박스 이름');
+            $table->foreignIdFor(User::class, 'author_id')->constrained()->comment('작성자 아이디');
+            $table->string('name', 100)->comment('박스 이름');
             $table->string('code', 50)->comment('박스 코드');
             $table->unsignedInteger('size')->comment('박스 사이즈');
             $table->integer('delivery_price')->nullable()->comment('배송 금액');

@@ -1,6 +1,7 @@
 <?php
 
 use App\Enums\Status;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,14 +15,10 @@ return new class extends Migration
     {
         Schema::create('register_good_requests', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('author_id')->constrained(
-                table: 'users', indexName: 'register_good_requests_requester_user_id'
-            )->onUpdate('cascade')->restrictOnDelete()->comment('요청자');
+            $table->foreignIdFor(User::class, 'author_id')->constrained()->comment('작성자 아이디');
+            $table->foreignIdFor(User::class, 'worker_id')->nullable()->constrained()->comment('업무 담당자 아이디');
             $table->string('title', 255);
             $table->string('request_file_url', 255)->nullable();
-            $table->foreignId('worker_id')->constrained(
-                table: 'users', indexName: 'register_good_requests_worker_user_id'
-            )->onUpdate('cascade')->restrictOnDelete()->nullable();
             $table->string('respond_file_url', 255)->nullable();
             $table->boolean('has_supplier_monitoring_price')->default(false);
             $table->text('memo')->nullable();

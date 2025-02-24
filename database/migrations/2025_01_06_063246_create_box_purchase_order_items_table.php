@@ -1,6 +1,9 @@
 <?php
 
 use App\Enums\PurchaseOrderItemStatus;
+use App\Models\Box;
+use App\Models\BoxPurchaseOrder;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,9 +17,9 @@ return new class extends Migration
     {
         Schema::create('box_purchase_order_items', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('box_purchase_order_id');
-            $table->foreignId('author_id');
-            $table->foreignId('box_id');
+            $table->foreignIdFor(User::class, 'author_id')->constrained()->comment('작성자 아이디');
+            $table->foreignIdFor(BoxPurchaseOrder::class)->constrained()->comment('박스 발주 아이디');
+            $table->foreignIdFor(Box::class)->constrained()->comment('박스 아이디');
             $table->integer('quantity')->nullable()->comment('수량');
             $table->bigInteger('subtotal')->nullable()->comment('소계');
             $table->bigInteger('unit_price')->nullable()->comment('개당 매입가');

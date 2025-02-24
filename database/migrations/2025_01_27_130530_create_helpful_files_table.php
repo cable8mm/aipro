@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,8 +14,8 @@ return new class extends Migration
     {
         Schema::create('helpful_files', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('author_id')->comment('작성자');
-            $table->string('attachment', 255)->nullable()->comment('파일명');
+            $table->foreignIdFor(User::class, 'author_id')->constrained()->comment('작성자 아이디');
+            $table->string('attachment', 255)->comment('파일명');
             $table->string('description', 255)->comment('설명');
             $table->timestamps();
         });

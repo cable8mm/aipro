@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\OrderSheetWaybill;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('mismatched_order_shipments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('author_id')->comment('등록자');
-            $table->foreignId('order_sheet_waybill_id')->nullable();
+            $table->foreignIdFor(User::class, 'author_id')->constrained()->comment('작성자 아이디');
+            $table->foreignIdFor(OrderSheetWaybill::class)->constrained()->comment('주문및송장 아이디');
             $table->string('order_no', 100)->nullable()->comment('주문고유번호');
             $table->string('site', 100)->nullable()->comment('판매사이트');
             $table->string('goods_cd', 100)->nullable()->comment('마스터상품코드');

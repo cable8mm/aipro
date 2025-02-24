@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('shutdown_goods', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('author_id');
+            $table->foreignIdFor(User::class, 'author_id')->constrained()->comment('작성자 아이디');
             $table->string('sku', 150);
             $table->string('title', 255);
             $table->text('reason');

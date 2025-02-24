@@ -1,6 +1,8 @@
 <?php
 
 use App\Enums\RetailPurchaseStatus;
+use App\Models\Customer;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,8 +16,8 @@ return new class extends Migration
     {
         Schema::create('retail_purchases', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('cashier_id')->nullable()->comment('결제자 아이디');
-            $table->foreignId('customer_id')->comment('고객 아이디');
+            $table->foreignIdFor(User::class, 'cashier_id')->constrained()->comment('결제자 아이디');
+            $table->foreignIdFor(Customer::class)->constrained()->comment('고객 아이디');
             $table->string('code', 50)->comment('판매 코드');
             $table->bigInteger('item_count')->default(0)->comment('아이템수');
             $table->bigInteger('total_price')->default(0)->comment('총 결제 금액');

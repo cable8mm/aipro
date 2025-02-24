@@ -93,9 +93,8 @@
             "./vendor/bin/pint"
         ],
         "log": "tail -f ./storage/logs/laravel.log",
-        "migrate": [
-            "@php artisan migrate:fresh --seed --force"
-        ],
+        "migrate": "@php artisan migrate:fresh --seed --force",
+        "migration": "@php artisan migrate:fresh --force",
         "nova-user": "@php artisan aipro:create-nova-account",
         "queue": "@php artisan queue:work --queue=high,default"
     },

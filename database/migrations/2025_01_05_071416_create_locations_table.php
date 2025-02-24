@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('locations', function (Blueprint $table) {
             $table->string('id', 10)->primary()->comment('위치 코드');
             $table->string('warehouse_id', 2)->comment('창고 아이디');
+            $table->foreign('warehouse_id')->references('id')->on('warehouses');
             $table->string('description', 255)->comment('위치 이름');
             $table->timestamps();
         });

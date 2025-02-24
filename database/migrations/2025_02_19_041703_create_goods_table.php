@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Item;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('goods', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('author_id');
-            $table->foreignId('item_id')->comment('아이템 아이디');
+            $table->foreignIdFor(User::class, 'author_id')->constrained()->comment('작성자 아이디');
+            $table->foreignIdFor(Item::class)->constrained()->comment('아이템 아이디');
             $table->string('list_image', 190)->nullable()->comment('리스트이미지');
             $table->string('goods_code', 255)->nullable()->comment('상품코드');
             $table->foreignId('playauto_category_id')->nullable()->comment('플레이오토 카테고리 코드');
