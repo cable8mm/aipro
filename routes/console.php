@@ -10,3 +10,8 @@ Artisan::command('inspire', function () {
 })->purpose('Display an inspiring quote')->hourly();
 
 Schedule::call(new PruneStaleAttachments)->daily();
+
+/**
+ * @link https://laravel.com/docs/11.x/sanctum#token-expiration
+ */
+Schedule::command('sanctum:prune-expired --hours=24')->daily();

@@ -19,4 +19,5 @@ Route::get('barcode-command', BarcodeCommandController::class);
 
 Route::get('monitor', MonitorController::class);
 
+require __DIR__.'/api_web.php';
 require __DIR__.'/auth.php';

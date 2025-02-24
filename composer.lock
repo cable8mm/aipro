@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2639e08757ddefa7558555d142a8c322",
+    "content-hash": "408c614da23ddbfecbd92249faf95c3f",
     "packages": [
         {
             "name": "archtechx/enums",
@@ -2398,6 +2398,56 @@
                 }
             ],
             "time": "2024-12-05T14:52:50+00:00"
+        },
+        {
+            "name": "jeffbeltran/sanctum-tokens",
+            "version": "v2.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/JeffBeltran/sanctum-tokens.git",
+                "reference": "1103962b76aacaec493831152da13a581452e5ec"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/JeffBeltran/sanctum-tokens/zipball/1103962b76aacaec493831152da13a581452e5ec",
+                "reference": "1103962b76aacaec493831152da13a581452e5ec",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/nova": "^4.0",
+                "php": "^7.3|^8.0"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.14"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Jeffbeltran\\SanctumTokens\\ToolServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Jeffbeltran\\SanctumTokens\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A Laravel Nova resource tool for sanctum tokens.",
+            "keywords": [
+                "laravel",
+                "nova",
+                "sanctum"
+            ],
+            "support": {
+                "issues": "https://github.com/JeffBeltran/sanctum-tokens/issues",
+                "source": "https://github.com/JeffBeltran/sanctum-tokens/tree/v2.1.1"
+            },
+            "time": "2024-03-08T03:55:03+00:00"
         },
         {
             "name": "laracraft-tech/laravel-useful-additions",

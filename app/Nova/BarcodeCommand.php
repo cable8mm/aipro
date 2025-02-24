@@ -55,9 +55,7 @@ class BarcodeCommand extends Resource
                 ->rules(Rule::unique('barcode_commands')->ignore($this->id), 'required')
                 ->required()->maxlength(20),
             Text::make(__('Barcode Image'), function () {
-                $barcode = $this->barcode;
-
-                return "<img class='py-2' src='/api/generate-barcode/{$barcode}' />";
+                return '<img class=\'py-2\' src=\''.route('generate-barcode', ['barcode' => $this->barcode]).'\' />';
             })->asHtml(),
             DateTime::make(__('Created At'), 'created_at')->exceptOnForms(),
             DateTime::make(__('Updated At'), 'updated_at')->exceptOnForms(),

@@ -16,6 +16,7 @@
         "cable8mm/waybill": "^1.0",
         "carlos-meneses/laravel-mpdf": "^2.1",
         "dedoc/scramble": "^0.11.33",
+        "jeffbeltran/sanctum-tokens": "^2.1",
         "laracraft-tech/laravel-useful-additions": "^4.0",
         "laravel-lang/common": "^6.4",
         "laravel/framework": "11.41.0",
@@ -123,7 +124,8 @@
         "picqer/php-barcode-generator": "Required to generate a barcode",
         "carlos-meneses/laravel-mpdf": "Required to generate PDF files for waybills and barcode",
         "cable8mm/order-sheet": "Provides making `order-sheet` excel files",
-        "cable8mm/waybill": "Provides a waybill pdf for making seeders"
+        "cable8mm/waybill": "Provides a waybill pdf for making seeders",
+        "jeffbeltran/sanctum-tokens": "Create a sanctum personal access tokens in Nova"
     },
     "config": {
         "optimize-autoloader": true,

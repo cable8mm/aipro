@@ -7,6 +7,7 @@ use App\Traits\NovaAuthorizedByManager;
 use Cable8mm\ValidationKisaRules\Rules\KisaPassword;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Jeffbeltran\SanctumTokens\SanctumTokens;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\Email;
 use Laravel\Nova\Fields\Gravatar;
@@ -85,6 +86,8 @@ class User extends Resource
 
             DateTime::make(__('Created At'), 'created_at')->exceptOnForms(),
             DateTime::make(__('Updated At'), 'updated_at')->exceptOnForms(),
+
+            SanctumTokens::make()->hideAbilities(),
         ];
     }
 
