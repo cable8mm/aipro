@@ -74,7 +74,7 @@
 									break;
 								case "90000001000118": // 송장출력
 									printJS({
-										printable: "/api/orders/" + Shipping.orderInfo.orderNo + "/waybill",
+										printable: "/orders/" + Shipping.orderInfo.orderNo + "/waybill",
 										type: "pdf",
 										showModal: true,
 										modalMessage: "송장 미리보기 생성 중..."
@@ -332,9 +332,7 @@
 		},
 
 		getOrderDetail: function(id) {
-			console.log("request : /api/order-shipments/order/" + id);
-
-			$.get("/api/order-shipments/order/" + id, function(data) {
+			$.get("/order/" + id, function(data) {
 				if (data.result == "success" && data.orders) {
 
 					console.log(data);
@@ -519,7 +517,7 @@
 
             $.ajax({
                 method: "PUT",
-                url: "/api/order-shipments/" + $(this).data("id"),
+                url: "/order-shipments/" + $(this).data("id"),
                 data: data
             }).done(function( res ) {
                 if (res && res.result == "success") {
@@ -543,7 +541,7 @@
                         $(".modal-completed").fadeOut();
 
                         printJS({
-                            printable: "/api/order-shipments/waybill/" + data.orderNo + "/order-no",
+                            printable: "/orders/" + data.orderNo + "/print",
                             type: "pdf",
                             showModal: true,
                             modalMessage: "송장 미리보기 생성 중..."
@@ -562,7 +560,7 @@
 		},
 
 		clearTempOrder: function() {
-			$.get("/api/orders/" + Shipping.orderInfo.orderNo + "/clear-order", function(data) {
+			$.get("/orders/" + Shipping.orderInfo.orderNo + "/clear-order", function(data) {
 				if (data.result == "success") {
 					location.reload();
 				}
@@ -570,7 +568,7 @@
 		},
 
 		getTempOrderCount: function() {
-			$.get("/api/order-shipments/pause", function(data) {
+			$.get("/order-shipments/pause", function(data) {
 				if (data.result == "success") {
 					$(".temp-order-count").text(data.count);
 				}
@@ -613,11 +611,11 @@
 	<div class="waybill-barcodes">
 		<strong>
 			<label>출력완료</label>
-			<img src="/api/generate-barcode/100012" />
+			<img src="{{ route('generate-barcode', ['barcode' => 100012]) }}" />
 		</strong>
 		<strong>
 			<label>재출력</label>
-			<img src="/api/generate-barcode/100012100011" />
+			<img src="{{ route('generate-barcode', ['barcode' => 100012100011]) }}" />
 		</strong>
 	</div>
 	<div class="memo-wrap" style="background-color:white; color:red; padding:0 20px;">
@@ -722,9 +720,9 @@
 		<td>
 			<div>${goods_name}</div>
 			<div class="barcodes">
-				<img src="/api/generate-barcode/${barcode}" class="goods-barcode" />
+				<img src="/generate-barcode/${barcode}" class="goods-barcode" />
 				@{{if center_code != null && center_code != ''}}
-				<img src="/api/generate-barcode/${barcode}" class="goods-barcode" />
+				<img src="/generate-barcode/${barcode}" class="goods-barcode" />
 				@{{/if}}
 			</div>
 		</td>

@@ -157,7 +157,7 @@
 			주문시간 : {{ $order->latestOrderShipment->orderDate }}
 		</div>
 		<div class="print-time">
-			출력시간 : {{ date('Y-m-d H:i:s') }}
+			출력시간 : {{ now(auth()->user()?->timezone)->format('Y-m-d H:i:s') }}
 		</div>
 	</div>
 	<div class="order-info">
@@ -165,7 +165,7 @@
 			주문번호 : <strong>{{ $order->id }}</strong>
 		</div>
 		<div class="order-barcode">
-			<img src="{{ url('api/generate-barcode', $order->id) }}"
+			<img src="{{ route('generate-barcode', ['barcode' => $order->id]) }}"
 				width="80%" height="50" />
 		</div>
 	</div>
@@ -176,7 +176,7 @@
 			송장번호 : <strong>{{ $order->waybill_numbers }}</strong>
 		</div>
 		<div class="waybill-barcode">
-			<img src="{{ url('api/generate-barcode', $order->waybill_numbers) }}"
+			<img src="{{ route('generate-barcode', ['barcode' => $order->waybill_numbers]) }}"
 				width="80%" height="50" />
 		</div>
 	</div>
@@ -185,7 +185,7 @@
 	<table class="goods-list" cellpadding="1" cellspacing="1" border="0">
 		<tr>
 			<th style="width:50px;">No</th>
-			<th style="width:70px;">{{ __('Master Code') }}</th>
+			<th style="width:70px;">SKU</th>
 			<th style="width:200px">상품명</th>
 			<th style="width:70px;">구역번호</th>
 			<th style="width:50px;">수량</th>
@@ -193,37 +193,36 @@
 			<th style="width:60px;">구분</th>
 			<th>비고</th>
 		</tr>
-        @foreach ($order->orderShipments as $item)
+        @foreach ($order->orderShipments as $orderShipment)
 		<tr>
 			<td>{{$loop->iteration}}
 			</td>
-			<td>{{ $item->good->sku }}
+			<td>{{ $orderShipment->item->sku }}
 			</td>
 			<td class="left">
-				<strong style="margin-bottom: 5px; display: block;">{{ $item->good->name ?? '미매칭상품 (확인필요)' }}</strong><br /><br />
-				<span style="font-size:11px;">{{ $item->goodsNm }}</span>
-                @isset($item->option)
-                <br /><span style='color: #333; font-size:10px;'><strong>옵션명 :</strong>{{ $item->option }}</span>
+				<strong style="margin-bottom: 5px; display: block;">{{ $orderShipment->item->name ?? '미매칭상품 (확인필요)' }}</strong><br /><br />
+                @isset($orderShipment->item->option)
+                <br /><span style='color: #333; font-size:10px;'><strong>옵션명 :</strong>{{ $orderShipment->item->option }}</span>
                 @endisset
 			</td>
 			<td>
-                {{ $item->good->location->code }}
+                {{ $orderShipment->item->location->id }}
 			</td>
 			<td>
-				주문: {{ $item->totalAmount }}<br />
-				재고: {{ $item->good->inventory }}
+				주문: {{ $orderShipment->totalAmount }}<br />
+				재고: {{ $orderShipment->item->inventory }}
 			</td>
 			<td class="left">
-                {{ $item->good->supplier->name ?? '' }}
+                {{ $orderShipment->item->supplier->name ?? '' }}
 			</td>
 			<td class="">
-                {{ $item->good->center_class }}, {{ $item->good->safe_class }}
+                {{ $orderShipment->item->center_class }}, {{ $orderShipment->item->safe_class }}
 			</td>
 			<td class="left" valign="top">
-                @if ($item->memo)
-                    {{ $item->memo }}
+                @if ($orderShipment->item->memo)
+                    {{ $orderShipment->item->memo }}
                 @endif
-                {{ $item->completed_at }}
+                {{ $orderShipment->item->completed_at }}
 			</td>
 		</tr>
         @endforeach
