@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Cable8mm\GoodCode\Sku;
 use Illuminate\Database\Seeder;
 
 class ItemSeeder extends Seeder
@@ -13,7 +14,7 @@ class ItemSeeder extends Seeder
     {
         for ($i = 1; $i <= 10; $i++) {
             \App\Models\Item::factory()->state([
-                'sku' => $i,
+                'sku' => Sku::of($i),
             ])->create();
         }
     }
