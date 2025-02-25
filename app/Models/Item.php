@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\InventoryHistory as EnumInventoryHistory;
 use Cable8mm\NFormat\NFormat;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -65,14 +66,14 @@ class Item extends Model
         });
     }
 
-    public function scopeShutdown($query)
+    public function scopeOffSale(Builder $query)
     {
-        return $query->where('discontinued_at', true);
+        return $query->whereNotNull('discontinued_at');
     }
 
-    public function scopeNotShutdown($query)
+    public function scopeOnSale(Builder $query)
     {
-        return $query->where('discontinued_at', false);
+        return $query->whereNull('discontinued_at');
     }
 
     public function box(): BelongsTo

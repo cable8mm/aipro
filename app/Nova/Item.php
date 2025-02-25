@@ -127,7 +127,7 @@ class Item extends Resource
         return [
             new Metrics\GoodSumCostPrice,
             new Metrics\SellGoodsPerSafeClass,
-            new Metrics\GoodsPerShutdown,
+            new Metrics\ItemsPerStatus,
         ];
     }
 

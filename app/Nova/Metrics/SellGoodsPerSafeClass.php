@@ -16,7 +16,7 @@ class SellGoodsPerSafeClass extends Partition
      */
     public function calculate(NovaRequest $request)
     {
-        return $this->count($request, Item::notShutdown(), 'safe_class')
+        return $this->count($request, Item::onSale(), 'safe_class')
             ->label(fn ($value) => SafeClass::{$value}->value());
     }
 
