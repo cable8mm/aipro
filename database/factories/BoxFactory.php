@@ -19,7 +19,7 @@ class BoxFactory extends Factory
         return [
             'author_id' => fake()->randomNumber(1) + 1,
             'name' => fake()->word(),
-            'code' => fake()->numerify('BOX-###'),
+            'sku' => fake()->numerify('BOX-###'),
             'size' => fake()->randomNumber(1) + 1,
             'delivery_price' => fake()->randomElement([3000, 35000, 4000, 45000, 5000, 7000, 10000]),
             'cost_price' => fake()->randomNumber(4),
