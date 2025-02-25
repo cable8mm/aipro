@@ -3,6 +3,9 @@
 namespace App\Models;
 
 use App\Enums\InventoryHistory as EnumInventoryHistory;
+use App\Enums\ItemStatus;
+use Cable8mm\NFormat\NFormat;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -35,13 +38,12 @@ class Item extends Model
             'spec' => 'string',
             'order_rule' => 'string',
             'barcode' => 'string',
-            'item_division_color' => 'string',
             'ship_quantity' => 'integer',
             'memo' => 'string',
             'print_classification' => 'string',
             'is_supplier_out_of_stock' => 'boolean',
-            'can_be_shipped' => 'boolean',
-            'is_shutdown' => 'boolean',
+            'active' => 'boolean',
+            'discontinued_at' => 'datetime',
         ];
     }
 
@@ -49,6 +51,23 @@ class Item extends Model
     {
         static::creating(function (Item $item) {
             $item->author_id = $item->author_id ?? Auth::user()->id;
+        });
+
+        static::saving(function (Item $item) {
+            /**
+             * Calculate the zero margin price of the item.
+             */
+            $item->zero_margin_price = $item->calculateZeroMarginPrice();
+
+            /**
+             * Calculate suggested selling price for item with rounding minimum price.
+             */
+            $item->suggested_selling_price = $item->calculateSuggestedSellingPrice();
+
+            /**
+             * When `discontinued_at` is set to datetime, `inventory_level` will be set to `discontinued` status.
+             */
+            $item->status = ItemStatus::{$item->status}->status($item->inventory, $item->discontinued_at)->name;
         });
 
         static::saved(function (Item $item) {
@@ -59,14 +78,19 @@ class Item extends Model
         });
     }
 
-    public function scopeShutdown($query)
+    public function scopeOffSale(Builder $query)
     {
-        return $query->where('is_shutdown', true);
+        return $query->whereNotNull('discontinued_at');
     }
 
-    public function scopeNotShutdown($query)
+    public function scopeOnSale(Builder $query)
     {
-        return $query->where('is_shutdown', false);
+        return $query->whereNull('discontinued_at');
+    }
+
+    public function scopeLatestOne(Builder $query)
+    {
+        return $query->orderBy('id', 'desc')->first();
     }
 
     public function box(): BelongsTo
@@ -134,5 +158,31 @@ class Item extends Model
             'historyable_id' => $attribute,
             'is_success' => true,
         ]);
+    }
+
+    /**
+     * Calculates the zero margin price for the given inventory
+     *
+     * @return int The method returns a zero margin price
+     *
+     * @example Item::find(1)->calculateZeroMarginPrice() => 32243
+     */
+    public function calculateZeroMarginPrice(): int
+    {
+        $PRICE_COEFFICIENT_WITH_BOX_FEE = 1.0137;	// 1 + Monthly box total amount divide total amount without refund order
+        $CARD_FEE_COEFFICIENT = 0.966;	            // 1 - card pay fee e.g 3.4%
+        $SHIPPING_FEE = 2442;                       // unit shipping fee is that monthly total delivery amount divided total delivery count
+        $goodMargin = 0;                            // Zero means no margin
+
+        return $this->last_cost_price >= 25000 ?
+        ((1 + $goodMargin) * $this->last_cost_price + $SHIPPING_FEE) / $CARD_FEE_COEFFICIENT * $PRICE_COEFFICIENT_WITH_BOX_FEE :
+        ((1 + $goodMargin) * $this->last_cost_price + $SHIPPING_FEE * $this->last_cost_price / 25000) / $CARD_FEE_COEFFICIENT * $PRICE_COEFFICIENT_WITH_BOX_FEE;
+    }
+
+    public function calculateSuggestedSellingPrice(): int
+    {
+        $MARGIN_COEFFICIENT = 1. + Setting::get('ITEM_DEFAULT_MARGIN_COEFFICIENT') * 0.01;
+
+        return NFormat::smartPrice($this->zero_margin_price * $MARGIN_COEFFICIENT);
     }
 }

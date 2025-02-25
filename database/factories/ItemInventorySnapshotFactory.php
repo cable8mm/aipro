@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Enums\SafeClass;
+use App\Enums\ItemInventoryLevel;
 use App\Enums\Status;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -23,7 +23,7 @@ class ItemInventorySnapshotFactory extends Factory
             'item_id' => fake()->randomNumber(1) + 1,
             'playauto_sku' => 'PM'.fake()->randomNumber(3, true),
             'inventory' => fake()->randomNumber(2) + 1,
-            'safe_class' => fake()->randomElement(SafeClass::names()),
+            'inventory_level' => fake()->randomElement(ItemInventoryLevel::names()),
             'type' => fake()->randomElement(Status::names()),
         ];
     }

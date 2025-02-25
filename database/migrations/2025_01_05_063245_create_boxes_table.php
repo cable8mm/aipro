@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(User::class, 'author_id')->constrained()->comment('작성자 아이디');
             $table->string('name', 100)->comment('박스 이름');
-            $table->string('code', 50)->comment('박스 코드');
+            $table->string('sku', 50)->comment('박스 SKU');
             $table->unsignedInteger('size')->comment('박스 사이즈');
             $table->integer('delivery_price')->nullable()->comment('배송 금액');
             $table->integer('cost_price')->nullable()->comment('매입가');

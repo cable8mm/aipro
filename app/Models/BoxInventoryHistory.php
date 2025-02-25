@@ -43,6 +43,9 @@ class BoxInventoryHistory extends Model
 
     /**
      * Get the parent inventoryHistoryable model (box_purchase_orders or ...).
+     *
+     * @see \App\Models\BoxPurchaseOrderItem
+     * @see \App\Models\Order
      */
     public function historyable(): MorphTo
     {

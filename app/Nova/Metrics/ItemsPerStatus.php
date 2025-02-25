@@ -2,11 +2,12 @@
 
 namespace App\Nova\Metrics;
 
+use App\Enums\ItemStatus;
 use App\Models\Item;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Metrics\Partition;
 
-class GoodsPerShutdown extends Partition
+class ItemsPerStatus extends Partition
 {
     /**
      * Calculate the value of the metric.
@@ -15,11 +16,8 @@ class GoodsPerShutdown extends Partition
      */
     public function calculate(NovaRequest $request)
     {
-        return $this->count($request, Item::class, 'is_shutdown')
-            ->label(fn ($value) => match ($value) {
-                1 => __('Off Sale'),
-                null => __('On Sale'),
-            });
+        return $this->count($request, Item::class, 'status')
+            ->label(fn ($value) => ItemStatus::{$value}->value());
     }
 
     /**
@@ -39,11 +37,11 @@ class GoodsPerShutdown extends Partition
      */
     public function uriKey()
     {
-        return 'goods-per-shutdown';
+        return 'items-per-status';
     }
 
     public function name()
     {
-        return __('Goods Per Shutdown');
+        return __('Items Per Status');
     }
 }

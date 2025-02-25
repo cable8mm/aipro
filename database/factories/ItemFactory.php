@@ -2,9 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Enums\CenterClass;
-use App\Enums\ItemColor;
-use App\Enums\SafeClass;
+use App\Enums\ItemInventoryLevel;
+use App\Enums\ItemStatus;
 use Cable8mm\GoodCode\LocationCode;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -24,6 +23,8 @@ class ItemFactory extends Factory
         fake()->addProvider(new \Bezhanov\Faker\Provider\Device(fake()));
 
         $productName = fake()->productName();
+        $costPrice = fake()->randomNumber(5, true);
+        $status = fake()->randomElement(ItemStatus::names());
 
         return [
             'author_id' => fake()->randomNumber(1) + 1,
@@ -34,25 +35,21 @@ class ItemFactory extends Factory
             'name' => $productName,
             'supplier_out_of_stock_count' => fake()->randomNumber(),
             'safe_inventory' => fake()->randomNumber(1),
-            'safe_class' => fake()->randomElement(SafeClass::names()),
-            'center_class' => fake()->randomElement(CenterClass::names()),
+            'inventory_level' => fake()->randomElement(ItemInventoryLevel::names()),
             'category' => fake()->randomElement(['꽃게|암컷', '꽃게|숫컷']),
             'maker' => fake()->company(),
             'brand' => fake()->deviceManufacturer(),
-            'cost_price' => fake()->randomNumber(5),
-            'last_cost_price' => fake()->randomNumber(5),
-            'suggested_selling_price' => fake()->randomNumber(5),
-            'suggested_retail_price' => fake()->randomNumber(5),
+            'cost_price' => $costPrice,
+            'last_cost_price' => $costPrice * (1 + (fake()->randomNumber(2) / 100)),
             'spec' => fake()->randomElement(['5g*10p', '15mm']),
             'order_rule' => fake()->randomElement(['12', '24']),
             'barcode' => fake()->ean13(),
-            'item_division_color' => fake()->randomElement(ItemColor::names()),
             'ship_quantity' => fake()->randomElement([1, 2, 4, 8, 16]),
             'memo' => fake()->paragraph(),
             'print_classification' => fake()->text(190),
             'is_supplier_out_of_stock' => fake()->boolean(),
-            'can_be_shipped' => fake()->boolean(),
-            'is_shutdown' => fake()->boolean(),
+            'status' => $status,
+            'discontinued_at' => $status === ItemStatus::DISCONTINUED->name ? now() : null,
         ];
     }
 }

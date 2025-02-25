@@ -102,6 +102,8 @@ class OrderShipment extends Model
 
     /**
      * Get the inventory history's order shipment.
+     *
+     * @see App\Models\InventoryHistory
      */
     public function inventoryHistory(): MorphOne
     {
