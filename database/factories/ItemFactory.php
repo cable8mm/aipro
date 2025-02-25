@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Enums\CenterClass;
+use App\Enums\ItemStatus;
 use App\Enums\SafeClass;
 use Cable8mm\GoodCode\LocationCode;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -23,6 +24,7 @@ class ItemFactory extends Factory
         fake()->addProvider(new \Bezhanov\Faker\Provider\Device(fake()));
 
         $productName = fake()->productName();
+        $costPrice = fake()->randomNumber(5, true);
 
         return [
             'author_id' => fake()->randomNumber(1) + 1,
@@ -38,10 +40,8 @@ class ItemFactory extends Factory
             'category' => fake()->randomElement(['꽃게|암컷', '꽃게|숫컷']),
             'maker' => fake()->company(),
             'brand' => fake()->deviceManufacturer(),
-            'cost_price' => fake()->randomNumber(5),
-            'last_cost_price' => fake()->randomNumber(5),
-            'suggested_selling_price' => fake()->randomNumber(5),
-            'suggested_retail_price' => fake()->randomNumber(5),
+            'cost_price' => $costPrice,
+            'last_cost_price' => $costPrice * (1 + (fake()->randomNumber(2) / 100)),
             'spec' => fake()->randomElement(['5g*10p', '15mm']),
             'order_rule' => fake()->randomElement(['12', '24']),
             'barcode' => fake()->ean13(),
@@ -49,8 +49,8 @@ class ItemFactory extends Factory
             'memo' => fake()->paragraph(),
             'print_classification' => fake()->text(190),
             'is_supplier_out_of_stock' => fake()->boolean(),
-            'can_be_shipped' => fake()->boolean(),
-            'is_shutdown' => fake()->boolean(),
+            'status' => fake()->randomElement(ItemStatus::names()),
+            'discontinued_at' => (fake()->randomNumber(1) > 8) ? now() : null,
         ];
     }
 }

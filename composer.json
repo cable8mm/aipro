@@ -13,6 +13,7 @@
         "cable8mm/enum-getter": "^1.0",
         "cable8mm/good-code": "^2.0",
         "cable8mm/laravel-validation-kisa-rules": "^1.0",
+        "cable8mm/n-format": "^1.3",
         "cable8mm/waybill": "^1.0",
         "carlos-meneses/laravel-mpdf": "^2.1",
         "dedoc/scramble": "^0.11.33",
@@ -125,7 +126,8 @@
         "carlos-meneses/laravel-mpdf": "Required to generate PDF files for waybills and barcode",
         "cable8mm/order-sheet": "Provides making `order-sheet` excel files",
         "cable8mm/waybill": "Provides a waybill pdf for making seeders",
-        "jeffbeltran/sanctum-tokens": "Create a sanctum personal access tokens in Nova"
+        "jeffbeltran/sanctum-tokens": "Create a sanctum personal access tokens in Nova",
+        "cable8mm/n-format": "Provides functions for formatting numbers, currencies and prices"
     },
     "config": {
         "optimize-autoloader": true,

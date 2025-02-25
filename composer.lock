@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "408c614da23ddbfecbd92249faf95c3f",
+    "content-hash": "fde6d8e280307a7b705069bfa11fb925",
     "packages": [
         {
             "name": "archtechx/enums",
@@ -336,6 +336,68 @@
                 "source": "https://github.com/cable8mm/laravel-validation-kisa-rules/tree/v1.0.1"
             },
             "time": "2024-04-26T12:23:41+00:00"
+        },
+        {
+            "name": "cable8mm/n-format",
+            "version": "v1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cable8mm/n-format.git",
+                "reference": "f805ce9d09919b9c59affe361af36c0682280175"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cable8mm/n-format/zipball/f805ce9d09919b9c59affe361af36c0682280175",
+                "reference": "f805ce9d09919b9c59affe361af36c0682280175",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.0",
+                "phpunit/phpunit": "^9.0|^10.0|^11.0"
+            },
+            "suggest": {
+                "laravel/pint": "Provides fixing all codes for coding style"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "NFormatHelper": "Cable8mm\\NFormat\\NFormat"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Cable8mm\\NFormat\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sam Lee",
+                    "email": "cable8mm@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Small NumberFormatter Extension Library",
+            "keywords": [
+                "TDD",
+                "extension",
+                "n-format",
+                "number-formatter",
+                "php"
+            ],
+            "support": {
+                "issues": "https://github.com/cable8mm/n-format/issues",
+                "source": "https://github.com/cable8mm/n-format/tree/v1.3.0"
+            },
+            "time": "2025-02-25T09:25:53+00:00"
         },
         {
             "name": "cable8mm/stub-template",
