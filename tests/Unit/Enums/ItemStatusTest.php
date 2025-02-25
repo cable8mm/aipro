@@ -1,10 +1,10 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\Unit\Enums;
 
 use PHPUnit\Framework\TestCase;
 
-class ExampleTest extends TestCase
+class ItemStatusTest extends TestCase
 {
     /**
      * A basic test example.
