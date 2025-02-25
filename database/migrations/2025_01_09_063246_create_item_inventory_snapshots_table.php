@@ -1,6 +1,6 @@
 <?php
 
-use App\Enums\SafeClass;
+use App\Enums\ItemInventoryLevel;
 use App\Models\Item;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreignIdFor(Item::class)->constrained()->comment('아이템');
             $table->string('playauto_sku', 50);
             $table->integer('inventory');
-            $table->string('safe_class', 20)->default(SafeClass::S1->name);
+            $table->string('inventory_level', 20)->default(ItemInventoryLevel::LEVEL_1->name);
             $table->string('type', 50)->nullable();
             $table->timestamps();
         });

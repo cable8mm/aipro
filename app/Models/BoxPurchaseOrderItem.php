@@ -89,6 +89,8 @@ class BoxPurchaseOrderItem extends Model
 
     /**
      * Get the box inventory history's box purchase order item.
+     *
+     * @see \App\Models\BoxInventoryHistory
      */
     public function boxInventoryHistory(): MorphOne
     {

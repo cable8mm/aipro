@@ -54,10 +54,10 @@ class Box extends Resource
         return [
             ID::make()->sortable(),
             BelongsTo::make(__('Author'), 'author', User::class)->exceptOnForms(),
-            Text::make(__('Code'), 'code')->maxlength(50),
+            Text::make(__('SKU'), 'sku')->maxlength(50),
             Text::make(__('Name'), 'name')->maxlength(100)->sortable(),
             Currency::make(__('Delivery Price'), 'delivery_price'),
-            Currency::make(__('Cost Price'), 'cost_price'),
+            Currency::make(__('Purchase Price'), 'purchase_price'),
             Number::make(__('Inventory'), 'inventory')->displayUsing(function ($value) {
                 return number_format($value);
             }),

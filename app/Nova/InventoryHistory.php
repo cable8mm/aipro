@@ -3,8 +3,7 @@
 namespace App\Nova;
 
 use App\Enums\InventoryHistory as EnumsInventoryHistory;
-use App\Enums\SafeClass;
-use App\Traits\NovaAuthorizedByNone;
+use App\Enums\ItemInventoryLevel;
 use Laravel\Nova\Fields\Badge;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
@@ -18,8 +17,6 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 
 class InventoryHistory extends Resource
 {
-    use NovaAuthorizedByNone;
-
     /**
      * The model the resource corresponds to.
      *
@@ -54,7 +51,7 @@ class InventoryHistory extends Resource
             ID::make()->sortable(),
             Text::make(__('SKU'), 'item.sku')->exceptOnForms(),
             BelongsTo::make(__('Author'), 'author', User::class)->exceptOnForms(),
-            Select::make(__('Safe Class'), 'item.safe_class')->options(SafeClass::array())->displayUsingLabels()->exceptOnForms(),
+            Select::make(__('Inventory Level'), 'item.inventory_level')->options(ItemInventoryLevel::array())->displayUsingLabels()->exceptOnForms(),
             BelongsTo::make(__('Item'), 'item', Item::class),
             Select::make(__('Type'), 'type')
                 ->rules('required')->required()
@@ -68,6 +65,7 @@ class InventoryHistory extends Resource
                 ->onlyOnIndex(),
             MorphTo::make(__('Inventory Historyable'), 'historyable')
                 ->types([
+                    ItemManualWarehousing::class,
                     RetailPurchaseItem::class,
                     OrderShipment::class,
                 ]),

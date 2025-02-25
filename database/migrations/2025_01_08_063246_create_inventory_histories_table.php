@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('inventory_histories', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class, 'author_id')->constrained()->comment('작성자 아이디');
+            $table->foreignIdFor(User::class, 'author_id')->nullable()->constrained()->comment('작성자 아이디');
             $table->foreignIdFor(Item::class)->nullable()->constrained()->comment('상품 아이디');
             $table->string('type', 20)->comment('타입(입고,출고)');
             $table->bigInteger('quantity')->comment('입출고 수량');

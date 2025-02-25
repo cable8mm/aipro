@@ -49,7 +49,11 @@ class InventoryHistory extends Model
     }
 
     /**
-     * Get the parent historyable model (retail_purchase or ...).
+     * Get the parent historyable model (retail_purchase_item, order_shipment and item_manual_warehousing).
+     *
+     * @see App\Models\RetailPurchaseItem
+     * @see App\Models\OrderShipment
+     * @see App\Models\ItemManualWarehousing
      */
     public function historyable(): MorphTo
     {

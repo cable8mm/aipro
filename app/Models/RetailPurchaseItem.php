@@ -34,6 +34,8 @@ class RetailPurchaseItem extends Model
 
     /**
      * Get the inventory history's retail purchase item.
+     *
+     * @see App\Models\InventoryHistory
      */
     public function inventoryHistory(): MorphOne
     {

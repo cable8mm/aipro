@@ -216,7 +216,7 @@
                 {{ $orderShipment->item->supplier->name ?? '' }}
 			</td>
 			<td class="">
-                {{ $orderShipment->item->center_class }}, {{ $orderShipment->item->safe_class }}
+                {{ $orderShipment->item->inventory_level }}
 			</td>
 			<td class="left" valign="top">
                 @if ($orderShipment->item->memo)

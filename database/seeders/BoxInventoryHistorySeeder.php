@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Box;
+use App\Models\BoxManualWarehousing;
 use App\Models\BoxPurchaseOrderItem;
 use App\Models\Order;
 use Illuminate\Database\Seeder;
@@ -13,6 +15,10 @@ class BoxInventoryHistorySeeder extends Seeder
      */
     public function run(): void
     {
+        Box::all()->each(function ($box) {
+            $box->plusminus(1000, BoxManualWarehousing::class, $box->id);
+        });
+
         $parents = [
             BoxPurchaseOrderItem::class,
             Order::class,

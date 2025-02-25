@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use Cable8mm\GoodCode\LocationCode;
+use Cable8mm\GoodCode\Sku;
 use Illuminate\Database\Seeder;
 
 class BoxSeeder extends Seeder
@@ -14,8 +14,8 @@ class BoxSeeder extends Seeder
     {
         for ($i = 1; $i < 11; $i++) {
             \App\Models\Box::factory(1, [
-                'name' => '센터'.$i.'호',
-                'code' => LocationCode::of(''),
+                'name' => __('Box Level :count', ['count' => $i]),
+                'sku' => Sku::of($i, prefix: 'BOX'),
             ])->create();
         }
 

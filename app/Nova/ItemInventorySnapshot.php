@@ -2,7 +2,7 @@
 
 namespace App\Nova;
 
-use App\Enums\SafeClass;
+use App\Enums\ItemInventoryLevel;
 use App\Enums\UserType;
 use App\Traits\NovaAuthorizedByDeveloper;
 use Illuminate\Http\Request;
@@ -56,7 +56,7 @@ class ItemInventorySnapshot extends Resource
             BelongsTo::make(__('Item'), 'item', Item::class),
             Text::make(__('Playauto SKU'), 'playauto_sku')->maxlength(50),
             Number::make(__('Inventory'), 'inventory'),
-            Select::make(__('Safe Class'), 'safe_class')->options(SafeClass::array())->displayUsingLabels(),
+            Select::make(__('Inventory Level'), 'inventory_level')->options(ItemInventoryLevel::array())->displayUsingLabels(),
             Stack::make(__('Created At').' & '.__('Updated At'), [
                 DateTime::make(__('Created At'), 'created_at'),
                 DateTime::make(__('Updated At'), 'updated_at'),
