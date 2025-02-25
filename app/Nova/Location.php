@@ -97,4 +97,9 @@ class Location extends Resource
     {
         return __('Locations');
     }
+
+    public function title()
+    {
+        return '['.$this->id.'] '.$this->description;
+    }
 }

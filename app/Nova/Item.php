@@ -2,11 +2,13 @@
 
 namespace App\Nova;
 
-use App\Enums\CenterClass;
+use App\Enums\ItemInventoryLevel;
 use App\Enums\ItemStatus;
-use App\Enums\SafeClass;
+use App\Models\Location as ModelsLocation;
+use App\Models\Supplier as ModelsSupplier;
 use App\Nova\Filters\InventoryCountFilter;
 use App\Traits\NovaAuthorizedByManager;
+use Cable8mm\GoodCode\Sku;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\DateTime;
@@ -61,43 +63,51 @@ class Item extends Resource
         return [
             ID::make()->sortable(),
             BelongsTo::make(__('Author'), 'author', User::class)->exceptOnForms(),
-            BelongsTo::make(__('Location'), 'location', Location::class),
+            BelongsTo::make(__('Location'), 'location', Location::class)
+                ->default(ModelsLocation::oldest()->first()->id),
             Text::make(__('SKU'), 'sku')
                 ->rules('required')->required()->maxlength(255)
-                ->sortable(),
-            Number::make(__('Units Per Case'), 'units_per_case'),
-            BelongsTo::make(__('Supplier'), 'supplier', Supplier::class)->filterable(),
+                ->sortable()
+                ->default(Sku::of(Item::latestOne()->id)->sku()),
+            Number::make(__('Units Per Case'), 'units_per_case')
+                ->rules('required')->required()
+                ->default(1),
+            BelongsTo::make(__('Supplier'), 'supplier', Supplier::class)
+                ->rules('required')->required()->filterable()
+                ->default(ModelsSupplier::latest()->first()->id),
             Text::make(__('Name'), 'name')
                 ->rules('required')->required()->maxlength(255),
-            Text::make(__('Godo Name'), 'good.name')
-                ->maxlength(255)->onlyOnForms(),
             Number::make(__('Inventory'), 'inventory')->displayUsing(function ($value) {
                 return number_format($value);
-            })->sortable(),
+            })->rules('required')->required()->sortable()->default(0),
+            Select::make(__('Status'), 'status')->options(ItemStatus::array())
+                ->rules('required')->required()
+                ->default(ItemStatus::ACTIVE->name)->onlyOnForms(),
             Panel::make(__('Additional Information'), [
                 Number::make(__('Safe Inventory'), 'safe_inventory')->displayUsing(function ($value) {
                     return number_format($value);
-                })->rules('required')->required()->sortable(),
-
-                Stack::make(__('Safe Class').' & '.__('Center Class'), [
-                    Select::make(__('Safe Class'), 'safe_class')->rules('required')
-                        ->required()->options(SafeClass::array())->displayUsingLabels()
-                        ->filterable()->sortable(),
-                    Select::make(__('Center Class'), 'center_class')
-                        ->rules('required')->required()->options(CenterClass::array())->displayUsingLabels()
-                        ->filterable()->sortable(),
-                ]),
-                Currency::make(__('Cost Price'), 'cost_price'),
+                })->rules('required')->required()->sortable()
+                    ->default(20),
+                Select::make(__('Inventory Level'), 'inventory_level')->rules('required')
+                    ->required()->options(ItemInventoryLevel::array())->displayUsingLabels()
+                    ->filterable()->sortable(),
+                Currency::make(__('Cost Price'), 'cost_price')
+                    ->rules('required')->required()
+                    ->default(50000),
                 Currency::make(__('Last Cost Price'), 'last_cost_price')->exceptOnForms(),
                 Currency::make(__('Zero Margin Price'), 'zero_margin_price')
                     ->hideFromDetail()->hideFromIndex()->exceptOnForms(),
                 Currency::make(__('Suggested Selling Price'), 'suggested_selling_price')
                     ->hideFromDetail()->hideFromIndex()->exceptOnForms(),
-                Text::make(__('Spec'), 'spec')->maxlength(255)->hideFromIndex(),
+                Text::make(__('Spec'), 'spec')
+                    ->maxlength(255)
+                    ->help('e.g. 5g*10p')
+                    ->hideFromIndex(),
                 Text::make(__('Order Rule'), 'order_rule')->maxlength(255)->hideFromIndex(),
                 Text::make(__('Barcode'), 'barcode')->maxlength(255)->hideFromIndex(),
                 Textarea::make(__('Memo'), 'memo')->alwaysShow()->hideFromIndex(),
-                DateTime::make(__('Discontinued At'), 'discontinued_at')->hideFromIndex(),
+                DateTime::make(__('Discontinued At'), 'discontinued_at')
+                    ->hideFromIndex()->exceptOnForms(),
                 Status::make(__('Status'), 'status')
                     ->loadingWhen(ItemStatus::loadingWhen())
                     ->failedWhen(ItemStatus::failedWhen())

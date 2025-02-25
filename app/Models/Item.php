@@ -76,6 +76,11 @@ class Item extends Model
         return $query->whereNull('discontinued_at');
     }
 
+    public function scopeLatestOne(Builder $query)
+    {
+        return $query->orderBy('id', 'desc')->first();
+    }
+
     public function box(): BelongsTo
     {
         return $this->belongsTo(Box::class);
