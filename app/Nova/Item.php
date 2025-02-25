@@ -3,11 +3,11 @@
 namespace App\Nova;
 
 use App\Enums\CenterClass;
+use App\Enums\ItemStatus;
 use App\Enums\SafeClass;
 use App\Nova\Filters\InventoryCountFilter;
 use App\Traits\NovaAuthorizedByManager;
 use Laravel\Nova\Fields\BelongsTo;
-use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\HasMany;
@@ -15,6 +15,7 @@ use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Stack;
+use Laravel\Nova\Fields\Status;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -86,23 +87,23 @@ class Item extends Resource
                         ->rules('required')->required()->options(CenterClass::array())->displayUsingLabels()
                         ->filterable()->sortable(),
                 ]),
-
                 Currency::make(__('Cost Price'), 'cost_price'),
                 Currency::make(__('Last Cost Price'), 'last_cost_price')->exceptOnForms(),
-                Currency::make(__('Goods Price'), 'goods_price'),
-                Text::make(__('Option'), 'option')->maxlength(100)->sortable()->hideFromIndex(),
+                Currency::make(__('Zero Margin Price'), 'zero_margin_price')
+                    ->hideFromDetail()->hideFromIndex()->exceptOnForms(),
                 Currency::make(__('Suggested Selling Price'), 'suggested_selling_price')
                     ->hideFromDetail()->hideFromIndex()->exceptOnForms(),
                 Text::make(__('Spec'), 'spec')->maxlength(255)->hideFromIndex(),
                 Text::make(__('Order Rule'), 'order_rule')->maxlength(255)->hideFromIndex(),
                 Text::make(__('Barcode'), 'barcode')->maxlength(255)->hideFromIndex(),
                 Textarea::make(__('Memo'), 'memo')->alwaysShow()->hideFromIndex(),
-                Currency::make(__('Zero Margin Price'), 'zero_margin_price')
-                    ->hideFromDetail()->hideFromIndex()->exceptOnForms(),
-                Boolean::make(__('Can Be Shipped'), 'can_be_shipped')->filterable()
-                    ->hideFromIndex(),
-                Boolean::make(__('Is Shutdown'), 'is_shutdown')
-                    ->filterable(),
+                DateTime::make(__('Discontinued At'), 'discontinued_at')->hideFromIndex(),
+                Status::make(__('Status'), 'status')
+                    ->loadingWhen(ItemStatus::loadingWhen())
+                    ->failedWhen(ItemStatus::failedWhen())
+                    ->displayUsing(function ($value) {
+                        return ItemStatus::{$value}->value() ?? '-';
+                    }),
             ])->withToolbar()->limit(3),
 
             Stack::make(__('Created At').' & '.__('Updated At'), [
