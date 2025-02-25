@@ -15,13 +15,14 @@ class ItemStatusTest extends TestCase
         $origins = [
             ItemStatus::PENDING,
             ItemStatus::ACTIVE,
-            ItemStatus::DISCONTINUED,
             ItemStatus::OUT_OF_STOCK,
         ];
 
         foreach ($origins as $origin) {
             $this->assertSame($origin->status(), ItemStatus::PENDING);
         }
+
+        $this->assertNotSame(ItemStatus::DISCONTINUED->status(), ItemStatus::PENDING);
     }
 
     public function test_status_method_with_pending(): void
