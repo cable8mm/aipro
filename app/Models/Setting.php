@@ -10,6 +10,8 @@ class Setting extends Model
 {
     use Actionable, HasFactory;
 
+    protected $primaryKey = 'key';
+
     protected function casts(): array
     {
         return [
@@ -24,6 +26,6 @@ class Setting extends Model
      */
     public static function get(string $key): string
     {
-        return static::where('key', $key)->first()->value;
+        return static::find($key)?->value;
     }
 }

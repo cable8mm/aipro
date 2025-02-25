@@ -24,6 +24,7 @@ class ItemFactory extends Factory
 
         $productName = fake()->productName();
         $costPrice = fake()->randomNumber(5, true);
+        $status = fake()->randomElement(ItemStatus::names());
 
         return [
             'author_id' => fake()->randomNumber(1) + 1,
@@ -47,8 +48,8 @@ class ItemFactory extends Factory
             'memo' => fake()->paragraph(),
             'print_classification' => fake()->text(190),
             'is_supplier_out_of_stock' => fake()->boolean(),
-            'status' => fake()->randomElement(ItemStatus::names()),
-            'discontinued_at' => (fake()->randomNumber(1) > 8) ? now() : null,
+            'status' => $status,
+            'discontinued_at' => $status === ItemStatus::DISCONTINUED->name ? now() : null,
         ];
     }
 }

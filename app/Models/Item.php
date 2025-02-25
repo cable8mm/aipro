@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\InventoryHistory as EnumInventoryHistory;
+use App\Enums\ItemStatus;
 use Cable8mm\NFormat\NFormat;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -53,9 +54,20 @@ class Item extends Model
         });
 
         static::saving(function (Item $item) {
+            /**
+             * Calculate the zero margin price of the item.
+             */
             $item->zero_margin_price = $item->calculateZeroMarginPrice();
 
-            $item->suggested_selling_price = NFormat::smartPrice($item->calculateSuggestedSellingPrice());
+            /**
+             * Calculate suggested selling price for item with rounding minimum price.
+             */
+            $item->suggested_selling_price = $item->calculateSuggestedSellingPrice();
+
+            /**
+             * When `discontinued_at` is set to datetime, `inventory_level` will be set to `discontinued` status.
+             */
+            $item->status = ItemStatus::{$item->status}->status($item->inventory, $item->discontinued_at)->name;
         });
 
         static::saved(function (Item $item) {
@@ -169,8 +181,8 @@ class Item extends Model
 
     public function calculateSuggestedSellingPrice(): int
     {
-        $MARGIN_COEFFICIENT = 1.3;
+        $MARGIN_COEFFICIENT = 1. + Setting::get('ITEM_DEFAULT_MARGIN_COEFFICIENT') * 0.01;
 
-        return $this->zero_margin_price * $MARGIN_COEFFICIENT;
+        return NFormat::smartPrice($this->zero_margin_price * $MARGIN_COEFFICIENT);
     }
 }

@@ -4,7 +4,6 @@ namespace App\Nova;
 
 use App\Traits\NovaAuthorizedByManager;
 use Laravel\Nova\Fields\DateTime;
-use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
@@ -44,7 +43,6 @@ class Setting extends Resource
     public function fields(NovaRequest $request)
     {
         return [
-            ID::make()->sortable(),
             Text::make(__('Key'), 'key')->rules('required')->required()->maxlength(255)->copyable(),
             Text::make(__('Value'), 'value')->rules('required')->required()->maxlength(255)->copyable(),
             Text::make(__('Memo'), 'memo')->maxlength(255)->showOnIndex(),

@@ -23,6 +23,31 @@ enum ItemStatus: string
         };
     }
 
+    public function status(?int $inventory = null, mixed $discontinuedAt = null)
+    {
+        if ($this === self::DISCONTINUED) {
+            return self::DISCONTINUED;
+        }
+
+        if (! is_null($discontinuedAt)) {
+            return self::DISCONTINUED;
+        }
+
+        if (is_null($inventory) || ($inventory === 0 && $this === self::PENDING)) {
+            return self::PENDING;
+        }
+
+        if ($inventory === 0) {
+            return self::OUT_OF_STOCK;
+        }
+
+        if ($inventory > 0) {
+            return self::ACTIVE;
+        }
+
+        return $this;
+    }
+
     public static function loadingWhen(): array
     {
         return [self::PENDING->name];

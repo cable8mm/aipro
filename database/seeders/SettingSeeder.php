@@ -32,6 +32,11 @@ class SettingSeeder extends Seeder
                 'value' => 40000,
                 'memo' => '목표 박스재고 합',
             ],
+            [
+                'key' => 'ITEM_DEFAULT_MARGIN_COEFFICIENT',
+                'value' => 30,
+                'memo' => '아이템 판매 기준 마진 인수(퍼센트)',
+            ],
         ];
 
         foreach ($settings as $setting) {
