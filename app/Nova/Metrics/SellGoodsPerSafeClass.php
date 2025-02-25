@@ -2,7 +2,7 @@
 
 namespace App\Nova\Metrics;
 
-use App\Enums\SafeClass;
+use App\Enums\ItemInventoryLevel;
 use App\Models\Item;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Metrics\Partition;
@@ -16,8 +16,8 @@ class SellGoodsPerSafeClass extends Partition
      */
     public function calculate(NovaRequest $request)
     {
-        return $this->count($request, Item::onSale(), 'safe_class')
-            ->label(fn ($value) => SafeClass::{$value}->value());
+        return $this->count($request, Item::onSale(), 'inventory_level')
+            ->label(fn ($value) => ItemInventoryLevel::{$value}->value());
     }
 
     /**

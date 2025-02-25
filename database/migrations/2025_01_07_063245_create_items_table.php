@@ -1,8 +1,7 @@
 <?php
 
-use App\Enums\CenterClass;
+use App\Enums\ItemInventoryLevel;
 use App\Enums\ItemStatus;
-use App\Enums\SafeClass;
 use App\Models\Box;
 use App\Models\Supplier;
 use App\Models\SupplierItem;
@@ -32,8 +31,7 @@ return new class extends Migration
             $table->bigInteger('inventory')->default(0)->comment('재고 갯수');
             $table->unsignedInteger('supplier_out_of_stock_count')->default(0)->comment('공급사 품절 등록 횟수');
             $table->integer('safe_inventory')->default(0)->comment('안전 재고 갯수');
-            $table->string('safe_class', 10)->default(SafeClass::S1->name);
-            $table->string('center_class', 10)->default(CenterClass::M->name);
+            $table->string('inventory_level', 10)->default(ItemInventoryLevel::LEVEL_1->name);
             $table->string('category', 255)->nullable();
             $table->string('maker', 255)->nullable();
             $table->string('brand', 191)->nullable();

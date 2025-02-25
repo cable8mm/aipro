@@ -2,9 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Enums\CenterClass;
+use App\Enums\ItemInventoryLevel;
 use App\Enums\ItemStatus;
-use App\Enums\SafeClass;
 use Cable8mm\GoodCode\LocationCode;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -35,8 +34,7 @@ class ItemFactory extends Factory
             'name' => $productName,
             'supplier_out_of_stock_count' => fake()->randomNumber(),
             'safe_inventory' => fake()->randomNumber(1),
-            'safe_class' => fake()->randomElement(SafeClass::names()),
-            'center_class' => fake()->randomElement(CenterClass::names()),
+            'inventory_level' => fake()->randomElement(ItemInventoryLevel::names()),
             'category' => fake()->randomElement(['꽃게|암컷', '꽃게|숫컷']),
             'maker' => fake()->company(),
             'brand' => fake()->deviceManufacturer(),

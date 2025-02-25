@@ -16,10 +16,10 @@ enum ItemStatus: string
     public function value(): string
     {
         return match ($this) {
-            self::ACTIVE => __('status.item.ACTIVE'),
-            self::DISCONTINUED => __('status.item.DISCONTINUED'),
-            self::OUT_OF_STOCK => __('status.item.OUT_OF_STOCK'),
-            self::PENDING => __('status.item.PENDING'),
+            self::ACTIVE => __('enum.item-status.ACTIVE'),
+            self::DISCONTINUED => __('enum.item-status.DISCONTINUED'),
+            self::OUT_OF_STOCK => __('enum.item-status.OUT_OF_STOCK'),
+            self::PENDING => __('enum.item-status.PENDING'),
         };
     }
 
