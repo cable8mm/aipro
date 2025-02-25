@@ -4,7 +4,6 @@ namespace App\Nova;
 
 use App\Enums\InventoryHistory as EnumsInventoryHistory;
 use App\Enums\SafeClass;
-use App\Traits\NovaAuthorizedByNone;
 use Laravel\Nova\Fields\Badge;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
@@ -18,8 +17,6 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 
 class InventoryHistory extends Resource
 {
-    use NovaAuthorizedByNone;
-
     /**
      * The model the resource corresponds to.
      *
@@ -68,6 +65,7 @@ class InventoryHistory extends Resource
                 ->onlyOnIndex(),
             MorphTo::make(__('Inventory Historyable'), 'historyable')
                 ->types([
+                    ItemManualWarehousing::class,
                     RetailPurchaseItem::class,
                     OrderShipment::class,
                 ]),

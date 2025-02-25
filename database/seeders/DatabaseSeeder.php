@@ -22,7 +22,6 @@ class DatabaseSeeder extends Seeder
             BoxSupplierSeeder::class,
             SupplierSeeder::class,
             AlertEmailSeeder::class,
-            BoxInventoryHistorySeeder::class,
             BoxManualWarehousingSeeder::class,
             BoxPurchaseOrderSeeder::class,
             ChannelFeeSeeder::class,
@@ -61,6 +60,7 @@ class DatabaseSeeder extends Seeder
             CustomerSeeder::class,
             RetailPurchaseSeeder::class,
             RetailPurchaseItemSeeder::class,
+            BoxInventoryHistorySeeder::class,
         ]);
     }
 }
