@@ -22,7 +22,6 @@ return new class extends Migration
             $table->bigInteger('after_quantity')->comment('입출고 후 재고 수량');
             $table->morphs('historyable');
             $table->unsignedBigInteger('cancel_id')->nullable()->comment('취소할 경우 저장되는 inventory_history_id');
-            $table->boolean('is_success')->comment('성공 유무');
             $table->timestamps();
         });
     }

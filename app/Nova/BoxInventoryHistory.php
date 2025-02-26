@@ -2,16 +2,16 @@
 
 namespace App\Nova;
 
-use App\Enums\InventoryHistory;
+use App\Enums\InventoryHistoryType;
 use App\Traits\NovaAuthorizedByNone;
 use Laravel\Nova\Fields\Badge;
 use Laravel\Nova\Fields\BelongsTo;
-use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\MorphTo;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
+use Laravel\Nova\Fields\Stack;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
@@ -56,13 +56,13 @@ class BoxInventoryHistory extends Resource
             BelongsTo::make(__('Box'), 'box', Box::class),
             Select::make(__('Type'), 'type')
                 ->rules('required')->required()
-                ->options(InventoryHistory::array())
+                ->options(InventoryHistoryType::array())
                 ->displayUsingLabels()
                 ->filterable()
                 ->hideFromIndex(),
             Badge::make(__('Type'), 'type')
-                ->map(InventoryHistory::array(value: 'success'))
-                ->labels(InventoryHistory::array())
+                ->map(InventoryHistoryType::array(value: 'success'))
+                ->labels(InventoryHistoryType::array())
                 ->onlyOnIndex(),
             MorphTo::make(__('Inventory Historyable'), 'historyable')
                 ->types([
@@ -76,9 +76,10 @@ class BoxInventoryHistory extends Resource
                 return number_format($value);
             })->rules('required')->required(),
             BelongsTo::make(__('Cancel'), 'cancel', BoxInventoryHistory::class),
-            Boolean::make(__('Is Success'), 'is_success')->rules('required')->required(),
-            DateTime::make(__('Created At'), 'created_at')->exceptOnForms(),
-            DateTime::make(__('Updated At'), 'updated_at')->exceptOnForms(),
+            Stack::make(__('Created At').' & '.__('Updated At'), [
+                DateTime::make(__('Created At'), 'created_at'),
+                DateTime::make(__('Updated At'), 'updated_at'),
+            ]),
         ];
     }
 

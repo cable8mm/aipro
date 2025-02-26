@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Facades\Auth;
+use RuntimeException;
 
 class InventoryHistory extends Model
 {
@@ -22,7 +23,6 @@ class InventoryHistory extends Model
             'model' => 'string',
             'attribute' => 'integer',
             'cancel_id' => 'integer',
-            'is_success' => 'boolean',
         ];
     }
 
@@ -58,5 +58,40 @@ class InventoryHistory extends Model
     public function historyable(): MorphTo
     {
         return $this->morphTo();
+    }
+
+    /**
+     * Create a new transaction for cancelling a transaction
+     *
+     * @throws RuntimeException When transaction is canceled it cannot be completed
+     */
+    public function cancelling()
+    {
+        if ($this->cannotCancelling()) {
+            throw new RuntimeException(__('Cannot cancel because it already canceled'));
+        }
+
+        $replicate = $this->replicate();
+
+        $cancelInventoryHistory = $replicate->item->plusminus(
+            $replicate->quantity * -1,
+            $replicate->historyable_type,
+            $replicate->historyable_id,
+            $this->id
+        );
+
+        $this->cancel_id = $cancelInventoryHistory->id;
+
+        $this->save();
+    }
+
+    public function canCancelling(): bool
+    {
+        return self::where('cancel_id', $this->id)->doesntExist();
+    }
+
+    public function cannotCancelling(): bool
+    {
+        return ! $this->canCancelling();
     }
 }
