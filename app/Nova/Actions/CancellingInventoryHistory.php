@@ -19,7 +19,7 @@ class CancellingInventoryHistory extends DestructiveAction
     public function handle(ActionFields $fields, Collection $models)
     {
         /**
-         * @var \App\Models\InventoryHistory $model
+         * @var \App\Models\InventoryHistory|\App\Models\BoxInventoryHistory $model
          */
         foreach ($models as $model) {
             try {

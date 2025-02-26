@@ -3,22 +3,19 @@
 namespace App\Nova;
 
 use App\Enums\InventoryHistoryType;
-use App\Traits\NovaAuthorizedByNone;
-use Laravel\Nova\Fields\Badge;
+use App\Nova\Actions\CancellingInventoryHistory;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\MorphTo;
 use Laravel\Nova\Fields\Number;
-use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Stack;
+use Laravel\Nova\Fields\Status;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class BoxInventoryHistory extends Resource
 {
-    use NovaAuthorizedByNone;
-
     /**
      * The model the resource corresponds to.
      *
@@ -54,16 +51,12 @@ class BoxInventoryHistory extends Resource
             BelongsTo::make(__('Author'), 'author', User::class)->exceptOnForms(),
             Text::make(__('SKU'), 'box.sku')->exceptOnForms(),
             BelongsTo::make(__('Box'), 'box', Box::class),
-            Select::make(__('Type'), 'type')
-                ->rules('required')->required()
-                ->options(InventoryHistoryType::array())
-                ->displayUsingLabels()
-                ->filterable()
-                ->hideFromIndex(),
-            Badge::make(__('Type'), 'type')
-                ->map(InventoryHistoryType::array(value: 'success'))
-                ->labels(InventoryHistoryType::array())
-                ->onlyOnIndex(),
+            Status::make(__('Type'), 'type')
+                ->loadingWhen(InventoryHistoryType::loadingWhen())
+                ->failedWhen(InventoryHistoryType::failedWhen())
+                ->displayUsing(function ($value) {
+                    return InventoryHistoryType::{$value}->value() ?? '-';
+                }),
             MorphTo::make(__('Inventory Historyable'), 'historyable')
                 ->types([
                     BoxPurchaseOrderItem::class,
@@ -120,11 +113,18 @@ class BoxInventoryHistory extends Resource
      */
     public function actions(NovaRequest $request)
     {
-        return [];
+        return [
+            (new CancellingInventoryHistory)->showInline(),
+        ];
     }
 
     public static function label()
     {
         return __('Box Inventory History');
+    }
+
+    public function title()
+    {
+        return __('Box Inventory History').'#'.$this->id;
     }
 }

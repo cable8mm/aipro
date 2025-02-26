@@ -65,19 +65,18 @@ class Box extends Model
      * @param  int  $inventory  Box's inventory amount
      * @param string caller model::class name
      * @param  int  $attribute  caller's attribute
+     * @param  int|null  $cancelId  cancel model's ID for cancel request
      * @return mixed On success Model::$data if its not empty or true, false on failure
      */
-    public function plusminus(int $inventory, string $model, int $attribute)
+    public function plusminus(int $inventory, string $model, int $attribute, ?int $cancelId = null)
     {
         $this->inventory += $inventory;
 
         $this->save();
 
-        $type = $inventory > 0 ? InventoryHistoryType::WAREHOUSING->name : InventoryHistoryType::SHIPPING->name;
-
         return $this->boxInventoryHistories()->create([
             'box_id' => $this->id,
-            'type' => $type,
+            'type' => InventoryHistoryType::of($inventory, $cancelId)->name,
             'quantity' => $inventory,
             'after_quantity' => $this->getOriginal('inventory'),
             'historyable_type' => $model,
