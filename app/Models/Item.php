@@ -44,6 +44,7 @@ class Item extends Model
             'is_supplier_out_of_stock' => 'boolean',
             'active' => 'boolean',
             'discontinued_at' => 'datetime',
+            'terminate_on_pricing_violation' => 'boolean',
         ];
     }
 

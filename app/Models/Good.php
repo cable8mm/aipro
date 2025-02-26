@@ -24,7 +24,6 @@ class Good extends Model
             'option' => 'string',
             'supplier_monitoring_price' => 'integer',
             'supplier_monitoring_status' => 'string',
-            'supplier_monitoring_interruption' => 'boolean',
             'goods_price' => 'integer',
             'memo' => 'string',
             'naver_category' => 'integer',

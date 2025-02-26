@@ -58,9 +58,6 @@ class Good extends Resource
                 ->rules('required')->required()->maxlength(255)->onlyOnForms(),
             Text::make(__('Option'), 'option'),
             Panel::make(__('Additional Information'), [
-                Currency::make(__('Supplier monitoring Price'), 'supplier_monitoring_price'),
-                Text::make(__('Supplier monitoring Status'), 'supplier_monitoring_status'),
-                Boolean::make(__('Supplier monitoring Interruption'), 'supplier_monitoring_interruption'),
                 Currency::make(__('Goods Price'), 'goods_price'),
                 Textarea::make(__('Memo'), 'memo')->alwaysShow(),
                 Number::make(__('Naver Category'), 'naver_category'),

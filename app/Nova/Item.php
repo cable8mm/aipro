@@ -4,12 +4,14 @@ namespace App\Nova;
 
 use App\Enums\ItemInventoryLevel;
 use App\Enums\ItemStatus;
+use App\Enums\SupplierPricingPolicy;
 use App\Models\Location as ModelsLocation;
 use App\Models\Supplier as ModelsSupplier;
 use App\Nova\Filters\InventoryCountFilter;
 use App\Traits\NovaAuthorizedByManager;
 use Cable8mm\GoodCode\Sku;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\HasMany;
@@ -100,6 +102,15 @@ class Item extends Resource
                     ->hideFromDetail()->hideFromIndex()->exceptOnForms(),
                 Currency::make(__('Suggested Selling Price'), 'suggested_selling_price')
                     ->hideFromDetail()->hideFromIndex()->exceptOnForms(),
+                Select::make(__('Supplier Pricing Policy'), 'supplier_pricing_policy')->options(SupplierPricingPolicy::array())
+                    ->rules('required')->required()
+                    ->default(SupplierPricingPolicy::FLEXIBLE->name)
+                    ->displayUsing(function ($value) {
+                        return SupplierPricingPolicy::{$value}->value() ?? '-';
+                    }),
+                Currency::make(__('Max Price'), 'max_price'),
+                Currency::make(__('Min Price'), 'min_price'),
+                Boolean::make(__('Terminate On Pricing Violation'), 'terminate_on_pricing_violation'),
                 Text::make(__('Spec'), 'spec')
                     ->maxlength(255)
                     ->help('e.g. 5g*10p')

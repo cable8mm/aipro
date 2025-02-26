@@ -2,6 +2,7 @@
 
 use App\Enums\ItemInventoryLevel;
 use App\Enums\ItemStatus;
+use App\Enums\SupplierPricingPolicy;
 use App\Models\Box;
 use App\Models\Supplier;
 use App\Models\SupplierItem;
@@ -40,6 +41,10 @@ return new class extends Migration
             $table->integer('zero_margin_price')->nullable()->comment('제로마진 가격');
             $table->integer('suggested_selling_price')->nullable()->comment('소매판매 판매');
             $table->integer('suggested_retail_price')->nullable()->comment('도매판매 제안가');
+            $table->enum('supplier_pricing_policy', SupplierPricingPolicy::names())->default(SupplierPricingPolicy::FLEXIBLE->name)->comment('상품의 가격 정책');
+            $table->integer('min_price')->nullable()->comment('최소 판매가');
+            $table->integer('max_price')->nullable()->comment('최대 판매가');
+            $table->boolean('terminate_on_pricing_violation')->default(false)->comment('가격 위반 시 공급 종료 여부');
             $table->string('spec', 255)->nullable()->comment('공급가 규격1(상품규격관련항목)');
             $table->string('order_rule', 255)->nullable()->comment('규격2 (입수수량 정보)');
             $table->string('barcode', 20)->nullable()->comment('바코드');

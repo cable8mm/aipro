@@ -22,9 +22,6 @@ return new class extends Migration
             $table->foreignId('playauto_category_id')->nullable()->comment('플레이오토 카테고리 코드');
             $table->string('name', 255);
             $table->string('option', 100)->nullable()->comment('옵션');
-            $table->integer('supplier_monitoring_price')->nullable()->comment('공급사 모니터링 가격');
-            $table->string('supplier_monitoring_status', 10)->nullable()->comment('fixed, manual');
-            $table->boolean('supplier_monitoring_interruption')->nullable()->comment('공모가 위반시 공급중단');
             $table->integer('goods_price')->nullable()->comment('상품가격(판매가)');
             $table->text('memo')->nullable();
             $table->char('naver_category', 20)->nullable()->comment('네이버 카테고리 ID');

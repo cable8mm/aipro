@@ -20,5 +20,10 @@ return [
         'WAREHOUSING_CANCELED' => '입고 취소',
         'SHIPPING' => '출고',
         'SHIPPING_CANCELED' => '출고 취소',
-    ]
+    ],
+    'supplier-pricing-policy' => [
+        'FLEXIBLE' => '자유 가격',
+        'GUIDED' => '권장 가격',
+        'FIXED' => '고정 가격',
+    ],
 ];
