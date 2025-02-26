@@ -107,7 +107,7 @@ class Item extends Resource
                 Text::make(__('Barcode'), 'barcode')->maxlength(255)->hideFromIndex(),
                 Textarea::make(__('Memo'), 'memo')->alwaysShow()->hideFromIndex(),
                 DateTime::make(__('Discontinued At'), 'discontinued_at')
-                    ->hideFromIndex()->exceptOnForms(),
+                    ->hideFromIndex()->onlyOnDetail(),
                 Status::make(__('Status'), 'status')
                     ->loadingWhen(ItemStatus::loadingWhen())
                     ->failedWhen(ItemStatus::failedWhen())

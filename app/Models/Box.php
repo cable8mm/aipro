@@ -39,6 +39,16 @@ class Box extends Model
         return $this->belongsTo(User::class, 'author_id');
     }
 
+    public function location(): BelongsTo
+    {
+        return $this->belongsTo(Location::class);
+    }
+
+    public function boxSupplier(): BelongsTo
+    {
+        return $this->belongsTo(BoxSupplier::class);
+    }
+
     public function boxPurchaseOrderItems(): HasMany
     {
         return $this->hasMany(BoxPurchaseOrderItem::class);
