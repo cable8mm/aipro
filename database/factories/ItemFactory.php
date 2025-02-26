@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Enums\ItemInventoryLevel;
 use App\Enums\ItemStatus;
+use App\Enums\SupplierPricingPolicy;
 use Cable8mm\GoodCode\LocationCode;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -41,6 +42,10 @@ class ItemFactory extends Factory
             'brand' => fake()->deviceManufacturer(),
             'cost_price' => $costPrice,
             'last_cost_price' => $costPrice * (1 + (fake()->randomNumber(2) / 100)),
+            'supplier_pricing_policy' => fake()->randomElement(SupplierPricingPolicy::names()),
+            'min_price' => $minPrice = fake()->randomNumber(5),
+            'max_price' => $minPrice + fake()->randomNumber(4, true),
+            'terminate_on_pricing_violation' => fake()->boolean(),
             'spec' => fake()->randomElement(['5g*10p', '15mm']),
             'order_rule' => fake()->randomElement(['12', '24']),
             'barcode' => fake()->ean13(),

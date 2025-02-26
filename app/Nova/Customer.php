@@ -105,4 +105,14 @@ class Customer extends Resource
     {
         return [];
     }
+
+    public static function label()
+    {
+        return __('Customers');
+    }
+
+    public function title()
+    {
+        return '['.$this->name.'] '.$this->contact_name;
+    }
 }

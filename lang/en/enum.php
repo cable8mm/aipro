@@ -20,5 +20,10 @@ return [
         'WAREHOUSING_CANCELED' => 'Warehousing Canceled',
         'SHIPPING' => 'Shipping',
         'SHIPPING_CANCELED' => 'Shipping Canceled',
-    ]
+    ],
+    'supplier-pricing-policy' => [
+        'FLEXIBLE' => 'Flexible',
+        'GUIDED' => 'Guided',
+        'FIXED' => 'Fixed',
+    ],
 ];
