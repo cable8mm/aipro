@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\Models\BoxSupplier as ModelsBoxSupplier;
 use App\Models\Location as ModelsLocation;
 use App\Nova\Metrics\BoxSumCostPrice;
 use App\Nova\Metrics\BoxSumInventory;
@@ -61,12 +62,16 @@ class Box extends Resource
             Number::make(__('Units Per Case'), 'units_per_case')
                 ->rules('required')->required()
                 ->default(1),
+            BelongsTo::make(__('Box Supplier'), 'boxSupplier', BoxSupplier::class)
+                ->rules('required')->required()->filterable()
+                ->default(ModelsBoxSupplier::latest()->first()->id),
             Text::make(__('Name'), 'name')->maxlength(100)->sortable(),
-            Currency::make(__('Delivery Price'), 'delivery_price'),
-            Currency::make(__('Cost Price'), 'cost_price'),
             Number::make(__('Inventory'), 'inventory')->displayUsing(function ($value) {
                 return number_format($value);
             }),
+            Currency::make(__('Delivery Price'), 'delivery_price'),
+            Currency::make(__('Cost Price'), 'cost_price'),
+            Currency::make(__('Last Cost Price'), 'last_cost_price')->exceptOnForms(),
             Textarea::make(__('Memo'), 'memo')->maxlength(255)->alwaysShow(),
             DateTime::make(__('Created At'), 'created_at')->exceptOnForms(),
             DateTime::make(__('Updated At'), 'updated_at')->exceptOnForms(),
