@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Enums\Channel;
+use App\Enums\ChannelStatus;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -31,7 +31,7 @@ class ChannelFactory extends Factory
             'last_processed_at' => fake()->dateTime(),
             'memo' => fake()->paragraph(),
             'is_active' => fake()->boolean(),
-            'status' => fake()->randomElement(Channel::names()),
+            'status' => fake()->randomElement(ChannelStatus::names()),
         ];
     }
 }

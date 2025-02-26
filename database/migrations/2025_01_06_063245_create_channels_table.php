@@ -1,6 +1,6 @@
 <?php
 
-use App\Enums\Channel;
+use App\Enums\ChannelStatus;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -28,7 +28,7 @@ return new class extends Migration
             $table->dateTime('last_processed_at')->nullable();
             $table->text('memo')->nullable();
             $table->boolean('is_active')->default(true);
-            $table->string('status', 100)->nullable()->default(Channel::UPLOAD_COMPLETED);
+            $table->string('status', 100)->default(ChannelStatus::UPLOAD_COMPLETED->name);
             $table->timestamps();
         });
     }

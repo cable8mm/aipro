@@ -8,11 +8,11 @@ enum InventoryHistoryType: string
 {
     use EnumGetter;
 
-    case WAREHOUSING = 'warehousing';
-    case WAREHOUSING_CANCELED = 'warehousing_canceled';
-    case SHIPPING = 'shipping';
-    case SHIPPING_CANCELED = 'shipping_canceled';
-    case CANCELED = 'canceled';
+    case WAREHOUSING = 'Warehousing';
+    case WAREHOUSING_CANCELED = 'Warehousing Canceled';
+    case SHIPPING = 'Shipping';
+    case SHIPPING_CANCELED = 'Shipping Canceled';
+    case CANCELED = 'Canceled';
 
     public function value(): string
     {

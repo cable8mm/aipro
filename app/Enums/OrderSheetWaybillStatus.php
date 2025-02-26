@@ -8,22 +8,22 @@ enum OrderSheetWaybillStatus: string
 {
     use EnumGetter;
 
-    case FILE_UPLOADED = 'file uploaded';
-    case FILE_ON_SUCCESS = 'file on success';
-    case RUNNING = 'running';
-    case SUCCESS = 'success';
-    case CANCEL = 'cancel';
-    case ERROR = 'error';
+    case FILE_UPLOADED = 'File Uploaded';
+    case FILE_ON_SUCCESS = 'File On Success';
+    case RUNNING = 'Running';
+    case SUCCESS = 'Success';
+    case CANCEL = 'Cancel';
+    case ERROR = 'Error';
 
     public function value(): string
     {
         return match ($this) {
-            self::FILE_UPLOADED => '파일업로드',
-            self::FILE_ON_SUCCESS => '정상확인완료',
-            self::RUNNING => '작업중',
-            self::SUCCESS => '주문서입력완료',
-            self::CANCEL => '취소',
-            self::ERROR => '에러',
+            self::FILE_UPLOADED => __('enum.order-sheet-waybill-status.FILE_UPLOADED'),
+            self::FILE_ON_SUCCESS => __('enum.order-sheet-waybill-status.FILE_ON_SUCCESS'),
+            self::RUNNING => __('enum.order-sheet-waybill-status.RUNNING'),
+            self::SUCCESS => __('enum.order-sheet-waybill-status.SUCCESS'),
+            self::CANCEL => __('enum.order-sheet-waybill-status.CANCEL'),
+            self::ERROR => __('enum.order-sheet-waybill-status.ERROR'),
         };
     }
 

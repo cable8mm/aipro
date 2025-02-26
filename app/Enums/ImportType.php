@@ -8,14 +8,14 @@ enum ImportType: string
 {
     use EnumGetter;
 
-    case ITEM = 'item';
-    case ORDER_SHEET_WAYBILL = 'order sheet waybills';
+    case ITEM = 'Item';
+    case ORDER_SHEET_WAYBILL = 'Order Sheet Waybills';
 
     public function value(): string
     {
         return match ($this) {
-            self::ITEM => '상품',
-            self::ORDER_SHEET_WAYBILL => '주문서 송장',
+            self::ITEM => __('enum.import-type.UPLOAD_COMPLETED'),
+            self::ORDER_SHEET_WAYBILL => __('enum.import-type.ORDER_SHEET_WAYBILL'),
         };
     }
 }

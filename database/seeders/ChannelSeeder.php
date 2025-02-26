@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Enums\Channel;
+use App\Enums\ChannelStatus;
 use Illuminate\Database\Seeder;
 
 class ChannelSeeder extends Seeder
@@ -28,7 +28,7 @@ class ChannelSeeder extends Seeder
                     'last_processed_at' => empty($data[11]) ? null : $data[6],
                     'memo' => $data[12],
                     'is_active' => $data[13],
-                    'status' => Channel::getName($data[14]),
+                    'status' => ChannelStatus::getName($data[14]),
                 ])->create();
             }
             fclose($handle);

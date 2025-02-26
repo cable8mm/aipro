@@ -8,18 +8,18 @@ enum PaymentMethod: string
 {
     use EnumGetter;
 
-    case CASH = 'cash';
-    case CARD = 'card';
-    case MOBILE = 'mobile';
-    case OTHER = 'other';
+    case CASH = 'Cash';
+    case CARD = 'Card';
+    case MOBILE = 'Mobile';
+    case OTHER = 'Other';
 
     public function value(): string
     {
         return match ($this) {
-            self::CASH => '💰 '.__('Cash'),
-            self::CARD => '💳 '.__('Card'),
-            self::MOBILE => '📱 '.__('Mobile'),
-            self::OTHER => '🧾 '.__('Other'),
+            self::CASH => '💰 '.__('enum.payment-method.CASH'),
+            self::CARD => '💳 '.__('enum.payment-method.CARD'),
+            self::MOBILE => '📱 '.__('enum.payment-method.MOBILE'),
+            self::OTHER => '🧾 '.__('enum.payment-method.OTHER'),
         };
     }
 }

@@ -8,18 +8,18 @@ enum RetailPurchaseStatus: string
 {
     use EnumGetter;
 
-    case COMPLETED = 'completed';
-    case PENDING = 'pending';
-    case CANCELED = 'canceled';
-    case REFUNDED = 'refunded';
+    case COMPLETED = 'Completed';
+    case PENDING = 'Pending';
+    case CANCELED = 'Canceled';
+    case REFUNDED = 'Refunded';
 
     public function value(): string
     {
         return match ($this) {
-            self::COMPLETED => __('Completed'),
-            self::PENDING => __('Pending'),
-            self::CANCELED => __('Canceled'),
-            self::REFUNDED => __('Refunded'),
+            self::COMPLETED => __('enum.retail-purchase-status.COMPLETED'),
+            self::PENDING => __('enum.retail-purchase-status.PENDING'),
+            self::CANCELED => __('enum.retail-purchase-status.CANCELED'),
+            self::REFUNDED => __('enum.retail-purchase-status.REFUNDED'),
         };
     }
 

@@ -8,24 +8,24 @@ enum ManualInventoryAdjustmentType: string
 {
     use EnumGetter;
 
-    case CLIENT_RETURN = 'client_return';
-    case EXCHANGE = 'exchange';
-    case WRONG_DELIVERY = 'wrong_delivery';
+    case CLIENT_RETURN = 'Client Return';
+    case EXCHANGE = 'Exchange';
+    case WRONG_DELIVERY = 'Wrong Delivery';
     case CHECK = 'check';
-    case SUPPLIER_RETURN = 'supplier_return';
-    case DISPOSAL = 'disposal';
-    case MISTAKE = 'mistake';
+    case SUPPLIER_RETURN = 'Supplier Return';
+    case DISPOSAL = 'Disposal';
+    case MISTAKE = 'Mistake';
 
     public function value(): string
     {
         return match ($this) {
-            self::CLIENT_RETURN => '고객반품',
-            self::EXCHANGE => '고객교환',
-            self::WRONG_DELIVERY => '오배송교환',
-            self::CHECK => '실사조정',
-            self::SUPPLIER_RETURN => '공급사반품',
-            self::DISPOSAL => '폐기',
-            self::MISTAKE => '오기입',
+            self::CLIENT_RETURN => __('enum.manual-inventory-adjustment-type.CLIENT_RETURN'),
+            self::EXCHANGE => __('enum.manual-inventory-adjustment-type.EXCHANGE'),
+            self::WRONG_DELIVERY => __('enum.manual-inventory-adjustment-type.WRONG_DELIVERY'),
+            self::CHECK => __('enum.manual-inventory-adjustment-type.CHECK'),
+            self::SUPPLIER_RETURN => __('enum.manual-inventory-adjustment-type.SUPPLIER_RETURN'),
+            self::DISPOSAL => __('enum.manual-inventory-adjustment-type.DISPOSAL'),
+            self::MISTAKE => __('enum.manual-inventory-adjustment-type.MISTAKE'),
         };
     }
 }

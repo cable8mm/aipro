@@ -8,24 +8,24 @@ enum PurchaseOrderItemStatus: string
 {
     use EnumGetter;
 
-    case PENDING = 'pending';
-    case RECEIVED = 'received';
-    case INSPECTED = 'inspected';
-    case STORED = 'stored';
-    case DAMAGED = 'damaged';
-    case RETURNED = 'returned';
-    case CANCELED = 'canceled';
+    case PENDING = 'Pending';
+    case RECEIVED = 'Received';
+    case INSPECTED = 'Inspected';
+    case STORED = 'Stored';
+    case DAMAGED = 'Damaged';
+    case RETURNED = 'Returned';
+    case CANCELED = 'Canceled';
 
     public function value(): string
     {
         return match ($this) {
-            self::PENDING => __('purchases-order.pending'),
-            self::RECEIVED => __('purchases-order.received'),
-            self::INSPECTED => __('purchases-order.inspected'),
-            self::STORED => __('purchases-order.stored'),
-            self::DAMAGED => __('purchases-order.damaged'),
-            self::RETURNED => __('purchases-order.returned'),
-            self::CANCELED => __('purchases-order.canceled'),
+            self::PENDING => __('enum.purchase-order-item-status.PENDING'),
+            self::RECEIVED => __('enum.purchase-order-item-status.RECEIVED'),
+            self::INSPECTED => __('enum.purchase-order-item-status.INSPECTED'),
+            self::STORED => __('enum.purchase-order-item-status.STORED'),
+            self::DAMAGED => __('enum.purchase-order-item-status.DAMAGED'),
+            self::RETURNED => __('enum.purchase-order-item-status.RETURNED'),
+            self::CANCELED => __('enum.purchase-order-item-status.CANCELED'),
         };
     }
 
