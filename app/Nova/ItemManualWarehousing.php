@@ -131,7 +131,7 @@ class ItemManualWarehousing extends Resource
 
     public function title()
     {
-        return __('Item Manual Warehousing').' '.'#'.$this->id;
+        return ManualInventoryAdjustmentType::{$this->type}->value().' '.'#'.$this->id;
     }
 
     public function authorizedToView(Request $request)

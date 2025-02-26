@@ -84,6 +84,8 @@
     "Cancel": "취소",
     "Cancel Id": "취소 ID",
     "Canceled": "취소",
+    "Cancelling Inventory History": "재고내역 취소하기",
+    "Cannot cancel because it already canceled": "이미 취소되었기 때문에 취소할 수 없습니다.",
     "Card": "카드",
     "Cash": "현금",
     "Cashier": "수납원",
