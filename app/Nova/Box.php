@@ -58,6 +58,9 @@ class Box extends Resource
             BelongsTo::make(__('Location'), 'location', Location::class)
                 ->default(ModelsLocation::oldest()->first()->id),
             Text::make(__('SKU'), 'sku')->maxlength(50),
+            Number::make(__('Units Per Case'), 'units_per_case')
+                ->rules('required')->required()
+                ->default(1),
             Text::make(__('Name'), 'name')->maxlength(100)->sortable(),
             Currency::make(__('Delivery Price'), 'delivery_price'),
             Currency::make(__('Cost Price'), 'cost_price'),
