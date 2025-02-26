@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Enums\InventoryHistory as EnumInventoryHistory;
+use App\Enums\InventoryHistoryType;
 use App\Enums\ItemStatus;
 use Cable8mm\NFormat\NFormat;
 use Illuminate\Database\Eloquent\Builder;
@@ -139,24 +139,23 @@ class Item extends Model
      * @param  int  $inventory  Good's inventory amount
      * @param string caller model::class name
      * @param  int  $attribute  caller's attribute
+     * @param  int  $attribute  caller's attribute
+     * @param  int|null  $cancelId  cancel model's ID for cancel request
      * @return mixed On success Model::$data if its not empty or true, false on failure
      */
-    public function plusminus(int $inventory, string $model, int $attribute)
+    public function plusminus(int $inventory, string $model, int $attribute, ?int $cancelId = null)
     {
         $this->inventory += $inventory;
 
         $this->save();
 
-        $type = $inventory > 0 ? EnumInventoryHistory::WAREHOUSING->name : EnumInventoryHistory::SHIPPING->name;
-
         return $this->inventoryHistories()->create([
             'item_id' => $this->id,
-            'type' => $type,
+            'type' => InventoryHistoryType::of($inventory, $cancelId)->name,
             'quantity' => $inventory,
             'after_quantity' => $this->getOriginal('inventory'),
             'historyable_type' => $model,
             'historyable_id' => $attribute,
-            'is_success' => true,
         ]);
     }
 

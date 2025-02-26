@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Facades\Auth;
+use RuntimeException;
 
 class BoxInventoryHistory extends Model
 {
@@ -20,7 +21,6 @@ class BoxInventoryHistory extends Model
             'quantity' => 'integer',
             'model' => 'string',
             'attribute' => 'string',
-            'is_success' => 'boolean',
         ];
     }
 
@@ -41,6 +41,11 @@ class BoxInventoryHistory extends Model
         return $this->belongsTo(User::class, 'author_id');
     }
 
+    public function cancel(): BelongsTo
+    {
+        return $this->belongsTo(BoxInventoryHistory::class, 'cancel_id');
+    }
+
     /**
      * Get the parent inventoryHistoryable model (box_purchase_orders or ...).
      *
@@ -50,5 +55,40 @@ class BoxInventoryHistory extends Model
     public function historyable(): MorphTo
     {
         return $this->morphTo();
+    }
+
+    /**
+     * Create a new transaction for cancelling a transaction
+     *
+     * @throws RuntimeException When transaction is canceled it cannot be completed
+     */
+    public function cancelling()
+    {
+        if ($this->cannotCancelling()) {
+            throw new RuntimeException(__('Cannot cancel because it already canceled'));
+        }
+
+        $replicate = $this->replicate();
+
+        $cancelBoxInventoryHistory = $replicate->box->plusminus(
+            $replicate->quantity * -1,
+            $replicate->historyable_type,
+            $replicate->historyable_id,
+            $this->id
+        );
+
+        $this->cancel_id = $cancelBoxInventoryHistory->id;
+
+        $this->save();
+    }
+
+    public function canCancelling(): bool
+    {
+        return self::where('cancel_id', $this->id)->doesntExist();
+    }
+
+    public function cannotCancelling(): bool
+    {
+        return ! $this->canCancelling();
     }
 }

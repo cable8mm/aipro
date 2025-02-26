@@ -14,5 +14,11 @@ return [
         'LEVEL_2' => '2등급',
         'LEVEL_3' => '3등급',
         'LEVEL_X' => 'X등급',
+    ],
+    'inventory-history-type' => [
+        'WAREHOUSING' => '입고',
+        'WAREHOUSING_CANCELED' => '입고 취소',
+        'SHIPPING' => '출고',
+        'SHIPPING_CANCELED' => '출고 취소',
     ]
 ];

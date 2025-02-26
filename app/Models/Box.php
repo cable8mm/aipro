@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Enums\InventoryHistory;
+use App\Enums\InventoryHistoryType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -65,24 +65,22 @@ class Box extends Model
      * @param  int  $inventory  Box's inventory amount
      * @param string caller model::class name
      * @param  int  $attribute  caller's attribute
+     * @param  int|null  $cancelId  cancel model's ID for cancel request
      * @return mixed On success Model::$data if its not empty or true, false on failure
      */
-    public function plusminus(int $inventory, string $model, int $attribute)
+    public function plusminus(int $inventory, string $model, int $attribute, ?int $cancelId = null)
     {
         $this->inventory += $inventory;
 
         $this->save();
 
-        $type = $inventory > 0 ? InventoryHistory::WAREHOUSING->name : InventoryHistory::SHIPPING->name;
-
         return $this->boxInventoryHistories()->create([
             'box_id' => $this->id,
-            'type' => $type,
+            'type' => InventoryHistoryType::of($inventory, $cancelId)->name,
             'quantity' => $inventory,
             'after_quantity' => $this->getOriginal('inventory'),
             'historyable_type' => $model,
             'historyable_id' => $attribute,
-            'is_success' => true,
         ]);
     }
 
