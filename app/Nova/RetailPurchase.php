@@ -6,6 +6,9 @@ use App\Enums\PaymentMethod;
 use App\Enums\RetailPurchaseStatus;
 use App\Nova\Actions\RetailPurchaseStatusChanging;
 use App\Nova\Filters\RetailPurchaseStatusFilter;
+use App\Nova\Metrics\NewRetailPurchase;
+use App\Nova\Metrics\RetailPurchasePerDay;
+use App\Nova\Metrics\RetailPurchaseSumPaymentMethod;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Currency;
@@ -92,7 +95,11 @@ class RetailPurchase extends Resource
      */
     public function cards(NovaRequest $request)
     {
-        return [];
+        return [
+            new RetailPurchaseSumPaymentMethod,
+            new NewRetailPurchase,
+            new RetailPurchasePerDay,
+        ];
     }
 
     /**
@@ -103,7 +110,7 @@ class RetailPurchase extends Resource
     public function filters(NovaRequest $request)
     {
         return [
-            RetailPurchaseStatusFilter::make(),
+            new RetailPurchaseStatusFilter,
         ];
     }
 
