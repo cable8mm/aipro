@@ -3,7 +3,6 @@
 namespace App\Nova;
 
 use App\Enums\ManualInventoryAdjustmentType;
-use App\Traits\NovaAuthorizedByWarehouser;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Badge;
 use Laravel\Nova\Fields\BelongsTo;
@@ -17,8 +16,6 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 
 class BoxManualWarehousing extends Resource
 {
-    use NovaAuthorizedByWarehouser;
-
     /**
      * The model the resource corresponds to.
      *
@@ -55,7 +52,9 @@ class BoxManualWarehousing extends Resource
         return [
             ID::make()->sortable(),
             BelongsTo::make(__('Author'), 'author', User::class)->exceptOnForms(),
-            BelongsTo::make(__('Box'), 'box', Box::class),
+            BelongsTo::make(__('Box'), 'box', Box::class)
+                ->searchable()
+                ->help(__('You can search for boxes by sku, box name or box supplier name.')),
             Select::make(__('Type'), 'type')
                 ->rules('required')->required()
                 ->options(ManualInventoryAdjustmentType::array())
@@ -67,10 +66,12 @@ class BoxManualWarehousing extends Resource
                 ->labels(ManualInventoryAdjustmentType::array())
                 ->onlyOnIndex(),
             Number::make(__('Manual Add Inventory Count'), 'manual_add_inventory_count')
-                ->rules('required', 'notIn:0')->displayUsing(function ($value) {
+                ->rules('required', 'notIn:0')->required()
+                ->default(-1)
+                ->displayUsing(function ($value) {
                     return number_format($value);
-                })->default(0),
-            Text::make(__('Memo'), 'memo'),
+                }),
+            Text::make(__('Memo'), 'memo')->nullable(),
             Stack::make(__('Created At').' & '.__('Updated At'), [
                 DateTime::make(__('Created At'), 'created_at'),
                 DateTime::make(__('Updated At'), 'updated_at'),
@@ -121,11 +122,6 @@ class BoxManualWarehousing extends Resource
     public static function label()
     {
         return __('Box Manual Warehousings');
-    }
-
-    public function authorizedToView(Request $request)
-    {
-        return false;
     }
 
     public function authorizedToUpdate(Request $request)

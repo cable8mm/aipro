@@ -49,8 +49,8 @@ class InventoryHistory extends Resource
     {
         return [
             ID::make()->sortable(),
-            Text::make(__('SKU'), 'item.sku')->exceptOnForms(),
             BelongsTo::make(__('Author'), 'author', User::class)->exceptOnForms(),
+            Text::make(__('SKU'), 'item.sku')->exceptOnForms(),
             Select::make(__('Inventory Level'), 'item.inventory_level')->options(ItemInventoryLevel::array())->displayUsingLabels()->exceptOnForms(),
             BelongsTo::make(__('Item'), 'item', Item::class),
             Select::make(__('Type'), 'type')

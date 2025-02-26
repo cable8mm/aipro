@@ -25,8 +25,16 @@ class ItemManualWarehousing extends Model
 
     protected static function booted(): void
     {
-        static::creating(function (ItemManualWarehousing $goodManualWarehousing) {
-            $goodManualWarehousing->author_id = $goodManualWarehousing->author_id ?? Auth::user()->id;
+        static::creating(function (ItemManualWarehousing $itemManualWarehousing) {
+            $itemManualWarehousing->author_id = $itemManualWarehousing->author_id ?? Auth::user()->id;
+        });
+
+        static::created(function (ItemManualWarehousing $itemManualWarehousing) {
+            $itemManualWarehousing->item->plusminus(
+                $itemManualWarehousing->manual_add_inventory_count,
+                get_class($itemManualWarehousing),
+                $itemManualWarehousing->id
+            );
         });
     }
 

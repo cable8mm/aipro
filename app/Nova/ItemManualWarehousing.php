@@ -57,7 +57,9 @@ class ItemManualWarehousing extends Resource
             BelongsTo::make(__('Author'), 'author', User::class)->exceptOnForms(),
             Text::make(__('SKU'), 'Item.sku')->onlyOnIndex(),
             Text::make(__('Supplier Name'), 'Item.supplier.name')->onlyOnIndex(),
-            BelongsTo::make(__('Item'), 'item', Item::class)->searchable(),
+            BelongsTo::make(__('Item'), 'item', Item::class)
+                ->searchable()
+                ->help(__('You can search for items by sku, item name or supplier name.')),
             Select::make(__('Type'), 'type')
                 ->rules('required')->required()
                 ->options(ManualInventoryAdjustmentType::array())
@@ -69,7 +71,8 @@ class ItemManualWarehousing extends Resource
                 ->labels(ManualInventoryAdjustmentType::array())
                 ->onlyOnIndex(),
             Number::make(__('Manual Add Inventory Count'), 'manual_add_inventory_count')
-                ->rules('required')->required()
+                ->rules('required', 'notIn:0')->required()
+                ->default(-1)
                 ->displayUsing(function ($value) {
                     return number_format($value);
                 }),
