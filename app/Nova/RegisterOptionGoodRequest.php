@@ -21,6 +21,8 @@ class RegisterOptionGoodRequest extends Resource
 {
     use NovaAuthorizedByNotReviewer;
 
+    public static $globallySearchable = false;
+
     /**
      * The model the resource corresponds to.
      *

@@ -11,6 +11,8 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Issue extends Resource
 {
+    public static $globallySearchable = false;
+
     /**
      * The model the resource corresponds to.
      *

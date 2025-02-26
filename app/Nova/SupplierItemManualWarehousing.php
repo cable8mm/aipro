@@ -15,6 +15,8 @@ class SupplierItemManualWarehousing extends Resource
 {
     use NovaAuthorizedByWarehouser;
 
+    public static $globallySearchable = false;
+
     /**
      * The model the resource corresponds to.
      *

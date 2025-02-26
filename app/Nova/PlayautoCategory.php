@@ -12,6 +12,8 @@ class PlayautoCategory extends Resource
 {
     use NovaAuthorizedByManager;
 
+    public static $globallySearchable = false;
+
     /**
      * The model the resource corresponds to.
      *

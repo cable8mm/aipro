@@ -11,6 +11,8 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 
 class IssueComment extends Resource
 {
+    public static $globallySearchable = false;
+
     /**
      * The model the resource corresponds to.
      *
