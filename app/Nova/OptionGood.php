@@ -39,7 +39,7 @@ class OptionGood extends Resource
      */
     public static $search = [
         'id',
-        'sku',
+        'goods_code',
     ];
 
     /**

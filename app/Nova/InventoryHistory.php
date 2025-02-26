@@ -18,6 +18,8 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 
 class InventoryHistory extends Resource
 {
+    public static $globallySearchable = false;
+
     /**
      * The model the resource corresponds to.
      *

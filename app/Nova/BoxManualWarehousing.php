@@ -19,6 +19,8 @@ class BoxManualWarehousing extends Resource
 {
     use NovaAuthorizedByWarehouser;
 
+    public static $globallySearchable = false;
+
     /**
      * The model the resource corresponds to.
      *
@@ -41,7 +43,7 @@ class BoxManualWarehousing extends Resource
     public static $search = [
         'id',
         'Box.name',
-        'Box.code',
+        'Box.sku',
         'memo',
     ];
 

@@ -42,7 +42,7 @@ class BoxPurchaseOrder extends Resource
      */
     public static $search = [
         'id',
-        'title',
+        'code',
     ];
 
     /**

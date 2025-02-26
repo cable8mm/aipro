@@ -34,7 +34,7 @@ class RetailPurchaseItem extends Resource
      */
     public static $search = [
         'id',
-        'retailPurchase.receipt_number',
+        'retailPurchase.code',
         'item.name',
     ];
 
