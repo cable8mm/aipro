@@ -8,18 +8,18 @@ enum Status: string
 {
     use EnumGetter;
 
-    case WAITING = 'waiting';
-    case RUNNING = 'running';
-    case FAILED = 'failed';
-    case SUCCESS = 'success';
+    case WAITING = 'Waiting';
+    case RUNNING = 'Running';
+    case FAILED = 'Failed';
+    case SUCCESS = 'Success';
 
     public function value(): string
     {
         return match ($this) {
-            self::WAITING => '대기',
-            self::RUNNING => '작업중',
-            self::FAILED => '실패',
-            self::SUCCESS => '성공',
+            self::WAITING => __('enum.status.WAITING'),
+            self::RUNNING => __('enum.status.RUNNING'),
+            self::FAILED => __('enum.status.FAILED'),
+            self::SUCCESS => __('enum.status.SUCCESS'),
         };
     }
 

@@ -8,20 +8,20 @@ enum OrderMethod: string
 {
     use EnumGetter;
 
-    case SMS = 'sms';
-    case EMAIL = 'email';
-    case PHONE = 'phone';
-    case KAKAOTALK = 'kakaotalk';
-    case ORDER_SYSTEM = 'order_system';
+    case SMS = 'SMS';
+    case EMAIL = 'Email';
+    case PHONE = 'Phone';
+    case KAKAOTALK = 'KakaoTalk';
+    case ORDER_SYSTEM = 'Order System';
 
     public function value(): string
     {
         return match ($this) {
-            self::SMS => '문자 메시지',
-            self::EMAIL => '이메일',
-            self::PHONE => '전화',
-            self::KAKAOTALK => '카카오톡',
-            self::ORDER_SYSTEM => '발주 시스템',
+            self::SMS => __('enum.order-method.SMS'),
+            self::EMAIL => __('enum.order-method.EMAIL'),
+            self::PHONE => __('enum.order-method.PHONE'),
+            self::KAKAOTALK => __('enum.order-method.KAKAOTALK'),
+            self::ORDER_SYSTEM => __('enum.order-method.ORDER_SYSTEM'),
         };
     }
 }

@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('price_coefficients', function (Blueprint $table) {
             $table->id();
-            $table->char('center_class', 1);
             $table->unsignedInteger('start_price')->comment('시작 가격');
             $table->unsignedInteger('end_price')->comment('끝 가격');
             $table->decimal('coefficient', 4, 3)->comment('가격*(계수)=판매가');

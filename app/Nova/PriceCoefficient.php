@@ -2,13 +2,11 @@
 
 namespace App\Nova;
 
-use App\Enums\CenterClass;
 use App\Traits\NovaAuthorizedByManager;
 use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
-use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class PriceCoefficient extends Resource
@@ -47,7 +45,6 @@ class PriceCoefficient extends Resource
     {
         return [
             ID::make()->sortable(),
-            Select::make(__('Center Class'), 'center_class')->options(CenterClass::array())->displayUsingLabels(),
             Currency::make(__('Start Price'), 'start_price'),
             Currency::make(__('End Price'), 'end_price'),
             Number::make(__('Coefficient'), 'coefficient')->step('any'),

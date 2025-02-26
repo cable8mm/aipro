@@ -4,13 +4,13 @@ namespace App\Enums;
 
 use Cable8mm\EnumGetter\EnumGetter;
 
-enum Channel: string
+enum ChannelStatus: string
 {
     use EnumGetter;
 
-    case UPLOAD_COMPLETED = 'upload completed';
-    case ON_SELLING = 'on selling';
-    case FAILED = 'failed';
+    case UPLOAD_COMPLETED = 'Upload Completed';
+    case ON_SELLING = 'On Selling';
+    case FAILED = 'Failed';
 
     public function value(): string
     {

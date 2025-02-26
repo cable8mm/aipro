@@ -2,7 +2,7 @@
 
 namespace App\Nova;
 
-use App\Enums\Channel as EnumsChannel;
+use App\Enums\ChannelStatus;
 use App\Traits\NovaAuthorizedByManager;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
@@ -66,12 +66,12 @@ class Channel extends Resource
             Textarea::make(__('Memo'), 'memo'),
             Boolean::make(__('Is Active'), 'is_active'),
             Status::make(__('Status'), 'status')
-                ->loadingWhen(EnumsChannel::loadingWhen())
-                ->failedWhen(EnumsChannel::failedWhen())
+                ->loadingWhen(ChannelStatus::loadingWhen())
+                ->failedWhen(ChannelStatus::failedWhen())
                 ->filterable(function ($request, $query, $value, $attribute) {
                     $query->where($attribute, $value);
                 })->displayUsing(function ($value) {
-                    return EnumsChannel::{$value}->value() ?? '-';
+                    return ChannelStatus::{$value}->value() ?? '-';
                 }),
             Stack::make(__('Created At').' & '.__('Updated At'), [
                 DateTime::make(__('Created At'), 'created_at'),

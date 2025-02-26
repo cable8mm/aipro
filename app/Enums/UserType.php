@@ -18,12 +18,12 @@ enum UserType: string
     public function value(): string
     {
         return match ($this) {
-            self::ADMINISTRATOR => '최고관리자',
-            self::DEVELOPER => '개발자',
-            self::MANAGER => '관리자',
-            self::MD => '엠디',
-            self::WAREHOUSER => '공무직',
-            self::REVIEWER => '리뷰어',
+            self::ADMINISTRATOR => __('enum.user-type.ADMINISTRATOR'),
+            self::DEVELOPER => __('enum.user-type.DEVELOPER'),
+            self::MANAGER => __('enum.user-type.MANAGER'),
+            self::MD => __('enum.user-type.MD'),
+            self::WAREHOUSER => __('enum.user-type.WAREHOUSER'),
+            self::REVIEWER => __('enum.user-type.REVIEWER'),
         };
     }
 }

@@ -8,16 +8,16 @@ enum PurchaseOrderStatus: string
 {
     use EnumGetter;
 
-    case PENDING = 'pending';
-    case STORED = 'stored';
-    case RETURNED = 'returned';
+    case PENDING = 'Pending';
+    case STORED = 'Stored';
+    case RETURNED = 'Returned';
 
     public function value(): string
     {
         return match ($this) {
-            self::PENDING => __('purchases-order.pending'),
-            self::STORED => __('purchases-order.stored'),
-            self::RETURNED => __('purchases-order.returned'),
+            self::PENDING => __('enum.purchase-order-status.PENDING'),
+            self::STORED => __('enum.purchase-order-status.STORED'),
+            self::RETURNED => __('enum.purchase-order-status.RETURNED'),
         };
     }
 

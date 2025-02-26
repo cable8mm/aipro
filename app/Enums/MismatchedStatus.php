@@ -8,16 +8,16 @@ enum MismatchedStatus: string
 {
     use EnumGetter;
 
-    case READY = 'ready';
-    case FAILED = 'failed';
-    case COMPLETED = 'completed';
+    case READY = 'Ready';
+    case FAILED = 'Failed';
+    case COMPLETED = 'Completed';
 
     public function value(): string
     {
         return match ($this) {
-            self::READY => '미처리',
-            self::FAILED => '실패',
-            self::COMPLETED => '처리완료',
+            self::READY => __('enum.mismatched-status.READY'),
+            self::FAILED => __('enum.mismatched-status.FAILED'),
+            self::COMPLETED => __('enum.mismatched-status.COMPLETED'),
         };
     }
 

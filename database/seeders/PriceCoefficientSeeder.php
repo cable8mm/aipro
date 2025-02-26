@@ -15,10 +15,9 @@ class PriceCoefficientSeeder extends Seeder
             while (($data = fgetcsv($handle, 1000, ',')) !== false) {
                 \App\Models\PriceCoefficient::factory(1, [
                     'id' => $data[0],
-                    'center_class' => $data[1],
-                    'start_price' => $data[2],
-                    'end_price' => $data[3],
-                    'coefficient' => $data[4],
+                    'start_price' => $data[1],
+                    'end_price' => $data[2],
+                    'coefficient' => $data[3],
                 ])->create();
             }
             fclose($handle);
