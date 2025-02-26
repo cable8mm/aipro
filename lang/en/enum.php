@@ -14,5 +14,11 @@ return [
         'LEVEL_2' => 'Level 2',
         'LEVEL_3' => 'Level 3',
         'LEVEL_X' => 'Level X',
+    ],
+    'inventory-history-type' => [
+        'WAREHOUSING' => 'Warehousing',
+        'WAREHOUSING_CANCELED' => 'Warehousing Canceled',
+        'SHIPPING' => 'Shipping',
+        'SHIPPING_CANCELED' => 'Shipping Canceled',
     ]
 ];
