@@ -22,7 +22,7 @@ return new class extends Migration
             $table->foreignIdFor(User::class, 'author_id')->constrained()->comment('작성자 아이디');
             $table->foreignIdFor(Supplier::class)->nullable()->constrained()->comment('공급사 아이디');
             $table->foreignIdFor(SupplierItem::class)->nullable()->constrained()->comment('공급사 아이디');
-            $table->foreignIdFor(Box::class)->nullable()->constrained()->comment('공급사 아이디');
+            $table->foreignIdFor(Box::class)->nullable()->constrained()->comment('박스 아이디');
             $table->string('location_id', 10)->comment('위치 코드');
             $table->foreign('location_id')->references('id')->on('locations');
             $table->string('sku', 255)->nullable();

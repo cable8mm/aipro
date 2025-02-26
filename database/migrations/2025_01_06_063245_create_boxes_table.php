@@ -15,6 +15,8 @@ return new class extends Migration
         Schema::create('boxes', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class, 'author_id')->constrained()->comment('작성자 아이디');
+            $table->string('location_id', 10)->comment('위치 코드');
+            $table->foreign('location_id')->references('id')->on('locations');
             $table->string('name', 100)->comment('박스 이름');
             $table->string('sku', 50)->comment('박스 SKU');
             $table->unsignedInteger('size')->comment('박스 사이즈');

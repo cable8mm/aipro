@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\Models\Location as ModelsLocation;
 use App\Nova\Metrics\BoxSumCostPrice;
 use App\Nova\Metrics\BoxSumInventory;
 use App\Traits\NovaAuthorizedByManager;
@@ -54,10 +55,12 @@ class Box extends Resource
         return [
             ID::make()->sortable(),
             BelongsTo::make(__('Author'), 'author', User::class)->exceptOnForms(),
+            BelongsTo::make(__('Location'), 'location', Location::class)
+                ->default(ModelsLocation::oldest()->first()->id),
             Text::make(__('SKU'), 'sku')->maxlength(50),
             Text::make(__('Name'), 'name')->maxlength(100)->sortable(),
             Currency::make(__('Delivery Price'), 'delivery_price'),
-            Currency::make(__('Purchase Price'), 'purchase_price'),
+            Currency::make(__('Cost Price'), 'cost_price'),
             Number::make(__('Inventory'), 'inventory')->displayUsing(function ($value) {
                 return number_format($value);
             }),
