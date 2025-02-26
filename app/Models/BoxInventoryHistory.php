@@ -41,6 +41,11 @@ class BoxInventoryHistory extends Model
         return $this->belongsTo(User::class, 'author_id');
     }
 
+    public function cancel(): BelongsTo
+    {
+        return $this->belongsTo(BoxInventoryHistory::class, 'cancel_id');
+    }
+
     /**
      * Get the parent inventoryHistoryable model (box_purchase_orders or ...).
      *

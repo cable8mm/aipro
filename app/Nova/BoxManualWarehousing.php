@@ -3,6 +3,7 @@
 namespace App\Nova;
 
 use App\Enums\ManualInventoryAdjustmentType;
+use App\Traits\NovaAuthorizedByWarehouser;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Badge;
 use Laravel\Nova\Fields\BelongsTo;
@@ -16,6 +17,8 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 
 class BoxManualWarehousing extends Resource
 {
+    use NovaAuthorizedByWarehouser;
+
     /**
      * The model the resource corresponds to.
      *
@@ -52,6 +55,8 @@ class BoxManualWarehousing extends Resource
         return [
             ID::make()->sortable(),
             BelongsTo::make(__('Author'), 'author', User::class)->exceptOnForms(),
+            Text::make(__('SKU'), 'Box.sku')->onlyOnIndex(),
+            Text::make(__('Box Supplier Name'), 'Box.boxSupplier.name')->onlyOnIndex(),
             BelongsTo::make(__('Box'), 'box', Box::class)
                 ->searchable()
                 ->help(__('You can search for boxes by sku, box name or box supplier name.')),
@@ -122,6 +127,11 @@ class BoxManualWarehousing extends Resource
     public static function label()
     {
         return __('Box Manual Warehousings');
+    }
+
+    public function authorizedToView(Request $request)
+    {
+        return false;
     }
 
     public function authorizedToUpdate(Request $request)

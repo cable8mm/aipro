@@ -75,6 +75,7 @@ class BoxInventoryHistory extends Resource
             Number::make(__('After Quantity'), 'after_quantity')->displayUsing(function ($value) {
                 return number_format($value);
             })->rules('required')->required(),
+            BelongsTo::make(__('Cancel'), 'cancel', BoxInventoryHistory::class),
             Boolean::make(__('Is Success'), 'is_success')->rules('required')->required(),
             DateTime::make(__('Created At'), 'created_at')->exceptOnForms(),
             DateTime::make(__('Updated At'), 'updated_at')->exceptOnForms(),

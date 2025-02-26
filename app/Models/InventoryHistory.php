@@ -43,7 +43,7 @@ class InventoryHistory extends Model
         return $this->belongsTo(Item::class);
     }
 
-    public function bySelf(): BelongsTo
+    public function cancel(): BelongsTo
     {
         return $this->belongsTo(InventoryHistory::class, 'cancel_id');
     }
