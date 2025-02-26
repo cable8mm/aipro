@@ -43,7 +43,8 @@ class Box extends Resource
     public static $search = [
         'id',
         'name',
-        'code',
+        'sku',
+        'boxSupplier.name',
     ];
 
     /**

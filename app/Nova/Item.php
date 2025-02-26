@@ -51,6 +51,7 @@ class Item extends Resource
         'name',
         'sku',
         'barcode',
+        'supplier.name',
     ];
 
     /**

@@ -27,6 +27,14 @@ class BoxManualWarehousing extends Model
         static::creating(function (BoxManualWarehousing $boxManualWarehousing) {
             $boxManualWarehousing->author_id = $boxManualWarehousing->author_id ?? Auth::user()->id;
         });
+
+        static::created(function (BoxManualWarehousing $boxManualWarehousing) {
+            $boxManualWarehousing->box->plusminus(
+                $boxManualWarehousing->manual_add_inventory_count,
+                get_class($boxManualWarehousing),
+                $boxManualWarehousing->id
+            );
+        });
     }
 
     public function box(): BelongsTo
