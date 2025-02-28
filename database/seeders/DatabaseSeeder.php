@@ -31,7 +31,6 @@ class DatabaseSeeder extends Seeder
             NaverCategorySeeder::class,
             OptionGoodSeeder::class,    // This must be over `OptionGoodOptionSeeder::class`
             // OrderSeeder::class,
-            PlayautoGoodSeeder::class,
             PriceCoefficientSeeder::class,
             PromotionCodeSeeder::class,
             PurchaseOrderSeeder::class,
