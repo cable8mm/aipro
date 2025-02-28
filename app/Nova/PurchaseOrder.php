@@ -42,6 +42,7 @@ class PurchaseOrder extends Resource
      */
     public static $search = [
         'id',
+        'code',
     ];
 
     /**

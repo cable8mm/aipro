@@ -36,6 +36,7 @@ class BarcodeCommand extends Resource
      */
     public static $search = [
         'id',
+        'name',
         'barcode',
     ];
 

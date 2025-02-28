@@ -40,6 +40,9 @@ class MismatchedOrderShipment extends Resource
     public static $search = [
         'id',
         'OrderSheetWaybill.id',
+        'order_no',
+        'site',
+        'goods_nm',
     ];
 
     /**

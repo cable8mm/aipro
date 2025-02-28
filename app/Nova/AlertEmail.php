@@ -34,8 +34,8 @@ class AlertEmail extends Resource
      */
     public static $search = [
         'id',
+        'name',
         'action_name',
-        'email_list',
     ];
 
     /**

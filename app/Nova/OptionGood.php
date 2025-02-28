@@ -40,6 +40,7 @@ class OptionGood extends Resource
     public static $search = [
         'id',
         'goods_code',
+        'name',
     ];
 
     /**

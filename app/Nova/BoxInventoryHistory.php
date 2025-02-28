@@ -39,6 +39,7 @@ class BoxInventoryHistory extends Resource
      */
     public static $search = [
         'id',
+        'box.sku',
     ];
 
     /**
