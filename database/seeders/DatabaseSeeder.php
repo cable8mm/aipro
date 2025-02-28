@@ -27,8 +27,6 @@ class DatabaseSeeder extends Seeder
             ChannelFeeSeeder::class,
             ChannelSeeder::class,
             HelpTipSeeder::class,
-            IssueCommentSeeder::class,
-            IssueSeeder::class,
             MismatchedOrderShipmentSeeder::class,
             NaverCategorySeeder::class,
             OptionGoodSeeder::class,    // This must be over `OptionGoodOptionSeeder::class`
