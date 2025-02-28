@@ -41,7 +41,6 @@ class DatabaseSeeder extends Seeder
             ItemSeeder::class,
             OptionGoodOptionSeeder::class,
             PurchaseOrderItemSeeder::class,
-            SupplierItemManualWarehousingSeeder::class,
             InventoryHistorySeeder::class,
             PlayautoCategorySeeder::class,
             // OrderShipmentSeeder::class,
