@@ -24,8 +24,6 @@ class DatabaseSeeder extends Seeder
             AlertEmailSeeder::class,
             BoxManualWarehousingSeeder::class,
             BoxPurchaseOrderSeeder::class,
-            ChannelFeeSeeder::class,
-            ChannelSeeder::class,
             HelpTipSeeder::class,
             MismatchedOrderShipmentSeeder::class,
             NaverCategorySeeder::class,
