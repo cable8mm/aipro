@@ -36,7 +36,6 @@ class DatabaseSeeder extends Seeder
             PromotionCodeSeeder::class,
             PurchaseOrderSeeder::class,
             SettingSeeder::class,
-            ShutdownGoodSeeder::class,
             SupplierItemSeeder::class,
             BoxPurchaseOrderItemSeeder::class,
             ItemSeeder::class,
