@@ -38,7 +38,7 @@ class RetailPurchase extends Resource
      *
      * @var string
      */
-    public static $title = 'receipt_number';
+    public static $title = 'code';
 
     /**
      * The columns that should be searched.
@@ -47,6 +47,7 @@ class RetailPurchase extends Resource
      */
     public static $search = [
         'id',
+        'code',
     ];
 
     /**

@@ -4,7 +4,7 @@ namespace App\Enums;
 
 use Cable8mm\EnumGetter\EnumGetter;
 
-enum Status: string
+enum OrderShipmentDeliveryType: string
 {
     use EnumGetter;
 
@@ -16,10 +16,10 @@ enum Status: string
     public function value(): string
     {
         return match ($this) {
-            self::WAITING => __('enum.status.WAITING'),
-            self::RUNNING => __('enum.status.RUNNING'),
-            self::FAILED => __('enum.status.FAILED'),
-            self::SUCCESS => __('enum.status.SUCCESS'),
+            self::WAITING => __('enum.order-shipment-delivery-type.WAITING'),
+            self::RUNNING => __('enum.order-shipment-delivery-type.RUNNING'),
+            self::FAILED => __('enum.order-shipment-delivery-type.FAILED'),
+            self::SUCCESS => __('enum.order-shipment-delivery-type.SUCCESS'),
         };
     }
 

@@ -3,8 +3,8 @@
 namespace Database\Factories;
 
 use App\Enums\OrderMethod;
+use App\Enums\OrderShipmentDeliveryType;
 use App\Enums\Site;
-use App\Enums\Status;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -31,7 +31,7 @@ class OrderShipmentFactory extends Factory
             'paymentDate' => fake()->dateTime(),
             'statusDate' => fake()->dateTime(),
             'deliveryDate' => fake()->dateTime(),
-            'status' => fake()->randomElement(Status::names()),
+            'status' => fake()->randomElement(OrderShipmentDeliveryType::names()),
             'siteOrderNo' => fake()->randomNumber(9) + 1,
             'siteGoodsCd' => fake()->randomNumber(4) + 1,
             'goodsNm' => fake()->productName(),

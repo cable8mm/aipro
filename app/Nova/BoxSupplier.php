@@ -41,6 +41,11 @@ class BoxSupplier extends Resource
      */
     public static $search = [
         'id',
+        'name',
+        'ordered_email',
+        'contact_name',
+        'contact_tel',
+        'contact_cel',
     ];
 
     /**
@@ -67,7 +72,9 @@ class BoxSupplier extends Resource
                 DateTime::make(__('Updated At'), 'updated_at'),
             ])->hideFromIndex(),
 
-            HasMany::make(__('Box Purchase Order Items'), 'boxPurchaseOrderItems', BoxPurchaseOrderItem::class),
+            HasMany::make(__('Boxes'), 'boxes', Box::class),
+
+            HasMany::make(__('Box Purchase Orders'), 'boxPurchaseOrders', BoxPurchaseOrder::class),
         ];
     }
 

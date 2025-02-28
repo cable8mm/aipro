@@ -23,12 +23,6 @@ return new class extends Migration
             $table->string('option', 100)->nullable()->comment('옵션');
             $table->integer('goods_price')->nullable()->comment('상품가격(판매가)');
             $table->text('memo')->nullable();
-            $table->char('naver_category', 20)->nullable()->comment('네이버 카테고리 ID');
-            $table->string('naver_productid', 128)->nullable()->comment('네이버 가격비교 페이지 ID');
-            $table->boolean('not_exist_naver_productid')->nullable()->comment('네이버 가격비교 페이지 ID 없음');
-            $table->boolean('naver_lowest_price_wrong')->nullable()->comment('네이버 최저가 잘못됨');
-            $table->integer('naver_lowest_price')->nullable()->comment('네이버 가격비교 최저가');
-            $table->integer('internet_lowest_price')->nullable()->comment('인터넷 최저가');
             $table->integer('zero_margin_price')->nullable()->comment('제로마진판매가');
             $table->timestamps();
         });

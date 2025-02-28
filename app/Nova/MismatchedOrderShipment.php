@@ -2,7 +2,7 @@
 
 namespace App\Nova;
 
-use App\Enums\MismatchedStatus;
+use App\Enums\MismatchedOrderShipmentStatus;
 use App\Nova\Actions\ChangeStatusAction;
 use App\Traits\NovaAuthorizedByWarehouser;
 use Laravel\Nova\Fields\BelongsTo;
@@ -40,6 +40,9 @@ class MismatchedOrderShipment extends Resource
     public static $search = [
         'id',
         'OrderSheetWaybill.id',
+        'order_no',
+        'site',
+        'goods_nm',
     ];
 
     /**
@@ -59,13 +62,13 @@ class MismatchedOrderShipment extends Resource
             Text::make(__('Option'), 'option')->maxlength(255),
             KeyValue::make(__('Json'), 'json'),
             Status::make(__('Status'), 'status')
-                ->default(MismatchedStatus::READY->name)
-                ->loadingWhen(MismatchedStatus::loadingWhen())
-                ->failedWhen(MismatchedStatus::failedWhen())
+                ->default(MismatchedOrderShipmentStatus::READY->name)
+                ->loadingWhen(MismatchedOrderShipmentStatus::loadingWhen())
+                ->failedWhen(MismatchedOrderShipmentStatus::failedWhen())
                 ->filterable(function ($request, $query, $value, $attribute) {
                     $query->where($attribute, $value);
                 })->displayUsing(function ($value) {
-                    return MismatchedStatus::{$value}->value() ?? '-';
+                    return MismatchedOrderShipmentStatus::{$value}->value() ?? '-';
                 }),
             BelongsTo::make(__('Author'), 'author', User::class),
             Stack::make(__('Created At').' & '.__('Updated At'), [
@@ -113,7 +116,7 @@ class MismatchedOrderShipment extends Resource
     public function actions(NovaRequest $request)
     {
         return [
-            (new ChangeStatusAction(MismatchedStatus::COMPLETED))->showInline(),
+            (new ChangeStatusAction(MismatchedOrderShipmentStatus::COMPLETED))->showInline(),
         ];
     }
 

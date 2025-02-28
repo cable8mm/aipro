@@ -39,7 +39,7 @@ return [
         'DISPOSAL' => '폐기',
         'MISTAKE' => '오기입',
     ],
-    'mismatched-status' => [
+    'mismatched-order-shipment-status' => [
         'READY' => '미처리',
         'FAILED' => '실패',
         'COMPLETED' => '처리완료',
@@ -59,7 +59,7 @@ return [
         'CANCEL' => '취소',
         'ERROR' => '에러',
     ],
-    'status' => [
+    'order-shipment-delivery-type' => [
         'WAITING' => '대기',
         'RUNNING' => '작업중',
         'FAILED' => '실패',

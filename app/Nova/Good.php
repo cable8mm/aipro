@@ -4,11 +4,9 @@ namespace App\Nova;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
-use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Stack;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
@@ -38,6 +36,9 @@ class Good extends Resource
      */
     public static $search = [
         'id',
+        'goods_code',
+        'name',
+        'option',
     ];
 
     /**
@@ -60,11 +61,6 @@ class Good extends Resource
             Panel::make(__('Additional Information'), [
                 Currency::make(__('Goods Price'), 'goods_price'),
                 Textarea::make(__('Memo'), 'memo')->alwaysShow(),
-                Number::make(__('Naver Category'), 'naver_category'),
-                Number::make(__('Naver Productid'), 'naver_productid'),
-                Boolean::make(__('Naver Lowest Price Wrong'), 'naver_lowest_price_wrong'),
-                Currency::make(__('Naver Lowest Price'), 'naver_lowest_price'),
-                Currency::make(__('Internet Lowest Price'), 'internet_lowest_price'),
                 Currency::make(__('Zero Margin Price'), 'zero_margin_price'),
             ])->withToolbar()->limit(3),
 

@@ -29,11 +29,6 @@ class GoodFactory extends Factory
             'option' => fake()->randomElement([null, 'Large', 'Small', 'Medium']),
             'goods_price' => fake()->randomNumber(5),
             'memo' => fake()->paragraph(),
-            'naver_category' => '5'.fake()->randomNumber(7),
-            'naver_productid' => fake()->randomNumber(9),
-            'naver_lowest_price_wrong' => fake()->boolean(),
-            'naver_lowest_price' => fake()->randomNumber(),
-            'internet_lowest_price' => fake()->randomNumber(),
             'zero_margin_price' => fake()->randomNumber(),
         ];
     }

@@ -26,7 +26,6 @@ class DatabaseSeeder extends Seeder
             BoxPurchaseOrderSeeder::class,
             HelpTipSeeder::class,
             MismatchedOrderShipmentSeeder::class,
-            NaverCategorySeeder::class,
             OptionGoodSeeder::class,    // This must be over `OptionGoodOptionSeeder::class`
             // OrderSeeder::class,
             PriceCoefficientSeeder::class,

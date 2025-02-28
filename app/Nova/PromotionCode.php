@@ -30,7 +30,7 @@ class PromotionCode extends Resource
      *
      * @var string
      */
-    public static $title = 'sku';
+    public static $title = 'goods_code';
 
     /**
      * The columns that should be searched.
@@ -39,6 +39,7 @@ class PromotionCode extends Resource
      */
     public static $search = [
         'id',
+        'goods_code',
     ];
 
     /**

@@ -38,6 +38,7 @@ class Order extends Resource
      */
     public static $search = [
         'id',
+        'waybill_numbers',
         'orderSheetWaybill.id',
     ];
 

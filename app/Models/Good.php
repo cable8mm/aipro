@@ -25,11 +25,6 @@ class Good extends Model
             'supplier_monitoring_status' => 'string',
             'goods_price' => 'integer',
             'memo' => 'string',
-            'naver_category' => 'integer',
-            'naver_productid' => 'integer',
-            'naver_lowest_price_wrong' => 'boolean',
-            'naver_lowest_price' => 'integer',
-            'internet_lowest_price' => 'integer',
             'zero_margin_price' => 'integer',
         ];
     }
