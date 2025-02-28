@@ -26,7 +26,6 @@ use App\Nova\OrderSheetWaybill;
 use App\Nova\OrderShipment;
 use App\Nova\PromotionCode;
 use App\Nova\PurchaseOrder;
-use App\Nova\RegisterGoodRequest;
 use App\Nova\RegisterOptionGoodRequest;
 use App\Nova\RetailPurchase;
 use App\Nova\RetailPurchaseItem;
@@ -76,7 +75,6 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 MenuSection::make(__('Items & Boxes'), [
                     MenuItem::resource(Item::class),
                     MenuItem::resource(Box::class),
-                    //                    MenuItem::resource(RegisterGoodRequest::class),
                 ])->icon('qrcode')->collapsable(),
 
                 MenuSection::make(__('Online Order & Shipping'), [
