@@ -53,7 +53,6 @@ class DatabaseSeeder extends Seeder
             // OrderShipmentSeeder::class,
             ItemManualWarehousingSeeder::class,
             BarcodeCommandSeeder::class,
-            RegisterImportFileSeeder::class,
             HelpfulFileSeeder::class,
             GoodSeeder::class,
             SetGoodSeeder::class,

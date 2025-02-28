@@ -27,7 +27,6 @@ use App\Nova\OrderShipment;
 use App\Nova\PromotionCode;
 use App\Nova\PurchaseOrder;
 use App\Nova\RegisterGoodRequest;
-use App\Nova\RegisterImportFile;
 use App\Nova\RegisterOptionGoodRequest;
 use App\Nova\RetailPurchase;
 use App\Nova\RetailPurchaseItem;
@@ -124,7 +123,6 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 MenuSection::make(__('Tools'), [
                     MenuItem::resource(BarcodeCommand::class),
                     MenuItem::externalLink(__('Print Barcode Commands'), '/barcode-command')->openInNewTab(),
-                    MenuItem::resource(RegisterImportFile::class),
                     MenuItem::resource(HelpfulFile::class),
                 ])->icon('scissors')->collapsable(),
 
