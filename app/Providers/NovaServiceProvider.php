@@ -26,9 +26,6 @@ use App\Nova\OrderSheetWaybill;
 use App\Nova\OrderShipment;
 use App\Nova\PromotionCode;
 use App\Nova\PurchaseOrder;
-use App\Nova\RegisterGoodRequest;
-use App\Nova\RegisterImportFile;
-use App\Nova\RegisterOptionGoodRequest;
 use App\Nova\RetailPurchase;
 use App\Nova\RetailPurchaseItem;
 use App\Nova\SetGood;
@@ -77,7 +74,6 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 MenuSection::make(__('Items & Boxes'), [
                     MenuItem::resource(Item::class),
                     MenuItem::resource(Box::class),
-                    //                    MenuItem::resource(RegisterGoodRequest::class),
                 ])->icon('qrcode')->collapsable(),
 
                 MenuSection::make(__('Online Order & Shipping'), [
@@ -118,13 +114,11 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                     MenuItem::resource(OptionGood::class),
                     MenuItem::resource(OptionGoodOption::class),
                     MenuItem::resource(PromotionCode::class),
-                    MenuItem::resource(RegisterOptionGoodRequest::class),
                 ])->icon('shopping-cart')->collapsable(),
 
                 MenuSection::make(__('Tools'), [
                     MenuItem::resource(BarcodeCommand::class),
                     MenuItem::externalLink(__('Print Barcode Commands'), '/barcode-command')->openInNewTab(),
-                    MenuItem::resource(RegisterImportFile::class),
                     MenuItem::resource(HelpfulFile::class),
                 ])->icon('scissors')->collapsable(),
 
