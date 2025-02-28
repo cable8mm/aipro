@@ -19,7 +19,6 @@ class Good extends Model
     {
         return [
             'list_image' => 'string',
-            'playauto_category_id' => 'integer',
             'name' => 'string',
             'option' => 'string',
             'supplier_monitoring_price' => 'integer',

@@ -25,7 +25,6 @@ class GoodFactory extends Factory
             'author_id' => fake()->randomNumber(1) + 1,
             'item_id' => fake()->randomNumber(1) + 1,
             'list_image' => 'placeholder_list_image.png',
-            'playauto_category_id' => fake()->randomElement([10020400, 10030200, 10060600, 10061000]),
             'name' => $productName,
             'option' => fake()->randomElement([null, 'Large', 'Small', 'Medium']),
             'goods_price' => fake()->randomNumber(5),

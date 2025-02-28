@@ -17,7 +17,7 @@ class Item extends Model
 {
     use Actionable, HasFactory;
 
-    protected $with = ['box', 'author', 'supplier', 'supplierItem', 'playautoCategory'];
+    protected $with = ['box', 'author', 'supplier', 'supplierItem'];
 
     protected $guarded = [];
 
@@ -112,11 +112,6 @@ class Item extends Model
     public function supplierItem(): BelongsTo
     {
         return $this->belongsTo(SupplierItem::class);
-    }
-
-    public function playautoCategory(): BelongsTo
-    {
-        return $this->belongsTo(PlayautoCategory::class);
     }
 
     public function location(): BelongsTo
