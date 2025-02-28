@@ -2,9 +2,9 @@
 
 namespace App\Nova;
 
+use App\Enums\OrderShipmentDeliveryType;
 use App\Enums\OrderShipmentStatus;
 use App\Enums\Site;
-use App\Enums\Status;
 use App\Traits\NovaAuthorizedByWarehouser;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
@@ -108,7 +108,7 @@ class OrderShipment extends Resource
                 Number::make(__('Validator'), 'validator')
                     ->hideFromIndex(),
                 Select::make(__('Delivery Type'), 'deliveryType')
-                    ->options(Status::array())->displayUsingLabels(),
+                    ->options(OrderShipmentDeliveryType::array())->displayUsingLabels(),
                 Currency::make(__('Delivery Price'), 'deliveryPrice')
                     ->hideFromIndex(),
                 Currency::make(__('Total Delivery Price'), 'totalDeliveryPrice')

@@ -39,7 +39,7 @@ return [
         'DISPOSAL' => 'Disposal',
         'MISTAKE' => 'Mistake',
     ],
-    'mismatched-status' => [
+    'mismatched-order-shipment-status' => [
         'READY' => 'Ready',
         'FAILED' => 'Failed',
         'COMPLETED' => 'Completed',
@@ -59,7 +59,7 @@ return [
         'CANCEL' => 'Cancel',
         'ERROR' => 'Error',
     ],
-    'status' => [
+    'order-shipment-delivery-type' => [
         'WAITING' => 'Waiting',
         'RUNNING' => 'Running',
         'FAILED' => 'Failed',

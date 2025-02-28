@@ -80,7 +80,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                     MenuItem::resource(OrderSheetWaybill::class),
                     MenuItem::resource(Order::class),
                     MenuItem::resource(OrderShipment::class),
-                    //                    MenuItem::resource(MismatchedOrderShipment::class),
+                    MenuItem::resource(MismatchedOrderShipment::class),
                 ])->icon('truck')->collapsable(),
 
                 MenuSection::make(__('Offline Purchase'), [

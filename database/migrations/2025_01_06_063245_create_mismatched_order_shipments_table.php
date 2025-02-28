@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\MismatchedOrderShipmentStatus;
 use App\Models\OrderSheetWaybill;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
@@ -23,7 +24,7 @@ return new class extends Migration
             $table->string('goods_nm', 255)->nullable()->comment('상품명');
             $table->string('option', 255)->nullable()->comment('주문선택사항');
             $table->text('json')->nullable()->comment('주문 전체 데이터');
-            $table->string('status', 100)->comment('Status::class');
+            $table->enum('status', MismatchedOrderShipmentStatus::names())->default(MismatchedOrderShipmentStatus::READY->name)->comment('아이템 상태');
             $table->timestamps();
         });
     }

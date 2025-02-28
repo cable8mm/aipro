@@ -4,7 +4,7 @@ namespace App\Enums;
 
 use Cable8mm\EnumGetter\EnumGetter;
 
-enum MismatchedStatus: string
+enum MismatchedOrderShipmentStatus: string
 {
     use EnumGetter;
 
@@ -15,9 +15,9 @@ enum MismatchedStatus: string
     public function value(): string
     {
         return match ($this) {
-            self::READY => __('enum.mismatched-status.READY'),
-            self::FAILED => __('enum.mismatched-status.FAILED'),
-            self::COMPLETED => __('enum.mismatched-status.COMPLETED'),
+            self::READY => __('enum.mismatched-order-shipment-status.READY'),
+            self::FAILED => __('enum.mismatched-order-shipment-status.FAILED'),
+            self::COMPLETED => __('enum.mismatched-order-shipment-status.COMPLETED'),
         };
     }
 
