@@ -47,7 +47,6 @@ class DatabaseSeeder extends Seeder
             SupplierItemManualWarehousingSeeder::class,
             InventoryHistorySeeder::class,
             PlayautoCategorySeeder::class,
-            ItemInventorySnapshotSeeder::class,
             // OrderShipmentSeeder::class,
             ItemManualWarehousingSeeder::class,
             BarcodeCommandSeeder::class,
