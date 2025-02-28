@@ -49,11 +49,6 @@ class BoxPurchaseOrderItem extends Model
         return $this->belongsTo(User::class, 'author_id');
     }
 
-    public function boxSupplier(): BelongsTo
-    {
-        return $this->belongsTo(BoxSupplier::class);
-    }
-
     public function box(): BelongsTo
     {
         return $this->belongsTo(Box::class);
