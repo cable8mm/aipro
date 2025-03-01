@@ -2,7 +2,7 @@
 
 namespace App\Nova;
 
-use App\Enums\ManualInventoryAdjustmentType;
+use App\Enums\ItemManualWarehousingType;
 use App\Traits\NovaAuthorizedByWarehouser;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Badge;
@@ -64,13 +64,13 @@ class BoxManualWarehousing extends Resource
                 ->help(__('You can search for boxes by sku, box name or box supplier name.')),
             Select::make(__('Type'), 'type')
                 ->rules('required')->required()
-                ->options(ManualInventoryAdjustmentType::array())
+                ->options(ItemManualWarehousingType::array())
                 ->displayUsingLabels()
                 ->filterable()
                 ->hideFromIndex(),
             Badge::make(__('Type'), 'type')
-                ->map(ManualInventoryAdjustmentType::array(value: 'success'))
-                ->labels(ManualInventoryAdjustmentType::array())
+                ->map(ItemManualWarehousingType::array(value: 'success'))
+                ->labels(ItemManualWarehousingType::array())
                 ->onlyOnIndex(),
             Number::make(__('Amount'), 'amount')
                 ->rules('required', 'notIn:0')->required()

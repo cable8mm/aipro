@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Enums\ManualInventoryAdjustmentType;
+use App\Enums\ItemManualWarehousingType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -22,7 +22,7 @@ class ItemManualWarehousing extends Model
     {
         return [
             'amount' => 'integer',
-            'type' => ManualInventoryAdjustmentType::class,
+            'type' => ItemManualWarehousingType::class,
         ];
     }
 
@@ -61,7 +61,7 @@ class ItemManualWarehousing extends Model
         return $this->morphOne(InventoryHistory::class, 'historyable');
     }
 
-    public function add(int $manualAddInventoryCount, ManualInventoryAdjustmentType $type, ?string $memo = null, ?int $itemId = null)
+    public function add(int $manualAddInventoryCount, ItemManualWarehousingType $type, ?string $memo = null, ?int $itemId = null)
     {
         return $this->create([
             'item_id' => $itemId,

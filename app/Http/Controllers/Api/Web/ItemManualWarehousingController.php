@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api\Web;
 
-use App\Enums\ManualInventoryAdjustmentType;
+use App\Enums\ItemManualWarehousingType;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ItemManualWarehousing as ResourcesItemManualWarehousing;
 use App\Models\Item;
@@ -36,7 +36,7 @@ class ItemManualWarehousingController extends Controller
             ],
             'type' => [
                 'required',
-                Rule::enum(ManualInventoryAdjustmentType::class),
+                Rule::enum(ItemManualWarehousingType::class),
             ],
             'memo' => [
                 'nullable',
@@ -47,7 +47,7 @@ class ItemManualWarehousingController extends Controller
         return new ResourcesItemManualWarehousing(ItemManualWarehousing::create([
             'item_id' => $validated['item_id'],
             'amount' => $validated['amount'],
-            'type' => ManualInventoryAdjustmentType::tryFrom($validated['type']),
+            'type' => ItemManualWarehousingType::tryFrom($validated['type']),
             'memo' => $validated['memo'],
         ]));
     }
@@ -79,7 +79,7 @@ class ItemManualWarehousingController extends Controller
             ],
             'type' => [
                 'required',
-                Rule::enum(ManualInventoryAdjustmentType::class),
+                Rule::enum(ItemManualWarehousingType::class),
             ],
             'memo' => [
                 'nullable',
@@ -91,7 +91,7 @@ class ItemManualWarehousingController extends Controller
 
         return new ResourcesItemManualWarehousing($item->itemManualWarehousings()->create([
             'amount' => $validated['amount'],
-            'type' => ManualInventoryAdjustmentType::tryFrom($validated['type']),
+            'type' => ItemManualWarehousingType::tryFrom($validated['type']),
             'memo' => $validated['memo'],
         ]));
     }
