@@ -13,13 +13,15 @@ class BoxController extends Controller
     /**
      * /api/web/box/{sku}
      *
-     * Get a box by sku
+     * Get a box From SKU
      */
-    public function showBySku(string $sku)
+    public function showFromSku(string $sku)
     {
         $validated = Validator::validate(
             ['sku' => $sku],
             ['sku' => [
+                'required',
+                'string',
                 Rule::exists('boxes', 'sku'),
             ]]
         );

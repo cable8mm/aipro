@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Web;
 use App\Http\Controllers\Controller;
 use App\Support\Barcode;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Validator;
 
 class GenerateBarcodeController extends Controller
 {
@@ -18,6 +19,14 @@ class GenerateBarcodeController extends Controller
      */
     public function __invoke(string $barcode)
     {
+        Validator::validate(
+            ['barcode' => $barcode],
+            ['barcode' => [
+                'required',
+                'string',
+            ]]
+        );
+
         return Response::make(
             Barcode::factory($barcode)->render(),
             200,

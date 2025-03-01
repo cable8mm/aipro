@@ -23,16 +23,15 @@ Route::prefix('api/web')->group(function () {
 
     Route::get('/items', [ItemController::class, 'index']);
     Route::get('/items/{item}', [ItemController::class, 'show']);
-    Route::get('/items/sku/{sku}', [ItemController::class, 'showBySku']);
-    Route::get('/items/barcode/{barcode}', [ItemController::class, 'showByBarcode']);
-    Route::post('/items/{item}/balance-by-barcode', [ItemController::class, 'balanceByBarcode']);
+    Route::get('/items/sku/{sku}', [ItemController::class, 'showFromSku']);
+    Route::get('/items/barcode/{barcode}', [ItemController::class, 'showFromBarcode']);
 
     Route::get('/order-shipments', [OrderShipmentController::class, 'index']);
     Route::get('/order-shipments/pause', [OrderShipmentController::class, 'pause']);
     Route::get('/order-shipments/{order_shipment}', [OrderShipmentController::class, 'show'])->whereNumber('order_shipment');
 
-    Route::get('/box/{code}', [BoxController::class, 'showBySku']);
+    Route::get('/box/{code}', [BoxController::class, 'showFromSku']);
 
     Route::post('/item-manual-warehousings', [ItemManualWarehousingController::class, 'store']);
-
+    Route::post('/item-manual-warehousings/barcode/{barcode}', [ItemManualWarehousingController::class, 'storeFromBarcode']);
 });
