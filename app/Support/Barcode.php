@@ -55,8 +55,10 @@ final class Barcode
     {
         $barcodeCommandTypeValue = $number[0];
 
-        if (null == ($barcodeCommandType = BarcodeCommandType::type($barcodeCommandTypeValue))) {
-            throw new \Exception($barcodeCommandTypeValue.' is invalid barcode command type');
+        try {
+            $barcodeCommandType = BarcodeCommandType::type($barcodeCommandTypeValue);
+        } catch (\Throwable $e) {
+            throw new \InvalidArgumentException($barcodeCommandTypeValue.' is invalid barcode command type');
         }
 
         $barcodeType = '';

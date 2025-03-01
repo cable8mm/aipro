@@ -20,4 +20,9 @@ enum BarcodeCommandType: string
             default => self::ITEM,
         };
     }
+
+    public static function can(int $first): bool
+    {
+        return self::type($first) instanceof self;
+    }
 }
