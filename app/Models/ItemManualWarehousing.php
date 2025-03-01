@@ -14,13 +14,15 @@ class ItemManualWarehousing extends Model
 {
     use Actionable, HasFactory;
 
+    protected $guarded = [];
+
     protected $with = ['item', 'author'];
 
     protected function casts(): array
     {
         return [
             'amount' => 'integer',
-            'type' => 'string',
+            'type' => ManualInventoryAdjustmentType::class,
         ];
     }
 

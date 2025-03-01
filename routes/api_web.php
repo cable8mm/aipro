@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\Web\BoxController;
 use App\Http\Controllers\Api\Web\GenerateBarcodeController;
 use App\Http\Controllers\Api\Web\ItemController;
+use App\Http\Controllers\Api\Web\ItemManualWarehousingController;
 use App\Http\Controllers\Api\Web\OrderController;
 use App\Http\Controllers\Api\Web\OrderSheetWaybillController;
 use App\Http\Controllers\Api\Web\OrderShipmentController;
@@ -32,6 +33,6 @@ Route::prefix('api/web')->group(function () {
 
     Route::get('/box/{code}', [BoxController::class, 'showBySku']);
 
-    Route::post('/item-manual-warehousings', [ItemController::class, 'store']);
+    Route::post('/item-manual-warehousings', [ItemManualWarehousingController::class, 'store']);
 
 });
