@@ -21,7 +21,7 @@ class BoxManualWarehousingFactory extends Factory
             'box_id' => fake()->randomNumber(1) + 1,
             'author_id' => fake()->randomNumber(1) + 1,
             'type' => fake()->randomElement(ManualInventoryAdjustmentType::names()),
-            'manual_add_inventory_count' => (fake()->boolean() ? 1 : -1) * (fake()->randomNumber(1) + 1),
+            'amount' => (fake()->boolean() ? 1 : -1) * (fake()->randomNumber(1) + 1),
             'memo' => fake()->randomElement(['', '고객 반품', '불량품 반품', '월말 재고 체크 중 발견']),
         ];
     }

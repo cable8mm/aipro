@@ -129,6 +129,11 @@ class Item extends Model
         return $this->hasMany(InventoryHistory::class);
     }
 
+    public function itemManualWarehousings(): HasMany
+    {
+        return $this->hasMany(ItemManualWarehousing::class);
+    }
+
     /**
      * Update inventory.
      *

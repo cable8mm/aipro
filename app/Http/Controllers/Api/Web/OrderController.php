@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\Web;
 
 use App\Enums\OrderShipmentStatus;
 use App\Http\Controllers\Controller;
@@ -17,7 +17,7 @@ use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf;
 class OrderController extends Controller
 {
     /**
-     * /orders/{id}/print
+     * /api/web/orders/{id}/print
      *
      * Print the order
      */
@@ -31,7 +31,7 @@ class OrderController extends Controller
     }
 
     /**
-     * /orders/{id}/waybill
+     * /api/web/orders/{id}/waybill
      *
      * Download a waybill from order number
      */
@@ -39,13 +39,13 @@ class OrderController extends Controller
     {
         $waybillFilePath = $order->orderSheetWaybill->waybill_file;
 
-        return Slicer::of(ParcelService::Cj, $order->waybillFilePage)
+        return Slicer::of(ParcelService::Cj, $order->waybillFilePage ?? 1)
             ->source($waybillFilePath)
             ->download('waybill_'.$order->id.'.pdf');
     }
 
     /**
-     * /orders/{id}
+     * /api/web/orders/{id}
      *
      * Update order shipment by monitoring
      */
@@ -109,7 +109,7 @@ class OrderController extends Controller
     }
 
     /**
-     * /orders/{id}/clear-order
+     * /api/web/orders/{id}/clear-order
      *
      * Clear current orders from order number
      */
@@ -129,7 +129,7 @@ class OrderController extends Controller
     }
 
     /**
-     * /order/{waybill_numbers}/order-shipments
+     * /api/web/order/{waybill_numbers}/order-shipments
      *
      * Get order-shipments by waybill number
      *

@@ -72,7 +72,7 @@ class BoxManualWarehousing extends Resource
                 ->map(ManualInventoryAdjustmentType::array(value: 'success'))
                 ->labels(ManualInventoryAdjustmentType::array())
                 ->onlyOnIndex(),
-            Number::make(__('Manual Add Inventory Count'), 'manual_add_inventory_count')
+            Number::make(__('Amount'), 'amount')
                 ->rules('required', 'notIn:0')->required()
                 ->default(-1)
                 ->displayUsing(function ($value) {

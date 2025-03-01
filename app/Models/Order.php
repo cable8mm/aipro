@@ -15,6 +15,8 @@ class Order extends Model
 {
     use Actionable, HasFactory;
 
+    protected $guarded = [];
+
     protected $with = ['orderSheetWaybill'];
 
     protected function casts(): array

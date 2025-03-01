@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(User::class, 'author_id')->constrained()->comment('작성자 아이디');
             $table->foreignIdFor(Item::class)->constrained()->comment('상품 아이디');
-            $table->integer('manual_add_inventory_count')->comment('상품 차감 수량');
+            $table->integer('amount')->comment('수량');
             $table->string('type', 100);
             $table->text('memo')->nullable();
             $table->timestamps();

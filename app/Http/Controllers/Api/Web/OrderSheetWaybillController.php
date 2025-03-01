@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\Web;
 
 use App\Http\Controllers\Controller;
 use App\Models\OrderSheetWaybill;
@@ -10,7 +10,7 @@ use OutOfRangeException;
 class OrderSheetWaybillController extends Controller
 {
     /**
-     * /order-sheet-waybill/{id}/print
+     * /api/web/order-sheet-waybill/{id}/print
      *
      * Print the order sheet waybill
      *
