@@ -18,7 +18,7 @@ class BoxManualWarehousing extends Model
     {
         return [
             'type' => 'string',
-            'manual_add_inventory_count' => 'integer',
+            'amount' => 'integer',
         ];
     }
 
@@ -30,7 +30,7 @@ class BoxManualWarehousing extends Model
 
         static::created(function (BoxManualWarehousing $boxManualWarehousing) {
             $boxManualWarehousing->box->plusminus(
-                $boxManualWarehousing->manual_add_inventory_count,
+                $boxManualWarehousing->amount,
                 get_class($boxManualWarehousing),
                 $boxManualWarehousing->id
             );
