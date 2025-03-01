@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\Web;
 
+use App\Enums\OrderShipmentStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\OrderShipmentResource;
 use App\Models\OrderShipment;
@@ -10,7 +11,7 @@ use Illuminate\Http\Request;
 class OrderShipmentController extends Controller
 {
     /**
-     * /order-shipments
+     * /api/web/order-shipments
      *
      * Get order shipments with paging
      */
@@ -22,13 +23,13 @@ class OrderShipmentController extends Controller
              *
              * @example 407518300914
              */
-            'order_no' => 'nullable|string',
+            'order_no' => 'nullable|string|required_without:waybill_no',
             /**
              * Waybill number
              *
              * @example 912432837263
              */
-            'waybill_no' => 'nullable|string',
+            'waybill_no' => 'nullable|string|required_without:order_no',
         ]);
 
         $orderShipment = OrderShipment::on();
@@ -51,7 +52,7 @@ class OrderShipmentController extends Controller
     }
 
     /**
-     * /order-shipments/{id}
+     * /api/web/order-shipments/{id}
      *
      * Get a order shipment resource
      */
@@ -61,16 +62,16 @@ class OrderShipmentController extends Controller
     }
 
     /**
-     * /order-shipments/pause
+     * /api/web/order-shipments/pause
      *
      * While the processing is on going, it is able to pause a order from processing
      */
     public function pause()
     {
-        $count = OrderShipment::where('status', '임시저장')->distinct()->count('orderNo');
+        $count = OrderShipment::where('status', OrderShipmentStatus::임시저장->name)->distinct()->count('orderNo');
 
         return response()->json([
-            'count' => $count,
+            'count' => (int) $count,
         ]);
     }
 }
