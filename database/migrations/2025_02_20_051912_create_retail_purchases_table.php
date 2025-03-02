@@ -22,7 +22,7 @@ return new class extends Migration
             $table->bigInteger('item_count')->default(0)->comment('아이템수');
             $table->bigInteger('total_price')->default(0)->comment('총 결제 금액');
             $table->string('payment_method', 50)->comment('결제 수단(cash, card, mobile, other)');
-            $table->string('status')->default(RetailPurchaseStatus::PENDING->name)->comment('판매상태(completed, pending, canceled, refunded)');
+            $table->string('status')->default(RetailPurchaseStatus::PENDING->value)->comment('판매상태(completed, pending, canceled, refunded)');
             $table->bigInteger('discount')->nullable()->comment('할인');
             $table->bigInteger('tax')->nullable()->comment('세금(부가세)');
             $table->text('notes')->nullable()->comment('비고');

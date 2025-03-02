@@ -33,8 +33,8 @@ class RetailPurchase extends Model
             $retailPurchase->cashier_id = $retailPurchase->cashier_id ?? Auth::user()->id;
 
             if (
-                $retailPurchase->status == RetailPurchaseStatus::COMPLETED->name
-                && $retailPurchase->getOriginal('status') != RetailPurchaseStatus::COMPLETED->name
+                $retailPurchase->status == RetailPurchaseStatus::COMPLETED->value
+                && $retailPurchase->getOriginal('status') != RetailPurchaseStatus::COMPLETED->value
             ) {
                 $retailPurchase->retailPurchaseItems()->each(function (RetailPurchaseItem $retailPurchaseItem) {
                     $retailPurchaseItem->item->plusminus($retailPurchaseItem->quantity * -1, __CLASS__, $retailPurchaseItem->id);

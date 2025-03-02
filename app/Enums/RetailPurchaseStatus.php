@@ -25,12 +25,12 @@ enum RetailPurchaseStatus: string
 
     public static function loadingWhen(): array
     {
-        return [self::PENDING->name];
+        return [self::PENDING->value];
     }
 
     public static function failedWhen(): array
     {
-        return [self::CANCELED->name, self::REFUNDED->name];
+        return [self::CANCELED->value, self::REFUNDED->value];
     }
 
     /**

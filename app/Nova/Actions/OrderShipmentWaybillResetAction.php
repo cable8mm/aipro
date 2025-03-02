@@ -30,7 +30,7 @@ class OrderShipmentWaybillResetAction extends Action
             $model->OrderShipments()->delete();
 
             $model->update([
-                'status' => OrderSheetWaybillStatus::FILE_UPLOADED->name,
+                'status' => OrderSheetWaybillStatus::FILE_UPLOADED->value,
                 'row_count' => null,
                 'order_count' => null,
                 'order_good_count' => null,

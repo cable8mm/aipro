@@ -79,7 +79,7 @@ final class Barcode
             $barcodeType = BarcodeType::CODABAR;
         }
 
-        return [BarcodeCommandType::{$barcodeCommandType->name}, $number, $barcodeType];
+        return [BarcodeCommandType::{$barcodeCommandType->value}, $number, $barcodeType];
     }
 
     public function render()

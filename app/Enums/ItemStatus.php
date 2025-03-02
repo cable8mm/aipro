@@ -50,11 +50,11 @@ enum ItemStatus: string
 
     public static function loadingWhen(): array
     {
-        return [self::PENDING->name];
+        return [self::PENDING->value];
     }
 
     public static function failedWhen(): array
     {
-        return [self::OUT_OF_STOCK->name, self::DISCONTINUED->name];
+        return [self::OUT_OF_STOCK->value, self::DISCONTINUED->value];
     }
 }

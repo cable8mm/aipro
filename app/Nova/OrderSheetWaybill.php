@@ -126,7 +126,7 @@ class OrderSheetWaybill extends Resource
             ]),
 
             FieldsStatus::make(__('Status'), 'status')
-                ->default(OrderSheetWaybillStatus::FILE_UPLOADED->name)
+                ->default(OrderSheetWaybillStatus::FILE_UPLOADED->value)
                 ->loadingWhen(OrderSheetWaybillStatus::loadingWhen())
                 ->failedWhen(OrderSheetWaybillStatus::failedWhen())
                 ->filterable(function ($request, $query, $value, $attribute) {

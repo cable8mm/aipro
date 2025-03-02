@@ -68,7 +68,7 @@ class OrderShipmentController extends Controller
      */
     public function pause()
     {
-        $count = OrderShipment::where('status', OrderShipmentStatus::임시저장->name)->distinct()->count('orderNo');
+        $count = OrderShipment::where('status', OrderShipmentStatus::임시저장->value)->distinct()->count('orderNo');
 
         return response()->json([
             'count' => (int) $count,

@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('paymentDate', 255)->nullable()->comment('결제일');
             $table->string('statusDate', 255)->nullable()->comment('상태변경일');
             $table->string('deliveryDate', 255)->nullable()->comment('배송일');
-            $table->string('status', 255)->nullable()->default(OrderShipmentStatus::상품준비중->name)->comment('상태');
+            $table->string('status', 255)->nullable()->default(OrderShipmentStatus::상품준비중->value)->comment('상태');
             $table->string('siteOrderNo', 255)->nullable()->comment('판매사이트 주문번호');
             $table->string('siteGoodsCd', 255)->nullable()->comment('판매사이트 상품코드');
             $table->string('goodsNm', 255)->nullable()->comment('상품명');

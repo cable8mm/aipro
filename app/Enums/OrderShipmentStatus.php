@@ -17,11 +17,11 @@ enum OrderShipmentStatus: string
 
     public static function loadingWhen(): array
     {
-        return [self::송장입력->name, self::상품준비중->name, self::부분검수완료, self::임시저장];
+        return [self::송장입력->value, self::상품준비중->value, self::부분검수완료->value, self::임시저장->value];
     }
 
     public static function failedWhen(): array
     {
-        return [self::에러->name];
+        return [self::에러->value];
     }
 }

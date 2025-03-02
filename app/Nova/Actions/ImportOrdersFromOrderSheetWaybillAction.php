@@ -31,7 +31,7 @@ class ImportOrdersFromOrderSheetWaybillAction extends Action
          * @var \App\Models\OrderSheetWaybill $model
          */
         foreach ($models as $model) {
-            $model->status = OrderSheetWaybillStatus::RUNNING->name;
+            $model->status = OrderSheetWaybillStatus::RUNNING->value;
             $model->save();
 
             try {
@@ -59,17 +59,17 @@ class ImportOrdersFromOrderSheetWaybillAction extends Action
                 $model->row_count = $orderSheetWaybillsImport->getNumberOfLines();
                 $model->order_count = $model->orderShipments()->distinct()->count('orderNo');
                 $model->order_good_count = $model->orderShipments()->count();   // only as good master codes
-                $model->status = OrderSheetWaybillStatus::SUCCESS->name;
+                $model->status = OrderSheetWaybillStatus::SUCCESS->value;
                 $model->save();
             } catch (OptionGoodInvalidArgumentException $e) {
                 $e->save();
 
-                $model->status = OrderSheetWaybillStatus::ERROR->name;
+                $model->status = OrderSheetWaybillStatus::ERROR->value;
                 $model->save();
 
                 return Action::danger($e->getMessage());
             } catch (\Exception $e) {
-                $model->status = OrderSheetWaybillStatus::ERROR->name;
+                $model->status = OrderSheetWaybillStatus::ERROR->value;
                 $model->save();
 
                 return Action::danger($e->getMessage());

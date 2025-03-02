@@ -27,7 +27,7 @@ class ChangeStatusAction extends DestructiveAction
     public function handle(ActionFields $fields, Collection $models)
     {
         foreach ($models as $model) {
-            $model->status = $this->status->name;
+            $model->status = $this->status->value;
             $model->save();
 
             $model->author->notify(

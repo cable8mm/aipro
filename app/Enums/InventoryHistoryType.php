@@ -31,7 +31,7 @@ enum InventoryHistoryType: string
 
     public static function failedWhen(): array
     {
-        return [self::WAREHOUSING_CANCELED->name, self::SHIPPING_CANCELED->name];
+        return [self::WAREHOUSING_CANCELED->value, self::SHIPPING_CANCELED->value];
     }
 
     public static function of(int $inventory, ?int $cancelId = null): static

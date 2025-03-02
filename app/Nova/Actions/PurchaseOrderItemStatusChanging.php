@@ -35,7 +35,7 @@ class PurchaseOrderItemStatusChanging extends DestructiveAction
                     throw new \RuntimeException(__('The status cannot be changed.'));
                 }
 
-                $model->status = $this->status->name;
+                $model->status = $this->status->value;
 
                 $model->save();
             }
