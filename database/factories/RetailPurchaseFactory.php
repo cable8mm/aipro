@@ -21,8 +21,8 @@ class RetailPurchaseFactory extends Factory
         return [
             'cashier_id' => fake()->randomNumber(1) + 1,
             'customer_id' => fake()->randomNumber(1) + 1,
-            'payment_method' => fake()->randomElement(PaymentMethod::names()),
-            'status' => fake()->randomElement(RetailPurchaseStatus::names()),
+            'payment_method' => fake()->randomElement(PaymentMethod::keys()),
+            'status' => fake()->randomElement(RetailPurchaseStatus::keys()),
             'discount' => fake()->randomNumber(2, true) + 1,
             'notes' => fake()->sentence(),
             'purchased_at' => fake()->dateTimeThisYear(),

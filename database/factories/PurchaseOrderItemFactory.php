@@ -29,7 +29,7 @@ class PurchaseOrderItemFactory extends Factory
             'unit_price' => $unit_price,
             'warehoused_at' => fake()->dateTime(),
             'purchase_ordered_at' => fake()->dateTime(),
-            'status' => fake()->randomElement(PurchaseOrderItemStatus::names()),
+            'status' => fake()->randomElement(PurchaseOrderItemStatus::keys()),
             'memo' => fake()->paragraph(),
         ];
     }

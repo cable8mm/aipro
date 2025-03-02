@@ -25,7 +25,7 @@ class ItemFactory extends Factory
 
         $productName = fake()->productName();
         $costPrice = fake()->randomNumber(5, true);
-        $status = fake()->randomElement(ItemStatus::names());
+        $status = fake()->randomElement(ItemStatus::keys());
 
         return [
             'author_id' => fake()->randomNumber(1) + 1,
@@ -36,13 +36,13 @@ class ItemFactory extends Factory
             'name' => $productName,
             'supplier_out_of_stock_count' => fake()->randomNumber(),
             'safe_inventory' => fake()->randomNumber(1),
-            'inventory_level' => fake()->randomElement(ItemInventoryLevel::names()),
+            'inventory_level' => fake()->randomElement(ItemInventoryLevel::keys()),
             'category' => fake()->randomElement(['꽃게|암컷', '꽃게|숫컷']),
             'maker' => fake()->company(),
             'brand' => fake()->deviceManufacturer(),
             'cost_price' => $costPrice,
             'last_cost_price' => $costPrice * (1 + (fake()->randomNumber(2) / 100)),
-            'supplier_pricing_policy' => fake()->randomElement(SupplierPricingPolicy::names()),
+            'supplier_pricing_policy' => fake()->randomElement(SupplierPricingPolicy::keys()),
             'min_price' => $minPrice = fake()->randomNumber(5),
             'max_price' => $minPrice + fake()->randomNumber(4, true),
             'terminate_on_pricing_violation' => fake()->boolean(),
