@@ -30,7 +30,7 @@ return [
         'ITEM' => '상품',
         'ORDER_SHEET_WAYBILL' => '주문서 송장',
     ],
-    'manual-inventory-adjustment-type' => [
+    'item-manual-warehousing-type' => [
         'CLIENT_RETURN' => '고객반품',
         'EXCHANGE' => '고객교환',
         'WRONG_DELIVERY' => '오배송교환',
