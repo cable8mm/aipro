@@ -28,7 +28,7 @@ trait NovaAuthorizedByNotReviewer
 
     public static function authorizedToCreate(Request $request)
     {
-        return $request->user()?->type != UserType::REVIEWER->value;
+        return $request->user()?->type != UserType::REVIEWER;
     }
 
     public function authorizedToDelete(Request $request)
@@ -38,6 +38,6 @@ trait NovaAuthorizedByNotReviewer
 
     public function authorizedToUpdate(Request $request)
     {
-        return $request->user()?->type != UserType::REVIEWER->value;
+        return $request->user()?->type != UserType::REVIEWER;
     }
 }

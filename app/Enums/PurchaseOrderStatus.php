@@ -23,12 +23,12 @@ enum PurchaseOrderStatus: string
 
     public static function loadingWhen(): array
     {
-        return [self::PENDING->value];
+        return [self::PENDING];
     }
 
     public static function failedWhen(): array
     {
-        return [self::RETURNED->value];
+        return [self::RETURNED];
     }
 
     /**

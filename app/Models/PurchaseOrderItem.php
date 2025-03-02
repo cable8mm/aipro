@@ -73,7 +73,7 @@ class PurchaseOrderItem extends Model
         }
 
         $replicate = $this->replicate()->fill([
-            'status' => PurchaseOrderItemStatus::RETURNED->value,
+            'status' => PurchaseOrderItemStatus::RETURNED,
             'quantity' => $quantity,
             'subtotal' => $quantity * $this->unit_price,
         ]);

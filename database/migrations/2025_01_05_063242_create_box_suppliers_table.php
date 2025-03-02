@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('contact_name', 255)->nullable();
             $table->string('contact_tel', 255)->nullable();
             $table->string('contact_cel', 255)->nullable();
-            $table->enum('order_method', OrderMethod::keys())->default(OrderMethod::PHONE->value)->comment('주문방식');
+            $table->enum('order_method', OrderMethod::keys())->default(OrderMethod::PHONE)->comment('주문방식');
             $table->string('balance_criteria', 255)->nullable();
             $table->integer('min_order_price')->nullable();
             $table->boolean('is_parceled')->nullable()->default('0');

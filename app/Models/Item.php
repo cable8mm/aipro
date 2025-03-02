@@ -157,7 +157,7 @@ class Item extends Model
 
         return $this->inventoryHistories()->create([
             'item_id' => $this->id,
-            'type' => InventoryHistoryType::of($inventory, $cancelId)->value,
+            'type' => InventoryHistoryType::of($inventory, $cancelId),
             'quantity' => $inventory,
             'after_quantity' => $this->getOriginal('inventory'),
             'historyable_type' => $model,

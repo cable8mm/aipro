@@ -85,7 +85,7 @@ class Item extends Resource
             })->rules('required')->required()->sortable()->default(0),
             Select::make(__('Status'), 'status')->options(ItemStatus::array())
                 ->rules('required')->required()
-                ->default(ItemStatus::ACTIVE->value)->onlyOnForms(),
+                ->default(ItemStatus::ACTIVE)->onlyOnForms(),
             Panel::make(__('Additional Information'), [
                 Number::make(__('Safe Inventory'), 'safe_inventory')->displayUsing(function ($value) {
                     return number_format($value);

@@ -23,11 +23,11 @@ enum MismatchedOrderShipmentStatus: string
 
     public static function loadingWhen(): array
     {
-        return [self::READY->value];
+        return [self::READY];
     }
 
     public static function failedWhen(): array
     {
-        return [self::FAILED->value];
+        return [self::FAILED];
     }
 }

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->enum('type', UserType::keys())->default(UserType::REVIEWER->value)->comment('유저 타입');
+            $table->enum('type', UserType::keys())->default(UserType::REVIEWER)->comment('유저 타입');
             $table->string('timezone', 80)->default('Asia/Seoul');
             $table->rememberToken();
             $table->timestamps();

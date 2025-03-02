@@ -34,7 +34,7 @@ class PurchaseOrderStatusChanging extends Action
                     throw new \RuntimeException(__('The status cannot be changed.'));
                 }
 
-                $model->status = $this->status->value;
+                $model->status = $this->status;
 
                 $model->save();
             }

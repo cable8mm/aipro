@@ -21,7 +21,7 @@ class MismatchedOrderShipment implements Arrayable
         $this->container['goods_nm'] = $orderShipment->data->get('goodsNm');
         $this->container['option'] = $orderShipment->data->get('option');
         $this->container['json'] = $orderShipment->data;
-        $this->container['status'] = MismatchedOrderShipmentStatus::READY->value;
+        $this->container['status'] = MismatchedOrderShipmentStatus::READY;
     }
 
     public function toArray(): array

@@ -41,7 +41,7 @@ class CreateNovaAccount extends Command
                     'name' => $name,
                     'email' => $email,
                     'password' => Hash::make($password),
-                    'type' => UserType::ADMINISTRATOR->value,
+                    'type' => UserType::ADMINISTRATOR,
                 ]))->save();
             } catch (QueryException $e) {
 

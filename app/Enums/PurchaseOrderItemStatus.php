@@ -31,20 +31,20 @@ enum PurchaseOrderItemStatus: string
 
     public static function loadingWhen(): array
     {
-        return [self::PENDING->value, self::RECEIVED->value, self::INSPECTED->value];
+        return [self::PENDING, self::RECEIVED, self::INSPECTED];
     }
 
     public static function failedWhen(): array
     {
-        return [self::DAMAGED->value, self::RETURNED->value, self::CANCELED->value];
+        return [self::DAMAGED, self::RETURNED, self::CANCELED];
     }
 
     public static function replicates(bool $default = false): array|string
     {
-        return $default ? self::DAMAGED->value
+        return $default ? self::DAMAGED
             : [
-                self::DAMAGED->value => self::DAMAGED->value(),
-                self::RETURNED->value => self::RETURNED->value(),
+                self::DAMAGED => self::DAMAGED->value(),
+                self::RETURNED => self::RETURNED->value(),
             ];
     }
 

@@ -65,7 +65,7 @@ class ItemManualWarehousing extends Model
     {
         return $this->create([
             'item_id' => $itemId,
-            'type' => $type->value,
+            'type' => $type,
             'amount' => $manualAddInventoryCount,
             'memo' => $memo,
         ]);

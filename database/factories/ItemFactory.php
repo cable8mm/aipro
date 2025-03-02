@@ -54,7 +54,7 @@ class ItemFactory extends Factory
             'print_classification' => fake()->text(190),
             'is_supplier_out_of_stock' => fake()->boolean(),
             'status' => $status,
-            'discontinued_at' => $status === ItemStatus::DISCONTINUED->value ? now() : null,
+            'discontinued_at' => $status === ItemStatus::DISCONTINUED ? now() : null,
         ];
     }
 }
