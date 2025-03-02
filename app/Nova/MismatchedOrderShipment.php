@@ -68,7 +68,7 @@ class MismatchedOrderShipment extends Resource
                 ->filterable(function ($request, $query, $value, $attribute) {
                     $query->where($attribute, $value);
                 })->displayUsing(function ($value) {
-                    return MismatchedOrderShipmentStatus::{$value}->value() ?? '-';
+                    return MismatchedOrderShipmentStatus::tryFrom($value)?->value() ?? '-';
                 }),
             BelongsTo::make(__('Author'), 'author', User::class),
             Stack::make(__('Created At').' & '.__('Updated At'), [

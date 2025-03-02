@@ -60,7 +60,7 @@ class InventoryHistory extends Resource
                 ->loadingWhen(InventoryHistoryType::loadingWhen())
                 ->failedWhen(InventoryHistoryType::failedWhen())
                 ->displayUsing(function ($value) {
-                    return InventoryHistoryType::{$value}->value() ?? '-';
+                    return InventoryHistoryType::tryFrom($value)?->value() ?? '-';
                 }),
             MorphTo::make(__('Inventory Historyable'), 'historyable')
                 ->types([

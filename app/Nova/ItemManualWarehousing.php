@@ -133,7 +133,7 @@ class ItemManualWarehousing extends Resource
 
     public function title()
     {
-        return ItemManualWarehousingType::{$this->type}->value().' '.'#'.$this->id;
+        return $this->type->value().' '.'#'.$this->id;
     }
 
     public function authorizedToView(Request $request)

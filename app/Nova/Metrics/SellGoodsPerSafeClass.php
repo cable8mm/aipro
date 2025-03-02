@@ -17,7 +17,7 @@ class SellGoodsPerSafeClass extends Partition
     public function calculate(NovaRequest $request)
     {
         return $this->count($request, Item::onSale(), 'inventory_level')
-            ->label(fn ($value) => ItemInventoryLevel::{$value}->value());
+            ->label(fn ($value) => ItemInventoryLevel::tryFrom($value)?->value());
     }
 
     /**

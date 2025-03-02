@@ -106,7 +106,7 @@ class Item extends Resource
                     ->rules('required')->required()
                     ->default(SupplierPricingPolicy::FLEXIBLE->name)
                     ->displayUsing(function ($value) {
-                        return SupplierPricingPolicy::{$value}->value() ?? '-';
+                        return SupplierPricingPolicy::tryFrom($value)?->value() ?? '-';
                     }),
                 Currency::make(__('Max Price'), 'max_price'),
                 Currency::make(__('Min Price'), 'min_price'),
@@ -124,7 +124,7 @@ class Item extends Resource
                     ->loadingWhen(ItemStatus::loadingWhen())
                     ->failedWhen(ItemStatus::failedWhen())
                     ->displayUsing(function ($value) {
-                        return ItemStatus::{$value}->value() ?? '-';
+                        return ItemStatus::tryFrom($value)?->value() ?? '-';
                     }),
             ])->withToolbar()->limit(3),
 

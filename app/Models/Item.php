@@ -68,7 +68,7 @@ class Item extends Model
             /**
              * When `discontinued_at` is set to datetime, `inventory_level` will be set to `discontinued` status.
              */
-            $item->status = ItemStatus::{$item->status}->status($item->inventory, $item->discontinued_at)->value;
+            $item->status = ItemStatus::from($item->status)->status($item->inventory, $item->discontinued_at)->value;
         });
 
         static::saved(function (Item $item) {

@@ -18,7 +18,7 @@ class RetailPurchaseSumPaymentMethod extends Partition
     public function calculate(NovaRequest $request): PartitionResult
     {
         return $this->count($request, RetailPurchase::class, 'payment_method')
-            ->label(fn ($value) => PaymentMethod::{$value}->value());
+            ->label(fn ($value) => PaymentMethod::tryFrom($value)?->value());
     }
 
     /**

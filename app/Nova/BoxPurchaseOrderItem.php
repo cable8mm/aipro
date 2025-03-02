@@ -92,7 +92,7 @@ class BoxPurchaseOrderItem extends Resource
                 ->filterable(function ($request, $query, $value, $attribute) {
                     $query->where($attribute, $value);
                 })->displayUsing(function ($value) {
-                    return PurchaseOrderItemStatus::{$value}->value() ?? '-';
+                    return PurchaseOrderItemStatus::tryFrom($value)?->value() ?? '-';
                 }),
             Textarea::make(__('Memo'), 'memo')
                 ->alwaysShow(),
