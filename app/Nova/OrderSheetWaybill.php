@@ -132,7 +132,7 @@ class OrderSheetWaybill extends Resource
                 ->filterable(function ($request, $query, $value, $attribute) {
                     $query->where($attribute, $value);
                 })->displayUsing(function ($value) {
-                    return OrderSheetWaybillStatus::tryFrom($value)?->value() ?? '-';
+                    return OrderSheetWaybillStatus::from($value)?->value() ?? '-';
                 }),
             Stack::make(__('Created At').' & '.__('Updated At'), [
                 DateTime::make(__('Created At'), 'created_at'),

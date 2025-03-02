@@ -73,8 +73,9 @@ class InventoryHistory extends Resource
             })->rules('required')->required(),
             Number::make(__('After Quantity'), 'after_quantity')->displayUsing(function ($value) {
                 return number_format($value);
-            })->rules('required')->required(),
-            BelongsTo::make(__('Cancel'), 'cancel', InventoryHistory::class),
+            })->rules('required')->required()->exceptOnForms(),
+            BelongsTo::make(__('Cancel'), 'cancel', InventoryHistory::class)
+                ->nullable(),
             Stack::make(__('Created At').' & '.__('Updated At'), [
                 DateTime::make(__('Created At'), 'created_at'),
                 DateTime::make(__('Updated At'), 'updated_at'),

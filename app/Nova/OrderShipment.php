@@ -67,7 +67,9 @@ class OrderShipment extends Resource
             Panel::make(__('Additional Information'), [
                 Text::make(__('Goods Code'), 'goodsCd')->copyable(),
                 Text::make(__('Seller Good Code'), 'sellerGoodsCd')->copyable(),
-                Select::make(__('Site'), 'site')->options(Site::array())->displayUsingLabels(),
+                Select::make(__('Site'), 'site')
+                    ->options(Site::array())
+                    ->displayUsingLabels(),
                 Text::make(__('Regist Date'), 'registDate')->maxlength(255)
                     ->hideFromIndex(),
                 Text::make(__('Order Date'), 'orderDate')->maxlength(255)
@@ -108,7 +110,8 @@ class OrderShipment extends Resource
                 Number::make(__('Validator'), 'validator')
                     ->hideFromIndex(),
                 Select::make(__('Delivery Type'), 'deliveryType')
-                    ->options(OrderShipmentDeliveryType::array())->displayUsingLabels(),
+                    ->options(OrderShipmentDeliveryType::array())
+                    ->displayUsingLabels(),
                 Currency::make(__('Delivery Price'), 'deliveryPrice')
                     ->hideFromIndex(),
                 Currency::make(__('Total Delivery Price'), 'totalDeliveryPrice')
@@ -222,8 +225,8 @@ class OrderShipment extends Resource
         return false;
     }
 
-    public function authorizedToUpdate(Request $request)
-    {
-        return false;
-    }
+    // public function authorizedToUpdate(Request $request)
+    // {
+    //     return false;
+    // }
 }

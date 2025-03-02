@@ -102,12 +102,11 @@ class Item extends Resource
                     ->hideFromDetail()->hideFromIndex()->exceptOnForms(),
                 Currency::make(__('Suggested Selling Price'), 'suggested_selling_price')
                     ->hideFromDetail()->hideFromIndex()->exceptOnForms(),
-                Select::make(__('Supplier Pricing Policy'), 'supplier_pricing_policy')->options(SupplierPricingPolicy::array())
+                Select::make(__('Supplier Pricing Policy'), 'supplier_pricing_policy')
+                    ->options(SupplierPricingPolicy::array())
                     ->rules('required')->required()
-                    ->default(SupplierPricingPolicy::FLEXIBLE->name)
-                    ->displayUsing(function ($value) {
-                        return SupplierPricingPolicy::tryFrom($value)?->value() ?? '-';
-                    }),
+                    ->default(SupplierPricingPolicy::FLEXIBLE)
+                    ->displayUsingLabels(),
                 Currency::make(__('Max Price'), 'max_price'),
                 Currency::make(__('Min Price'), 'min_price'),
                 Boolean::make(__('Terminate On Pricing Violation'), 'terminate_on_pricing_violation'),

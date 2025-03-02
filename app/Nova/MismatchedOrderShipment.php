@@ -62,13 +62,13 @@ class MismatchedOrderShipment extends Resource
             Text::make(__('Option'), 'option')->maxlength(255),
             KeyValue::make(__('Json'), 'json'),
             Status::make(__('Status'), 'status')
-                ->default(MismatchedOrderShipmentStatus::READY)
                 ->loadingWhen(MismatchedOrderShipmentStatus::loadingWhen())
                 ->failedWhen(MismatchedOrderShipmentStatus::failedWhen())
+                ->default(MismatchedOrderShipmentStatus::READY)
                 ->filterable(function ($request, $query, $value, $attribute) {
                     $query->where($attribute, $value);
                 })->displayUsing(function ($value) {
-                    return MismatchedOrderShipmentStatus::tryFrom($value)?->value() ?? '-';
+                    return MismatchedOrderShipmentStatus::from($value)?->value() ?? '-';
                 }),
             BelongsTo::make(__('Author'), 'author', User::class),
             Stack::make(__('Created At').' & '.__('Updated At'), [

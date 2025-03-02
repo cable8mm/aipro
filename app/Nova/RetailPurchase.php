@@ -68,7 +68,8 @@ class RetailPurchase extends Resource
             Number::make(__('Item Count'), 'item_count')->exceptOnForms(),
             Currency::make(__('Total Price'), 'total_price')->exceptOnForms(),
             Select::make(__('Payment Method'), 'payment_method')
-                ->options(PaymentMethod::array())->displayUsingLabels()
+                ->options(PaymentMethod::array())
+                ->displayUsingLabels()
                 ->filterable(),
             Status::make(__('Status'), 'status')
                 ->loadingWhen(RetailPurchaseStatus::loadingWhen())
