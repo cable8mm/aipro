@@ -47,7 +47,9 @@ class AlertEmail extends Resource
     {
         return [
             ID::make()->sortable(),
+
             Text::make(__('Name'), 'name')->rules('required')->required()->maxlength(255),
+
             Text::make(__('Action Name'), 'action_name')->rules('required')->required()->maxlength(255)->copyable(),
 
             Tag::make(__('Users'), 'users', User::class)->preload()->withPreview(),

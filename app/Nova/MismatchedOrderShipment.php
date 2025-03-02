@@ -54,13 +54,21 @@ class MismatchedOrderShipment extends Resource
     {
         return [
             ID::make()->sortable(),
+
             BelongsTo::make(__('Order Sheet Waybill'), 'orderSheetWaybill', OrderSheetWaybill::class),
+
             Text::make(__('Order No'), 'order_no')->maxlength(100)->copyable(),
+
             Text::make(__('Site'), 'site')->maxlength(100),
+
             Text::make(__('Goods Cd'), 'goods_cd')->maxlength(100)->copyable(),
+
             Text::make(__('Goods Nm'), 'goods_nm')->maxlength(255),
+
             Text::make(__('Option'), 'option')->maxlength(255),
+
             KeyValue::make(__('Json'), 'json'),
+
             Status::make(__('Status'), 'status')
                 ->loadingWhen(MismatchedOrderShipmentStatus::loadingWhen())
                 ->failedWhen(MismatchedOrderShipmentStatus::failedWhen())
@@ -70,7 +78,9 @@ class MismatchedOrderShipment extends Resource
                 })->displayUsing(function ($value) {
                     return MismatchedOrderShipmentStatus::from($value)?->value() ?? '-';
                 }),
+
             BelongsTo::make(__('Author'), 'author', User::class),
+
             Stack::make(__('Created At').' & '.__('Updated At'), [
                 DateTime::make(__('Created At'), 'created_at'),
                 DateTime::make(__('Updated At'), 'updated_at'),

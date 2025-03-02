@@ -50,17 +50,25 @@ class Good extends Resource
     {
         return [
             ID::make()->sortable(),
+
             BelongsTo::make(__('Author'), 'author', User::class)->exceptOnForms(),
+
             BelongsTo::make(__('Item'), 'item', Item::class),
+
             Text::make(__('Goods Code'), 'goods_code')
                 ->rules('required')->required()->maxlength(255)
                 ->sortable(),
+
             Text::make(__('Name'), 'name')
                 ->rules('required')->required()->maxlength(255)->onlyOnForms(),
+
             Text::make(__('Option'), 'option'),
+
             Panel::make(__('Additional Information'), [
                 Currency::make(__('Goods Price'), 'goods_price'),
+
                 Textarea::make(__('Memo'), 'memo')->alwaysShow(),
+
                 Currency::make(__('Zero Margin Price'), 'zero_margin_price'),
             ])->withToolbar()->limit(3),
 

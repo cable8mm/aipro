@@ -57,21 +57,34 @@ class Supplier extends Resource
     {
         return [
             ID::make()->sortable(),
+
             BelongsTo::make(__('Author'), 'author', User::class)->exceptOnForms(),
+
             Text::make(__('Name'), 'name')->maxlength(50)->rules('required')->required(),
+
             Text::make(__('Contact Name'), 'contact_name')->maxlength(50)->rules('required')->required(),
+
             Email::make(__('Ordered Email'), 'ordered_email')->maxlength(100),
+
             Text::make(__('Contact Tel'), 'contact_tel')->maxlength(40),
+
             Text::make(__('Contact Cel'), 'contact_cel')->maxlength(40)->rules('required')->required(),
+
             MultiSelect::make(__('Order Method'), 'order_method')->options(OrderMethod::array())
                 ->rules('required')->required()->displayUsingLabels()->filterable(),
+
             Text::make(__('Balance Criteria'), 'balance_criteria')->maxlength(100),
+
             Currency::make(__('Min Order Price'), 'min_order_price')
                 ->rules('required')->required()
                 ->default(0),
+
             Textarea::make(__('Additional Information'), 'additional_information')->alwaysShow()->nullable(),
+
             Boolean::make(__('Is Parceled'), 'is_parceled')->default(true)->filterable(),
+
             Boolean::make(__('Is Active'), 'is_active')->default(true)->filterable(),
+
             Stack::make(__('Created At').' & '.__('Updated At'), [
                 DateTime::make(__('Created At'), 'created_at'),
                 DateTime::make(__('Updated At'), 'updated_at'),

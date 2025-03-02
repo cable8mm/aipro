@@ -51,15 +51,21 @@ class Order extends Resource
     {
         return [
             ID::make(__('Order Number'), 'id')->sortable(),
+
             BelongsTo::make(__('Order Sheet Waybill'), 'orderSheetWaybill', OrderSheetWaybill::class),
+
             Number::make(__('Order Good Count'), 'order_good_count')->displayUsing(function ($value) {
                 return number_format($value);
             })->exceptOnForms(),
+
             BelongsTo::make(__('Box'), 'box', Box::class),
+
             Number::make(__('Printed Count'), 'printed_count')->displayUsing(function ($value) {
                 return number_format($value);
             })->exceptOnForms(),
+
             Text::make(__('Waybill Numbers'), 'waybill_numbers'),
+
             DateTime::make(__('Created At'), 'created_at')->exceptOnForms(),
             DateTime::make(__('Updated At'), 'updated_at')->exceptOnForms(),
 

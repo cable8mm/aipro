@@ -57,21 +57,32 @@ class BoxSupplier extends Resource
     {
         return [
             ID::make()->sortable(),
+
             BelongsTo::make(__('Author'), 'author', User::class)->exceptOnForms(),
+
             Text::make(__('Name'), 'name')->maxlength(255)
                 ->rules('required')->required(),
+
             Text::make(__('Ordered Email'), 'ordered_email')->maxlength(255),
+
             Text::make(__('Contact Name'), 'contact_name')->maxlength(255)
                 ->rules('required')->required(),
+
             Text::make(__('Contact Tel'), 'contact_tel')->maxlength(255),
+
             Text::make(__('Contact Cel'), 'contact_cel')->maxlength(255),
+
             Select::make(__('Order Method'), 'order_method')
                 ->options(OrderMethod::array())->displayUsingLabels(),
+
             Currency::make(__('Min Order Price'), 'min_order_price')
                 ->rules('required')->required()
                 ->default(0),
+
             Boolean::make(__('Is Parceled'), 'is_parceled'),
+
             Textarea::make(__('Additional Information'), 'additional_information')->alwaysShow(),
+
             Stack::make(__('Created At').' & '.__('Updated At'), [
                 DateTime::make(__('Created At'), 'created_at'),
                 DateTime::make(__('Updated At'), 'updated_at'),

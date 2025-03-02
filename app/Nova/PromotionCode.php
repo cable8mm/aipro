@@ -51,21 +51,29 @@ class PromotionCode extends Resource
     {
         return [
             ID::make()->sortable(),
+
             BelongsTo::make(__('Author'), 'author', User::class)->exceptOnForms(),
+
             MorphTo::make(__('Promotion Codable'), 'promotionCodable')
                 ->types([
                     Good::class,
                     SetGood::class,
                 ]),
+
             Text::make(__('Goods Code'), 'goods_code')
                 ->rules('required')->required()
                 ->copyable()
                 ->exceptOnForms()
                 ->maxlength(100),
+
             Text::make(__('Memo'), 'memo')->rules('required')->required()->maxlength(255),
+
             DateTime::make(__('Started At'), 'started_at')->nullable(),
+
             DateTime::make(__('Finished At'), 'finished_at')->nullable(),
+
             Textarea::make(__('Memo'), 'memo')->maxlength(190)->alwaysShow(),
+
             Stack::make(__('Created At').' & '.__('Updated At'), [
                 DateTime::make(__('Created At'), 'created_at'),
                 DateTime::make(__('Updated At'), 'updated_at'),

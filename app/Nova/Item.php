@@ -65,66 +65,91 @@ class Item extends Resource
     {
         return [
             ID::make()->sortable(),
+
             BelongsTo::make(__('Author'), 'author', User::class)->exceptOnForms(),
+
             BelongsTo::make(__('Location'), 'location', Location::class)
                 ->default(ModelsLocation::oldest()->first()->id),
+
             Text::make(__('SKU'), 'sku')
                 ->rules('required')->required()->maxlength(255)
                 ->sortable()
                 ->default(Sku::of(Item::latestOne()->id)->sku()),
+
             Number::make(__('Units Per Case'), 'units_per_case')
                 ->rules('required')->required()
                 ->default(1),
+
             BelongsTo::make(__('Supplier'), 'supplier', Supplier::class)
                 ->rules('required')->required()->filterable()
                 ->default(ModelsSupplier::latest()->first()->id),
+
             Text::make(__('Name'), 'name')
                 ->rules('required')->required()->maxlength(255),
+
             Number::make(__('Inventory'), 'inventory')->displayUsing(function ($value) {
                 return number_format($value);
             })->rules('required')->required()->sortable()->default(0),
+
             Select::make(__('Status'), 'status')->options(ItemStatus::array())
                 ->rules('required')->required()
                 ->default(ItemStatus::ACTIVE)->onlyOnForms(),
+
             Panel::make(__('Additional Information'), [
                 Number::make(__('Safe Inventory'), 'safe_inventory')->displayUsing(function ($value) {
                     return number_format($value);
                 })->rules('required')->required()->sortable()
                     ->default(20),
+
                 Select::make(__('Inventory Level'), 'inventory_level')->rules('required')
                     ->required()->options(ItemInventoryLevel::array())->displayUsingLabels()
                     ->filterable()->sortable(),
+
                 Currency::make(__('Cost Price'), 'cost_price')
                     ->rules('required')->required()
                     ->default(50000),
+
                 Currency::make(__('Last Cost Price'), 'last_cost_price')->exceptOnForms(),
+
                 Currency::make(__('Zero Margin Price'), 'zero_margin_price')
                     ->hideFromDetail()->hideFromIndex()->exceptOnForms(),
+
                 Currency::make(__('Suggested Selling Price'), 'suggested_selling_price')
                     ->hideFromDetail()->hideFromIndex()->exceptOnForms(),
+
                 Select::make(__('Supplier Pricing Policy'), 'supplier_pricing_policy')
                     ->options(SupplierPricingPolicy::array())
                     ->rules('required')->required()
                     ->default(SupplierPricingPolicy::FLEXIBLE)
                     ->displayUsingLabels(),
+
                 Currency::make(__('Max Price'), 'max_price'),
+
                 Currency::make(__('Min Price'), 'min_price'),
+
                 Boolean::make(__('Terminate On Pricing Violation'), 'terminate_on_pricing_violation'),
+
                 Text::make(__('Spec'), 'spec')
                     ->maxlength(255)
                     ->help('e.g. 5g*10p')
                     ->hideFromIndex(),
+
                 Text::make(__('Order Rule'), 'order_rule')->maxlength(255)->hideFromIndex(),
+
                 Text::make(__('Barcode'), 'barcode')->maxlength(255)->hideFromIndex(),
+
                 Textarea::make(__('Memo'), 'memo')->alwaysShow()->hideFromIndex(),
+
                 DateTime::make(__('Discontinued At'), 'discontinued_at')
                     ->hideFromIndex()->onlyOnDetail(),
+
                 Status::make(__('Status'), 'status')
                     ->loadingWhen(ItemStatus::loadingWhen())
                     ->failedWhen(ItemStatus::failedWhen())
                     ->displayUsing(function ($value) {
                         return ItemStatus::tryFrom($value)?->value() ?? '-';
                     }),
+
             ])->withToolbar()->limit(3),
 
             Stack::make(__('Created At').' & '.__('Updated At'), [

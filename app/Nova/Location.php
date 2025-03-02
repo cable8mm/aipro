@@ -46,8 +46,11 @@ class Location extends Resource
     {
         return [
             ID::make()->sortable(),
+
             BelongsTo::make(__('Warehouse'), 'warehouse', Warehouse::class),
+
             Text::make(__('Description'), 'description')->maxlength(50),
+
             DateTime::make(__('Created At'), 'created_at')->exceptOnForms(),
             DateTime::make(__('Updated At'), 'updated_at')->exceptOnForms(),
         ];

@@ -44,11 +44,15 @@ class HelpfulFile extends Resource
     {
         return [
             ID::make()->sortable(),
+
             BelongsTo::make(__('Author'), 'author', User::class),
+
             File::make(__('Attachment'), 'attachment')
                 ->disk('builtin')
                 ->path('helpful_files'),
+
             Text::make(__('Description'), 'description'),
+
             DateTime::make(__('Created At'), 'created_at')->exceptOnForms(),
             DateTime::make(__('Updated At'), 'updated_at')->exceptOnForms(),
         ];

@@ -56,29 +56,38 @@ class BoxManualWarehousing extends Resource
     {
         return [
             ID::make()->sortable(),
+
             BelongsTo::make(__('Author'), 'author', User::class)->exceptOnForms(),
+
             Text::make(__('SKU'), 'Box.sku')->onlyOnIndex(),
+
             Text::make(__('Box Supplier Name'), 'Box.boxSupplier.name')->onlyOnIndex(),
+
             BelongsTo::make(__('Box'), 'box', Box::class)
                 ->searchable()
                 ->help(__('You can search for boxes by sku, box name or box supplier name.')),
+
             Select::make(__('Type'), 'type')
                 ->rules('required')->required()
                 ->options(ItemManualWarehousingType::array())
                 ->displayUsingLabels()
                 ->filterable()
                 ->hideFromIndex(),
+
             Badge::make(__('Type'), 'type')
                 ->map(ItemManualWarehousingType::array(value: 'success'))
                 ->labels(ItemManualWarehousingType::array())
                 ->onlyOnIndex(),
+
             Number::make(__('Amount'), 'amount')
                 ->rules('required', 'notIn:0')->required()
                 ->default(-1)
                 ->displayUsing(function ($value) {
                     return number_format($value);
                 }),
+
             Text::make(__('Memo'), 'memo')->nullable(),
+
             Stack::make(__('Created At').' & '.__('Updated At'), [
                 DateTime::make(__('Created At'), 'created_at'),
                 DateTime::make(__('Updated At'), 'updated_at'),

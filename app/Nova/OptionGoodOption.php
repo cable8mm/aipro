@@ -51,19 +51,26 @@ class OptionGoodOption extends Resource
     {
         return [
             ID::make(),
+
             BelongsTo::make(__('Author'), 'author', User::class)->exceptOnForms(),
+
             BelongsTo::make(__('Option Good'), 'optionGood', OptionGood::class),
+
             Text::make(__('Name'), 'name')->rules('required')->required()
                 ->help(__('The option must match this field, so please enter the exact name.')),
+
             Text::make(__('Goods Code'), function () {
                 return $this->optionGoodOptionable->goods_code;
             }),
+
             MorphTo::make(__('Option Good Optionable'), 'optionGoodOptionable')
                 ->types([
                     Good::class,
                     SetGood::class,
                 ]),
+
             Number::make(__('Sort Order'), 'sort_order')->exceptOnForms(),
+
             Stack::make(__('Created At').' & '.__('Updated At'), [
                 DateTime::make(__('Created At'), 'created_at'),
                 DateTime::make(__('Updated At'), 'updated_at'),

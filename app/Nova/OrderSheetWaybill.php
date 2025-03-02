@@ -58,7 +58,9 @@ class OrderSheetWaybill extends Resource
     {
         return [
             ID::make()->sortable(),
+
             BelongsTo::make(__('Author'), 'author', User::class)->exceptOnForms(),
+
             Text::make(__('Title'), 'title', function () {
                 return $this->title();
             })->exceptOnForms(),
@@ -66,7 +68,9 @@ class OrderSheetWaybill extends Resource
             Number::make(__('Row Count'), 'row_count')->nullable()->displayUsing(function ($value) {
                 return ! is_null($value) ? number_format($value) : null;
             })->exceptOnForms(),
+
             Number::make(__('Order Count'), 'order_count')->nullable()->exceptOnForms(),
+
             Number::make(__('Order Good Count'), 'order_good_count')->nullable()->displayUsing(function ($value) {
                 return ! is_null($value) ? number_format($value) : null;
             })->exceptOnForms(),
@@ -134,6 +138,7 @@ class OrderSheetWaybill extends Resource
                 })->displayUsing(function ($value) {
                     return OrderSheetWaybillStatus::from($value)?->value() ?? '-';
                 }),
+
             Stack::make(__('Created At').' & '.__('Updated At'), [
                 DateTime::make(__('Created At'), 'created_at'),
                 DateTime::make(__('Updated At'), 'updated_at'),

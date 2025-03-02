@@ -52,16 +52,22 @@ class OptionGood extends Resource
     {
         return [
             ID::make()->sortable(),
+
             BelongsTo::make(__('Author'), 'author', User::class)->readonly(),
+
             Text::make(__('Goods Code'), 'goods_code')
                 ->readonly()
                 ->copyable()
                 ->maxlength(130)
                 ->readonly()
                 ->help(__('This value can only input by adding or updating related goods')),
+
             Number::make(__('Option Count'), 'option_count')->readonly(),
+
             Text::make(__('Name'), 'name')->rules('required')->required()->maxlength(130),
+
             Boolean::make(__('Is Active'), 'is_active'),
+
             DateTime::make(__('Created At'), 'created_at')->exceptOnForms(),
             DateTime::make(__('Updated At'), 'updated_at')->exceptOnForms(),
 
