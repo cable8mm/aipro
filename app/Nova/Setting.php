@@ -43,8 +43,11 @@ class Setting extends Resource
     {
         return [
             Text::make(__('Key'), 'key')->rules('required')->required()->maxlength(255)->copyable(),
+
             Text::make(__('Value'), 'value')->rules('required')->required()->maxlength(255)->copyable(),
+
             Text::make(__('Memo'), 'memo')->maxlength(255)->showOnIndex(),
+
             DateTime::make(__('Created At'), 'created_at')->exceptOnForms(),
             DateTime::make(__('Updated At'), 'updated_at')->exceptOnForms(),
         ];

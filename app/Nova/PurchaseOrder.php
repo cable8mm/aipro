@@ -54,32 +54,44 @@ class PurchaseOrder extends Resource
     {
         return [
             ID::make()->sortable(),
+
             BelongsTo::make(__('Author'), 'author', User::class)->exceptOnForms(),
+
             BelongsTo::make(__('Warehouse Manager'), 'warehouseManager', User::class)
                 ->showCreateRelationButton(),
+
             BelongsTo::make(__('Supplier'), 'supplier', Supplier::class)->filterable()
                 ->showCreateRelationButton()
                 ->modalSize('4xl'),
+
             Text::make(__('Code'), 'code')->exceptOnForms(),
+
             Number::make(__('Total Good Count'), 'total_good_count')->exceptOnForms()->displayUsing(function ($value) {
                 return number_format($value);
             }),
+
             Currency::make(__('Total Order Price'), 'total_order_price')->exceptOnForms(),
+
             Currency::make(__('Discount Amount'), 'discount_amount')
                 ->rules('required')->required()
                 ->default(0),
+
             Stack::make(__('Dates'), [
                 DateTime::make(__('Purchase Ordered At'), 'purchase_ordered_at')
                     ->displayUsing(fn ($value) => __('Order').' : '.($value ? $value->toDateTimeString() : '-'))
                     ->nullable()->filterable(),
+
                 DateTime::make(__('Predict Warehoused At'), 'predict_warehoused_at')
                     ->displayUsing(fn ($value) => __('Predict Warehousing').' : '.($value ? $value->toDateTimeString() : '-'))
                     ->nullable()->filterable(),
             ]),
+
             DateTime::make(__('Warehoused At'), 'warehoused_at')
                 ->displayUsing(fn ($value) => $value ? $value->toDateTimeString() : '-')
                 ->exceptOnForms(),
+
             Textarea::make(__('Memo'), 'memo')->alwaysShow(),
+
             Status::make(__('Status'), 'status')
                 ->loadingWhen(PurchaseOrderStatus::loadingWhen())
                 ->failedWhen(PurchaseOrderStatus::failedWhen())
@@ -88,6 +100,7 @@ class PurchaseOrder extends Resource
                 })->displayUsing(function ($value) {
                     return PurchaseOrderStatus::tryFrom($value)?->value() ?? '-';
                 }),
+
             Stack::make(__('Created At').' & '.__('Updated At'), [
                 DateTime::make(__('Created At'), 'created_at')->displayUsing(fn ($value) => $value ? $value->toDateTimeString() : '-'),
                 DateTime::make(__('Updated At'), 'updated_at')->displayUsing(fn ($value) => $value ? $value->toDateTimeString() : '-'),

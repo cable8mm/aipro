@@ -59,27 +59,40 @@ class RetailPurchase extends Resource
     {
         return [
             ID::make()->sortable(),
+
             BelongsTo::make(__('Cashier'), 'cashier', User::class)->exceptOnForms(),
+
             BelongsTo::make(__('Customer'), 'customer', Customer::class)
                 ->showCreateRelationButton()
                 ->modalSize('4xl')
                 ->filterable(),
+
             Text::make(__('Code'), 'code')->exceptOnForms(),
+
             Number::make(__('Item Count'), 'item_count')->exceptOnForms(),
+
             Currency::make(__('Total Price'), 'total_price')->exceptOnForms(),
+
             Select::make(__('Payment Method'), 'payment_method')
-                ->options(PaymentMethod::array())->displayUsingLabels()
+                ->options(PaymentMethod::array())
+                ->displayUsingLabels()
                 ->filterable(),
+
             Status::make(__('Status'), 'status')
                 ->loadingWhen(RetailPurchaseStatus::loadingWhen())
                 ->failedWhen(RetailPurchaseStatus::failedWhen())
                 ->displayUsing(function ($value) {
                     return RetailPurchaseStatus::tryFrom($value)?->value() ?? '-';
                 }),
+
             Currency::make(__('Discount'), 'discount')->default(0),
+
             Currency::make(__('Tax'), 'tax')->exceptOnForms(),
+
             Date::make(__('Purchased At'), 'purchased_at')->default(now()),
+
             Textarea::make(__('Notes'), 'notes')->nullable()->alwaysShow(),
+
             Stack::make(__('Created At').' & '.__('Updated At'), [
                 DateTime::make(__('Created At'), 'created_at'),
                 DateTime::make(__('Updated At'), 'updated_at'),

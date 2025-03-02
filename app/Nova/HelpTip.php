@@ -46,11 +46,14 @@ class HelpTip extends Resource
     {
         return [
             ID::make()->sortable(),
+
             Text::make(__('Word'), 'word')
                 ->creationRules('required', 'unique:help_tips,word')
                 ->updateRules('required')
                 ->required()->maxlength(100),
+
             Text::make(__('Help Tip'), 'help_tip')->rules('required')->required()->maxlength(190),
+
             DateTime::make(__('Created At'), 'created_at')->exceptOnForms(),
             DateTime::make(__('Updated At'), 'updated_at')->exceptOnForms(),
         ];

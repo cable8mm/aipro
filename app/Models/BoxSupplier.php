@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\OrderMethod;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -22,6 +23,7 @@ class BoxSupplier extends Model
             'contact_tel' => 'string',
             'contact_cel' => 'string',
             'min_order_price' => 'integer',
+            'order_method' => OrderMethod::class,
         ];
     }
 

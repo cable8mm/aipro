@@ -47,9 +47,13 @@ class RetailPurchaseItem extends Resource
     {
         return [
             ID::make()->sortable(),
+
             BelongsTo::make(__('Retail Purchase'), 'retailPurchase', RetailPurchase::class),
+
             BelongsTo::make(__('Item'), 'item', Item::class),
+
             Number::make(__('Quantity'), 'quantity')->default(1),
+
             // @see https://laracasts.com/discuss/channels/nova/nova-4-dependson-on-a-belongsto-relationship
             Currency::make(__('Unit Price'), 'unit_price')
                 ->dependsOn(
@@ -64,6 +68,7 @@ class RetailPurchaseItem extends Resource
                         }
                     }
                 ),
+
             Currency::make(__('Subtotal'), 'subtotal')
                 ->dependsOn(
                     ['quantity', 'unit_price'],
@@ -73,6 +78,7 @@ class RetailPurchaseItem extends Resource
                         }
                     }
                 ),
+
             DateTime::make(__('Created At'), 'created_at')->exceptOnForms(),
             DateTime::make(__('Updated At'), 'updated_at')->exceptOnForms(),
         ];

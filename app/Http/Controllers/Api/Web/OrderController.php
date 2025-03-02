@@ -68,11 +68,11 @@ class OrderController extends Controller
         $waybillNos = implode(',', $validated['waybills']);
 
         if ($validated['mode'] == 'complete') {
-            $status = OrderShipmentStatus::검수완료->value;
+            $status = OrderShipmentStatus::검수완료;
         } elseif ($validated['mode'] == 'partial') {
-            $status = OrderShipmentStatus::부분검수완료->value;
+            $status = OrderShipmentStatus::부분검수완료;
         } else {
-            $status = OrderShipmentStatus::임시저장->value;
+            $status = OrderShipmentStatus::임시저장;
         }
 
         $order->orderShipments()->update([

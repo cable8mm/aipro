@@ -24,7 +24,7 @@ class BoxPurchaseOrderItem extends Model
             'unit_price' => 'integer',
             'warehoused_at' => 'datetime',
             'purchase_ordered_at' => 'datetime',
-            'status' => 'string',
+            'status' => PurchaseOrderItemStatus::class,
         ];
     }
 
@@ -74,7 +74,7 @@ class BoxPurchaseOrderItem extends Model
         }
 
         $replicate = $this->replicate()->fill([
-            'status' => PurchaseOrderItemStatus::RETURNED->value,
+            'status' => PurchaseOrderItemStatus::RETURNED,
             'quantity' => $quantity,
             'subtotal' => $quantity * $this->unit_price,
         ]);

@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\InventoryHistoryType;
 use App\Models\Box;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
@@ -17,7 +18,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(User::class, 'author_id')->nullable()->constrained()->comment('작성자 아이디');
             $table->foreignIdFor(Box::class)->constrained()->comment('박스 아이디');
-            $table->string('type', 20)->comment('타입(입고,출고)');
+            $table->enum('type', InventoryHistoryType::keys())->default(InventoryHistoryType::WAREHOUSING)->comment('타입(입고,출고)');
             $table->bigInteger('quantity')->comment('입출고 수량');
             $table->bigInteger('after_quantity')->comment('입출고 후 재고 수량');
             $table->morphs('historyable');

@@ -30,7 +30,7 @@ return [
         'ITEM' => 'Item',
         'ORDER_SHEET_WAYBILL' => 'Order Sheet Waybill',
     ],
-    'manual-inventory-adjustment-type' => [
+    'item-manual-warehousing-type' => [
         'CLIENT_RETURN' => 'Client Return',
         'EXCHANGE' => 'Exchange',
         'WRONG_DELIVERY' => 'Wrong Delivery',

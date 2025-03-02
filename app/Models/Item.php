@@ -3,7 +3,9 @@
 namespace App\Models;
 
 use App\Enums\InventoryHistoryType;
+use App\Enums\ItemInventoryLevel;
 use App\Enums\ItemStatus;
+use App\Enums\SupplierPricingPolicy;
 use Cable8mm\NFormat\NFormat;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -33,6 +35,7 @@ class Item extends Model
             'brand' => 'string',
             'cost_price' => 'integer',
             'last_cost_price' => 'integer',
+            'supplier_pricing_policy' => SupplierPricingPolicy::class,
             'suggested_selling_price' => 'integer',
             'suggested_retail_price' => 'integer',
             'spec' => 'string',
@@ -45,6 +48,8 @@ class Item extends Model
             'active' => 'boolean',
             'discontinued_at' => 'datetime',
             'terminate_on_pricing_violation' => 'boolean',
+            'status' => ItemStatus::class,
+            'inventory_level' => ItemInventoryLevel::class,
         ];
     }
 
@@ -68,7 +73,7 @@ class Item extends Model
             /**
              * When `discontinued_at` is set to datetime, `inventory_level` will be set to `discontinued` status.
              */
-            $item->status = ItemStatus::from($item->status)->status($item->inventory, $item->discontinued_at)->value;
+            $item->status = $item->status->status($item->inventory, $item->discontinued_at);
         });
 
         static::saved(function (Item $item) {
@@ -152,7 +157,7 @@ class Item extends Model
 
         return $this->inventoryHistories()->create([
             'item_id' => $this->id,
-            'type' => InventoryHistoryType::of($inventory, $cancelId)->value,
+            'type' => InventoryHistoryType::of($inventory, $cancelId),
             'quantity' => $inventory,
             'after_quantity' => $this->getOriginal('inventory'),
             'historyable_type' => $model,

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\PaymentMethod;
 use App\Enums\RetailPurchaseStatus;
 use Cable8mm\GoodCode\ReceiptCode;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -19,6 +20,8 @@ class RetailPurchase extends Model
 
     protected $casts = [
         'purchased_at' => 'date',
+        'payment_method' => PaymentMethod::class,
+        'status' => RetailPurchaseStatus::class,
     ];
 
     protected static function booted(): void
@@ -33,8 +36,8 @@ class RetailPurchase extends Model
             $retailPurchase->cashier_id = $retailPurchase->cashier_id ?? Auth::user()->id;
 
             if (
-                $retailPurchase->status == RetailPurchaseStatus::COMPLETED->value
-                && $retailPurchase->getOriginal('status') != RetailPurchaseStatus::COMPLETED->value
+                $retailPurchase->status == RetailPurchaseStatus::COMPLETED
+                && $retailPurchase->getOriginal('status') != RetailPurchaseStatus::COMPLETED
             ) {
                 $retailPurchase->retailPurchaseItems()->each(function (RetailPurchaseItem $retailPurchaseItem) {
                     $retailPurchaseItem->item->plusminus($retailPurchaseItem->quantity * -1, __CLASS__, $retailPurchaseItem->id);

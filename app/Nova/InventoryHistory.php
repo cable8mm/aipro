@@ -52,29 +52,42 @@ class InventoryHistory extends Resource
     {
         return [
             ID::make()->sortable(),
+
             BelongsTo::make(__('Author'), 'author', User::class)->exceptOnForms(),
+
             Text::make(__('SKU'), 'item.sku')->exceptOnForms(),
-            Select::make(__('Inventory Level'), 'item.inventory_level')->options(ItemInventoryLevel::array())->displayUsingLabels()->exceptOnForms(),
+
+            Select::make(__('Inventory Level'), 'item.inventory_level')
+                ->options(ItemInventoryLevel::array())
+                ->displayUsingLabels()->exceptOnForms(),
+
             BelongsTo::make(__('Item'), 'item', Item::class),
+
             Status::make(__('Type'), 'type')
                 ->loadingWhen(InventoryHistoryType::loadingWhen())
                 ->failedWhen(InventoryHistoryType::failedWhen())
                 ->displayUsing(function ($value) {
                     return InventoryHistoryType::tryFrom($value)?->value() ?? '-';
                 }),
+
             MorphTo::make(__('Inventory Historyable'), 'historyable')
                 ->types([
                     ItemManualWarehousing::class,
                     RetailPurchaseItem::class,
                     OrderShipment::class,
                 ]),
+
             Number::make(__('Quantity'), 'quantity')->displayUsing(function ($value) {
                 return number_format($value);
             })->rules('required')->required(),
+
             Number::make(__('After Quantity'), 'after_quantity')->displayUsing(function ($value) {
                 return number_format($value);
-            })->rules('required')->required(),
-            BelongsTo::make(__('Cancel'), 'cancel', InventoryHistory::class),
+            })->rules('required')->required()->exceptOnForms(),
+
+            BelongsTo::make(__('Cancel'), 'cancel', InventoryHistory::class)
+                ->nullable(),
+
             Stack::make(__('Created At').' & '.__('Updated At'), [
                 DateTime::make(__('Created At'), 'created_at'),
                 DateTime::make(__('Updated At'), 'updated_at'),

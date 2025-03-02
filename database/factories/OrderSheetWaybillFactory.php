@@ -27,7 +27,7 @@ class OrderSheetWaybillFactory extends Factory
             'waybill_file_name' => 'order_sheet_waybill.pdf',
             'waybill_file_size' => fake()->randomNumber(8, true),
             'excel_json' => fake()->words(10),
-            'status' => OrderSheetWaybillStatus::FILE_UPLOADED->name,
+            'status' => OrderSheetWaybillStatus::FILE_UPLOADED,
         ];
     }
 }

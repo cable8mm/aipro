@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('waybill_file_name')->comment('운송장파일 이름');
             $table->unsignedBigInteger('waybill_file_size')->comment('운송장파일 사이즈');
             $table->json('excel_json')->nullable();
-            $table->string('status', 50)->nullable()->default(OrderSheetWaybillStatus::FILE_UPLOADED)->comment('에러,파일업로드,정상확인완료,주문서입력완료');
+            $table->enum('status', OrderSheetWaybillStatus::keys())->default(OrderSheetWaybillStatus::FILE_UPLOADED)->comment('유저 타입');
             $table->timestamps();
         });
     }

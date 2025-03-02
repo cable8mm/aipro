@@ -54,23 +54,33 @@ class SetGood extends Resource
     {
         return [
             ID::make()->sortable(),
+
             BelongsTo::make(__('Author'), 'author', User::class)
                 ->exceptOnForms()
                 ->filterable(),
+
             Text::make(__('Shortening Goods Code'), fn () => 'COM'.$this->id)
                 ->copyable()
                 ->exceptOnForms(),
+
             Text::make(__('Goods Code'), 'goods_code')
                 ->maxlength(255)
                 ->copyable()
                 ->readonly()
                 ->help(__('This value can only input by adding or updating related goods')),
+
             Number::make(__('Good Count'), 'good_count')->exceptOnForms(),
+
             Text::make(__('Name'), 'name')->rules('required')->required()->maxlength(255),
+
             Currency::make(__('Goods Price'), 'goods_price')->rules('required')->required(),
+
             Currency::make(__('Last Cost Price'), 'last_cost_price')->exceptOnForms(),
+
             Currency::make(__('Zero Margin Price'), 'zero_margin_price')->exceptOnForms(),
+
             Boolean::make(__('Is Shutdown'), 'is_shutdown'),
+
             Stack::make(__('Created At').' & '.__('Updated At'), [
                 DateTime::make(__('Created At'), 'created_at'),
                 DateTime::make(__('Updated At'), 'updated_at'),
@@ -140,8 +150,8 @@ class SetGood extends Resource
 
     public function authorizedToUpdate(Request $request)
     {
-        return $request->user()?->type == UserType::ADMINISTRATOR->value
-            || $request->user()?->type == UserType::DEVELOPER->value
-            || $request->user()?->type == UserType::MANAGER->value;
+        return $request->user()?->type == UserType::ADMINISTRATOR
+            || $request->user()?->type == UserType::DEVELOPER
+            || $request->user()?->type == UserType::MANAGER;
     }
 }

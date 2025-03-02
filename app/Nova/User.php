@@ -142,17 +142,17 @@ class User extends Resource
 
     public function authorizedToView(Request $request)
     {
-        return $request->user()?->type == UserType::ADMINISTRATOR->value
-            || $request->user()?->type == UserType::DEVELOPER->value
-            || $request->user()?->type == UserType::MANAGER->value
+        return $request->user()?->type == UserType::ADMINISTRATOR
+            || $request->user()?->type == UserType::DEVELOPER
+            || $request->user()?->type == UserType::MANAGER
             || $request->user()?->id == $this->id;
     }
 
     public function authorizedToUpdate(Request $request)
     {
-        return $request->user()?->type == UserType::ADMINISTRATOR->value
-            || $request->user()?->type == UserType::DEVELOPER->value
-            || $request->user()?->type == UserType::MANAGER->value
+        return $request->user()?->type == UserType::ADMINISTRATOR
+            || $request->user()?->type == UserType::DEVELOPER
+            || $request->user()?->type == UserType::MANAGER
             || $request->user()?->id == $this->id;
     }
 }

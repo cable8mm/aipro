@@ -28,19 +28,19 @@ trait NovaAuthorizedByDeveloper
 
     public static function authorizedToCreate(Request $request)
     {
-        return $request->user()?->type == UserType::ADMINISTRATOR->value
-            || $request->user()?->type == UserType::DEVELOPER->value;
+        return $request->user()?->type == UserType::ADMINISTRATOR
+            || $request->user()?->type == UserType::DEVELOPER;
     }
 
     public function authorizedToDelete(Request $request)
     {
-        return $request->user()?->type == UserType::ADMINISTRATOR->value
-            || $request->user()?->type == UserType::DEVELOPER->value;
+        return $request->user()?->type == UserType::ADMINISTRATOR
+            || $request->user()?->type == UserType::DEVELOPER;
     }
 
     public function authorizedToUpdate(Request $request)
     {
-        return $request->user()?->type == UserType::ADMINISTRATOR->value
-            || $request->user()?->type == UserType::DEVELOPER->value;
+        return $request->user()?->type == UserType::ADMINISTRATOR
+            || $request->user()?->type == UserType::DEVELOPER;
     }
 }

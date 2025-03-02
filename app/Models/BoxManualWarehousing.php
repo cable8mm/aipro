@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\ItemManualWarehousingType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -17,7 +18,7 @@ class BoxManualWarehousing extends Model
     protected function casts(): array
     {
         return [
-            'type' => 'string',
+            'type' => ItemManualWarehousingType::class,
             'amount' => 'integer',
         ];
     }

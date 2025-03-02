@@ -28,10 +28,10 @@ trait NovaAuthorizedByMd
 
     public static function authorizedToCreate(Request $request)
     {
-        return $request->user()?->type == UserType::ADMINISTRATOR->value
-            || $request->user()?->type == UserType::DEVELOPER->value
-            || $request->user()?->type == UserType::MANAGER->value
-            || $request->user()?->type == UserType::MD->value;
+        return $request->user()?->type == UserType::ADMINISTRATOR
+            || $request->user()?->type == UserType::DEVELOPER
+            || $request->user()?->type == UserType::MANAGER
+            || $request->user()?->type == UserType::MD;
     }
 
     public function authorizedToDelete(Request $request)
@@ -41,9 +41,9 @@ trait NovaAuthorizedByMd
 
     public function authorizedToUpdate(Request $request)
     {
-        return $request->user()?->type == UserType::ADMINISTRATOR->value
-            || $request->user()?->type == UserType::DEVELOPER->value
-            || $request->user()?->type == UserType::MANAGER->value
-            || $request->user()?->type == UserType::MD->value;
+        return $request->user()?->type == UserType::ADMINISTRATOR
+            || $request->user()?->type == UserType::DEVELOPER
+            || $request->user()?->type == UserType::MANAGER
+            || $request->user()?->type == UserType::MD;
     }
 }

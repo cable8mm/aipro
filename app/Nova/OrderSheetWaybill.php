@@ -58,7 +58,9 @@ class OrderSheetWaybill extends Resource
     {
         return [
             ID::make()->sortable(),
+
             BelongsTo::make(__('Author'), 'author', User::class)->exceptOnForms(),
+
             Text::make(__('Title'), 'title', function () {
                 return $this->title();
             })->exceptOnForms(),
@@ -66,7 +68,9 @@ class OrderSheetWaybill extends Resource
             Number::make(__('Row Count'), 'row_count')->nullable()->displayUsing(function ($value) {
                 return ! is_null($value) ? number_format($value) : null;
             })->exceptOnForms(),
+
             Number::make(__('Order Count'), 'order_count')->nullable()->exceptOnForms(),
+
             Number::make(__('Order Good Count'), 'order_good_count')->nullable()->displayUsing(function ($value) {
                 return ! is_null($value) ? number_format($value) : null;
             })->exceptOnForms(),
@@ -126,14 +130,15 @@ class OrderSheetWaybill extends Resource
             ]),
 
             FieldsStatus::make(__('Status'), 'status')
-                ->default(OrderSheetWaybillStatus::FILE_UPLOADED->value)
+                ->default(OrderSheetWaybillStatus::FILE_UPLOADED)
                 ->loadingWhen(OrderSheetWaybillStatus::loadingWhen())
                 ->failedWhen(OrderSheetWaybillStatus::failedWhen())
                 ->filterable(function ($request, $query, $value, $attribute) {
                     $query->where($attribute, $value);
                 })->displayUsing(function ($value) {
-                    return OrderSheetWaybillStatus::tryFrom($value)?->value() ?? '-';
+                    return OrderSheetWaybillStatus::from($value)?->value() ?? '-';
                 }),
+
             Stack::make(__('Created At').' & '.__('Updated At'), [
                 DateTime::make(__('Created At'), 'created_at'),
                 DateTime::make(__('Updated At'), 'updated_at'),

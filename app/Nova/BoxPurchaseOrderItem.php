@@ -50,14 +50,19 @@ class BoxPurchaseOrderItem extends Resource
     {
         return [
             ID::make()->sortable(),
+
             BelongsTo::make(__('Box Purchase Order'), 'boxPurchaseOrder', BoxPurchaseOrder::class),
+
             BelongsTo::make(__('Author'), 'author', User::class)
                 ->exceptOnForms(),
+
             BelongsTo::make(__('Box'), 'box', Box::class),
+
             Number::make(__('Quantity'), 'quantity')
                 ->rules('required')->required()
                 ->default(1)
                 ->help(__('If it sets the minus value, the status is going to set RETURNED automatically.')),
+
             Currency::make(__('Unit Price'), 'unit_price')
                 ->rules('required')->required()
                 ->dependsOnUpdating(
@@ -72,6 +77,7 @@ class BoxPurchaseOrderItem extends Resource
                         }
                     }
                 ),
+
             Currency::make(__('Subtotal'), 'subtotal')
                 ->rules('required')->required()
                 ->dependsOn(
@@ -82,10 +88,13 @@ class BoxPurchaseOrderItem extends Resource
                         }
                     }
                 ),
+
             DateTime::make(__('Purchase Ordered At'), 'purchase_ordered_at')
                 ->filterable(),
+
             DateTime::make(__('Warehoused At'), 'warehoused_at')
                 ->filterable(),
+
             Status::make(__('Status'), 'status')
                 ->loadingWhen(PurchaseOrderItemStatus::loadingWhen())
                 ->failedWhen(PurchaseOrderItemStatus::failedWhen())
@@ -94,8 +103,10 @@ class BoxPurchaseOrderItem extends Resource
                 })->displayUsing(function ($value) {
                     return PurchaseOrderItemStatus::tryFrom($value)?->value() ?? '-';
                 }),
+
             Textarea::make(__('Memo'), 'memo')
                 ->alwaysShow(),
+
             Stack::make(__('Created At').' & '.__('Updated At'), [
                 DateTime::make(__('Created At'), 'created_at'),
                 DateTime::make(__('Updated At'), 'updated_at'),

@@ -47,9 +47,13 @@ class PriceCoefficient extends Resource
     {
         return [
             ID::make()->sortable(),
+
             Currency::make(__('Start Price'), 'start_price'),
+
             Currency::make(__('End Price'), 'end_price'),
+
             Number::make(__('Coefficient'), 'coefficient')->step('any'),
+
             DateTime::make(__('Created At'), 'created_at')->exceptOnForms(),
             DateTime::make(__('Updated At'), 'updated_at')->exceptOnForms(),
         ];

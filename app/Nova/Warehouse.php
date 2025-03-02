@@ -43,7 +43,9 @@ class Warehouse extends Resource
     {
         return [
             ID::make()->sortable(),
+
             Text::make(__('Description'), 'description'),
+
             DateTime::make(__('Created At'), 'created_at')->exceptOnForms(),
             DateTime::make(__('Updated At'), 'updated_at')->exceptOnForms(),
 
