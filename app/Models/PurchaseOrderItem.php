@@ -23,7 +23,7 @@ class PurchaseOrderItem extends Model
             'unit_price' => 'integer',
             'warehoused_at' => 'datetime',
             'purchase_ordered_at' => 'datetime',
-            'status' => 'string',
+            'status' => PurchaseOrderItemStatus::class,
         ];
     }
 

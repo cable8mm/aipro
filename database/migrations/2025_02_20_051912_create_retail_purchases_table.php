@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\PaymentMethod;
 use App\Enums\RetailPurchaseStatus;
 use App\Models\Customer;
 use App\Models\User;
@@ -21,8 +22,8 @@ return new class extends Migration
             $table->string('code', 50)->comment('판매 코드');
             $table->bigInteger('item_count')->default(0)->comment('아이템수');
             $table->bigInteger('total_price')->default(0)->comment('총 결제 금액');
-            $table->string('payment_method', 50)->comment('결제 수단(cash, card, mobile, other)');
-            $table->string('status')->default(RetailPurchaseStatus::PENDING->value)->comment('판매상태(completed, pending, canceled, refunded)');
+            $table->enum('payment_method', PaymentMethod::keys())->default(PaymentMethod::CARD->value)->comment('결제 수단(cash, card, mobile, other)');
+            $table->enum('status', RetailPurchaseStatus::keys())->default(RetailPurchaseStatus::PENDING->value)->comment('판매상태(completed, pending, canceled, refunded)');
             $table->bigInteger('discount')->nullable()->comment('할인');
             $table->bigInteger('tax')->nullable()->comment('세금(부가세)');
             $table->text('notes')->nullable()->comment('비고');

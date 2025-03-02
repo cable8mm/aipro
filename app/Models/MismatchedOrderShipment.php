@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\MismatchedOrderShipmentStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -24,7 +25,7 @@ class MismatchedOrderShipment extends Model
             'goods_cd' => 'string',
             'goods_nm' => 'string',
             'option' => 'string',
-            'status' => 'string',
+            'status' => MismatchedOrderShipmentStatus::class,
             'json' => 'object',
         ];
     }

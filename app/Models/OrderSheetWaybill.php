@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\OrderSheetWaybillStatus;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -33,6 +34,7 @@ class OrderSheetWaybill extends Model
             'waybill_file_name' => 'string',
             'waybill_file_size' => 'integer',
             'excel_json' => 'json',
+            'status' => OrderSheetWaybillStatus::class,
         ];
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\PurchaseOrderStatus;
 use Cable8mm\GoodCode\ReceiptCode;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -26,7 +27,7 @@ class BoxPurchaseOrder extends Model
             'total_box_count' => 'integer',
             'total_order_price' => 'integer',
             'discount_amount' => 'integer',
-            'status' => 'string',
+            'status' => PurchaseOrderStatus::class,
         ];
     }
 

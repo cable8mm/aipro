@@ -32,7 +32,7 @@ return new class extends Migration
             $table->bigInteger('inventory')->default(0)->comment('재고 갯수');
             $table->unsignedInteger('supplier_out_of_stock_count')->default(0)->comment('공급사 품절 등록 횟수');
             $table->integer('safe_inventory')->default(0)->comment('안전 재고 갯수');
-            $table->string('inventory_level', 30)->default(ItemInventoryLevel::LEVEL_1->value);
+            $table->enum('inventory_level', ItemInventoryLevel::keys())->default(ItemInventoryLevel::LEVEL_1->value)->comment('안전재고 레벨');
             $table->string('category', 255)->nullable();
             $table->string('maker', 255)->nullable();
             $table->string('brand', 191)->nullable();

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\PaymentMethod;
 use App\Enums\RetailPurchaseStatus;
 use Cable8mm\GoodCode\ReceiptCode;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -19,6 +20,8 @@ class RetailPurchase extends Model
 
     protected $casts = [
         'purchased_at' => 'date',
+        'payment_method' => PaymentMethod::class,
+        'status' => RetailPurchaseStatus::class,
     ];
 
     protected static function booted(): void

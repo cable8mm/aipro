@@ -26,7 +26,7 @@ return new class extends Migration
             $table->dateTime('predict_warehoused_at')->nullable()->comment('예상 입고 날짜');
             $table->dateTime('warehoused_at')->nullable()->comment('입고 시각');
             $table->bigInteger('discount_amount')->default('0')->comment('할인가');
-            $table->string('status', 30)->default(PurchaseOrderStatus::PENDING->value)->comment('pending, received, inspected, stored, damaged, returned');
+            $table->enum('status', PurchaseOrderStatus::keys())->default(PurchaseOrderStatus::PENDING->value)->comment('pending, received, inspected, stored, damaged, returned');
             $table->text('memo')->nullable();
             $table->timestamps();
         });
