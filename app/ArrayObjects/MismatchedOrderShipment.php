@@ -2,7 +2,7 @@
 
 namespace App\ArrayObjects;
 
-use App\Enums\MismatchedStatus;
+use App\Enums\MismatchedOrderShipmentStatus;
 use Illuminate\Contracts\Support\Arrayable;
 
 class MismatchedOrderShipment implements Arrayable
@@ -21,7 +21,7 @@ class MismatchedOrderShipment implements Arrayable
         $this->container['goods_nm'] = $orderShipment->data->get('goodsNm');
         $this->container['option'] = $orderShipment->data->get('option');
         $this->container['json'] = $orderShipment->data;
-        $this->container['status'] = MismatchedStatus::READY->name;
+        $this->container['status'] = MismatchedOrderShipmentStatus::READY->value;
     }
 
     public function toArray(): array

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\ItemManualWarehousingType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -13,13 +14,15 @@ class ItemManualWarehousing extends Model
 {
     use Actionable, HasFactory;
 
+    protected $guarded = [];
+
     protected $with = ['item', 'author'];
 
     protected function casts(): array
     {
         return [
-            'manual_add_inventory_count' => 'integer',
-            'type' => 'string',
+            'amount' => 'integer',
+            'type' => ItemManualWarehousingType::class,
         ];
     }
 
@@ -31,7 +34,7 @@ class ItemManualWarehousing extends Model
 
         static::created(function (ItemManualWarehousing $itemManualWarehousing) {
             $itemManualWarehousing->item->plusminus(
-                $itemManualWarehousing->manual_add_inventory_count,
+                $itemManualWarehousing->amount,
                 get_class($itemManualWarehousing),
                 $itemManualWarehousing->id
             );
@@ -56,5 +59,15 @@ class ItemManualWarehousing extends Model
     public function inventoryHistory(): MorphOne
     {
         return $this->morphOne(InventoryHistory::class, 'historyable');
+    }
+
+    public function add(int $manualAddInventoryCount, ItemManualWarehousingType $type, ?string $memo = null, ?int $itemId = null)
+    {
+        return $this->create([
+            'item_id' => $itemId,
+            'type' => $type->value,
+            'amount' => $manualAddInventoryCount,
+            'memo' => $memo,
+        ]);
     }
 }

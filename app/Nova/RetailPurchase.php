@@ -74,7 +74,7 @@ class RetailPurchase extends Resource
                 ->loadingWhen(RetailPurchaseStatus::loadingWhen())
                 ->failedWhen(RetailPurchaseStatus::failedWhen())
                 ->displayUsing(function ($value) {
-                    return RetailPurchaseStatus::{$value}->value() ?? '-';
+                    return RetailPurchaseStatus::tryFrom($value)?->value() ?? '-';
                 }),
             Currency::make(__('Discount'), 'discount')->default(0),
             Currency::make(__('Tax'), 'tax')->exceptOnForms(),

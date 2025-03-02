@@ -68,7 +68,7 @@ class Item extends Model
             /**
              * When `discontinued_at` is set to datetime, `inventory_level` will be set to `discontinued` status.
              */
-            $item->status = ItemStatus::{$item->status}->status($item->inventory, $item->discontinued_at)->name;
+            $item->status = ItemStatus::from($item->status)->status($item->inventory, $item->discontinued_at)->value;
         });
 
         static::saved(function (Item $item) {
@@ -129,6 +129,11 @@ class Item extends Model
         return $this->hasMany(InventoryHistory::class);
     }
 
+    public function itemManualWarehousings(): HasMany
+    {
+        return $this->hasMany(ItemManualWarehousing::class);
+    }
+
     /**
      * Update inventory.
      *
@@ -147,7 +152,7 @@ class Item extends Model
 
         return $this->inventoryHistories()->create([
             'item_id' => $this->id,
-            'type' => InventoryHistoryType::of($inventory, $cancelId)->name,
+            'type' => InventoryHistoryType::of($inventory, $cancelId)->value,
             'quantity' => $inventory,
             'after_quantity' => $this->getOriginal('inventory'),
             'historyable_type' => $model,

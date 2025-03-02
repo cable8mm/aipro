@@ -85,7 +85,7 @@ class BoxPurchaseOrder extends Resource
                 ->filterable(function ($request, $query, $value, $attribute) {
                     $query->where($attribute, $value);
                 })->displayUsing(function ($value) {
-                    return PurchaseOrderStatus::{$value}->value() ?? '-';
+                    return PurchaseOrderStatus::tryFrom($value)?->value() ?? '-';
                 }),
             Stack::make(__('Created At').' & '.__('Updated At'), [
                 DateTime::make(__('Created At'), 'created_at')->displayUsing(fn ($value) => $value ? $value->toDateTimeString() : '-'),

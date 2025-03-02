@@ -2,7 +2,7 @@
 
 namespace App\Nova;
 
-use App\Enums\ManualInventoryAdjustmentType;
+use App\Enums\ItemManualWarehousingType;
 use App\Traits\NovaAuthorizedByWarehouser;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Badge;
@@ -64,15 +64,15 @@ class ItemManualWarehousing extends Resource
                 ->help(__('You can search for items by sku, item name or supplier name.')),
             Select::make(__('Type'), 'type')
                 ->rules('required')->required()
-                ->options(ManualInventoryAdjustmentType::array())
+                ->options(ItemManualWarehousingType::array())
                 ->displayUsingLabels()
                 ->filterable()
                 ->hideFromIndex(),
             Badge::make(__('Type'), 'type')
-                ->map(ManualInventoryAdjustmentType::array(value: 'success'))
-                ->labels(ManualInventoryAdjustmentType::array())
+                ->map(ItemManualWarehousingType::array(value: 'success'))
+                ->labels(ItemManualWarehousingType::array())
                 ->onlyOnIndex(),
-            Number::make(__('Manual Add Inventory Count'), 'manual_add_inventory_count')
+            Number::make(__('Amount'), 'amount')
                 ->rules('required', 'notIn:0')->required()
                 ->default(-1)
                 ->displayUsing(function ($value) {
@@ -133,7 +133,7 @@ class ItemManualWarehousing extends Resource
 
     public function title()
     {
-        return ManualInventoryAdjustmentType::{$this->type}->value().' '.'#'.$this->id;
+        return $this->type->value().' '.'#'.$this->id;
     }
 
     public function authorizedToView(Request $request)

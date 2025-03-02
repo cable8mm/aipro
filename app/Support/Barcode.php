@@ -55,8 +55,10 @@ final class Barcode
     {
         $barcodeCommandTypeValue = $number[0];
 
-        if (null == ($barcodeCommandType = BarcodeCommandType::type($barcodeCommandTypeValue))) {
-            throw new \Exception($barcodeCommandTypeValue.' is invalid barcode command type');
+        try {
+            $barcodeCommandType = BarcodeCommandType::type($barcodeCommandTypeValue);
+        } catch (\Throwable $e) {
+            throw new \InvalidArgumentException($barcodeCommandTypeValue.' is invalid barcode command type');
         }
 
         $barcodeType = '';
@@ -77,7 +79,7 @@ final class Barcode
             $barcodeType = BarcodeType::CODABAR;
         }
 
-        return [BarcodeCommandType::{$barcodeCommandType->name}, $number, $barcodeType];
+        return [BarcodeCommandType::from($barcodeCommandType->value), $number, $barcodeType];
     }
 
     public function render()

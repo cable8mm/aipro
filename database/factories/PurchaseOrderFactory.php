@@ -24,7 +24,7 @@ class PurchaseOrderFactory extends Factory
             'purchase_ordered_at' => fake()->date(),
             'predict_warehoused_at' => fake()->date(),
             'warehoused_at' => fake()->dateTime(),
-            'status' => fake()->randomElement(PurchaseOrderStatus::names()),
+            'status' => fake()->randomElement(PurchaseOrderStatus::keys()),
             'memo' => fake()->paragraph(),
         ];
     }

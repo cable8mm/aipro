@@ -4,7 +4,7 @@ namespace App\Enums;
 
 use Cable8mm\EnumGetter\EnumGetter;
 
-enum ManualInventoryAdjustmentType: string
+enum ItemManualWarehousingType: string
 {
     use EnumGetter;
 

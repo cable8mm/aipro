@@ -25,7 +25,7 @@ return new class extends Migration
             $table->bigInteger('unit_price')->nullable()->comment('개당 매입가');
             $table->dateTime('warehoused_at')->nullable()->comment('입고시각');
             $table->dateTime('purchase_ordered_at')->nullable()->comment('발주시각');
-            $table->string('status', 30)->default(PurchaseOrderItemStatus::PENDING->name)->comment('pending, received, inspected, stored, damaged, returned');
+            $table->string('status', 30)->default(PurchaseOrderItemStatus::PENDING->value)->comment('pending, received, inspected, stored, damaged, returned');
             $table->text('memo')->nullable();
             $table->timestamps();
         });

@@ -29,11 +29,11 @@ enum OrderSheetWaybillStatus: string
 
     public static function loadingWhen(): array
     {
-        return [self::FILE_UPLOADED->name, self::FILE_ON_SUCCESS->name];
+        return [self::FILE_UPLOADED->value, self::FILE_ON_SUCCESS->value];
     }
 
     public static function failedWhen(): array
     {
-        return [self::ERROR->name];
+        return [self::ERROR->value];
     }
 }

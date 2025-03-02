@@ -17,7 +17,7 @@ class ItemsPerStatus extends Partition
     public function calculate(NovaRequest $request)
     {
         return $this->count($request, Item::class, 'status')
-            ->label(fn ($value) => ItemStatus::{$value}->value());
+            ->label(fn ($value) => ItemStatus::tryFrom($value)?->value());
     }
 
     /**

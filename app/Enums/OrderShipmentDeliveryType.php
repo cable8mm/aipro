@@ -25,11 +25,11 @@ enum OrderShipmentDeliveryType: string
 
     public static function loadingWhen(): array
     {
-        return [self::WAITING->name, self::RUNNING->name];
+        return [self::WAITING->value, self::RUNNING->value];
     }
 
     public static function failedWhen(): array
     {
-        return [self::FAILED->name];
+        return [self::FAILED->value];
     }
 }

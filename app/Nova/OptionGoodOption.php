@@ -123,9 +123,9 @@ class OptionGoodOption extends Resource
 
     public function authorizedToUpdate(Request $request)
     {
-        return $request->user()?->type == UserType::ADMINISTRATOR->name
-            || $request->user()?->type == UserType::DEVELOPER->name
-            || $request->user()?->type == UserType::MANAGER->name
+        return $request->user()?->type == UserType::ADMINISTRATOR->value
+            || $request->user()?->type == UserType::DEVELOPER->value
+            || $request->user()?->type == UserType::MANAGER->value
             || $request->user()?->id == $this->user_id;
     }
 }
