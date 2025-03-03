@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Models;
 
+use App\Enums\PurchaseOrderItemStatus;
 use App\Models\BoxPurchaseOrderItem;
 use Database\Seeders\BoxPurchaseOrderItemSeeder;
 use Database\Seeders\BoxPurchaseOrderSeeder;
@@ -29,7 +30,9 @@ class BoxPurchaseOrderItemTest extends TestCase
             BoxPurchaseOrderItemSeeder::class,
         ]);
 
-        $old = BoxPurchaseOrderItem::orderBy('id', 'desc')->first();
+        $old = BoxPurchaseOrderItem::factory()->state([
+            'status' => PurchaseOrderItemStatus::PENDING,
+        ])->create();
 
         $new = $old->returned(1);
 
