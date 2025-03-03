@@ -39,20 +39,11 @@ enum PurchaseOrderItemStatus: string
         return [self::DAMAGED, self::RETURNED, self::CANCELED];
     }
 
-    public static function replicates(bool $default = false): array|string
-    {
-        return $default ? self::DAMAGED
-            : [
-                self::DAMAGED => self::DAMAGED->value(),
-                self::RETURNED => self::RETURNED->value(),
-            ];
-    }
-
     /**
      * Whether the status can be changed.
      *
      * @param  PurchaseOrderItemStatus|string|null  $old  old status of purchase order item status
-     * @param  PurchaseOrderItemStatus:string  $new  new status of purchase order item status
+     * @param  PurchaseOrderItemStatus|string  $new  new status of purchase order item status
      * @return bool true if successful, false otherwise
      */
     public static function can(PurchaseOrderItemStatus|string|null $old, PurchaseOrderItemStatus|string $new): bool
@@ -62,11 +53,11 @@ enum PurchaseOrderItemStatus: string
         }
 
         if (is_string($old)) {
-            $old = self::of($old);
+            $old = self::from($old);
         }
 
         if (is_string($new)) {
-            $new = self::of($new);
+            $new = self::from($new);
         }
 
         return match ($old) {
@@ -90,11 +81,11 @@ enum PurchaseOrderItemStatus: string
     /**
      * Whether the status can NOT be changed.
      *
-     * @param  PurchaseOrderItemStatus|string  $old  old status of purchase order item status
-     * @param  PurchaseOrderItemStatus  $new  new status of purchase order item status
+     * @param  PurchaseOrderItemStatus|string|null  $old  old status of purchase order item status
+     * @param  PurchaseOrderItemStatus|string  $new  new status of purchase order item status
      * @return bool true if successful, false otherwise
      */
-    public static function cannot(PurchaseOrderItemStatus|string $old, PurchaseOrderItemStatus $new): bool
+    public static function cannot(PurchaseOrderItemStatus|string|null $old, PurchaseOrderItemStatus|string $new): bool
     {
         return self::can($old, $new) === false;
     }
