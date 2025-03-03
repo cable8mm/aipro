@@ -13,6 +13,8 @@ class PurchaseOrderItem extends Model
 {
     use Actionable, HasFactory;
 
+    protected $guarded = [];
+
     protected $with = ['purchaseOrder', 'author', 'warehouseManager', 'item'];
 
     protected function casts(): array

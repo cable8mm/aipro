@@ -15,9 +15,13 @@ Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
 
-Route::get('barcode-command', BarcodeCommandController::class);
+Route::middleware(['auth'])
+    ->get('barcode-command', BarcodeCommandController::class)
+    ->name('barcode-command');
 
-Route::get('monitor', MonitorController::class);
+Route::middleware(['auth'])
+    ->get('monitor', MonitorController::class)
+    ->name('monitor');
 
 require __DIR__.'/api_web.php';
 require __DIR__.'/auth.php';

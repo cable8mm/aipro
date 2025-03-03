@@ -8,16 +8,16 @@ enum RetailPurchaseStatus: string
 {
     use EnumGetter;
 
-    case COMPLETED = 'Completed';
     case PENDING = 'Pending';
+    case COMPLETED = 'Completed';
     case CANCELED = 'Canceled';
     case REFUNDED = 'Refunded';
 
     public function value(): string
     {
         return match ($this) {
-            self::COMPLETED => __('enum.retail-purchase-status.COMPLETED'),
             self::PENDING => __('enum.retail-purchase-status.PENDING'),
+            self::COMPLETED => __('enum.retail-purchase-status.COMPLETED'),
             self::CANCELED => __('enum.retail-purchase-status.CANCELED'),
             self::REFUNDED => __('enum.retail-purchase-status.REFUNDED'),
         };
@@ -47,11 +47,11 @@ enum RetailPurchaseStatus: string
         }
 
         if (is_string($old)) {
-            $old = self::of($old);
+            $old = self::from($old);
         }
 
         if (is_string($new)) {
-            $new = self::of($new);
+            $new = self::from($new);
         }
 
         return match ($old) {
@@ -67,11 +67,11 @@ enum RetailPurchaseStatus: string
     /**
      * Whether the status can NOT be changed.
      *
-     * @param  RetailPurchaseStatus|string  $old  old status of retail purchase status
-     * @param  RetailPurchaseStatus  $new  new status of retail purchase status
+     * @param  RetailPurchaseStatus|string|null  $old  old status of retail purchase status
+     * @param  RetailPurchaseStatus|string  $new  new status of retail purchase status
      * @return bool true if successful, false otherwise
      */
-    public static function cannot(RetailPurchaseStatus|string $old, RetailPurchaseStatus $new): bool
+    public static function cannot(RetailPurchaseStatus|string|null $old, RetailPurchaseStatus|string $new): bool
     {
         return self::can($old, $new) === false;
     }

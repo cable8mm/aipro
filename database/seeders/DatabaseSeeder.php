@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Artisan;
 
 class DatabaseSeeder extends Seeder
 {
@@ -49,5 +50,7 @@ class DatabaseSeeder extends Seeder
             RetailPurchaseItemSeeder::class,
             BoxInventoryHistorySeeder::class,
         ]);
+
+        Artisan::call('aipro:create-nova-account');
     }
 }

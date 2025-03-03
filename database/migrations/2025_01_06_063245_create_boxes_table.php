@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(User::class, 'author_id')->constrained()->comment('작성자 아이디');
             $table->foreignIdFor(BoxSupplier::class)->constrained()->comment('박스공급사 아이디');
-            $table->string('location_id', 10)->comment('위치 코드');
+            $table->string('location_id', 36)->comment('위치 코드');
             $table->foreign('location_id')->references('id')->on('locations');
             $table->string('sku', 50)->comment('박스 SKU');
             $table->string('name', 100)->comment('박스 이름');

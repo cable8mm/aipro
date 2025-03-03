@@ -9,29 +9,48 @@ use App\Http\Controllers\Api\Web\OrderSheetWaybillController;
 use App\Http\Controllers\Api\Web\OrderShipmentController;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('api/web')->group(function () {
+Route::middleware(['auth'])->prefix('api/web')->group(function () {
 
-    Route::get('/generate-barcode/{barcode}', GenerateBarcodeController::class)->name('generate-barcode');
+    Route::get('/generate-barcode/{barcode}', GenerateBarcodeController::class)
+        ->name('generate-barcode');
 
-    Route::put('/orders/{order}', [OrderController::class, 'update']);
-    Route::get('/orders/{order}/print', [OrderController::class, 'print'])->name('orders.print')->middleware('auth:sanctum');
-    Route::get('/orders/{order}/waybill', [OrderController::class, 'waybill']);
-    Route::get('/orders/{order}/clear-order', [OrderController::class, 'clearOrder']);
-    Route::get('/orders/{waybill_numbers}/order-shipments', [OrderController::class, 'orderShipments']);
+    Route::put('/orders/{order}', [OrderController::class, 'update'])
+        ->name('orders.update');
+    Route::get('/orders/{order}/print', [OrderController::class, 'print'])
+        ->name('orders.print');
+    Route::get('/orders/{order}/waybill', [OrderController::class, 'waybill'])
+        ->name('orders.waybill');
+    Route::get('/orders/{order}/clear-order', [OrderController::class, 'clearOrder'])
+        ->name('orders.clear-order');
+    Route::get('/orders/{waybill_numbers}/order-shipments', [OrderController::class, 'orderShipments'])
+        ->name('orders.order-shipments');
 
-    Route::get('/order-sheet-waybills/{order_sheet_waybill}/print', [OrderSheetWaybillController::class, 'print'])->name('order-sheet-waybills.print');
+    Route::get('/order-sheet-waybills/{orderSheetWaybill}/print', [OrderSheetWaybillController::class, 'print'])
+        ->name('order-sheet-waybills.print');
 
-    Route::get('/items', [ItemController::class, 'index']);
-    Route::get('/items/{item}', [ItemController::class, 'show']);
-    Route::get('/items/sku/{sku}', [ItemController::class, 'showFromSku']);
-    Route::get('/items/barcode/{barcode}', [ItemController::class, 'showFromBarcode']);
+    Route::get('/items', [ItemController::class, 'index'])
+        ->name('items');
+    Route::get('/items/{item}', [ItemController::class, 'show'])
+        ->name('items.show');
+    Route::get('/items/sku/{sku}', [ItemController::class, 'showFromSku'])
+        ->name('items.show-from-sku');
+    Route::get('/items/barcode/{barcode}', [ItemController::class, 'showFromBarcode'])
+        ->name('items.show-from-barcode');
 
-    Route::get('/order-shipments', [OrderShipmentController::class, 'index']);
-    Route::get('/order-shipments/pause', [OrderShipmentController::class, 'pause']);
-    Route::get('/order-shipments/{order_shipment}', [OrderShipmentController::class, 'show'])->whereNumber('order_shipment');
+    Route::get('/order-shipments', [OrderShipmentController::class, 'index'])
+        ->name('order-shipments');
+    Route::get('/order-shipments/pause', [OrderShipmentController::class, 'pause'])
+        ->name('order-shipments.pause');
+    Route::get('/order-shipments/{order_shipment}', [OrderShipmentController::class, 'show'])
+        ->whereNumber('order_shipment')
+        ->name('order-shipments.show');
 
-    Route::get('/box/{code}', [BoxController::class, 'showFromSku']);
+    Route::get('/box/{sku}', [BoxController::class, 'showFromSku'])
+        ->name('box.show-from-sku');
 
-    Route::post('/item-manual-warehousings', [ItemManualWarehousingController::class, 'store']);
-    Route::post('/item-manual-warehousings/barcode/{barcode}', [ItemManualWarehousingController::class, 'storeFromBarcode']);
+    Route::post('/item-manual-warehousings', [ItemManualWarehousingController::class, 'store'])
+        ->name('item-manual-warehousings.store');
+    Route::post('/item-manual-warehousings/barcode/{barcode}', [ItemManualWarehousingController::class, 'storeFromBarcode'])
+        ->name('item-manual-warehousings.store-from-barcode');
+
 });

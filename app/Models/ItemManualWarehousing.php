@@ -60,14 +60,4 @@ class ItemManualWarehousing extends Model
     {
         return $this->morphOne(InventoryHistory::class, 'historyable');
     }
-
-    public function add(int $manualAddInventoryCount, ItemManualWarehousingType $type, ?string $memo = null, ?int $itemId = null)
-    {
-        return $this->create([
-            'item_id' => $itemId,
-            'type' => $type,
-            'amount' => $manualAddInventoryCount,
-            'memo' => $memo,
-        ]);
-    }
 }

@@ -27,6 +27,14 @@ enum Locale: string
         };
     }
 
+    public static function ietfs(): array
+    {
+        return [
+            self::EN->value => self::EN->ietf(),
+            self::KO->value => self::KO->ietf(),
+        ];
+    }
+
     public static function enValues(): array
     {
         return [

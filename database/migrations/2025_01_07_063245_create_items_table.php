@@ -24,7 +24,7 @@ return new class extends Migration
             $table->foreignIdFor(Supplier::class)->nullable()->constrained()->comment('공급사 아이디');
             $table->foreignIdFor(SupplierItem::class)->nullable()->constrained()->comment('공급사 아이디');
             $table->foreignIdFor(Box::class)->nullable()->constrained()->comment('박스 아이디');
-            $table->string('location_id', 10)->comment('위치 코드');
+            $table->string('location_id', 36)->comment('위치 코드');
             $table->foreign('location_id')->references('id')->on('locations');
             $table->string('sku', 255)->nullable();
             $table->unsignedInteger('units_per_case')->default(1)->comment('입수량');

@@ -45,11 +45,11 @@ enum PurchaseOrderStatus: string
         }
 
         if (is_string($old)) {
-            $old = self::of($old);
+            $old = self::from($old);
         }
 
         if (is_string($new)) {
-            $new = self::of($new);
+            $new = self::from($new);
         }
 
         return match ($old) {
@@ -69,11 +69,11 @@ enum PurchaseOrderStatus: string
     /**
      * Whether the status can NOT be changed.
      *
-     * @param  PurchaseOrderStatus|string  $old  old status of purchase order status
-     * @param  PurchaseOrderStatus  $new  new status of purchase order status
+     * @param  PurchaseOrderStatus|string|null  $old  old status of purchase order status
+     * @param  PurchaseOrderStatus|string  $new  new status of purchase order status
      * @return bool true if successful, false otherwise
      */
-    public static function cannot(PurchaseOrderStatus|string $old, PurchaseOrderStatus $new): bool
+    public static function cannot(PurchaseOrderStatus|string|null $old, PurchaseOrderStatus|string $new): bool
     {
         return self::can($old, $new) === false;
     }

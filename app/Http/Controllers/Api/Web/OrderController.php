@@ -125,7 +125,7 @@ class OrderController extends Controller
 
         return response()->json([
             'result' => 'success',
-        ]);
+        ], 200);
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Location;
 use Cable8mm\GoodCode\LocationCode;
 use Illuminate\Database\Seeder;
 
@@ -13,11 +14,10 @@ class LocationSeeder extends Seeder
     public function run(): void
     {
         for ($i = 1; $i <= 3; $i++) {
-            \App\Models\Location::create([
+            Location::factory()->state([
                 'id' => LocationCode::of(warehouse: 'A'.$i),
                 'warehouse_id' => LocationCode::of(warehouse: 'A'.$i),
-                'description' => __('Warehouse')." A$i ",
-            ]);
+            ])->create();
         }
     }
 }

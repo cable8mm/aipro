@@ -26,6 +26,6 @@ class Setting extends Model
      */
     public static function get(string $key): string
     {
-        return static::find($key)?->value;
+        return static::find($key)->value;
     }
 }
