@@ -16,6 +16,13 @@ return Application::configure(basePath: dirname(__DIR__))
          * @link https://laravel.com/docs/11.x/sanctum#sanctum-middleware
          */
         $middleware->statefulApi();
+
+        /**
+         * @link https://github.com/badinansoft/nova-language-switch
+         */
+        $middleware->web(append: [
+            \Badinansoft\LanguageSwitch\Http\Middleware\LanguageSwitch::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

@@ -10,6 +10,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.3",
+        "badinansoft/nova-language-switch": "^3.0",
         "cable8mm/enum-getter": "^1.0",
         "cable8mm/good-code": "^2.0",
         "cable8mm/laravel-validation-kisa-rules": "^1.0",
@@ -126,7 +127,8 @@
         "cable8mm/order-sheet": "Provides making `order-sheet` excel files",
         "cable8mm/waybill": "Provides a waybill pdf for making seeders",
         "jeffbeltran/sanctum-tokens": "Create a sanctum personal access tokens in Nova",
-        "cable8mm/n-format": "Provides functions for formatting numbers, currencies and prices"
+        "cable8mm/n-format": "Provides functions for formatting numbers, currencies and prices",
+        "badinansoft/nova-language-switch": "Provides a language switch for Nova"
     },
     "config": {
         "optimize-autoloader": true,
