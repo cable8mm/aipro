@@ -99,4 +99,8 @@ return [
         'RETURNED' => '반품 처리',
         'CANCELED' => '취소',
     ],
+    'locale' => [
+        'KO' => '한국어',
+        'EN' => '영어',
+    ],
 ];

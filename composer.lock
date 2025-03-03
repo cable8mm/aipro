@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "46101760ecb93fa01d0e754e329964e2",
+    "content-hash": "227f4d188d70e2b44ecc32559345b86e",
     "packages": [
         {
             "name": "archtechx/enums",
@@ -51,6 +51,65 @@
                 "source": "https://github.com/archtechx/enums/tree/v1.1.1"
             },
             "time": "2024-10-29T15:38:32+00:00"
+        },
+        {
+            "name": "badinansoft/nova-language-switch",
+            "version": "3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/badinansoft/nova-language-switch.git",
+                "reference": "96dc24932b73a9c74971163bb86535a689cadd49"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/badinansoft/nova-language-switch/zipball/96dc24932b73a9c74971163bb86535a689cadd49",
+                "reference": "96dc24932b73a9c74971163bb86535a689cadd49",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/nova": "^4.0|^5.0",
+                "php": "^7.3|^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Badinansoft\\LanguageSwitch\\ToolServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Badinansoft\\LanguageSwitch\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Shahab Zebari",
+                    "email": "me@shahabzebari.net",
+                    "homepage": "https://shahabzebari.net",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A Laravel Nova package to switch language in your application",
+            "homepage": "https://github.com/badinansoft/nova-language-switch",
+            "keywords": [
+                "i18n",
+                "language",
+                "laravel",
+                "nova",
+                "switch",
+                "translation"
+            ],
+            "support": {
+                "issues": "https://github.com/badinansoft/nova-language-switch/issues",
+                "source": "https://github.com/badinansoft/nova-language-switch/tree/3.0.0"
+            },
+            "time": "2025-01-25T15:47:30+00:00"
         },
         {
             "name": "brick/math",
@@ -172,16 +231,16 @@
         },
         {
             "name": "cable8mm/enum-getter",
-            "version": "v1.6.0",
+            "version": "v1.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cable8mm/enum-getter.git",
-                "reference": "1a6b5f36e13892f49926c618fdc4ff2eb9282359"
+                "reference": "e9d366199cc36e40f133e31c2dc70da9b6f57fca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cable8mm/enum-getter/zipball/1a6b5f36e13892f49926c618fdc4ff2eb9282359",
-                "reference": "1a6b5f36e13892f49926c618fdc4ff2eb9282359",
+                "url": "https://api.github.com/repos/cable8mm/enum-getter/zipball/e9d366199cc36e40f133e31c2dc70da9b6f57fca",
+                "reference": "e9d366199cc36e40f133e31c2dc70da9b6f57fca",
                 "shasum": ""
             },
             "require": {
@@ -189,7 +248,7 @@
             },
             "require-dev": {
                 "laravel/pint": "^1.19",
-                "phpunit/phpunit": "^10.5"
+                "phpunit/phpunit": "^10.0|^11.0"
             },
             "suggest": {
                 "laravel/pint": "Pint is a PHP static analysis tool that finds common mistakes in your Laravel application."
@@ -221,9 +280,9 @@
             ],
             "support": {
                 "issues": "https://github.com/cable8mm/enum-getter/issues",
-                "source": "https://github.com/cable8mm/enum-getter/tree/v1.6.0"
+                "source": "https://github.com/cable8mm/enum-getter/tree/v1.7.1"
             },
-            "time": "2025-03-01T16:26:53+00:00"
+            "time": "2025-03-02T18:04:46+00:00"
         },
         {
             "name": "cable8mm/good-code",
@@ -2639,16 +2698,16 @@
         },
         {
             "name": "laravel-lang/attributes",
-            "version": "2.12.0",
+            "version": "2.12.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Laravel-Lang/attributes.git",
-                "reference": "3587526b8ad83243b37bbf25822c87609944fc35"
+                "reference": "f8764d036b0f9f6e8c9cbd808d13fe00f198397c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laravel-Lang/attributes/zipball/3587526b8ad83243b37bbf25822c87609944fc35",
-                "reference": "3587526b8ad83243b37bbf25822c87609944fc35",
+                "url": "https://api.github.com/repos/Laravel-Lang/attributes/zipball/f8764d036b0f9f6e8c9cbd808d13fe00f198397c",
+                "reference": "f8764d036b0f9f6e8c9cbd808d13fe00f198397c",
                 "shasum": ""
             },
             "require": {
@@ -2702,9 +2761,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Laravel-Lang/attributes/issues",
-                "source": "https://github.com/Laravel-Lang/attributes/tree/2.12.0"
+                "source": "https://github.com/Laravel-Lang/attributes/tree/2.12.1"
             },
-            "time": "2025-02-24T18:21:06+00:00"
+            "time": "2025-03-02T15:10:33+00:00"
         },
         {
             "name": "laravel-lang/common",
@@ -7506,16 +7565,16 @@
         },
         {
             "name": "ramsey/collection",
-            "version": "2.0.0",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ramsey/collection.git",
-                "reference": "a4b48764bfbb8f3a6a4d1aeb1a35bb5e9ecac4a5"
+                "reference": "3c5990b8a5e0b79cd1cf11c2dc1229e58e93f109"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ramsey/collection/zipball/a4b48764bfbb8f3a6a4d1aeb1a35bb5e9ecac4a5",
-                "reference": "a4b48764bfbb8f3a6a4d1aeb1a35bb5e9ecac4a5",
+                "url": "https://api.github.com/repos/ramsey/collection/zipball/3c5990b8a5e0b79cd1cf11c2dc1229e58e93f109",
+                "reference": "3c5990b8a5e0b79cd1cf11c2dc1229e58e93f109",
                 "shasum": ""
             },
             "require": {
@@ -7523,25 +7582,22 @@
             },
             "require-dev": {
                 "captainhook/plugin-composer": "^5.3",
-                "ergebnis/composer-normalize": "^2.28.3",
-                "fakerphp/faker": "^1.21",
+                "ergebnis/composer-normalize": "^2.45",
+                "fakerphp/faker": "^1.24",
                 "hamcrest/hamcrest-php": "^2.0",
-                "jangregor/phpstan-prophecy": "^1.0",
-                "mockery/mockery": "^1.5",
+                "jangregor/phpstan-prophecy": "^2.1",
+                "mockery/mockery": "^1.6",
                 "php-parallel-lint/php-console-highlighter": "^1.0",
-                "php-parallel-lint/php-parallel-lint": "^1.3",
-                "phpcsstandards/phpcsutils": "^1.0.0-rc1",
-                "phpspec/prophecy-phpunit": "^2.0",
-                "phpstan/extension-installer": "^1.2",
-                "phpstan/phpstan": "^1.9",
-                "phpstan/phpstan-mockery": "^1.1",
-                "phpstan/phpstan-phpunit": "^1.3",
-                "phpunit/phpunit": "^9.5",
-                "psalm/plugin-mockery": "^1.1",
-                "psalm/plugin-phpunit": "^0.18.4",
-                "ramsey/coding-standard": "^2.0.3",
-                "ramsey/conventional-commits": "^1.3",
-                "vimeo/psalm": "^5.4"
+                "php-parallel-lint/php-parallel-lint": "^1.4",
+                "phpspec/prophecy-phpunit": "^2.3",
+                "phpstan/extension-installer": "^1.4",
+                "phpstan/phpstan": "^2.1",
+                "phpstan/phpstan-mockery": "^2.0",
+                "phpstan/phpstan-phpunit": "^2.0",
+                "phpunit/phpunit": "^10.5",
+                "ramsey/coding-standard": "^2.3",
+                "ramsey/conventional-commits": "^1.6",
+                "roave/security-advisories": "dev-latest"
             },
             "type": "library",
             "extra": {
@@ -7579,19 +7635,9 @@
             ],
             "support": {
                 "issues": "https://github.com/ramsey/collection/issues",
-                "source": "https://github.com/ramsey/collection/tree/2.0.0"
+                "source": "https://github.com/ramsey/collection/tree/2.1.0"
             },
-            "funding": [
-                {
-                    "url": "https://github.com/ramsey",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/ramsey/collection",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2022-12-31T21:50:55+00:00"
+            "time": "2025-03-02T04:48:29+00:00"
         },
         {
             "name": "ramsey/uuid",

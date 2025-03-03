@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\Enums\Locale;
 use App\Enums\UserType;
 use App\Traits\NovaAuthorizedByManager;
 use Cable8mm\ValidationKisaRules\Rules\KisaPassword;
@@ -78,6 +79,12 @@ class User extends Resource
             Timezone::make(__('Timezone'), 'timezone')->required()->searchable()
                 ->default(Auth::user()?->timezone)
                 ->help(__('If you are in Korea, select "Asia/Seoul".')),
+
+            // Select::make(__('Locale'), 'locale')->rules('required')->required()
+            //     ->options(Locale::array())
+            //     ->default(Auth::user()?->language)
+            //     ->displayUsingLabels()
+            //     ->help(__('If you are in Korea, select "ko".')),
 
             Panel::make(__('Change Password'), [
                 Password::make(__('Password'), 'password')

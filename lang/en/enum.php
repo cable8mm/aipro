@@ -91,12 +91,16 @@ return [
         'RETURNED' => 'Returned',
     ],
     'purchase-order-item-status' => [
-        'PENDING'  => '입고 대기',
-        'RECEIVED' => '입고 완료',
-        'INSPECTED' => '검수 완료',
-        'STORED' => '보관 완료',
-        'DAMAGED' => '손상됨',
-        'RETURNED' => '반품 처리',
-        'CANCELED' => '취소',
+        'PENDING'  => 'Pending',
+        'RECEIVED' => 'Received',
+        'INSPECTED' => 'Inspected',
+        'STORED' => 'Stored',
+        'DAMAGED' => 'Damaged',
+        'RETURNED' => 'Returned',
+        'CANCELED' => 'Canceled',
+    ],
+    'locale' => [
+        'KO' => 'Korean',
+        'EN' => 'English',
     ],
 ];
