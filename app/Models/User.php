@@ -8,6 +8,7 @@ use App\Enums\Locale;
 use App\Enums\UserType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Nova\Actions\Actionable;
@@ -52,6 +53,11 @@ class User extends Authenticatable
             'type' => UserType::class,
             'locale' => Locale::class,
         ];
+    }
+
+    public function boxes(): HasMany
+    {
+        return $this->hasMany(Box::class, 'author_id', 'id');
     }
 
     public function alertEmail(): BelongsToMany

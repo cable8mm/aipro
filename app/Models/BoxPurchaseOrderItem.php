@@ -60,6 +60,16 @@ class BoxPurchaseOrderItem extends Model
     }
 
     /**
+     * Get the box inventory history's box purchase order item.
+     *
+     * @see \App\Models\BoxInventoryHistory
+     */
+    public function boxInventoryHistory(): MorphOne
+    {
+        return $this->morphOne(BoxInventoryHistory::class, 'historyable');
+    }
+
+    /**
      * Create a new purchase order item for returning.
      *
      * @param  int  $quantity  The quantity of the item returned, in general the value should be negative value.
@@ -80,15 +90,5 @@ class BoxPurchaseOrderItem extends Model
         ]);
 
         return tap($replicate)->save();
-    }
-
-    /**
-     * Get the box inventory history's box purchase order item.
-     *
-     * @see \App\Models\BoxInventoryHistory
-     */
-    public function boxInventoryHistory(): MorphOne
-    {
-        return $this->morphOne(BoxInventoryHistory::class, 'historyable');
     }
 }
