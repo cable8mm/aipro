@@ -25,7 +25,7 @@ class OrderControllerTest extends TestCase
             'order' => 1,
         ]));
 
-        $response->assertStatus(405);
+        $response->assertStatus(401);
     }
 
     public function test_store_visited_under_login(): void

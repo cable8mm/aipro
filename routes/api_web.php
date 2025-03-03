@@ -25,7 +25,7 @@ Route::middleware(['auth'])->prefix('api/web')->group(function () {
     Route::get('/orders/{waybill_numbers}/order-shipments', [OrderController::class, 'orderShipments'])
         ->name('orders.order-shipments');
 
-    Route::get('/order-sheet-waybills/{order_sheet_waybill}/print', [OrderSheetWaybillController::class, 'print'])
+    Route::get('/order-sheet-waybills/{orderSheetWaybill}/print', [OrderSheetWaybillController::class, 'print'])
         ->name('order-sheet-waybills.print');
 
     Route::get('/items', [ItemController::class, 'index'])
