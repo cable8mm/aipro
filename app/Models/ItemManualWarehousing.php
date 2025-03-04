@@ -16,8 +16,6 @@ class ItemManualWarehousing extends Model
 
     protected $guarded = [];
 
-    protected $with = ['item', 'author'];
-
     protected function casts(): array
     {
         return [

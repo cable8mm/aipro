@@ -15,8 +15,6 @@ class MismatchedOrderShipment extends Model
 
     protected $guarded = [];
 
-    protected $with = ['author', 'orderSheetWaybill'];
-
     protected function casts(): array
     {
         return [

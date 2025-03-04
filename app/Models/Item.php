@@ -19,8 +19,6 @@ class Item extends Model
 {
     use Actionable, HasFactory;
 
-    protected $with = ['box', 'author', 'supplier', 'supplierItem'];
-
     protected $guarded = [];
 
     protected function casts(): array

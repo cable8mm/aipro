@@ -80,7 +80,7 @@ class BoxInventoryHistory extends Resource
             })->rules('required')->required()->exceptOnForms(),
 
             BelongsTo::make(__('Cancel'), 'cancel', BoxInventoryHistory::class)
-                ->nullable(),
+                ->nullable()->exceptOnForms(),
 
             Stack::make(__('Created At').' & '.__('Updated At'), [
                 DateTime::make(__('Created At'), 'created_at'),

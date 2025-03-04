@@ -17,8 +17,6 @@ class OrderSheetWaybill extends Model
 {
     use HasFactory;
 
-    protected $with = ['author'];
-
     protected $guarded = [];
 
     protected function casts(): array

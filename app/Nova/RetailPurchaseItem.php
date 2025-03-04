@@ -34,8 +34,6 @@ class RetailPurchaseItem extends Resource
      */
     public static $search = [
         'id',
-        'retailPurchase.code',
-        'item.name',
     ];
 
     /**
@@ -131,6 +129,6 @@ class RetailPurchaseItem extends Resource
 
     public function title()
     {
-        return '['.__('Retail Purchase').']'.$this->item->name;
+        return '['.__('Retail Purchase').'] #'.$this->id;
     }
 }
