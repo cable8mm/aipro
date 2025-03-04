@@ -11,8 +11,6 @@ use RuntimeException;
 
 class BoxInventoryHistory extends Model
 {
-    protected $with = ['box'];
-
     protected $guarded = [];
 
     protected function casts(): array

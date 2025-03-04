@@ -15,8 +15,6 @@ class PurchaseOrderItem extends Model
 
     protected $guarded = [];
 
-    protected $with = ['purchaseOrder', 'author', 'warehouseManager', 'item'];
-
     protected function casts(): array
     {
         return [
@@ -40,19 +38,14 @@ class PurchaseOrderItem extends Model
         });
     }
 
-    public function purchaseOrder(): BelongsTo
-    {
-        return $this->belongsTo(PurchaseOrder::class);
-    }
-
     public function author(): BelongsTo
     {
         return $this->belongsTo(User::class, 'author_id');
     }
 
-    public function warehouseManager(): BelongsTo
+    public function purchaseOrder(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'warehouse_manager_id');
+        return $this->belongsTo(PurchaseOrder::class);
     }
 
     public function item(): BelongsTo

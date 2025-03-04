@@ -13,8 +13,6 @@ class PromotionCode extends Model
 {
     use Actionable, HasFactory;
 
-    protected $with = ['author'];
-
     protected $guarded = [];
 
     protected function casts(): array

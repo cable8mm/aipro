@@ -15,8 +15,6 @@ class SetGood extends Model
 {
     use Actionable, HasFactory;
 
-    protected $with = ['author'];
-
     protected function casts(): array
     {
         return [

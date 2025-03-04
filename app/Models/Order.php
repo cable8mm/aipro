@@ -17,8 +17,6 @@ class Order extends Model
 
     protected $guarded = [];
 
-    protected $with = ['orderSheetWaybill'];
-
     protected function casts(): array
     {
         return [

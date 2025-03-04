@@ -10,8 +10,6 @@ use RuntimeException;
 
 class InventoryHistory extends Model
 {
-    protected $with = ['author', 'item'];
-
     protected $guarded = [];
 
     protected function casts(): array
