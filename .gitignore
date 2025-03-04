@@ -458,3 +458,4 @@ tests/resources/**
 /public/vendor
 /lang/vendor
 /public/build
+hot

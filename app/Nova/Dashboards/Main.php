@@ -21,9 +21,9 @@ class Main extends Dashboard
     /**
      * Get the cards for the dashboard.
      *
-     * @return array
+     * @return array<int, \Laravel\Nova\Card>
      */
-    public function cards()
+    public function cards(): array
     {
         return [
             new EasyLink,
@@ -41,12 +41,12 @@ class Main extends Dashboard
         ];
     }
 
-    public function label()
+    public function label(): string
     {
         return __('Main');
     }
 
-    public function name()
+    public function name(): string
     {
         return __('Order Shipment Per Day');
     }

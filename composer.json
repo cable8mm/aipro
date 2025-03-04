@@ -17,21 +17,21 @@
         "cable8mm/n-format": "^1.3",
         "cable8mm/waybill": "^1.0",
         "carlos-meneses/laravel-mpdf": "^2.1",
-        "dedoc/scramble": "^0.11.33",
-        "jeffbeltran/sanctum-tokens": "^2.1",
+        "dedoc/scramble": "^0.12",
         "laracraft-tech/laravel-useful-additions": "^4.0",
         "laravel-lang/common": "^6.4",
-        "laravel/framework": "11.41.0",
-        "laravel/nova": "4.34.3",
+        "laravel/framework": "^12.0",
+        "laravel/nova": "^5.0",
         "laravel/sanctum": "^4.0",
+        "laravel/scout": "^10.13",
         "laravel/tinker": "^2.9",
         "livewire/livewire": "^3.4",
         "livewire/volt": "^1.0",
         "maatwebsite/excel": "^3.1",
         "maatwebsite/laravel-nova-excel": "^1.3",
-        "outl1ne/nova-input-filter": "^2.0",
-        "outl1ne/nova-multiselect-filter": "^4.0",
-        "outl1ne/nova-sortable": "^3.0",
+        "outl1ne/nova-input-filter": "^3.0",
+        "outl1ne/nova-multiselect-filter": "^5.0",
+        "outl1ne/nova-sortable": "^4.0",
         "picqer/php-barcode-generator": "^3.2"
     },
     "require-dev": {
@@ -47,7 +47,7 @@
         "mbezhanov/faker-provider-collection": "^2.0",
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.1",
-        "phpunit/phpunit": "^11.0.1"
+        "phpunit/phpunit": "^11.0"
     },
     "autoload": {
         "psr-4": {
@@ -68,6 +68,7 @@
         ],
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=laravel-assets --ansi --force",
+            "@php artisan nova:publish --ansi",
             "@php artisan lang:update"
         ],
         "post-root-package-install": [
@@ -126,7 +127,6 @@
         "carlos-meneses/laravel-mpdf": "Required to generate PDF files for waybills and barcode",
         "cable8mm/order-sheet": "Provides making `order-sheet` excel files",
         "cable8mm/waybill": "Provides a waybill pdf for making seeders",
-        "jeffbeltran/sanctum-tokens": "Create a sanctum personal access tokens in Nova",
         "cable8mm/n-format": "Provides functions for formatting numbers, currencies and prices",
         "badinansoft/nova-language-switch": "Provides a language switch for Nova"
     },
