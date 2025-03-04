@@ -8,7 +8,6 @@ use App\Traits\NovaAuthorizedByManager;
 use Cable8mm\ValidationKisaRules\Rules\KisaPassword;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Jeffbeltran\SanctumTokens\SanctumTokens;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\Email;
 use Laravel\Nova\Fields\Gravatar;
@@ -55,9 +54,9 @@ class User extends Resource
     /**
      * Get the fields displayed by the resource.
      *
-     * @return array
+     * @return array<int, \Laravel\Nova\Fields\Field|\Laravel\Nova\Panel|\Laravel\Nova\ResourceTool|\Illuminate\Http\Resources\MergeValue>
      */
-    public function fields(NovaRequest $request)
+    public function fields(NovaRequest $request): array
     {
         return [
             ID::make()->sortable(),
@@ -97,17 +96,15 @@ class User extends Resource
 
             DateTime::make(__('Created At'), 'created_at')->exceptOnForms(),
             DateTime::make(__('Updated At'), 'updated_at')->exceptOnForms(),
-
-            SanctumTokens::make()->hideAbilities(),
         ];
     }
 
     /**
      * Get the cards available for the request.
      *
-     * @return array
+     * @return array<int, \Laravel\Nova\Card>
      */
-    public function cards(NovaRequest $request)
+    public function cards(NovaRequest $request): array
     {
         return [];
     }
@@ -115,9 +112,9 @@ class User extends Resource
     /**
      * Get the filters available for the resource.
      *
-     * @return array
+     * @return array<int, \Laravel\Nova\Filters\Filter>
      */
-    public function filters(NovaRequest $request)
+    public function filters(NovaRequest $request): array
     {
         return [];
     }
@@ -125,9 +122,9 @@ class User extends Resource
     /**
      * Get the lenses available for the resource.
      *
-     * @return array
+     * @return array<int, \Laravel\Nova\Lenses\Lens>
      */
-    public function lenses(NovaRequest $request)
+    public function lenses(NovaRequest $request): array
     {
         return [];
     }
@@ -135,14 +132,14 @@ class User extends Resource
     /**
      * Get the actions available for the resource.
      *
-     * @return array
+     * @return array<int, \Laravel\Nova\Actions\Action>
      */
-    public function actions(NovaRequest $request)
+    public function actions(NovaRequest $request): array
     {
         return [];
     }
 
-    public static function label()
+    public static function label(): string
     {
         return __('User');
     }
