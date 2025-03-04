@@ -13,15 +13,19 @@ use Illuminate\Support\Facades\Auth;
 
 class RetailPurchase extends Model
 {
-    /** @use HasFactory<\Database\Factories\RetailPurchaseFactory> */
     use HasFactory;
 
     protected $guarded = [];
 
     protected $casts = [
-        'purchased_at' => 'date',
+        'code' => 'string',
+        'item_count' => 'integer',
+        'total_price' => 'integer',
         'payment_method' => PaymentMethod::class,
         'status' => RetailPurchaseStatus::class,
+        'discount' => 'integer',
+        'tax' => 'integer',
+        'purchased_at' => 'datetime',
     ];
 
     protected static function booted(): void
@@ -60,6 +64,14 @@ class RetailPurchase extends Model
     {
         return $this->hasMany(RetailPurchaseItem::class);
     }
+
+    /**
+     * ???
+     */
+    // public function item(): BelongsTo
+    // {
+    //     return $this->belongsTo(Item::class);
+    // }
 
     public function getTotalPrice(): int
     {

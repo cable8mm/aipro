@@ -55,10 +55,10 @@ class PurchaseOrderItem extends Resource
         return [
             ID::make()->sortable(),
 
-            BelongsTo::make(__('Purchase Order'), 'purchaseOrder', PurchaseOrder::class),
-
             BelongsTo::make(__('Author'), 'author', User::class)
                 ->exceptOnForms(),
+
+            BelongsTo::make(__('Purchase Order'), 'purchaseOrder', PurchaseOrder::class),
 
             BelongsTo::make(__('Item'), 'item', Item::class),
 
