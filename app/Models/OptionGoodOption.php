@@ -43,7 +43,7 @@ class OptionGoodOption extends Model implements Sortable
         });
 
         static::saving(function (OptionGoodOption $optionGoodOption) {
-            if ($optionGoodOption->optionable_type::where('optionable_id', $optionGoodOption->optionable_id)->doesntExist()) {
+            if ($optionGoodOption->optionable_type::where('id', $optionGoodOption->optionable_id)->doesntExist()) {
                 throw new \InvalidArgumentException(__('OptionGood Option cannot be connected to Good or SetGood.'));
             }
         });
