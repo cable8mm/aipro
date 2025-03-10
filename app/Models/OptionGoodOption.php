@@ -33,8 +33,6 @@ class OptionGoodOption extends Model implements Sortable
             'suggested_selling_price_of_gms' => 'integer',
             'order' => 'integer',
             'goods_bar' => 'string',
-            'is_my_shop_sale' => 'boolean',
-            'is_other_shop_sale' => 'boolean',
         ];
     }
 
@@ -42,6 +40,12 @@ class OptionGoodOption extends Model implements Sortable
     {
         static::creating(function (OptionGoodOption $optionGoodOption) {
             $optionGoodOption->author_id = $optionGoodOption->author_id ?? Auth::user()->id;
+        });
+
+        static::saving(function (OptionGoodOption $optionGoodOption) {
+            if ($optionGoodOption->optionable_type::where('id', $optionGoodOption->optionable_id)->doesntExist()) {
+                throw new \InvalidArgumentException(__('OptionGood Option cannot be connected to Good or SetGood.'));
+            }
         });
 
         static::saved(function (OptionGoodOption $optionGoodOption) {
@@ -59,13 +63,13 @@ class OptionGoodOption extends Model implements Sortable
         return $this->belongsTo(OptionGood::class);
     }
 
-    public function optionGoodOptionable(): MorphTo
+    public function optionable(): MorphTo
     {
         return $this->morphTo();
     }
 
     public function goodsCode(): string
     {
-        return $this->optionGoodOptionable->goods_code;
+        return $this->optionable->goods_code;
     }
 }

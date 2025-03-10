@@ -24,6 +24,8 @@ class OptionGood extends Model
             'option_count' => 'integer',
             'my_shop_sale_option_count' => 'integer',
             'other_shop_sale_option_count' => 'integer',
+            'is_my_shop_sale' => 'boolean',
+            'is_other_shop_sale' => 'boolean',
             'is_active' => 'boolean',
         ];
     }

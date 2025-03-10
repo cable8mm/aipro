@@ -5,7 +5,18 @@ namespace Tests\Feature\Models;
 use App\Models\OptionGood;
 use App\Models\OptionGoodOption;
 use Cable8mm\GoodCode\Enums\GoodCodeType;
+use Database\Seeders\BoxSeeder;
+use Database\Seeders\BoxSupplierSeeder;
+use Database\Seeders\GoodSeeder;
+use Database\Seeders\ItemSeeder;
+use Database\Seeders\LocationSeeder;
+use Database\Seeders\OptionGoodSeeder;
+use Database\Seeders\SetGoodSeeder;
+use Database\Seeders\SettingSeeder;
+use Database\Seeders\SupplierItemSeeder;
+use Database\Seeders\SupplierSeeder;
 use Database\Seeders\UserSeeder;
+use Database\Seeders\WarehouseSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -16,7 +27,18 @@ class OptionGoodTest extends TestCase
     public function test_option_method(): void
     {
         $this->seed([
+            SettingSeeder::class,
             UserSeeder::class,
+            SupplierSeeder::class,
+            SupplierItemSeeder::class,
+            WarehouseSeeder::class,
+            LocationSeeder::class,
+            BoxSupplierSeeder::class,
+            BoxSeeder::class,
+            ItemSeeder::class,
+            GoodSeeder::class,
+            SetGoodSeeder::class,
+            OptionGoodSeeder::class,
         ]);
 
         $optionGood = OptionGood::factory()->create();
@@ -41,7 +63,18 @@ class OptionGoodTest extends TestCase
     public function test_update_specific_fields_method(): void
     {
         $this->seed([
+            SettingSeeder::class,
             UserSeeder::class,
+            SupplierSeeder::class,
+            SupplierItemSeeder::class,
+            WarehouseSeeder::class,
+            LocationSeeder::class,
+            BoxSupplierSeeder::class,
+            BoxSeeder::class,
+            ItemSeeder::class,
+            GoodSeeder::class,
+            SetGoodSeeder::class,
+            OptionGoodSeeder::class,
         ]);
 
         $optionGood = OptionGood::factory()->state([

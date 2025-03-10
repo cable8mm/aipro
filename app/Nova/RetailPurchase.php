@@ -17,6 +17,7 @@ use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
+use Laravel\Nova\Fields\Repeater;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Stack;
 use Laravel\Nova\Fields\Status;
@@ -97,6 +98,12 @@ class RetailPurchase extends Resource
                 DateTime::make(__('Created At'), 'created_at'),
                 DateTime::make(__('Updated At'), 'updated_at'),
             ]),
+
+            // Repeater::make(__('Retail Purchase Items'), 'retailPurchaseItems')
+            //     ->asHasMany(RetailPurchaseItem::class)
+            //     ->repeatables([
+            //         Repeaters\RetailPurchaseItem::make(),
+            //     ]),
 
             HasMany::make(__('Retail Purchase Items'), 'retailPurchaseItems', RetailPurchaseItem::class),
         ];

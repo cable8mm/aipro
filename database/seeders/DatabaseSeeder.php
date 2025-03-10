@@ -28,7 +28,6 @@ class DatabaseSeeder extends Seeder
             BoxPurchaseOrderSeeder::class,
             HelpTipSeeder::class,
             MismatchedOrderShipmentSeeder::class,
-            OptionGoodSeeder::class,    // This must be over `OptionGoodOptionSeeder::class`
             // OrderSeeder::class,
             PriceCoefficientSeeder::class,
             PromotionCodeSeeder::class,
@@ -37,7 +36,6 @@ class DatabaseSeeder extends Seeder
             SupplierItemSeeder::class,
             BoxPurchaseOrderItemSeeder::class,
             ItemSeeder::class,
-            OptionGoodOptionSeeder::class,
             PurchaseOrderItemSeeder::class,
             InventoryHistorySeeder::class,
             // OrderShipmentSeeder::class,
@@ -46,6 +44,8 @@ class DatabaseSeeder extends Seeder
             HelpfulFileSeeder::class,
             GoodSeeder::class,
             SetGoodSeeder::class,
+            OptionGoodSeeder::class,    // This must be over `OptionGoodOptionSeeder::class`
+            OptionGoodOptionSeeder::class,
             CustomerSeeder::class,
             RetailPurchaseSeeder::class,
             RetailPurchaseItemSeeder::class,

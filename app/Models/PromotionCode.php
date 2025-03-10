@@ -30,7 +30,7 @@ class PromotionCode extends Model
         return $this->belongsTo(User::class, 'author_id');
     }
 
-    public function promotionCodable(): MorphTo
+    public function codable(): MorphTo
     {
         return $this->morphTo();
     }
@@ -43,7 +43,7 @@ class PromotionCode extends Model
     protected function goodsCode(): Attribute
     {
         return Attribute::make(
-            get: fn (mixed $value, array $attributes) => $this->promotionCodable->goods_code.'+'.$this->id,
+            get: fn (mixed $value, array $attributes) => $this->codable->goods_code.'+'.$this->id,
         );
     }
 }

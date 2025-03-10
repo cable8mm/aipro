@@ -50,7 +50,7 @@ class SetGood extends Model
      */
     public function promotionCode(): MorphOne
     {
-        return $this->morphOne(PromotionCode::class, 'promotionCodable');
+        return $this->morphOne(PromotionCode::class, 'codable');
     }
 
     /**
