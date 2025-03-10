@@ -60,10 +60,10 @@ class OptionGoodOption extends Resource
                 ->help(__('The option must match this field, so please enter the exact name.')),
 
             Text::make(__('Goods Code'), function () {
-                return $this->optionGoodOptionable->goods_code;
+                return $this->optionable->goods_code;
             }),
 
-            MorphTo::make(__('Option Good Optionable'), 'optionGoodOptionable')
+            MorphTo::make(__('Option Good Optionable'), 'optionable')
                 ->types([
                     Good::class,
                     SetGood::class,

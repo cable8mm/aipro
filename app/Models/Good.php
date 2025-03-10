@@ -60,7 +60,7 @@ class Good extends Model
      */
     public function promotionCode(): MorphOne
     {
-        return $this->morphOne(PromotionCode::class, 'promotionCodable');
+        return $this->morphOne(PromotionCode::class, 'codable');
     }
 
     /**
@@ -70,6 +70,6 @@ class Good extends Model
      */
     public function optionGoodOption(): MorphOne
     {
-        return $this->morphOne(OptionGoodOption::class, 'optionGoodOptionable');
+        return $this->morphOne(OptionGoodOption::class, 'optionable');
     }
 }

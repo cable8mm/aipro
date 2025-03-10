@@ -11,6 +11,7 @@ use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
+use Laravel\Nova\Fields\Repeater;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
@@ -66,10 +67,20 @@ class OptionGood extends Resource
 
             Text::make(__('Name'), 'name')->rules('required')->required()->maxlength(130),
 
+            Boolean::make(__('Is My Shop Sale'), 'is_my_shop_sale'),
+
+            Boolean::make(__('Is Other Shop Sale'), 'is_other_shop_sale'),
+
             Boolean::make(__('Is Active'), 'is_active'),
 
             DateTime::make(__('Created At'), 'created_at')->exceptOnForms(),
             DateTime::make(__('Updated At'), 'updated_at')->exceptOnForms(),
+
+            // Repeater::make(__('Option Good Options'), 'optionGoodOptions')
+            //     ->asHasMany(OptionGoodOption::class)
+            //     ->repeatables([
+            //         Repeaters\OptionGoodOption::make(),
+            //     ]),
 
             HasMany::make(__('Option Good Options'), 'optionGoodOptions', OptionGoodOption::class),
         ];
