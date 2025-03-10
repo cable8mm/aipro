@@ -22,11 +22,9 @@ class OptionGoodOptionFactory extends Factory
         return [
             'author_id' => fake()->randomNumber(1) + 1,
             'option_good_id' => fake()->randomNumber(1) + 1,
-            'option_good_optionable_id' => fake()->randomNumber(1) + 1,
             'name' => fake()->text(10),
-            'option_good_optionable_type' => fake()->randomElement(['App\Models\Good', 'App\Models\SetGood']), // change this to your model class name
-            'is_my_shop_sale' => fake()->boolean(),
-            'is_other_shop_sale' => fake()->boolean(),
+            'optionable_type' => fake()->randomElement(['App\Models\Good', 'App\Models\SetGood']), // change this to your model class name
+            'optionable_id' => fake()->randomNumber(1) + 1,
         ];
     }
 }
