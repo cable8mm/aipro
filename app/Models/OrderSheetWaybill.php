@@ -103,4 +103,14 @@ class OrderSheetWaybill extends Model
             ->select(['id', 'order_good_count', 'waybill_numbers', 'order_sheet_waybill_id'])
             ->toArray();
     }
+
+    public function printed(): void
+    {
+        $this->orderShipments()->update([
+            'printed' => 'Y',
+            'printed_at' => now(),
+        ]);
+
+        $this->orders()->increment('printed_count');
+    }
 }

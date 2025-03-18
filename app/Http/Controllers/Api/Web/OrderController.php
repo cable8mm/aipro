@@ -27,6 +27,8 @@ class OrderController extends Controller
             'order' => $order,
         ]);
 
+        $order->increment('printed_count');
+
         return $pdf->stream('document.pdf');
     }
 
