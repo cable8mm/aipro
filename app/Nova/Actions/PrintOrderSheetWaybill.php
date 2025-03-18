@@ -22,7 +22,7 @@ class PrintOrderSheetWaybill extends Action
     public function handle(ActionFields $fields, Collection $models)
     {
         foreach ($models as $model) {
-            return ActionResponse::openInNewTab(route('order-sheet-waybills.print', ['order_sheet_waybill' => $model->id]));
+            return ActionResponse::openInNewTab(route('order-sheet-waybills.print', ['orderSheetWaybill' => $model->id]));
         }
     }
 
