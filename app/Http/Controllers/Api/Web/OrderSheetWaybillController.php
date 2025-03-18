@@ -48,6 +48,8 @@ class OrderSheetWaybillController extends Controller
             }
         }
 
+        $orderSheetWaybill->printed();
+
         return $pdf->stream('document.pdf');
     }
 }
