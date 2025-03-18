@@ -9,10 +9,10 @@ use App\Http\Controllers\Api\Web\OrderSheetWaybillController;
 use App\Http\Controllers\Api\Web\OrderShipmentController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware(['auth'])->prefix('api/web')->group(function () {
+Route::get('/generate-barcode/{barcode}', GenerateBarcodeController::class)
+    ->name('generate-barcode');
 
-    Route::get('/generate-barcode/{barcode}', GenerateBarcodeController::class)
-        ->name('generate-barcode');
+Route::middleware(['auth:sanctum'])->prefix('api/web')->group(function () {
 
     Route::put('/orders/{order}', [OrderController::class, 'update'])
         ->name('orders.update');
