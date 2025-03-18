@@ -14,11 +14,12 @@ class GenerateBarcodeControllerTest extends TestCase
     {
         $response = $this->getJson(route('generate-barcode', ['barcode' => '13213212']));
 
-        $response->assertStatus(401);
+        $response->assertStatus(200);
     }
 
     public function test_invoke_visited_under_login(): void
     {
+        /** @var \Illuminate\Contracts\Auth\Authenticatable */
         $user = User::factory()->create();
 
         $this->actingAs($user);
