@@ -56,6 +56,18 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             return $request->user()?->timezone;
         });
 
+        Nova::userLocale(function () {
+            return match (app()->getLocale()) {
+                'en' => 'en-US',
+                'ko' => 'ko-KR',
+                default => null,
+            };
+        });
+
+        Nova::serving(function () {
+            Nova::translations(__DIR__.'/../../lang/'.app()->getLocale().'.json');
+        });
+
         Nova::withBreadcrumbs();
 
         Nova::withoutNotificationCenter();
