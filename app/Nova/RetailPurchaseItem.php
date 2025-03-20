@@ -46,7 +46,7 @@ class RetailPurchaseItem extends Resource
         return [
             ID::make()->sortable(),
 
-            BelongsTo::make(__('Retail Purchase'), 'retailPurchase', RetailPurchase::class),
+            BelongsTo::make(__('Retail Purchase'), 'retailPurchase', RetailPurchase::class)->filterable(),
 
             BelongsTo::make(__('Item'), 'item', Item::class),
 

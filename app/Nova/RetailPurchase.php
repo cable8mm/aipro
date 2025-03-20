@@ -4,6 +4,7 @@ namespace App\Nova;
 
 use App\Enums\PaymentMethod;
 use App\Enums\RetailPurchaseStatus;
+use App\Nova\Actions\PrintRetailPurchase;
 use App\Nova\Actions\RetailPurchaseStatusChanging;
 use App\Nova\Filters\RetailPurchaseStatusFilter;
 use App\Nova\Metrics\NewRetailPurchase;
@@ -153,6 +154,7 @@ class RetailPurchase extends Resource
     public function actions(NovaRequest $request)
     {
         return [
+            (new PrintRetailPurchase)->showInline(),
             (new RetailPurchaseStatusChanging(RetailPurchaseStatus::COMPLETED))->showInline(),
             (new RetailPurchaseStatusChanging(RetailPurchaseStatus::CANCELED))->showInline(),
             (new RetailPurchaseStatusChanging(RetailPurchaseStatus::REFUNDED))->showInline(),

@@ -11,7 +11,6 @@ use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\DateTime;
-use Laravel\Nova\Fields\HasOne;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
@@ -64,7 +63,7 @@ class OrderShipment extends Resource
 
             BelongsTo::make(__('Order Sheet Waybill'), 'orderSheetWaybill', OrderSheetWaybill::class),
 
-            HasOne::make(__('Item'), 'item', Item::class),
+            BelongsTo::make(__('Item'), 'item', Item::class),
 
             BelongsTo::make(__('Order Number'), 'order', Order::class),
 
