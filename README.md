@@ -16,16 +16,7 @@ AIPro is a solution designed for companies with warehouses to keep their WMS (Wa
 
 ## Installation
 
-[Install valet](https://laravel.com/docs/10.x/valet#installation):
-
-```sh
-composer global require laravel/valet
-
-echo "export PATH=~/.composer/vendor/bin:$PATH" >> ~/.bashrc
-source ~/.bashrc
-
-valet install
-```
+[Install Laravel Herd](https://herd.laravel.com) and set up as php 8.3.
 
 Cloning:
 
@@ -44,15 +35,13 @@ composer install # install Project
 
 php artisan storage:link # for uploading images and files
 
-valet secure # set https
-
-valet use; # setup php@8.2
+herd secure # set https
 
 composer global update; # update global composer
 
 npm install # install npm libraries
 
-valet open # visit https://aipro.test
+herd open # visit https://aipro.test
 ```
 
 Database:
@@ -123,22 +112,3 @@ For testing third party integration, you should make github repository secrets a
 
 - NOVA_PASSWORD
 - NOVA_USERNAME
-
-*Google Login* is optional for social logins,
-
-- GOOGLE_CLIENT_ID
-- GOOGLE_CLIENT_SECRET
-
-*Facebook Login* is optional for social logins,
-
-- FACEBOOK_CLIENT_ID
-- FACEBOOK_CLIENT_SECRET
-
-*Kakao Login* is optional for social logins,
-
-- KAKAO_CLIENT_ID
-- KAKAO_CLIENT_SECRET
-
-Additionally, *Github*, *Instagram* and *Naver* are supported to login.
-
-The stage server is automatically deployed in Merge, and the live server is deployed manually at [Envoy](https://envoyer.io/). However, you must first create a GitHub Release before live deployment.
