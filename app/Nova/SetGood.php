@@ -2,8 +2,7 @@
 
 namespace App\Nova;
 
-use App\Enums\UserType;
-use App\Traits\NovaAuthorizedByMd;
+use App\Nova\Actions\ToggleIsActive;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\BelongsToMany;
@@ -18,8 +17,6 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 
 class SetGood extends Resource
 {
-    use NovaAuthorizedByMd;
-
     /**
      * The model the resource corresponds to.
      *
@@ -79,7 +76,7 @@ class SetGood extends Resource
 
             Currency::make(__('Zero Margin Price'), 'zero_margin_price')->exceptOnForms(),
 
-            Boolean::make(__('Is Shutdown'), 'is_shutdown'),
+            Boolean::make(__('Is Active'), 'is_active'),
 
             Stack::make(__('Created At').' & '.__('Updated At'), [
                 DateTime::make(__('Created At'), 'created_at'),
@@ -135,7 +132,10 @@ class SetGood extends Resource
      */
     public function actions(NovaRequest $request)
     {
-        return [];
+        return [
+            (new ToggleIsActive(true))->showInline(),
+            (new ToggleIsActive(false))->showInline(),
+        ];
     }
 
     public static function label()
@@ -146,12 +146,5 @@ class SetGood extends Resource
     public function title()
     {
         return '['.$this->goods_code.'] '.$this->name;
-    }
-
-    public function authorizedToUpdate(Request $request)
-    {
-        return $request->user()?->type == UserType::ADMINISTRATOR
-            || $request->user()?->type == UserType::DEVELOPER
-            || $request->user()?->type == UserType::MANAGER;
     }
 }

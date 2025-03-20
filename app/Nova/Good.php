@@ -2,8 +2,10 @@
 
 namespace App\Nova;
 
+use App\Nova\Actions\ToggleIsActive;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
@@ -11,7 +13,6 @@ use Laravel\Nova\Fields\Stack;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
-use Laravel\Nova\Panel;
 
 class Good extends Resource
 {
@@ -64,18 +65,18 @@ class Good extends Resource
 
             Text::make(__('Option'), 'option'),
 
-            Panel::make(__('Additional Information'), [
-                Currency::make(__('Goods Price'), 'goods_price'),
+            Currency::make(__('Goods Price'), 'goods_price'),
 
-                Textarea::make(__('Memo'), 'memo')->alwaysShow(),
+            Textarea::make(__('Memo'), 'memo')->alwaysShow(),
 
-                Currency::make(__('Zero Margin Price'), 'zero_margin_price'),
-            ])->withToolbar()->limit(3),
+            Currency::make(__('Zero Margin Price'), 'zero_margin_price'),
+
+            Boolean::make(__('Is Active'), 'is_active')->default(true)->filterable(),
 
             Stack::make(__('Created At').' & '.__('Updated At'), [
                 DateTime::make(__('Created At'), 'created_at'),
                 DateTime::make(__('Updated At'), 'updated_at'),
-            ])->hideFromIndex(),
+            ]),
         ];
     }
 
@@ -116,7 +117,10 @@ class Good extends Resource
      */
     public function actions(NovaRequest $request)
     {
-        return [];
+        return [
+            (new ToggleIsActive(true))->showInline(),
+            (new ToggleIsActive(false))->showInline(),
+        ];
     }
 
     public static function label()

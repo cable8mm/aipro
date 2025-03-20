@@ -26,6 +26,7 @@ class Good extends Model
             'goods_price' => 'integer',
             'memo' => 'string',
             'zero_margin_price' => 'integer',
+            'is_active' => 'boolean',
         ];
     }
 

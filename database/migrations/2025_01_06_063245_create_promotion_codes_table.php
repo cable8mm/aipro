@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('memo', 190)->nullable();
             $table->dateTime('started_at')->nullable();
             $table->dateTime('finished_at')->nullable();
+            $table->boolean('is_active')->default(true)->comment('운영중');
             $table->timestamps();
         });
     }

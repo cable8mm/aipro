@@ -26,7 +26,7 @@ class SetGoodFactory extends Factory
             'goods_price' => fake()->numberBetween(1000, 50000),
             'last_cost_price' => fake()->numberBetween(1000, 50000),
             'zero_margin_price' => fake()->numberBetween(1000, 50000),
-            'is_shutdown' => fake()->boolean(),
+            'is_active' => fake()->boolean(),
         ];
     }
 }

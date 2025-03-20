@@ -23,7 +23,7 @@ class SetGood extends Model
             'goods_price' => 'integer',
             'zero_margin_price' => 'integer',
             'suggested_selling_price_of_gms' => 'integer',
-            'is_shutdown' => 'boolean',
+            'is_active' => 'boolean',
         ];
     }
 
