@@ -24,6 +24,7 @@ return new class extends Migration
             $table->integer('goods_price')->nullable()->comment('상품가격(판매가)');
             $table->text('memo')->nullable();
             $table->integer('zero_margin_price')->nullable()->comment('제로마진판매가');
+            $table->boolean('is_active')->default(true)->comment('운영중');
             $table->timestamps();
         });
     }

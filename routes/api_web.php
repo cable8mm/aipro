@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\Web\ItemManualWarehousingController;
 use App\Http\Controllers\Api\Web\OrderController;
 use App\Http\Controllers\Api\Web\OrderSheetWaybillController;
 use App\Http\Controllers\Api\Web\OrderShipmentController;
+use App\Http\Controllers\Api\Web\RetailPurchaseController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/generate-barcode/{barcode}', GenerateBarcodeController::class)
@@ -27,6 +28,9 @@ Route::middleware(['auth:sanctum'])->prefix('api/web')->group(function () {
 
     Route::get('/order-sheet-waybills/{orderSheetWaybill}/print', [OrderSheetWaybillController::class, 'print'])
         ->name('order-sheet-waybills.print');
+
+    Route::get('/retail-purchases/{retailPurchase}/print', [RetailPurchaseController::class, 'print'])
+        ->name('retail-purchases.print');
 
     Route::get('/items', [ItemController::class, 'index'])
         ->name('items');

@@ -22,6 +22,7 @@ class PromotionCode extends Model
             'memo' => 'string',
             'started_at' => 'datetime',
             'finished_at' => 'datetime',
+            'is_active' => 'boolean',
         ];
     }
 

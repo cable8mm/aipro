@@ -12,6 +12,8 @@ class Customer extends Model
 {
     use Actionable, HasFactory;
 
+    protected $guarded = [];
+
     protected function casts(): array
     {
         return [

@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class OrderShipment extends Model
@@ -85,9 +84,9 @@ class OrderShipment extends Model
         return $this->hasMany(OrderShipment::class, 'orderNo', 'orderNo');
     }
 
-    public function item(): HasOne
+    public function item(): BelongsTo
     {
-        return $this->HasOne(Item::class, 'sku', 'goodsCd');
+        return $this->belongsTo(Item::class, 'goodsCd', 'sku');
     }
 
     public function setGoods(): HasMany

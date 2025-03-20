@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\Nova\Actions\ToggleIsActive;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
@@ -119,7 +120,10 @@ class Customer extends Resource
      */
     public function actions(NovaRequest $request)
     {
-        return [];
+        return [
+            (new ToggleIsActive(true))->showInline(),
+            (new ToggleIsActive(false))->showInline(),
+        ];
     }
 
     public static function label()

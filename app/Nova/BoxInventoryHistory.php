@@ -9,7 +9,6 @@ use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\MorphTo;
 use Laravel\Nova\Fields\Number;
-use Laravel\Nova\Fields\Stack;
 use Laravel\Nova\Fields\Status;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -82,10 +81,7 @@ class BoxInventoryHistory extends Resource
             BelongsTo::make(__('Cancel'), 'cancel', BoxInventoryHistory::class)
                 ->nullable()->exceptOnForms(),
 
-            Stack::make(__('Created At').' & '.__('Updated At'), [
-                DateTime::make(__('Created At'), 'created_at'),
-                DateTime::make(__('Updated At'), 'updated_at'),
-            ]),
+            DateTime::make(__('Action Happened At'), 'created_at')->exceptOnForms()->showOnPreview(),
         ];
     }
 

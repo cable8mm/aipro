@@ -3,9 +3,10 @@
 namespace App\Nova;
 
 use App\Enums\UserType;
-use App\Traits\NovaAuthorizedByMd;
+use App\Nova\Actions\ToggleIsActive;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\MorphTo;
@@ -16,8 +17,6 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 
 class PromotionCode extends Resource
 {
-    use NovaAuthorizedByMd;
-
     /**
      * The model the resource corresponds to.
      *
@@ -68,11 +67,14 @@ class PromotionCode extends Resource
 
             Text::make(__('Memo'), 'memo')->rules('required')->required()->maxlength(255),
 
-            DateTime::make(__('Started At'), 'started_at')->nullable(),
-
-            DateTime::make(__('Finished At'), 'finished_at')->nullable(),
+            Stack::make(__('Started At').' & '.__('Finished At'), [
+                DateTime::make(__('Started At'), 'started_at')->nullable(),
+                DateTime::make(__('Finished At'), 'finished_at')->nullable(),
+            ]),
 
             Textarea::make(__('Memo'), 'memo')->maxlength(190)->alwaysShow(),
+
+            Boolean::make(__('Is Active'), 'is_active'),
 
             Stack::make(__('Created At').' & '.__('Updated At'), [
                 DateTime::make(__('Created At'), 'created_at'),
@@ -118,7 +120,10 @@ class PromotionCode extends Resource
      */
     public function actions(NovaRequest $request)
     {
-        return [];
+        return [
+            (new ToggleIsActive(true))->showInline(),
+            (new ToggleIsActive(false))->showInline(),
+        ];
     }
 
     public static function label()

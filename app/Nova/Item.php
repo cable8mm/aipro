@@ -155,7 +155,7 @@ class Item extends Resource
             Stack::make(__('Created At').' & '.__('Updated At'), [
                 DateTime::make(__('Created At'), 'created_at'),
                 DateTime::make(__('Updated At'), 'updated_at'),
-            ])->hideFromIndex(),
+            ]),
 
             HasMany::make(__('Purchase Order Items'), 'purchaseOrderItems', PurchaseOrderItem::class),
 

@@ -22,7 +22,7 @@ return new class extends Migration
             $table->integer('other_shop_sale_option_count')->default(0)->comment('타사몰 판매 가능 옵션수');
             $table->boolean('is_my_shop_sale')->default(true)->comment('내매장판매여부(센터마감기준)');
             $table->boolean('is_other_shop_sale')->default(true)->comment('타매장판매여부(센터마감기준)');
-            $table->boolean('is_active')->default(true);
+            $table->boolean('is_active')->default(true)->comment('운영중');
             $table->timestamps();
         });
     }
