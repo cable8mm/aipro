@@ -3,6 +3,7 @@
 namespace App\Nova;
 
 use App\Enums\UserType;
+use App\Nova\Actions\ToggleIsActive;
 use App\Traits\NovaAuthorizedByMd;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
@@ -12,6 +13,7 @@ use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Repeater;
+use Laravel\Nova\Fields\Stack;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
@@ -73,8 +75,10 @@ class OptionGood extends Resource
 
             Boolean::make(__('Is Active'), 'is_active'),
 
-            DateTime::make(__('Created At'), 'created_at')->exceptOnForms(),
-            DateTime::make(__('Updated At'), 'updated_at')->exceptOnForms(),
+            Stack::make(__('Created At').' & '.__('Updated At'), [
+                DateTime::make(__('Created At'), 'created_at'),
+                DateTime::make(__('Updated At'), 'updated_at'),
+            ]),
 
             // Repeater::make(__('Option Good Options'), 'optionGoodOptions')
             //     ->asHasMany(OptionGoodOption::class)
@@ -123,7 +127,10 @@ class OptionGood extends Resource
      */
     public function actions(NovaRequest $request)
     {
-        return [];
+        return [
+            (new ToggleIsActive(true))->showInline(),
+            (new ToggleIsActive(false))->showInline(),
+        ];
     }
 
     public static function label()
