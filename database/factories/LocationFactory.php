@@ -20,8 +20,8 @@ class LocationFactory extends Factory
         $uuid = fake()->uuid();
 
         return [
-            'id' => LocationCode::of(warehouse: $uuid),
-            'warehouse_id' => LocationCode::of(warehouse: $uuid),
+            'code' => LocationCode::of(warehouse: $uuid),
+            'warehouse_id' => fake()->numberBetween(1, 3),
             'description' => fake()->sentence(),
         ];
     }

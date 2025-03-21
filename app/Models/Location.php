@@ -10,8 +10,6 @@ class Location extends Model
 {
     use HasFactory;
 
-    public $incrementing = false;
-
     public function warehouse(): BelongsTo
     {
         return $this->belongsTo(Warehouse::class);

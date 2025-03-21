@@ -18,7 +18,7 @@ class WarehouseFactory extends Factory
     public function definition(): array
     {
         return [
-            'id' => LocationCode::of(warehouse: fake()->uuid()),
+            'code' => LocationCode::of(warehouse: fake()->uuid()),
             'description' => fake()->sentence(),
         ];
     }

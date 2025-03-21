@@ -58,8 +58,7 @@ class OrderShipment extends Resource
     public function fields(NovaRequest $request)
     {
         return [
-            ID::make()
-                ->hideFromIndex(),
+            ID::make()->sortable(),
 
             BelongsTo::make(__('Order Sheet Waybill'), 'orderSheetWaybill', OrderSheetWaybill::class),
 

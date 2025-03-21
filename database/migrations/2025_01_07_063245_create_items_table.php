@@ -4,6 +4,7 @@ use App\Enums\ItemInventoryLevel;
 use App\Enums\ItemStatus;
 use App\Enums\SupplierPricingPolicy;
 use App\Models\Box;
+use App\Models\Location;
 use App\Models\Supplier;
 use App\Models\SupplierItem;
 use App\Models\User;
@@ -24,8 +25,7 @@ return new class extends Migration
             $table->foreignIdFor(Supplier::class)->nullable()->constrained()->comment('공급사 아이디');
             $table->foreignIdFor(SupplierItem::class)->nullable()->constrained()->comment('공급사 아이디');
             $table->foreignIdFor(Box::class)->nullable()->constrained()->comment('박스 아이디');
-            $table->string('location_id', 36)->comment('위치 코드');
-            $table->foreign('location_id')->references('id')->on('locations');
+            $table->foreignIdFor(Location::class)->nullable()->constrained()->comment('위치 아이디');
             $table->string('sku', 255)->nullable();
             $table->unsignedInteger('units_per_case')->default(1)->comment('입수량');
             $table->string('name', 255);

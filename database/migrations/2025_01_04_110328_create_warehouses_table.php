@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('warehouses', function (Blueprint $table) {
-            $table->string('id', 36)->primary();
+            $table->id();
+            $table->string('code', 36)->comment('창고 코드');
             $table->string('description', 255)->comment('위치 이름');
             $table->timestamps();
         });
