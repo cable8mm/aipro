@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\Web\BarcodeCommandController;
 use App\Http\Controllers\Api\Web\BoxController;
 use App\Http\Controllers\Api\Web\GenerateBarcodeController;
 use App\Http\Controllers\Api\Web\ItemController;
@@ -56,5 +57,8 @@ Route::middleware(['auth:sanctum'])->prefix('api/web')->group(function () {
         ->name('item-manual-warehousings.store');
     Route::post('/item-manual-warehousings/barcode/{barcode}', [ItemManualWarehousingController::class, 'storeFromBarcode'])
         ->name('item-manual-warehousings.store-from-barcode');
+
+    Route::get('/barcode-command/print', [BarcodeCommandController::class, 'print'])
+        ->name('barcode-command.print');
 
 });

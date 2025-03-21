@@ -129,7 +129,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
 
                 MenuSection::make(__('Tools'), [
                     MenuItem::resource(BarcodeCommand::class),
-                    MenuItem::externalLink(__('Print Barcode Commands'), '/barcode-command')->openInNewTab(),
+                    MenuItem::externalLink(__('Print Barcode Commands'), '/api/web/barcode-command/print')->openInNewTab(),
                     MenuItem::resource(HelpfulFile::class),
                 ])->icon('scissors')->collapsable(),
 
