@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\OrderShipmentStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -25,7 +26,7 @@ class OrderShipment extends Model
             'paymentDate' => 'string',
             'statusDate' => 'string',
             'deliveryDate' => 'string',
-            'status' => 'string',
+            'status' => OrderShipmentStatus::class,
             'siteOrderNo' => 'string',
             'siteGoodsCd' => 'string',
             'goodsNm' => 'string',
