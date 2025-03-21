@@ -8,7 +8,6 @@ use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\HasManyThrough;
-use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -50,7 +49,7 @@ class Order extends Resource
     public function fields(NovaRequest $request)
     {
         return [
-            ID::make(__('Order Number'), 'id')->sortable(),
+            Number::make(__('Order Number'), 'id')->rules('required')->required()->sortable(),
 
             BelongsTo::make(__('Order Sheet Waybill'), 'orderSheetWaybill', OrderSheetWaybill::class),
 
@@ -64,7 +63,7 @@ class Order extends Resource
                 return number_format($value);
             })->exceptOnForms(),
 
-            Text::make(__('Waybill Numbers'), 'waybill_numbers'),
+            Text::make(__('Waybill Numbers'), 'waybill_numbers')->rules('required')->required(),
 
             DateTime::make(__('Created At'), 'created_at')->exceptOnForms(),
             DateTime::make(__('Updated At'), 'updated_at')->exceptOnForms(),
