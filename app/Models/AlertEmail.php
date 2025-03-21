@@ -16,11 +16,10 @@ class AlertEmail extends Model
         return [
             'name' => 'string',
             'action_name' => 'string',
-            'email_list' => 'array',
         ];
     }
 
-    public function users(): BelongsToMany
+    public function recipients(): BelongsToMany
     {
         return $this->belongsToMany(User::class);
     }

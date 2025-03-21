@@ -45,13 +45,15 @@ class HelpfulFile extends Resource
         return [
             ID::make()->sortable(),
 
-            BelongsTo::make(__('Author'), 'author', User::class),
+            BelongsTo::make(__('Author'), 'author', User::class)->exceptOnForms(),
 
-            File::make(__('Attachment'), 'attachment')
+            File::make(__('Attachment'), 'attachment')->required()
                 ->disk('builtin')
-                ->path('helpful_files'),
+                ->path('helpful_files')
+                ->creationRules('required', 'file')
+                ->updateRules('nullable', 'file'),
 
-            Text::make(__('Description'), 'description'),
+            Text::make(__('Description'), 'description')->rules('required')->required(),
 
             DateTime::make(__('Created At'), 'created_at')->exceptOnForms(),
             DateTime::make(__('Updated At'), 'updated_at')->exceptOnForms(),
@@ -106,30 +108,5 @@ class HelpfulFile extends Resource
     public function title()
     {
         return __('Helpful Files').' '.'#'.$this->id;
-    }
-
-    public function authorizedToReplicate(Request $request)
-    {
-        return false;
-    }
-
-    public function authorizedToView(Request $request)
-    {
-        return true;
-    }
-
-    public static function authorizedToCreate(Request $request)
-    {
-        return false;
-    }
-
-    public function authorizedToDelete(Request $request)
-    {
-        return false;
-    }
-
-    public function authorizedToUpdate(Request $request)
-    {
-        return false;
     }
 }

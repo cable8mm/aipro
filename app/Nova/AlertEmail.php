@@ -52,7 +52,7 @@ class AlertEmail extends Resource
 
             Text::make(__('Action Name'), 'action_name')->rules('required')->required()->maxlength(255)->copyable(),
 
-            Tag::make(__('Users'), 'users', User::class)->preload()->withPreview(),
+            Tag::make(__('Recipients'), 'recipients', User::class)->displayAsList()->preload()->withPreview(),
 
             DateTime::make(__('Created At'), 'created_at')->exceptOnForms(),
             DateTime::make(__('Updated At'), 'updated_at')->exceptOnForms(),
