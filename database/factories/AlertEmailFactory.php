@@ -16,14 +16,7 @@ class AlertEmailFactory extends Factory
      */
     public function definition(): array
     {
-        $email_list = [];
-
-        for ($i = 0; $i < fake()->randomNumber(1); $i++) {
-            $email_list[] = fake()->email();
-        }
-
         return [
-            'email_list' => $email_list,
         ];
     }
 }
