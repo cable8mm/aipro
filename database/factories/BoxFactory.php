@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use Cable8mm\GoodCode\LocationCode;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -21,7 +20,7 @@ class BoxFactory extends Factory
 
         return [
             'author_id' => fake()->randomNumber(1) + 1,
-            'location_id' => LocationCode::of(warehouse: 'A'.fake()->numberBetween(1, 3)),
+            'location_id' => fake()->numberBetween(1, 3),
             'box_supplier_id' => fake()->randomNumber(1) + 1,
             'name' => fake()->word(),
             'sku' => fake()->numerify('BOX-###'),

@@ -25,7 +25,7 @@ class Location extends Resource
      *
      * @var string
      */
-    public static $title = 'id';
+    public static $title = 'code';
 
     /**
      * The columns that should be searched.
@@ -33,8 +33,7 @@ class Location extends Resource
      * @var array
      */
     public static $search = [
-        'id',
-        'description',
+        'code',
     ];
 
     /**
@@ -49,7 +48,9 @@ class Location extends Resource
 
             BelongsTo::make(__('Warehouse'), 'warehouse', Warehouse::class),
 
-            Text::make(__('Description'), 'description')->maxlength(50),
+            Text::make(__('Code'), 'code')->maxlength(36)->rules('required')->required(),
+
+            Text::make(__('Description'), 'description')->maxlength(255),
 
             DateTime::make(__('Created At'), 'created_at')->exceptOnForms(),
             DateTime::make(__('Updated At'), 'updated_at')->exceptOnForms(),
@@ -103,6 +104,6 @@ class Location extends Resource
 
     public function title()
     {
-        return '['.$this->id.'] '.$this->description;
+        return $this->warehouse->code.'-'.$this->code;
     }
 }

@@ -23,7 +23,7 @@ class Warehouse extends Resource
      *
      * @var string
      */
-    public static $title = 'id';
+    public static $title = 'code';
 
     /**
      * The columns that should be searched.
@@ -31,7 +31,7 @@ class Warehouse extends Resource
      * @var array
      */
     public static $search = [
-        'id',
+        'code',
     ];
 
     /**
@@ -44,7 +44,9 @@ class Warehouse extends Resource
         return [
             ID::make()->sortable(),
 
-            Text::make(__('Description'), 'description'),
+            Text::make(__('Code'), 'code')->maxlength(36)->rules('required')->required(),
+
+            Text::make(__('Description'), 'description')->maxlength(255),
 
             DateTime::make(__('Created At'), 'created_at')->exceptOnForms(),
             DateTime::make(__('Updated At'), 'updated_at')->exceptOnForms(),

@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\BoxSupplier;
+use App\Models\Location;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -17,8 +18,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(User::class, 'author_id')->constrained()->comment('작성자 아이디');
             $table->foreignIdFor(BoxSupplier::class)->constrained()->comment('박스공급사 아이디');
-            $table->string('location_id', 36)->comment('위치 코드');
-            $table->foreign('location_id')->references('id')->on('locations');
+            $table->foreignIdFor(Location::class)->constrained()->comment('위치 아이디');
             $table->string('sku', 50)->comment('박스 SKU');
             $table->string('name', 100)->comment('박스 이름');
             $table->bigInteger('inventory')->default(0)->comment('재고 수량');

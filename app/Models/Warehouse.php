@@ -10,8 +10,6 @@ class Warehouse extends Model
 {
     use HasFactory;
 
-    public $incrementing = false;
-
     public function locations(): HasMany
     {
         return $this->hasMany(Location::class);

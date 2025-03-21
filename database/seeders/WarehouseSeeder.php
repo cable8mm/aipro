@@ -15,8 +15,8 @@ class WarehouseSeeder extends Seeder
     {
         for ($i = 1; $i <= 3; $i++) {
             Warehouse::factory()->state([
-                'id' => LocationCode::of(warehouse: 'A'.$i),
-                'description' => __('Warehouse')." $i",
+                'code' => LocationCode::of(warehouse: 'W'.$i),
+                'description' => __('Warehouse')." W$i",
             ])->create();
         }
     }
